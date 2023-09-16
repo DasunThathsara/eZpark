@@ -2,7 +2,7 @@
     class Controller{
         // To load the model
         public function model($model){
-            require_once '../app/models/'.$model;
+            require_once '../app/models/'.$model.'.php';
 
             // Instantiate the model and pass it to the controller member variable
             return new $model();

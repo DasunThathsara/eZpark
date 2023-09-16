@@ -1,3 +1,9 @@
-h1{
-    color: red;
-}
+/* --------------- Components Styles --------------- */
+@import url('components/topnavbar.css');
+
+
+/* ------------------ Form Styles ------------------ */
+@import url('components/formStyles.css');
+
+
+/* ----------------- General Styles ---------------- */

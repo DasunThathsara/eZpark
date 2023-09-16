@@ -7,3 +7,9 @@
 
     // WEBSITE NAME
     define('SITENAME', 'eZpark');
+
+    // Database Configuration
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'root');
+    define('DB_PASSWORD', '');
+    define('DB_NAME', 'ezpark_db');
