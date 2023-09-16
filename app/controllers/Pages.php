@@ -1,6 +1,15 @@
 <?php
-    class Pages {
+    class Pages extends Controller {
         public function __construct(){
-            echo "hello from pages";
+        }
+
+        public function index(){
+        }
+
+        public function about($name){
+            $data = [
+                'username' => $name
+            ];
+            $this->view('v_about', $data);
         }
     }
