@@ -26,6 +26,10 @@
                     if (method_exists($this->currentController, $url[1])){
                         $this->currentMethod = $url[1];
                         unset($url[1]);
+                    } else {
+                        // Method does not exist, display 404 error
+                        $this->currentController->pageNotFound();
+                        return;
                     }
                 }
 
@@ -34,6 +38,11 @@
 
                 // Call method and pass the parameter list
                 call_user_func_array([$this->currentController, $this->currentMethod], $this->param);
+            }
+            else {
+                // Controller does not exist, display 404 error
+                $this->currentController = new Controller();
+                $this->currentController->pageNotFound();
             }
         }
 

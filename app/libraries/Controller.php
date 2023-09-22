@@ -17,4 +17,10 @@
                 die('Corresponding view does not exist');
             }
         }
+
+        // 404 Error
+        public function pageNotFound(){
+            http_response_code(404);
+            $this->view('404');
+        }
     }
