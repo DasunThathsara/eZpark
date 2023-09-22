@@ -37,22 +37,24 @@
             <div class="user-selection-container">
                 <ul class="user-selection-list">
                     <li data-user-type="driver">Driver</li>
-                    <li data-user-type="owner">Owner</li>
+                    <li data-user-type="parkingOwner">Owner</li>
                     <li data-user-type="security">Security</li>
                     <li data-user-type="merchandiser">Merchandiser</li>
                 </ul>
             </div>
 
+            <!-- Hidden Input for User Type -->
+            <input type="hidden" name="user_type" id="user_type" value="" />
+
             <div id="driverFields" class="additional-fields" style="display: none;">
                 <input type="text" value="Driver">
             </div>
 
-            <div id="ownerFields" class="additional-fields" style="display: none;">
-                <input type="text" value="Owner">
+            <div id="parkingOwnerFields" class="additional-fields" style="display: none;">
+                <input type="text" value="Parking Owner">
             </div>
 
             <div id="securityFields" class="additional-fields" style="display: none;">
-                <input type="text" value="Security">
                 <input type="text" value="Security">
             </div>
 

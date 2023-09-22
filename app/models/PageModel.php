@@ -1,5 +1,5 @@
 <?php
-    class Pages{
+    class PageModel{
         private $db;
 
         public function __construct(){

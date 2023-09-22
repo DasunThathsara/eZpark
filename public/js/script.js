@@ -1,5 +1,6 @@
 const userSelectionList = document.querySelector(".user-selection-list");
 const additionalFields = document.querySelectorAll(".additional-fields");
+const userTypeInput = document.getElementById('user_type'); // Hidden input field
 
 userSelectionList.addEventListener("click", function (e) {
     if (e.target.tagName === "LI") {
@@ -13,6 +14,9 @@ userSelectionList.addEventListener("click", function (e) {
         // Add the "selected" class to the clicked list item
         e.target.classList.add("selected");
 
+        // Set the selected user type in the hidden input field
+        userTypeInput.value = selectedUserType;
+
         // Hide all additional field divs
         additionalFields.forEach(field => {
             field.style.display = "none";
@@ -25,6 +29,7 @@ userSelectionList.addEventListener("click", function (e) {
         }
     }
 });
+
 
 
 

@@ -8,12 +8,14 @@ class UserModel{
 
     // Register user
     public function register($data){
-        $this->db->query('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+        // Prepare statement
+        $this->db->query('INSERT INTO users (name, email, password, userType) VALUES (:name, :email, :password, :userType)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':password', $data['password']);
+        $this->db->bind(':userType', $data['user_type']);
 
         // Execute
         if ($this->db->execute()){
