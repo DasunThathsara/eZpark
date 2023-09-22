@@ -1,7 +1,9 @@
 <?php
 class Security extends Controller {
     public function __construct(){
-        $this->pagesModel = $this->model('SecurityModel');
+        $this->middleware = new AuthMiddleware();
+        // Only security personnel are allowed to access security pages
+        $this->middleware->checkAccess(['security']);
     }
 
     public function index(){

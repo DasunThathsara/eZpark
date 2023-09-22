@@ -1,7 +1,9 @@
 <?php
 class Driver extends Controller {
     public function __construct(){
-        $this->pagesModel = $this->model('DriverModel');
+        $this->middleware = new AuthMiddleware();
+        // Only drivers are allowed to access driver pages
+        $this->middleware->checkAccess(['driver']);
     }
 
     public function index(){

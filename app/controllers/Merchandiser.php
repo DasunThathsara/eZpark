@@ -1,7 +1,9 @@
 <?php
 class Merchandiser extends Controller {
     public function __construct(){
-        $this->pagesModel = $this->model('MerchandiserModel');
+        $this->middleware = new AuthMiddleware();
+        // Only merchandiser personnel are allowed to access merchandiser pages
+        $this->middleware->checkAccess(['merchandiser']);
     }
 
     public function index(){
