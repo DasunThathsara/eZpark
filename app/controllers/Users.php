@@ -183,4 +183,28 @@ class Users extends Controller{
             return false;
         }
     }
+
+    public function checkLogin() {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('users/login');
+        } else {
+            $userType = $_SESSION['user_type'];
+            switch ($userType) {
+                case 'driver':
+                    redirect('driver/index');
+                    break;
+                case 'parkingOwner':
+                    redirect('parkingOwner/index');
+                    break;
+                case 'security':
+                    redirect('security/index');
+                    break;
+                case 'merchandiser':
+                    redirect('merchandiser/index');
+                    break;
+                default:
+                    redirect('pages/index');
+            }
+        }
+    }
 }
