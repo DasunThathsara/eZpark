@@ -9,6 +9,10 @@
     background-color: #f2f2f2;
 }
 
+.form-container h1{
+    text-align: center;
+}
+
 input[type=text], input[type=password], input[type=email], input[type=number] {
     width: 100%;
     padding: 12px 20px;
@@ -31,4 +35,61 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: #45a049;
+}
+
+.strength-text{
+    font-size: 12px;
+}
+
+.error-msg{
+    text-align: center;
+    color: red;
+    font-size: 15px;
+    background-color: rgba(255, 0, 0, 0.07);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user-selection-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.form-input-title {
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+
+/* ----------------- User Selection ----------------- */
+.user-selection-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.user-selection-list li {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.user-selection-list li:hover {
+    box-shadow: 0 0 6px 0.1px rgba(0, 0, 0, 0.22);
+}
+
+.user-selection-list li.selected {
+    background-color: #45a049;
+    color: #fff;
+}
+
+.additional-fields {
+    margin-top: 10px;
+    display: none;
 }

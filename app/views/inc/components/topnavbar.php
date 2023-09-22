@@ -1,5 +1,5 @@
 <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">Login</a>
-    <a href="#contact">Register</a>
+    <a class="active" href="">Home</a>
+    <a href="<?php echo URLROOT ?>/users/login">Login</a>
+    <a href="<?php echo URLROOT ?>/users/register">Register</a>
 </div>
