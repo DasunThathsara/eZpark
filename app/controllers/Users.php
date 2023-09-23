@@ -182,6 +182,7 @@ class Users extends Controller{
         redirect($_SESSION['user_type'].'/index');
     }
 
+    // Logout function
     public function logout(){
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
@@ -193,6 +194,7 @@ class Users extends Controller{
         redirect('users/login');
     }
 
+    // Check if user is logged in
     public function isLoggedIn(){
         if (isset($_SESSION['user_id'])){
             return true;
@@ -202,6 +204,7 @@ class Users extends Controller{
         }
     }
 
+    // Check if user is logged in
     public function checkLogin() {
         if (!isset($_SESSION['user_id'])) {
             redirect('users/login');
