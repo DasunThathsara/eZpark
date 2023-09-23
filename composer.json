@@ -1,0 +1,14 @@
+{
+  "name": "ezpark/ezpark",
+  "description": "Parking management and finding system",
+  "authors": [
+    {
+      "name": "Dasun Thathsara",
+      "email": "dasun.thathsara.sri@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "monolog/monolog": "^2.0"
+  }
+}
