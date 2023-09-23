@@ -98,6 +98,7 @@ class Users extends Controller{
             $data = [
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
+                'remember_me' => isset($_POST['remember_me']),
                 'err' => ''
             ];
 
@@ -129,6 +130,11 @@ class Users extends Controller{
                 if ($loggedInUser){
                     // Create session
                     $this->createUserSession($loggedInUser);
+
+                    // If "Remember Me" is checked, set a cookie
+                    if ($data['remember_me']) {
+                        $this->setRememberMeCookie($loggedInUser->id);
+                    }
                 }
                 else{
                     $data['err'] = 'Password incorrect';
@@ -153,6 +159,18 @@ class Users extends Controller{
             // Load view
             $this->view('users/login', $data);
         }
+    }
+
+    // Function to set a "Remember Me" cookie
+    private function setRememberMeCookie($userId) {
+        // Generate a unique token or identifier
+        $token = uniqid();
+
+        // Store the token in the database (you may need to create a "remember_tokens" table for this)
+        $this->userModel->storeRememberToken($userId, $token);
+
+        // Set a cookie with the token (you may want to set an expiration time)
+        setcookie('remember_me', $token, time() + 3600 * 24 * 30, '/');
     }
 
     public function createUserSession($user){
