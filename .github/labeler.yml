@@ -1,38 +1,24 @@
-# .github/labeler.yml
+name: Labeler
 
-# Define label rules
-label_rules:
-  - name: "bug"
-    conditions:
-      - "bug"
-      - "error"
-      - "issue"
-  - name: "feature"
-    conditions:
-      - "feature"
-      - "enhancement"
-  - name: "documentation"
-    conditions:
-      - "documentation"
-      - "docs"
-  - name: "needs-review"
-    conditions:
-      - "needs-review"
-      - "review"
-  - name: "good-first-issue"
-    conditions:
-      - "good first issue"
-      - "beginner-friendly"
+on:
+  issues:
+    types:
+      - opened
+      - edited
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
-# Define label color (optional)
-label_colors:
-  - name: "bug"
-    color: "d73a4a"
-  - name: "feature"
-    color: "a2eeef"
-  - name: "documentation"
-    color: "0075ca"
-  - name: "needs-review"
-    color: "fbca04"
-  - name: "good-first-issue"
-    color: "7057ff"
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Labeler Action
+        uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
