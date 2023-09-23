@@ -172,6 +172,7 @@ class Users extends Controller{
         setcookie('remember_me', $token, time() + 3600 * 24 * 30, '/');
     }
 
+    // Create the session
     public function createUserSession($user){
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
