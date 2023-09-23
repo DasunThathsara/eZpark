@@ -110,7 +110,6 @@ class Users extends Controller{
             else{
                 if ($this->userModel->findUserByEmail($data['email'])){
                     // User found
-
                 }
                 else{
                     // User not found
