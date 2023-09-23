@@ -20,7 +20,7 @@ class ComposerStaticInit72f0a5108c5453186f9ed3ba3ace1276
     public static $prefixDirsPsr4 = array (
         'Psr\\Log\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/src',
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Monolog\\' => 
         array (

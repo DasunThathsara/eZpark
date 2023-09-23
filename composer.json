@@ -10,5 +10,11 @@
   "require": {
     "php": ">=7.2",
     "monolog/monolog": "^2.0"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
   }
 }
