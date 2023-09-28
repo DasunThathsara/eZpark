@@ -7,7 +7,16 @@
 
         public function __construct(){
             $url = $this->getURL();
-            // CHeck requested controller is existing in the controllers folder
+            // Check user request null controller
+            if  (ucwords($url[0]) == null){
+                // If null, then load the default controller
+                require_once '../app/controllers/Pages.php';
+                $this->currentController = new Pages;
+                $this->currentController->index();
+                return;
+            }
+
+            // Check requested controller is existing in the controllers folder
             if (file_exists('../app/controllers/'.ucwords($url[0]).'.php')){
                 // If the controller exists, then load it
                 $this->currentController = ucwords($url[0]);
