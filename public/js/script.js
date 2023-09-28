@@ -69,4 +69,3 @@ function updateStrengthText(strength) {
     strengthText.textContent = text;
 }
 
-

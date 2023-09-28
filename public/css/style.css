@@ -1,9 +1,7 @@
 /* --------------- Components Styles --------------- */
 @import url('components/topnavbar.css');
-
-
-/* ------------------ Form Styles ------------------ */
 @import url('components/formStyles.css');
+@import url('components/sidenavbar.css');
 
 
 /* ----------------- General Styles ---------------- */
