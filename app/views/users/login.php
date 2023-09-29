@@ -1,7 +1,4 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-    <!--  TOP NAVIGATION  -->
-    <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
-
     <div class="form-container">
         <h1>Login</h1>
         <?php if (!empty($data['err'])) { ?>
@@ -29,6 +26,10 @@
             <!-- Submit -->
             <input type="submit" value="Submit">
         </form>
+
+        <div class="other-options">
+            <p>If you don't have an account? <a href="<?php echo URLROOT ?>/users/register">Register</a></p>
+        </div>
     </div>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

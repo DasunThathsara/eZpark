@@ -1,16 +1,38 @@
 .form-container {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15%;
-    width: 50%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f2f2f2;
+    margin-top: 15vh;
+    width: 60%;
+    max-width: 500px;
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+
+.form-container form{
+    padding: 10px 30px 30px 30px;
+}
+
+.form-container .other-options{
+    text-align: center;
+    padding: 0px 30px 30px 30px;
+}
+
+.form-container .other-options p{
+    color: #cccccc;
+}
+
+.form-container .other-options a{
+    color: #fdc63e;
+    text-decoration: none;
 }
 
 .form-container h1{
     text-align: center;
+    background-color: #fdc63e;
+    border-radius: 20px 20px 0 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 input[type=text], input[type=password], input[type=email], input[type=number] {
@@ -24,17 +46,19 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 
 input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #fcd426;
+    color: #000000;
     padding: 12px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: #ffc400;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.25);
 }
 
 .strength-text{

@@ -69,9 +69,23 @@ try {
 <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
 <!--  SIDE NAVIGATION  -->
-<?php require APPROOT.'/views/inc/components/sidenavbar.php'; ?>
+<?php
+    $section = 'dashboard';
+    require APPROOT.'/views/inc/components/sidenavbar.php';
+?>
 
+<main class="page-container">
+    <section class="section" id="main">
+        <h1>Driver Dashboard</h1>
 
-<h1>Driver Dashboard</h1>
+        <div class="options">
+            <a href="<?php echo URLROOT ?>/driver/vehicles">
+                <div class="vehicles">
+                    <h1>Vehicles</h1>
+                </div>
+            </a>
+        </div>
+    </section>
+</main>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
