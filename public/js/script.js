@@ -33,6 +33,7 @@ userSelectionList.addEventListener("click", function (e) {
 
 
 
+// ------------------------------- Password Check -------------------------------
 
 const passwordInput = document.getElementById('password');
 const strengthText = document.getElementById('strength-text');
