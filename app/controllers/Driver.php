@@ -15,11 +15,9 @@ class Driver extends Controller {
     }
 
     public function vehicles(){
-        $data = [
-            'title' => 'Vehicles'
-        ];
+        $vehicles = $this->driverModel->viewVehicles();
 
-        $this->view('driver/vehicles', $data);
+        $this->view('driver/vehicles', $vehicles);
     }
 
     public function vehicleRegister(){

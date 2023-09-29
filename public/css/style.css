@@ -17,39 +17,87 @@
     margin: 1vh 2vw;
 }
 
-.page-container .section h1{
+.page-container .section .container h1{
     text-align: center;
     margin-top: 50px;
     font-size: 50px;
 }
 
 /* ----------------- Driver Dashboard Styles ---------------- */
-.page-container .section .options{
-    padding-left: 5vw;
-    padding-right: 5vw;
-    padding-top: 20px;
-}
-
-.page-container .section .options .vehicles{
-    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.22);
-    width: 150px;
-    height: 100px;
-    border-radius: 20px;
-    transition: 0.3s;
-}
-
-.page-container .section .options a{
-    text-decoration: none;
-    color: black;
-}
-
-.page-container .section .options .vehicles:hover{
-    scale: 1.05;
-}
-
-.page-container .section .options .vehicles h1{
+.page-container .section .container .emptyVehicle{
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: rgba(253, 198, 62, 0.07);
+    border: 1px solid rgba(253, 198, 62, 0.24);
     text-align: center;
-    padding-top: 40px;
-    font-size: 20px;
     border-radius: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #8c8c8c;
+    font-size: 20px;
+}
+
+.page-container .section .container .table-container{
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.page-container .section .container .table{
+    margin-top: 50px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 50px;
+}
+
+.page-container .section .container a{
+    text-decoration: none;
+    background-color: #fdc63e;
+    width: 100%;
+    color: #000000;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 5vw;
+}
+
+.page-container .section .container .sub-option {
+    text-decoration: none;
+    background-color: #fdc63e;
+    width: 100%;
+    color: #000000;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 2px;
+}
+
+.page-container .section .container a:hover{
+    background-color: #ffc400;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.20);
+}
+
+.page-container .section .container th{
+    background-color: #fccc04;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ffffff;
+}
+
+.page-container .section .container tr{
+    background-color: #fff;
+}
+
+.page-container .section .container tr:nth-child(even){
+    background-color: rgba(252, 204, 4, 0.16);
+}
+
+.page-container .section .container td{
+    padding: 10px;
+    border: 1px solid #ffffff;
 }
