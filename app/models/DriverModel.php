@@ -7,18 +7,15 @@ class DriverModel{
     }
 
     // Register user
-    public function register($data): bool
+    public function registerVehicle($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo) VALUES (:name, :username, :email, :password, :userType, :contactNo)');
+        $this->db->query('INSERT INTO vehicle (name, vehicleType, id) VALUES (:name, :vehicleType, :id)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
-        $this->db->bind(':email', $data['email']);
-        $this->db->bind(':username', $data['username']);
-        $this->db->bind(':password', $data['password']);
-        $this->db->bind(':userType', $data['user_type']);
-        $this->db->bind(':contactNo', $data['contact_no']);
+        $this->db->bind(':vehicleType', $data['vehicle_type']);
+        $this->db->bind(':id', $_SESSION['user_id']);
 
         // Execute
         if ($this->db->execute()){
@@ -30,47 +27,17 @@ class DriverModel{
     }
 
     // Find user
-    public function findUserByEmail($email): bool
+    public function findVehicleByName($name): bool
     {
-        $this->db->query('SELECT * FROM user WHERE email = :email');
-        $this->db->bind(':email', $email);
+        $this->db->query('SELECT * FROM vehicle WHERE name = :name and id = :id');
+        $this->db->bind(':name', $name);
+        $this->db->bind(':id', $_SESSION['user_id']);
 
         $row = $this->db->single();
 
         // Check row
         if ($this->db->rowCount() > 0){
             return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function findUserByUsername($username): bool
-    {
-        $this->db->query('SELECT * FROM user WHERE username = :username');
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
-
-        // Check row
-        if ($this->db->rowCount() > 0){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // Login user
-    public function login($email, $password, $username){
-        $this->db->query('SELECT * FROM user WHERE email = :email OR username = :username');
-        $this->db->bind(':email', $email);
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
-
-        $hashed_password = $row->password;
-        if (password_verify($password, $hashed_password)){
-            return $row;
         } else {
             return false;
         }
