@@ -14,8 +14,10 @@ class Users extends Controller{
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
+                'username' => trim($_POST['username']),
                 'confirm_password' => trim($_POST['confirm_password']),
                 'user_type' => trim($_POST['user_type']),
+                'contact_no' => trim($_POST['contact_no']),
                 'err' => ''
             ];
 
@@ -32,6 +34,16 @@ class Users extends Controller{
                 // Check email
                 if ($this->userModel->findUserByEmail($data['email'])){
                     $data['err'] = 'Email is already taken';
+                }
+            }
+
+            // Validate username
+            if (empty($data['username'])){
+                $data['err'] = 'Please enter username';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByUsername($data['username'])){
+                    $data['err'] = 'Username is already taken';
                 }
             }
 
@@ -56,6 +68,11 @@ class Users extends Controller{
                 $data['err'] = 'Please select user type';
             }
 
+            // Validate contact number
+            if (empty($data['contact_no'])){
+                $data['err'] = 'Please enter contact number';
+            }
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Hash password
@@ -77,9 +94,11 @@ class Users extends Controller{
             $data = [
                 'name' => '',
                 'email' => '',
+                'username' => '',
                 'password' => '',
                 'confirm_password' => '',
                 'user_type' => '',
+                'contact_no' => '',
                 'err' => '',
             ];
 
@@ -97,6 +116,7 @@ class Users extends Controller{
             // Input data
             $data = [
                 'email' => trim($_POST['email']),
+                'username' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
                 'remember_me' => isset($_POST['remember_me']),
                 'err' => ''
@@ -108,7 +128,7 @@ class Users extends Controller{
                 $data['err'] = 'Please enter email';
             }
             else{
-                if ($this->userModel->findUserByEmail($data['email'])){
+                if ($this->userModel->findUserByEmail($data['email']) or $this->userModel->findUserByUsername($data['username'])){
                     // User found
                 }
                 else{
@@ -125,7 +145,7 @@ class Users extends Controller{
             // Check if error is empty
             if (empty($data['err'])){
                 // log the user
-                $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                $loggedInUser = $this->userModel->login($data['email'], $data['password'], $data['username']);
                 if ($loggedInUser){
                     // Create session
                     $this->createUserSession($loggedInUser);
@@ -151,6 +171,7 @@ class Users extends Controller{
             // Initial form load
             $data = [
                 'email' => '',
+                'username' => '',
                 'password' => '',
                 'err' => ''
             ];
@@ -176,6 +197,7 @@ class Users extends Controller{
     public function createUserSession($user){
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
+        $_SESSION['username'] = $user->username;
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_type'] = $user->userType;
 
@@ -186,6 +208,7 @@ class Users extends Controller{
     public function logout(){
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
+        unset($_SESSION['username']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_type']);
 

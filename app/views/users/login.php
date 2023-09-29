@@ -12,7 +12,7 @@
         <form action="<?php echo URLROOT ?>/users/login" method="post">
             <!-- Email -->
             <div class="form-input-title">Email:</div>
-            <input type="email" name="email" id="email" required value="<?php echo $data['email'] ?>" />
+            <input type="text" name="email" id="email" required value="<?php echo $data['email'] ?>" />
 
             <!-- Password -->
             <div class="form-input-title">Password:</div>

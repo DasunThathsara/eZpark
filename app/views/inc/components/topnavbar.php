@@ -1,11 +1,11 @@
 <div class="topnav">
     <div class="container">
         <div class="items">
-            <a class="item logo" onclick="navToggle()"><img style="width: 20px" src="<?php echo URLROOT ?>/images/menu.svg" alt=""></i></a>
             <?php if (empty($_SESSION['user_id'])){ ?>
                 <a class="item" href="<?php echo URLROOT ?>/users/login">Login</a>
-                <a href="<?php echo URLROOT ?>/users/register">Register</a>
+                <a class="item" href="<?php echo URLROOT ?>/users/register">Register</a>
             <?php }else{ ?>
+                <a class="item logo" onclick="navToggle()"><img style="width: 20px" src="<?php echo URLROOT ?>/images/menu.svg" alt=""></i></a>
                 <a class="item" href=""><?php echo $_SESSION['user_name'] ?></a>
             <?php } ?>
         </div>
