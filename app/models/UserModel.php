@@ -7,15 +7,18 @@ class UserModel{
     }
 
     // Register user
-    public function register($data){
+    public function register($data): bool
+    {
         // Prepare statement
-        $this->db->query('INSERT INTO users (name, email, password, userType) VALUES (:name, :email, :password, :userType)');
+        $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo) VALUES (:name, :username, :email, :password, :userType, :contactNo)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':email', $data['email']);
+        $this->db->bind(':username', $data['username']);
         $this->db->bind(':password', $data['password']);
         $this->db->bind(':userType', $data['user_type']);
+        $this->db->bind(':contactNo', $data['contact_no']);
 
         // Execute
         if ($this->db->execute()){
@@ -27,8 +30,9 @@ class UserModel{
     }
 
     // Find user
-    public function findUserByEmail($email){
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+    public function findUserByEmail($email): bool
+    {
+        $this->db->query('SELECT * FROM user WHERE email = :email');
         $this->db->bind(':email', $email);
 
         $row = $this->db->single();
@@ -41,10 +45,26 @@ class UserModel{
         }
     }
 
+    public function findUserByUsername($username): bool
+    {
+        $this->db->query('SELECT * FROM user WHERE username = :username');
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Login user
-    public function login($email, $password){
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+    public function login($email, $password, $username){
+        $this->db->query('SELECT * FROM user WHERE email = :email OR username = :username');
         $this->db->bind(':email', $email);
+        $this->db->bind(':username', $username);
 
         $row = $this->db->single();
 
