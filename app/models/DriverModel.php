@@ -6,7 +6,8 @@ class DriverModel{
         $this->db = new Database();
     }
 
-    // Register user
+    // ------------------------- Vehicle Functionalities -------------------------
+    // Register vehicle
     public function registerVehicle($data): bool
     {
         // Prepare statement
@@ -26,7 +27,7 @@ class DriverModel{
         }
     }
 
-    // Find user
+    // Find vehicle
     public function findVehicleByName($name): bool
     {
         $this->db->query('SELECT * FROM vehicle WHERE name = :name and id = :id');
@@ -41,5 +42,14 @@ class DriverModel{
         } else {
             return false;
         }
+    }
+
+    public function viewVehicles(){
+        $this->db->query('SELECT * FROM vehicle WHERE id = :id');
+        $this->db->bind(':id', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
     }
 }

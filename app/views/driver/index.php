@@ -76,14 +76,8 @@ try {
 
 <main class="page-container">
     <section class="section" id="main">
-        <h1>Driver Dashboard</h1>
-
-        <div class="options">
-            <a href="<?php echo URLROOT ?>/driver/vehicles">
-                <div class="vehicles">
-                    <h1>Vehicles</h1>
-                </div>
-            </a>
+        <div class="container">
+            <h1>Driver Dashboard</h1>
         </div>
     </section>
 </main>
