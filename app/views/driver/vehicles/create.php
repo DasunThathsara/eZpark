@@ -16,10 +16,10 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/users/register" method="post">
+    <form action="<?php echo URLROOT ?>/driver/vehicleRegister" method="post">
         <!-- Name -->
         <div class="form-input-title">Name:</div>
-        <input type="text" name="Name" id="Name" required value="" />
+        <input type="text" name="name" id="name" required value="" />
 
         <br><br>
         <!-- Vehicle Type -->
@@ -41,4 +41,14 @@
         <input type="submit" value="Add">
     </form>
 </div>
+
+<script>
+    const userSelectionList = document.querySelector('.user-selection-list');
+
+    userSelectionList.addEventListener('click', function(event) {
+        if (event.target.tagName === 'LI') {
+            document.getElementById('vehicle_type').value = event.target.getAttribute('data-user-type');
+        }
+    });
+</script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>

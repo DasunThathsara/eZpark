@@ -4,6 +4,7 @@ class Driver extends Controller {
         $this->middleware = new AuthMiddleware();
         // Only drivers are allowed to access driver pages
         $this->middleware->checkAccess(['driver']);
+        $this->driverModel = $this->model('DriverModel');
     }
 
     public function index(){
@@ -29,16 +30,16 @@ class Driver extends Controller {
 
             $data = [
                 'name' => trim($_POST['name']),
-                'user_type' => trim($_POST['vehicle_type']),
+                'vehicle_type' => trim($_POST['vehicle_type']),
                 'err' => ''
             ];
 
             // Validate data
             // Validate email
-            if (empty($data['email'])){
-                $data['err'] = 'Please enter email';
+            if (empty($data['name'])){
+                $data['err'] = 'Please enter name';
             } else {
-                // Check email
+                // Check name
                 if ($this->driverModel->findVehicleByName($data['name'])){
                     $data['err'] = 'Name cannot be duplicate';
                 }
@@ -52,6 +53,8 @@ class Driver extends Controller {
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register vehicle
+                print_r($data);
+                print_r($_SESSION['user_id']);
                 if ($this->driverModel->registerVehicle($data)){
                     redirect('driver/vehicles');
                 } else {
