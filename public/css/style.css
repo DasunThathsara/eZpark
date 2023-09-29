@@ -5,3 +5,51 @@
 
 
 /* ----------------- General Styles ---------------- */
+.page-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    margin-top: 50px;
+}
+
+.page-container .section{
+    margin: 1vh 2vw;
+}
+
+.page-container .section h1{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+/* ----------------- Driver Dashboard Styles ---------------- */
+.page-container .section .options{
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 20px;
+}
+
+.page-container .section .options .vehicles{
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.22);
+    width: 150px;
+    height: 100px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.page-container .section .options a{
+    text-decoration: none;
+    color: black;
+}
+
+.page-container .section .options .vehicles:hover{
+    scale: 1.05;
+}
+
+.page-container .section .options .vehicles h1{
+    text-align: center;
+    padding-top: 40px;
+    font-size: 20px;
+    border-radius: 20px;
+}

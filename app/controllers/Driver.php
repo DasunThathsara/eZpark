@@ -13,11 +13,65 @@ class Driver extends Controller {
         $this->view('driver/index', $data);
     }
 
-    public function about(){
-        $users = $this->pagesModel->getUser();
+    public function vehicles(){
         $data = [
-            'users' => $users
+            'title' => 'Vehicles'
         ];
-        $this->view('about', $data);
+
+        $this->view('driver/vehicles', $data);
+    }
+
+    public function vehicleRegister(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'user_type' => trim($_POST['vehicle_type']),
+                'err' => ''
+            ];
+
+            // Validate data
+            // Validate email
+            if (empty($data['email'])){
+                $data['err'] = 'Please enter email';
+            } else {
+                // Check email
+                if ($this->driverModel->findVehicleByName($data['name'])){
+                    $data['err'] = 'Name cannot be duplicate';
+                }
+            }
+
+            // Validate user type
+            if (empty($data['vehicle_type'])){
+                $data['err'] = 'Please select vehicle type';
+            }
+
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Register vehicle
+                if ($this->driverModel->registerVehicle($data)){
+                    redirect('driver/vehicles');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('driver/vehicles/create', $data);
+            }
+
+        } else {
+            // Initial form data
+            $data = [
+                'name' => '',
+                'vehicle_type' => '',
+                'err' => '',
+            ];
+
+            // Load view
+            $this->view('driver/vehicles/create', $data);
+        }
     }
 }
