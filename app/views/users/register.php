@@ -1,7 +1,4 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-    <!--  TOP NAVIGATION  -->
-    <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
-
     <div class="form-container">
         <h1>Sign up</h1>
         <?php if (!empty($data['err'])){?>
@@ -77,5 +74,9 @@
             <!-- Submit -->
             <input type="submit" value="Submit">
         </form>
+
+        <div class="other-options">
+            <p>If you already have an account? <a href="<?php echo URLROOT ?>/users/login">Login</a></p>
+        </div>
     </div>
 <?php require APPROOT.'/views/inc/footer.php'; ?>
