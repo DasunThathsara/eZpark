@@ -21,6 +21,24 @@ class UserModel{
         $this->db->bind(':contactNo', $data['contact_no']);
 
         // Execute
+        if ($this->db->execute() and $this->userTableUpdate($data)){;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Update the specific user table
+    public function userTableUpdate($data): bool
+    {
+        // Prepare statement
+        $this->db->query('INSERT INTO driver (id) VALUES (:id)');
+
+        // Bind values
+        $this->db->bind(':id', $_SESSION['user_id']);
+
+        // Execute
         if ($this->db->execute()){
             return true;
         }
@@ -28,6 +46,7 @@ class UserModel{
             return false;
         }
     }
+
 
     // Find user
     public function findUserByEmail($email): bool
