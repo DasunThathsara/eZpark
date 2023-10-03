@@ -32,11 +32,20 @@ class UserModel{
     // Update the specific user table
     public function userTableUpdate($data): bool
     {
+
+        $this->db->query('SELECT id FROM user WHERE username = :username AND password = :password');
+
+        // Bind values
+        $this->db->bind(':username', $data['username']);
+        $this->db->bind(':password', $data['password']);
+
+        $row = $this->db->single();
+
         // Prepare statement
         $this->db->query('INSERT INTO driver (id) VALUES (:id)');
 
         // Bind values
-        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':id', $row->id);
 
         // Execute
         if ($this->db->execute()){
