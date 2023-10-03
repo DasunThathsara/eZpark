@@ -3,8 +3,17 @@
 <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
 <!--  SIDE NAVIGATION  -->
-<?php require APPROOT.'/views/inc/components/sidenavbar.php'; ?>
+<?php
+$section = 'dashboard';
+require APPROOT.'/views/inc/components/sidenavbar.php';
+?>
 
-<h1>Security Dashboard</h1>
+<main class="page-container">
+    <section class="section" id="main">
+        <div class="container">
+            <h1>Driver Dashboard</h1>
+        </div>
+    </section>
+</main>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
