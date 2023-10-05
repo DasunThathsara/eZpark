@@ -200,6 +200,7 @@ class Users extends Controller{
         $_SESSION['username'] = $user->username;
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_type'] = $user->userType;
+        $_SESSION['contact_no'] = $user->contactNo;
 
         redirect($_SESSION['user_type'].'/index');
     }
@@ -211,6 +212,7 @@ class Users extends Controller{
         unset($_SESSION['username']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_type']);
+        unset($_SESSION['contact_no']);
 
         session_destroy();
 
@@ -249,6 +251,94 @@ class Users extends Controller{
                 default:
                     redirect('pages/index');
             }
+        }
+    }
+
+    public function viewProfile(){
+        $data = [
+            'title' => 'Profile',
+            'email' => $_SESSION['user_email'],
+            'username' => $_SESSION['username'],
+            'name' => $_SESSION['user_name'],
+            'contact_no' => $_SESSION['contact_no']
+        ];
+        $this->view('users/profile', $data);
+    }
+
+    public function updateProfile(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'username' => trim($_POST['username']),
+                'contact_no' => trim($_POST['contact_no']),
+                'err' => ''
+            ];
+
+            // Validate data
+            // Validate name
+            if (empty($data['name'])){
+                $data['err'] = 'Please enter name';
+            }
+
+            // Validate email
+            if (empty($data['email'])){
+                $data['err'] = 'Please enter email';
+            } else {
+                // Check email
+                if ($data['email'] != $_SESSION['user_email'] and $this->userModel->findUserByEmail($data['email'])){
+                    $data['err'] = 'Email is already taken';
+                }
+            }
+
+            // Validate username
+            if (empty($data['username'])){
+                $data['err'] = 'Please enter username';
+            } else {
+                // Check email
+                if ($data['username'] != $_SESSION['username'] and $this->userModel->findUserByUsername($data['username'])){
+                    $data['err'] = 'Username is already taken';
+                }
+            }
+
+            // Validate contact number
+            if (empty($data['contact_no'])){
+                $data['err'] = 'Please enter contact number';
+            }
+
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Update user
+                if ($this->userModel->updateProfile($data)){
+                    $_SESSION['user_email'] = $data['email'];
+                    $_SESSION['username'] = $data['username'];
+                    $_SESSION['user_name'] = $data['name'];
+                    $_SESSION['contact_no'] = $data['contact_no'];
+                    redirect($_SESSION['user_type'].'/index');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('users/profile', $data);
+            }
+
+        } else {
+            // Initial form data
+            $data = [
+                'name' => '',
+                'email' => '',
+                'username' => '',
+                'contact_no' => '',
+                'err' => '',
+            ];
+
+            // Load view
+            $this->view('users/viewProfile', $data);
         }
     }
 }

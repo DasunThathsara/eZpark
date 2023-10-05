@@ -103,4 +103,28 @@ class UserModel{
             return false;
         }
     }
+
+
+    // Update user profile
+    public function updateProfile($data): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE user SET username = :username, email = :email, name = :name, contactNo = :contactNo WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':username', $data['username']);
+        $this->db->bind(':contactNo', $data['contact_no']);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
 }
