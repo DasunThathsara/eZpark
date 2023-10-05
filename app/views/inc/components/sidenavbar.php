@@ -27,7 +27,13 @@
             <?php } ?>
             </a>
             <div class="item"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
-            <div class="item"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+            <a href="<?php echo URLROOT ?>/users/viewProfile">
+                <?php if ($section == 'profile'){?>
+                    <div class="item selected"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+                <?php }
+                else{ ?>
+                    <div class="item"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+                <?php } ?>
             <div class="logout"><a href="<?php echo URLROOT ?>/users/logout">Logout</a></div>
         </div>
     </div>
