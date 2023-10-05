@@ -1,7 +1,7 @@
 .sidenav{
     background-color: #ffffff;
     z-index: 1;
-    position: absolute;
+    position: fixed;
     top: 0;
     border-radius: 0 50px 50px 0;
     height: 100vh;
