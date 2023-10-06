@@ -3,7 +3,7 @@
         <div class="logo"><img src="<?php echo URLROOT ?>/images/logo.png" alt=""></div>
         <a class="sidenav-close-btn" onclick="navToggle()">X</a>
         <div class="items">
-            <a href="<?php echo URLROOT ?>/driver/index">
+            <a href="<?php echo URLROOT ?>/merchandiser/index">
                 <?php if ($section == 'dashboard'){?>
                     <div class="item selected"><img src="<?php echo URLROOT ?>/images/home.svg" alt="">Dashboard</div>
                 <?php }
@@ -25,6 +25,17 @@
                         <div class="item"><img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">Vehicles</div>
                     <?php } ?>
             <?php } ?>
+
+            <?php if ($_SESSION['user_type'] == 'merchandiser'){ ?>
+                <a href="<?php echo URLROOT ?>/merchandiser/parkings">
+                    <?php if ($section == 'parkings'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
+                    <?php } ?>
+            <?php } ?>
+            
             </a>
             <div class="item"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
             <a href="<?php echo URLROOT ?>/users/viewProfile">
