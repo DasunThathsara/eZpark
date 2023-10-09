@@ -29,12 +29,12 @@
     margin-left: 50px;
     margin-right: 50px;
     background-color: rgba(253, 198, 62, 0.07);
-    border: 1px solid rgba(253, 198, 62, 0.24);
+    border: 2px dotted rgba(253, 198, 62, 0.24);
     text-align: center;
     border-radius: 20px;
     padding-top: 50px;
     padding-bottom: 50px;
-    color: #8c8c8c;
+    color: rgba(140, 140, 140, 0.87);
     font-size: 20px;
 }
 

@@ -3,7 +3,7 @@
         <div class="logo"><img src="<?php echo URLROOT ?>/images/logo.png" alt=""></div>
         <a class="sidenav-close-btn" onclick="navToggle()">X</a>
         <div class="items">
-            <a href="<?php echo URLROOT ?>/merchandiser/index">
+            <a href="<?php echo URLROOT ?>/<?php echo $_SESSION['user_type'] ?>/index">
                 <?php if ($section == 'dashboard'){?>
                     <div class="item selected"><img src="<?php echo URLROOT ?>/images/home.svg" alt="">Dashboard</div>
                 <?php }
@@ -12,11 +12,44 @@
                 <?php } ?>
             </a>
 
+            <!------------------------------------------ Driver ------------------------------------------>
             <?php if ($_SESSION['user_type'] == 'driver'){ ?>
-                <div class="item"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Bookings</a></div>
-                <div class="item"><img src="<?php echo URLROOT ?>/images/search.svg" alt="">Search Parking</div>
-                <div class="item"><img src="<?php echo URLROOT ?>/images/history.svg" alt="">Parking History</div>
-                <div class="item"><img src="<?php echo URLROOT ?>/images/package.svg" alt="">Packages</div>
+                <a href="<?php echo URLROOT ?>/driver/booking">
+                    <?php if ($section == 'booking'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Bookings</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Bookings</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/driver/search">
+                    <?php if ($section == 'search'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/search.svg" alt="">Search Parking</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/search.svg" alt="">Search Parking</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/driver/history">
+                    <?php if ($section == 'history'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/history.svg" alt="">Parking History</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/history.svg" alt="">Parking History</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/driver/packages">
+                    <?php if ($section == 'packages'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/package.svg" alt="">Packages</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/package.svg" alt="">Packages</div>
+                    <?php } ?>
+                </a>
+
                 <a href="<?php echo URLROOT ?>/driver/vehicles">
                     <?php if ($section == 'vehicles'){?>
                         <div class="item selected"><img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">Vehicles</div>
@@ -24,8 +57,19 @@
                     else{ ?>
                         <div class="item"><img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">Vehicles</div>
                     <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/driver/rating">
+                    <?php if ($section == 'rating'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
+                    <?php } ?>
+                </a>
             <?php } ?>
 
+            <!------------------------------------------ Merchandiser ------------------------------------------>
             <?php if ($_SESSION['user_type'] == 'merchandiser'){ ?>
                 <a href="<?php echo URLROOT ?>/merchandiser/parkings">
                     <?php if ($section == 'parkings'){?>
@@ -34,10 +78,11 @@
                     else{ ?>
                         <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
                     <?php } ?>
+                </a>
             <?php } ?>
             
-            </a>
-            <div class="item"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
+
+
             <a href="<?php echo URLROOT ?>/users/viewProfile">
                 <?php if ($section == 'profile'){?>
                     <div class="item selected"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
