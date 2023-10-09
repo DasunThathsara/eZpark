@@ -69,6 +69,20 @@
                 </a>
             <?php } ?>
 
+            <!------------------------------------------ Merchandiser ------------------------------------------>
+            <?php if ($_SESSION['user_type'] == 'merchandiser'){ ?>
+                <a href="<?php echo URLROOT ?>/merchandiser/parkings">
+                    <?php if ($section == 'parkings'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
+                    <?php } ?>
+                </a>
+            <?php } ?>
+            
+
+
             <a href="<?php echo URLROOT ?>/users/viewProfile">
                 <?php if ($section == 'profile'){?>
                     <div class="item selected"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>

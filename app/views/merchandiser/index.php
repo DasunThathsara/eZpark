@@ -4,8 +4,8 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'dashboard';
-require APPROOT.'/views/inc/components/sidenavbar.php';
+    $section = 'dashboard';
+    require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
 <main class="page-container">
