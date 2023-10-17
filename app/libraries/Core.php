@@ -8,7 +8,7 @@
         public function __construct(){
             $url = $this->getURL();
             // Check user request null controller
-            if  (ucwords($url[0]) == null){
+            if  (is_null($url)){
                 // If null, then load the default controller
                 require_once '../app/controllers/Pages.php';
                 $this->currentController = new Pages;
