@@ -29,6 +29,24 @@
     font-size: 50px;
 }
 
+.container .error-img{
+    width: 50px
+}
+
+.container .error-btn{
+    text-decoration: none;
+    border: 2px solid rgb(255,167,41);
+    border-radius: 20px;
+    padding: 10px;
+    color: black;
+    transition: 0.5s;
+}
+
+.container .error-btn:hover{
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.20);
+    scale: 1.1;
+}
+
 /* ----------------- Merchandiser Dashboard Styles ---------------- */
 .page-container .section .container .emptyParking{
     margin-top: 100px;
