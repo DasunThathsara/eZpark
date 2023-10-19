@@ -152,7 +152,7 @@
     width: 40vw;
 }
 
-.landing-container .row .col .left-right .black-circle-1{
+.landing-container .row .col .right-col .black-circle-1{
     background-color: #1c1c1c;
     border-radius: 50%;
     height: 500px;
@@ -162,7 +162,7 @@
     top: 130px;
 }
 
-.landing-container .row .col .left-right .yellow-circle-1{
+.landing-container .row .col .right-col .yellow-circle-1{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
     border-radius: 50%;
     height: 250px;
@@ -173,7 +173,7 @@
     top: 120px;
 }
 
-.landing-container .row .col .left-right .yellow-circle-2{
+.landing-container .row .col .right-col .yellow-circle-2{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     border-radius: 50%;
     height: 80px;
@@ -184,7 +184,7 @@
     top: 280px;
 }
 
-.landing-container .row .col .left-right .yellow-circle-3{
+.landing-container .row .col .right-col .yellow-circle-3{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     z-index: -1;
     position: absolute;
@@ -195,7 +195,7 @@
     border-radius: 10rem 10rem 0 0;
 }
 
-.landing-container .row .col .left-right .yellow-circle-4{
+.landing-container .row .col .right-col .yellow-circle-4{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     border-radius: 50%;
     height: 100px;
@@ -207,7 +207,7 @@
 }
 
 
-.landing-container .row .col .left-right .yellow-circle-5{
+.landing-container .row .col .right-col .yellow-circle-5{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     z-index: -1;
     position: absolute;
@@ -218,7 +218,7 @@
     border-radius: 0 0 10rem 10rem;
 }
 
-.landing-container .row .col .left-right .phone{
+.landing-container .row .col .right-col .phone{
     width: 350px;
     position: absolute;
     right: 150px;
@@ -226,7 +226,7 @@
     z-index: 1
 }
 
-.landing-container .row .col .left-right .car{
+.landing-container .row .col .right-col .car{
     width: 500px;
     position: absolute;
     right: 250px;
@@ -264,7 +264,7 @@
         font-weight: 500;
     }
 
-    .landing-container .row .col .left-right .black-circle-1{
+    .landing-container .row .col .right-col .black-circle-1{
         background-color: #1c1c1c;
         border-radius: 50%;
         height: 450px;
@@ -274,7 +274,7 @@
         top: 130px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-1{
+    .landing-container .row .col .right-col .yellow-circle-1{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
         border-radius: 50%;
         height: 200px;
@@ -285,7 +285,7 @@
         top: 120px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-2{
+    .landing-container .row .col .right-col .yellow-circle-2{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         border-radius: 50%;
         height: 80px;
@@ -296,7 +296,7 @@
         top: 280px;
     }
 
-    .landing-container .row .col .left-right .phone{
+    .landing-container .row .col .right-col .phone{
         width: 300px;
         position: absolute;
         right: 120px;
@@ -304,7 +304,7 @@
         z-index: 1
     }
 
-    .landing-container .row .col .left-right .car{
+    .landing-container .row .col .right-col .car{
         width: 480px;
         position: absolute;
         right: 220px;
@@ -328,7 +328,7 @@
         width: 30vw;
     }
 
-    .landing-container .row .col .left-right .black-circle-1{
+    .landing-container .row .col .right-col .black-circle-1{
         background-color: #1c1c1c;
         border-radius: 50%;
         height: 400px;
@@ -338,7 +338,7 @@
         top: 150px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-1{
+    .landing-container .row .col .right-col .yellow-circle-1{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
         border-radius: 50%;
         height: 160px;
@@ -349,7 +349,7 @@
         top: 150px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-2{
+    .landing-container .row .col .right-col .yellow-circle-2{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         border-radius: 50%;
         height: 70px;
@@ -360,7 +360,7 @@
         top: 260px;
     }
 
-    .landing-container .row .col .left-right .phone{
+    .landing-container .row .col .right-col .phone{
         width: 270px;
         position: absolute;
         right: 100px;
@@ -368,7 +368,7 @@
         z-index: 1
     }
 
-    .landing-container .row .col .left-right .car{
+    .landing-container .row .col .right-col .car{
         width: 450px;
         position: absolute;
         right: 180px;
@@ -392,7 +392,7 @@
         width: 40vw;
     }
 
-    .landing-container .row .col .left-right .black-circle-1{
+    .landing-container .row .col .right-col .black-circle-1{
         background-color: #1c1c1c;
         border-radius: 50%;
         height: 350px;
@@ -402,7 +402,7 @@
         top: 190px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-1{
+    .landing-container .row .col .right-col .yellow-circle-1{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
         border-radius: 50%;
         height: 140px;
@@ -413,7 +413,7 @@
         top: 180px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-2{
+    .landing-container .row .col .right-col .yellow-circle-2{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         border-radius: 50%;
         height: 60px;
@@ -424,7 +424,7 @@
         top: 270px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-3{
+    .landing-container .row .col .right-col .yellow-circle-3{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -435,7 +435,7 @@
         border-radius: 10rem 10rem 0 0;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-5{
+    .landing-container .row .col .right-col .yellow-circle-5{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -446,7 +446,7 @@
         border-radius: 0 0 10rem 10rem;
     }
 
-    .landing-container .row .col .left-right .phone{
+    .landing-container .row .col .right-col .phone{
         width: 230px;
         position: absolute;
         right: 80px;
@@ -454,7 +454,7 @@
         z-index: 1
     }
 
-    .landing-container .row .col .left-right .car{
+    .landing-container .row .col .right-col .car{
         width: 380px;
         position: absolute;
         right: 140px;
@@ -478,7 +478,7 @@
         width: 40vw;
     }
 
-    .landing-container .row .col .left-right .black-circle-1{
+    .landing-container .row .col .right-col .black-circle-1{
         background-color: #1c1c1c;
         border-radius: 50%;
         height: 300px;
@@ -488,7 +488,7 @@
         top: 200px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-1{
+    .landing-container .row .col .right-col .yellow-circle-1{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
         border-radius: 50%;
         height: 120px;
@@ -499,7 +499,7 @@
         top: 200px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-2{
+    .landing-container .row .col .right-col .yellow-circle-2{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         border-radius: 50%;
         height: 50px;
@@ -510,7 +510,7 @@
         top: 270px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-3{
+    .landing-container .row .col .right-col .yellow-circle-3{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -521,7 +521,7 @@
         border-radius: 10rem 10rem 0 0;
     }
 
-    .landing-container .row .col .left-right .phone{
+    .landing-container .row .col .right-col .phone{
         width: 200px;
         position: absolute;
         right: 60px;
@@ -529,7 +529,7 @@
         z-index: 1
     }
 
-    .landing-container .row .col .left-right .car{
+    .landing-container .row .col .right-col .car{
         width: 320px;
         position: absolute;
         right: 100px;
@@ -540,6 +540,7 @@
 @media screen and (max-width: 660px){
     .landing-container .row .col .left-col{
         padding-left: 20px;
+        text-align: center;
     }
 
     .landing-container .row .col .left-col h1{
@@ -553,7 +554,7 @@
         width: 40vw;
     }
 
-    .landing-container .row .col .left-right .black-circle-1{
+    .landing-container .row .col .right-col .black-circle-1{
         background-color: #1c1c1c;
         border-radius: 50%;
         height: 300px;
@@ -563,7 +564,7 @@
         top: 200px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-1{
+    .landing-container .row .col .right-col .yellow-circle-1{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
         border-radius: 50%;
         height: 120px;
@@ -574,7 +575,7 @@
         top: 200px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-2{
+    .landing-container .row .col .right-col .yellow-circle-2{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         border-radius: 50%;
         height: 50px;
@@ -585,7 +586,7 @@
         top: 270px;
     }
 
-    .landing-container .row .col .left-right .yellow-circle-3{
+    .landing-container .row .col .right-col .yellow-circle-3{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -596,7 +597,7 @@
         border-radius: 10rem 10rem 0 0;
     }
 
-    .landing-container .row .col .left-right .phone{
+    .landing-container .row .col .right-col .phone{
         width: 200px;
         position: absolute;
         right: 60px;
@@ -604,10 +605,28 @@
         z-index: 1
     }
 
-    .landing-container .row .col .left-right .car{
+    .landing-container .row .col .right-col .car{
         width: 320px;
         position: absolute;
         right: 100px;
         top: 350px
     }
+}
+
+/* ------------------------------- SVG Styles ------------------------------- */
+.svg .svg-1{
+    width: 700px;
+    position: absolute;
+    top: -250px;
+    left: -250px;
+    z-index: -1;
+}
+
+.svg .svg-2{
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    overflow: hidden;
 }
