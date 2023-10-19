@@ -44,7 +44,7 @@
     top: 40px;
     cursor: pointer;
     right: -15px;
-    padding: 7px 10px;
+    padding: 7px 11px;
     font-size: 15px;
     transition: 0.3s;
     background-color: #fdc63e;
@@ -54,6 +54,12 @@
 
 .sidenav .container .sidenav-close-btn:hover{
     scale: 1.1;
+}
+
+@media screen and (min-width: 700px){
+    .sidenav .container .sidenav-close-btn{
+        display: none;
+    }
 }
 
 .sidenav .container .items{
