@@ -140,6 +140,25 @@
 
 .landing-container .row .col .left-col{
     padding-left: 100px;
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: opacity 1s, transform 1s;
+}
+
+.landing-container .row .col .left-col.reveal {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.landing-container .row .col .right-col {
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: opacity 1s, transform 1s;
+}
+
+.landing-container .row .col .right-col.reveal {
+    opacity: 1;
+    transform: translateY(-180px);
 }
 
 .landing-container .row .col .left-col h1{
@@ -184,7 +203,7 @@
     top: 280px;
 }
 
-.landing-container .row .col .right-col .yellow-circle-3{
+.landing-container .yellow-circle-3{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     z-index: -1;
     position: absolute;
@@ -195,7 +214,7 @@
     border-radius: 10rem 10rem 0 0;
 }
 
-.landing-container .row .col .right-col .yellow-circle-4{
+.landing-container .yellow-circle-4{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     border-radius: 50%;
     height: 100px;
@@ -207,7 +226,7 @@
 }
 
 
-.landing-container .row .col .right-col .yellow-circle-5{
+.landing-container .yellow-circle-5{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
     z-index: -1;
     position: absolute;
@@ -424,7 +443,7 @@
         top: 270px;
     }
 
-    .landing-container .row .col .right-col .yellow-circle-3{
+    .landing-container .yellow-circle-3{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -435,7 +454,7 @@
         border-radius: 10rem 10rem 0 0;
     }
 
-    .landing-container .row .col .right-col .yellow-circle-5{
+    .landing-container .yellow-circle-5{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -510,7 +529,7 @@
         top: 270px;
     }
 
-    .landing-container .row .col .right-col .yellow-circle-3{
+    .landing-container .yellow-circle-3{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -586,7 +605,7 @@
         top: 270px;
     }
 
-    .landing-container .row .col .right-col .yellow-circle-3{
+    .landing-container .yellow-circle-3{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         z-index: -1;
         position: absolute;
@@ -623,7 +642,7 @@
 }
 
 .svg .svg-2{
-    width: 400px;
+    width: 300px;
     position: absolute;
     bottom: 0;
     right: 0;
