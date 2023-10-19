@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="left-right">
+                <div class="right-col">
                     <div class="black-circle-1"></div>
                     <div class="yellow-circle-1"></div>
                     <div class="yellow-circle-2"></div>
