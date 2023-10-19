@@ -131,7 +131,7 @@
 
 .landing-container .row{
     display: flex;
-    margin-top: 150px;
+    margin-top: 180px;
 }
 
 .landing-container .row .col{
@@ -149,6 +149,7 @@
 
 .landing-container .row .col .left-col p{
     color: rgba(0,0,0,0.29);
+    width: 40vw;
 }
 
 .landing-container .row .col .left-right .black-circle-1{
@@ -231,4 +232,141 @@
     position: absolute;
     right: 250px;
     top: 400px
+}
+
+@media screen and (max-width: 1379px){
+    .landing-container .row .col .left-col h1{
+        font-size: 85px;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 1316px){
+    .landing-container .row .col .left-col h1{
+        font-size: 80px;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 1255px){
+    .landing-container .row .col .left-col h1{
+        font-size: 75px;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 1220px){
+    .landing-container .row .col .left-col{
+        padding-left: 50px;
+    }
+
+    .landing-container .row .col .left-col h1{
+        font-size: 65px;
+        font-weight: 500;
+    }
+
+    .landing-container .row .col .left-right .black-circle-1{
+        background-color: #1c1c1c;
+        border-radius: 50%;
+        height: 450px;
+        width: 450px;
+        position: absolute;
+        right: 50px;
+        top: 130px;
+    }
+
+    .landing-container .row .col .left-right .yellow-circle-1{
+        background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        z-index: 1;
+        position: absolute;
+        right: 30px;
+        top: 120px;
+    }
+
+    .landing-container .row .col .left-right .yellow-circle-2{
+        background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        z-index: 1;
+        position: absolute;
+        right: 450px;
+        top: 280px;
+    }
+
+    .landing-container .row .col .left-right .phone{
+        width: 300px;
+        position: absolute;
+        right: 120px;
+        top: 180px;
+        z-index: 1
+    }
+
+    .landing-container .row .col .left-right .car{
+        width: 480px;
+        position: absolute;
+        right: 220px;
+        top: 400px
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .landing-container .row .col .left-col{
+        padding-left: 50px;
+    }
+
+    .landing-container .row .col .left-col h1{
+        font-size: 65px;
+        font-weight: 500;
+    }
+
+    .landing-container .row .col .left-right .black-circle-1{
+        background-color: #1c1c1c;
+        border-radius: 50%;
+        height: 450px;
+        width: 450px;
+        position: absolute;
+        right: 50px;
+        top: 130px;
+    }
+
+    .landing-container .row .col .left-right .yellow-circle-1{
+        background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        z-index: 1;
+        position: absolute;
+        right: 30px;
+        top: 120px;
+    }
+
+    .landing-container .row .col .left-right .yellow-circle-2{
+        background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        z-index: 1;
+        position: absolute;
+        right: 450px;
+        top: 280px;
+    }
+
+    .landing-container .row .col .left-right .phone{
+        width: 300px;
+        position: absolute;
+        right: 120px;
+        top: 180px;
+        z-index: 1
+    }
+
+    .landing-container .row .col .left-right .car{
+        width: 480px;
+        position: absolute;
+        right: 220px;
+        top: 400px
+    }
 }
