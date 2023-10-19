@@ -7,8 +7,15 @@
     height: 100vh;
     width: 250px;
     box-shadow: 0 0 20px 0.1px rgba(0, 0, 0, 0.49);
-    left: -270px; /* Move the sidebar off-screen to the left initially */
+    left: 0;
     transition: left 0.5s ease-in;
+}
+
+@media screen and (max-width: 700px){
+    .sidenav{
+        left: -270px;
+        transition: left 0.5s ease-in;
+    }
 }
 
 .sidenav-toggled{
