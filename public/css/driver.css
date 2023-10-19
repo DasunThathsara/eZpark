@@ -1,12 +1,15 @@
 /* ----------------- Driver Dashboard Styles ---------------- */
+.page-container .section .container{
+    transition: 0.5s;
+    margin-left: 270px;
+}
+
 .page-container .section .container .map{
     margin-right: 20px;
-    margin-left: 270px;
     margin-top: 30px;
     border-radius: 20px;
     box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.10);
     height: 70vh;
-    transition: 0.5s;
 }
 
 .page-container .section .container .map:hover{
@@ -15,11 +18,9 @@
 }
 
 .page-container .section .container .search{
-    margin-left: 270px;
     margin-right: 20px;
     margin-top: 30px;
     border-radius: 20px;
-    transition: 0.5s;
 }
 
 .page-container .section .container .search input{
@@ -54,12 +55,7 @@
 }
 
 @media screen and (max-width: 700px){
-    .page-container .section .container .search{
-        margin-left: 20px;
-        transition: left 0.5s ease-in;
-    }
-
-    .page-container .section .container .map{
+    .page-container .section .container{
         margin-left: 20px;
         transition: left 0.5s ease-in;
     }
