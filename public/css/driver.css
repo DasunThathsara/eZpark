@@ -19,6 +19,7 @@
     margin-right: 20px;
     margin-top: 30px;
     border-radius: 20px;
+    transition: 0.5s;
 }
 
 .page-container .section .container .search input{
@@ -54,7 +55,6 @@
 
 @media screen and (max-width: 700px){
     .page-container .section .container .search{
-        width: 93%;
         margin-left: 20px;
         transition: left 0.5s ease-in;
     }
@@ -62,6 +62,13 @@
     .page-container .section .container .map{
         margin-left: 20px;
         transition: left 0.5s ease-in;
+    }
+
+    .page-container .section .container .map img{
+        width: 40px;
+        top: 348px;
+        left: 20px;
+        position: absolute;
     }
 }
 
