@@ -4,6 +4,9 @@
 @import url('components/sidenavbar.css');
 
 /* ----------------- General Styles ---------------- */
+*{
+    font-family: 'Trebuchet MS', sans-serif;
+}
 .page-container{
     position: absolute;
     top: 0;
@@ -128,7 +131,7 @@
 
 .landing-container .row{
     display: flex;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 .landing-container .row .col{
@@ -140,9 +143,8 @@
 }
 
 .landing-container .row .col .left-col h1{
-    font-size: 80px;
-    font-family: Candara, serif;
-    font-weight: 1500;
+    font-size: 90px;
+    font-weight: 500;
 }
 
 .landing-container .row .col .left-col p{
