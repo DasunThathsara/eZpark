@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
     <!--  TOP NAVIGATION  -->
-    <div class="topnav" style="background-color: white">
+    <div class="topnav" style="width: 96%; background-color: rgba(255,255,255,0); padding-left: 2%; padding-right: 2%; z-index: 1">
         <div class="container">
             <div class="items">
                 <?php if (empty($_SESSION['user_id'])){ ?>
@@ -12,22 +12,24 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row" style="display: flex; margin-top: 200px;">
-            <div class="" style="width: 50%">
-                <div class="" style="padding-left: 30px">
-                    <h1 style="font-size: 55px; font-family: Candara; font-weight: 1500;">Search Parking<br />Anywhere</h1>
-                    <p style="color: rgba(0,0,0,0.29);">At eZpark, we're committed to simplifying your parking experience and ensuring hassle-free journeys to your destination.</p>
+    <div class="landing-container">
+        <div class="row">
+            <div class="col">
+                <div class="left-col">
+                    <h1>Search Parking<br />Anywhere</h1>
+                    <p>At eZpark, we're committed to simplifying your parking experience and ensuring hassle-free journeys to your destination.</p>
                 </div>
             </div>
-            <div class="" style="width: 50%">
-                <div class="">
-                    <div class="black-circle" style="background-color: #1c1c1c; border-radius: 50%; height: 350px; width: 350px; position: absolute; right: 50px;"></div>
-                    <div class="black-circle" style="background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));; border-radius: 50%; height: 150px; width: 150px; z-index: 1; position: absolute; right: 70px; top: 200px;"></div>
-                    <div class="black-circle" style="background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));; border-radius: 50%; height: 70px; width: 70px; z-index: 1; position: absolute; right: 340px; top: 250px;"></div>
-                    <div class="black-circle" style="background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));; border-radius: 50%; height: 150px; width: 150px; z-index: 1; position: absolute; left: 80px; bottom: -50px;"></div>
-                    <img src="<?php echo URLROOT ?>/images/phone.png" alt="" style="width: 220px; position: absolute; right: 80px; top: 250px; z-index: 1">
-                    <img src="<?php echo URLROOT ?>/images/car.png" alt="" style="width: 300px; position: absolute; right: 170px; top: 450px">
+            <div class="col">
+                <div class="left-right">
+                    <div class="black-circle-1"></div>
+                    <div class="yellow-circle-1"></div>
+                    <div class="yellow-circle-2"></div>
+                    <div class="yellow-circle-3"></div>
+<!--                    <div class="yellow-circle-4"></div>-->
+                    <div class="yellow-circle-5"></div>
+                    <img class="phone" src="<?php echo URLROOT ?>/images/phone.png" alt="Phone">
+                    <img class="car" src="<?php echo URLROOT ?>/images/car1.png" alt="Car">
                 </div>
             </div>
         </div>
