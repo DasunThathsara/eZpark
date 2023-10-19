@@ -3,7 +3,6 @@
 @import url('components/formStyles.css');
 @import url('components/sidenavbar.css');
 
-
 /* ----------------- General Styles ---------------- */
 .page-container{
     position: absolute;
@@ -115,4 +114,119 @@
     padding-bottom: 50px;
     color: #8c8c8c;
     font-size: 20px;
+}
+
+
+/* --------------- Index Page Styles --------------- */
+.landing-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.landing-container .row{
+    display: flex;
+    margin-top: 200px;
+}
+
+.landing-container .row .col{
+    width: 50%;
+}
+
+.landing-container .row .col .left-col{
+    padding-left: 100px;
+}
+
+.landing-container .row .col .left-col h1{
+    font-size: 80px;
+    font-family: Candara, serif;
+    font-weight: 1500;
+}
+
+.landing-container .row .col .left-col p{
+    color: rgba(0,0,0,0.29);
+}
+
+.landing-container .row .col .left-right .black-circle-1{
+    background-color: #1c1c1c;
+    border-radius: 50%;
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    right: 100px;
+    top: 130px;
+}
+
+.landing-container .row .col .left-right .yellow-circle-1{
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    z-index: 1;
+    position: absolute;
+    right: 70px;
+    top: 120px;
+}
+
+.landing-container .row .col .left-right .yellow-circle-2{
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    z-index: 1;
+    position: absolute;
+    right: 550px;
+    top: 280px;
+}
+
+.landing-container .row .col .left-right .yellow-circle-3{
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+    z-index: 1;
+    position: absolute;
+    left: 80px;
+    bottom: 0;
+    width: 12rem;
+    height: 6rem;
+    border-radius: 10rem 10rem 0 0;
+
+}
+
+.landing-container .row .col .left-right .yellow-circle-4{
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    z-index: -1;
+    position: absolute;
+    left: 35vw;
+    top: 220px;
+}
+
+
+.landing-container .row .col .left-right .yellow-circle-5{
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+    z-index: -1;
+    position: absolute;
+    right: 600px;
+    top: 0;
+    width: 10rem;
+    height: 5rem;
+    border-radius: 0 0 10rem 10rem;
+}
+
+.landing-container .row .col .left-right .phone{
+    width: 350px;
+    position: absolute;
+    right: 150px;
+    top: 180px;
+    z-index: 1
+}
+
+.landing-container .row .col .left-right .car{
+    width: 420px;
+    position: absolute;
+    right: 250px;
+    top: 450px
 }
