@@ -9,3 +9,11 @@
         <link rel="stylesheet" href="<?php echo URLROOT ?>/css/style.css">
     </head>
     <body>
+
+    <!-- Loading screen -->
+    <div class="loader-wrapper">
+        <div class="logo-container">
+            <img src="<?php echo URLROOT ?>/images/logo.png" alt="">
+        </div>
+        <div class="loader"></div>
+    </div>
