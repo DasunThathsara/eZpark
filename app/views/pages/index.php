@@ -25,7 +25,7 @@
                     <div class="black-circle-1"></div>
                     <div class="yellow-circle-1"></div>
                     <div class="yellow-circle-2"></div>
-                    <img class="phone" src="<?php echo URLROOT ?>/images/phone.png" alt="Phone">
+                    <img class="phone" src="<?php echo URLROOT ?>/images/phone-1.png" alt="Phone">
                     <img class="car" src="<?php echo URLROOT ?>/images/car1.png" alt="Car">
                 </div>
             </div>
