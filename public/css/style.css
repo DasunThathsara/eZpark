@@ -6,6 +6,7 @@
 /* ---------------- External Styles ---------------- */
 @import url('landingpage.css');
 @import url('driver.css');
+@import url('merchandiser.css');
 
 /* ----------------- General Styles ---------------- */
 *{
@@ -45,21 +46,6 @@
 .container .error-btn:hover{
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.20);
     scale: 1.1;
-}
-
-/* ----------------- Merchandiser Dashboard Styles ---------------- */
-.page-container .section .container .emptyParking{
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-    background-color: rgba(253, 198, 62, 0.07);
-    border: 1px solid rgba(253, 198, 62, 0.24);
-    text-align: center;
-    border-radius: 20px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: #8c8c8c;
-    font-size: 20px;
 }
 
 /* ------------------------------- SVG Styles ------------------------------- */
