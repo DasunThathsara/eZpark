@@ -54,7 +54,7 @@
     position: absolute;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 720px){
     .page-container .section .container{
         margin-left: 20px;
         transition: left 0.5s ease-in;

@@ -11,7 +11,7 @@
     transition: left 0.5s ease-in;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 720px){
     .sidenav{
         left: -270px;
         transition: left 0.5s ease-in;
@@ -54,9 +54,10 @@
 
 .sidenav .container .sidenav-close-btn:hover{
     scale: 1.1;
+    
 }
 
-@media screen and (min-width: 700px){
+@media screen and (min-width: 720px){
     .sidenav .container .sidenav-close-btn{
         display: none;
     }
