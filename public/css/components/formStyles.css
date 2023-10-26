@@ -7,12 +7,38 @@
     box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     background-color: #ffffff;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s, transform 1s;
+}
+
+.form-container.reveal{
+    opacity: 1;
+    transform: translateY(0px);
 }
 
 .form-container form{
     overflow: hidden;
     position: relative;
     padding: 10px 30px 30px 30px;
+}
+
+@media screen and (max-width: 700px) {
+    .form-container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form-container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .form-container {
+        width: 90%;
+    }
 }
 
 .form-container .other-options{

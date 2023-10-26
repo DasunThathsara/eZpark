@@ -79,4 +79,10 @@
             <p>If you already have an account? <a href="<?php echo URLROOT ?>/users/login">Login</a></p>
         </div>
     </div>
+
+    <!--?xml version="1.0" standalone="no"?-->
+    <div class="svg">
+        <img class="svg-1" src="<?php echo URLROOT ?>/images/svg-1.png" alt="">
+        <img class="svg-2" src="<?php echo URLROOT ?>/images/svg-7.png" alt="">
+    </div>
 <?php require APPROOT.'/views/inc/footer.php'; ?>

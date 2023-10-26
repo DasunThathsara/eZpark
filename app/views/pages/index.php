@@ -32,17 +32,8 @@
         </div>
         <div class="yellow-circle-3"></div>
         <!--<div class="yellow-circle-4"></div>-->
-        <div class="yellow-circle-5"></div>
+        <div class="yellow-circle-5 anm"></div>
 
     </div>
-
-    <script>
-        const rightCol = document.querySelector(".right-col");
-        const leftCol = document.querySelector(".left-col");
-        setTimeout(function() {
-            rightCol.classList.add("reveal");
-            leftCol.classList.add("reveal");
-        }, 500);
-    </script>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
