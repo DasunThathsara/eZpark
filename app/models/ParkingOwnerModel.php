@@ -53,6 +53,7 @@ class ParkingOwnerModel{
         return $row;
     }
 
+    // Romove land
     public function removeLand($data): bool
     {
         // Prepare statement
@@ -74,6 +75,7 @@ class ParkingOwnerModel{
         }
     }
 
+    // Update land
     public function updateLand($data): bool
     {
         // Prepare statement
@@ -84,7 +86,6 @@ class ParkingOwnerModel{
         $this->db->bind(':old_name', $data['old_name']);
         $this->db->bind(':city', $data['city']);
         $this->db->bind(':old_city', $data['old_city']);
-      //  $this->db->bind(':vehicleType', $data['vehicle_type']);
         $this->db->bind(':id', $_SESSION['user_id']);
 
 
