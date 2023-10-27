@@ -1,3 +1,8 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -9,3 +14,11 @@
         <link rel="stylesheet" href="<?php echo URLROOT ?>/css/style.css">
     </head>
     <body>
+
+    <!-- Loading screen -->
+    <div class="loader-wrapper">
+        <div class="logo-container">
+            <img src="<?php echo URLROOT ?>/images/logo.png" alt="">
+        </div>
+        <div class="loader"></div>
+    </div>

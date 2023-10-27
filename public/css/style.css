@@ -3,8 +3,15 @@
 @import url('components/formStyles.css');
 @import url('components/sidenavbar.css');
 
+/* ---------------- External Styles ---------------- */
+@import url('landingpage.css');
+@import url('driver.css');
+@import url('merchandiser.css');
 
 /* ----------------- General Styles ---------------- */
+*{
+    font-family: 'Trebuchet MS', sans-serif;
+}
 .page-container{
     position: absolute;
     top: 0;
@@ -23,96 +30,76 @@
     font-size: 50px;
 }
 
-/* ----------------- Driver Dashboard Styles ---------------- */
-.page-container .section .container .emptyVehicle{
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-    background-color: rgba(253, 198, 62, 0.07);
-    border: 2px dotted rgba(253, 198, 62, 0.24);
-    text-align: center;
+.container .error-img{
+    width: 50px
+}
+
+.container .error-btn{
+    text-decoration: none;
+    border: 2px solid rgb(255,167,41);
     border-radius: 20px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: rgba(140, 140, 140, 0.87);
-    font-size: 20px;
+    padding: 10px;
+    color: black;
+    transition: 0.5s;
 }
 
-.page-container .section .container .table-container{
-    margin-left: 5vw;
-    margin-right: 5vw;
-}
-
-.page-container .section .container .table{
-    margin-top: 50px;
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    border-radius: 50px;
-}
-
-.page-container .section .container a{
-    text-decoration: none;
-    background-color: #fdc63e;
-    width: 100%;
-    color: #000000;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-left: 5vw;
-}
-
-.page-container .section .container .sub-option {
-    text-decoration: none;
-    background-color: #fdc63e;
-    width: 100%;
-    color: #000000;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-left: 2px;
-}
-
-.page-container .section .container a:hover{
-    background-color: #ffc400;
+.container .error-btn:hover{
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.20);
+    scale: 1.1;
 }
 
-.page-container .section .container th{
-    background-color: #fccc04;
-    text-align: left;
-    padding: 10px;
-    border: 1px solid #ffffff;
+/* ------------------------------- SVG Styles ------------------------------- */
+.svg .svg-1{
+    width: 700px;
+    position: absolute;
+    top: -250px;
+    left: -250px;
+    z-index: -1;
 }
 
-.page-container .section .container tr{
-    background-color: #fff;
+.svg .svg-2{
+    width: 300px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    overflow: hidden;
 }
 
-.page-container .section .container tr:nth-child(even){
-    background-color: rgba(252, 204, 4, 0.16);
+/* --------------------- Loading Page -------------------- */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-.page-container .section .container td{
-    padding: 10px;
-    border: 1px solid #ffffff;
+.logo-container {
+    margin-bottom: 20px;
 }
 
-/* ----------------- Merchandiser Dashboard Styles ---------------- */
-.page-container .section .container .emptyParking{
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-    background-color: rgba(253, 198, 62, 0.07);
-    border: 1px solid rgba(253, 198, 62, 0.24);
-    text-align: center;
-    border-radius: 20px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: #8c8c8c;
-    font-size: 20px;
+.loader-wrapper img{
+    width: 20vw;
+    z-index: 100;
+}
+
+.loader {
+    border: 8px solid #f1f1f1;
+    border-top: 8px solid rgb(255,167,41);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -10,6 +10,8 @@
 }
 
 .form-container form{
+    overflow: hidden;
+    position: relative;
     padding: 10px 30px 30px 30px;
 }
 

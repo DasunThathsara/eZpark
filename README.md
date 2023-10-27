@@ -1,3 +1,5 @@
+<img src="https://github.com/DasunThathsara/eZpark/blob/main/public/images/landingpage.png?raw=true" />
+
 # eZpark 
 Parking assistance system
 
