@@ -53,14 +53,6 @@ public function ParkingRegister(){
             }
         }
 
-        // // Validate user type
-        // if (empty($data['vehicle_type'])){
-        //     $data['err'] = 'Please select vehicle type';
-        // }
-        // else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel'){
-        //     $data['err'] = 'Invalid vehicle type';
-        // }
-
         // Validation is completed and no error found
         if (empty($data['err'])){
             // Register parking
@@ -80,7 +72,7 @@ public function ParkingRegister(){
         // Initial form data
         $data = [
             'name' => '',
-            // 'city' => '',
+            'city' => '',
             'err' => '',
         ];
 

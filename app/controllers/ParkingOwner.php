@@ -21,7 +21,7 @@ class ParkingOwner extends Controller {
     }
 
     // Register Land
-    public function landRegister(){
+    public function LandRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
             // input data
@@ -30,7 +30,6 @@ class ParkingOwner extends Controller {
             $data = [
                 'name' => trim($_POST['name']),
                 'city' => trim($_POST['city']),
-                //'land_type' => trim($_POST['land_type']),
                 'err' => ''
             ];
 
@@ -45,12 +44,13 @@ class ParkingOwner extends Controller {
                 }
             }
 
-            /*// Validate user type
-            if (empty($data['land_type'])){
-                $data['err'] = 'Please select land type';
-            }
-            else if ($data['land_type'] != 'car' and $data['land_type'] != 'bike' and $data['land_type'] != '3wheel'){
-                $data['err'] = 'Invalid land type';
+            if (empty($data['city'])){
+                $data['err'] = 'Please enter city';
+            } else {
+                // Check city
+                if ($this->parkingOwnerModel->findLandByName($data['city'])){
+                    $data['err'] = 'City cannot be duplicate';
+                }
             }
 
             // Validation is completed and no error found*/
@@ -73,7 +73,6 @@ class ParkingOwner extends Controller {
             $data = [
                 'name' => '',
                 'city' => '',
-                //'land_type' => '',
                 'err' => '',
             ];
 
@@ -124,11 +123,9 @@ class ParkingOwner extends Controller {
 
             $data = [
                 'name' => trim($_POST['name']),
-                'city' => trim($_POST['city']),
                 'old_name' => trim($_POST['old_name']),
+                'city' => trim($_POST['city']),
                 'old_city' => trim($_POST['old_city']),
-
-                //'land_type' => trim($_POST['land_type']),
                 'err' => ''
             ];
 
@@ -152,14 +149,6 @@ class ParkingOwner extends Controller {
                 }
             }
 
-            /*// Validate user type
-            if (empty($data['land_type'])){
-                $data['err'] = 'Please select land type';
-            }
-            else if ($data['land_type'] != 'car' and $data['land_type'] != 'bike' and $data['land_type'] != '3wheel'){
-                $data['err'] = 'Invalid land type'.$data['land_type'];
-            }*/
-
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
@@ -176,40 +165,4 @@ class ParkingOwner extends Controller {
         }
     }
 
-/*
-    // ------------------------ Bookings ------------------------
-    public function booking(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $this->view('driver/booking', $vehicles);
-    }
-
-    // ------------------------ Search ------------------------
-    public function search(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $this->view('driver/search', $vehicles);
-    }
-
-    // ------------------------ History ------------------------
-    public function history(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $this->view('driver/history', $vehicles);
-    }
-
-    // ------------------------ Bookings ------------------------
-    public function rating(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $this->view('driver/rating', $vehicles);
-    }
-
-    // ------------------------ Packages ------------------------
-    public function packages(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $this->view('driver/packages', $vehicles);
-    }
-    */
 }
