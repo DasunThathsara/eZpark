@@ -8,7 +8,6 @@ $section = 'packages';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
-
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
