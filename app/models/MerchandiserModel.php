@@ -6,13 +6,6 @@ class MerchandiserModel{
         $this->db = new Database();
     }
 
-    // public function getUser(){
-    //     $this->db->query('SELECT * FROM users');
-
-    //     return $this->db->resultSet();
-    // }
-
-
 // ------------------------- Parking Functionalities -------------------------
     // Register parking
     public function registerParking($data): bool
