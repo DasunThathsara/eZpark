@@ -100,7 +100,7 @@
 
                  <!-- Card 6 -->
                  <div class="card">
-                    <a href="#">
+                    <a href="<?php echo URLROOT ?>/parkingOwner/packages">
                         <table>
                             <tr>
                             <th>
