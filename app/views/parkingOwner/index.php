@@ -97,6 +97,23 @@
                         </table>
                     </a>
                 </div>
+
+                 <!-- Card 6 -->
+                 <div class="card">
+                    <a href="#">
+                        <table>
+                            <tr>
+                            <th>
+                                    <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
+                                </th>
+                                <td>
+                                    <p>3</p>
+                                    <p>Packages</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
