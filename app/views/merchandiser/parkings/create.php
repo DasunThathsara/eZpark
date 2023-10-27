@@ -34,13 +34,4 @@
     </form>
 </div>
 
-<!-- <script>
-    const userSelectionList = document.querySelector('.user-selection-list');
-
-    userSelectionList.addEventListener('click', function(event) {
-        if (event.target.tagName === 'LI') {
-            document.getElementById('vehicle_type').value = event.target.getAttribute('data-user-type');
-        }
-    });
-</script> -->
 <?php require APPROOT.'/views/inc/footer.php'; ?>
