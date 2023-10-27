@@ -165,4 +165,11 @@ class ParkingOwner extends Controller {
         }
     }
 
+    // ------------------------ Packages ------------------------
+    public function packages(){
+        $lands = $this->driverModel->viewLands();
+
+        $this->view('driver/packages', $lands);
+    }
+
 }
