@@ -106,7 +106,6 @@
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
-    margin-left: 5vw;
 }
 
 .page-container .section .container .sub-option {
@@ -119,12 +118,16 @@
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
-    margin-left: 2px;
+}
+
+.page-container .section .container .sub-option:hover {
+    scale: 1.05;
+    box-shadow: none;
 }
 
 .page-container .section .container a:hover{
     background-color: #ffc400;
-    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.20);
+    scale: 1.1;
 }
 
 .page-container .section .container th{

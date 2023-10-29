@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
     <!--  TOP NAVIGATION  -->
-    <div class="topnav" style="width: 96%; background-color: rgba(255,255,255,0); padding-left: 2%; padding-right: 2%; z-index: 1">
+    <div class="topnav" style="width: 96%; background: linear-gradient(to right, white, white); padding-left: 2%; padding-right: 2%; z-index: 1">
         <div class="container">
             <div class="items">
                 <?php if (empty($_SESSION['user_id'])){ ?>
