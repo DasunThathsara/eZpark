@@ -34,10 +34,12 @@
     padding: 30px 0 30px 0;
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
+    background-color: white;
 }
 
 .form-container .type-select .type-select-btn:hover{
     scale: 1.05;
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255, 188, 19));
 }
 
 .form-container.reveal{
@@ -71,7 +73,7 @@
 
 .form-container .other-options{
     text-align: center;
-    padding: 0px 30px 30px 30px;
+    padding: 0px 30px 15px 30px;
 }
 
 .form-container .other-options p{
@@ -85,10 +87,11 @@
 
 .form-container h1{
     text-align: center;
-    background-color: #fdc63e;
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));
     border-radius: 20px 20px 0 0;
     padding-top: 20px;
     padding-bottom: 20px;
+    color: #000000;
 }
 
 .form-container form{
@@ -120,7 +123,7 @@ input[type=submit] {
     background-color: #fcd426;
     color: #000000;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 8px 0 0 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
