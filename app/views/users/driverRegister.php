@@ -9,32 +9,25 @@
 
     <form action="<?php echo URLROOT ?>/users/register" method="post">
         <!-- Username -->
-        <div class="form-input-title">Username:</div>
-        <input type="text" name="username" id="username" required value="<?php echo $data['username'] ?>" />
+        <input type="text" name="username" id="username" required value="<?php echo $data['username'] ?>" placeholder="Username" />
 
         <!-- Name -->
-        <div class="form-input-title">Name:</div>
-        <input type="text" name="name" id="name" required value="<?php echo $data['name'] ?>" />
+        <input type="text" name="name" id="name" required value="<?php echo $data['name'] ?>" placeholder="Name" />
 
         <!-- Email -->
-        <div class="form-input-title">Email:</div>
-        <input type="email" name="email" id="email" required value="<?php echo $data['email'] ?>" />
+        <input type="email" name="email" id="email" required value="<?php echo $data['email'] ?>" placeholder="Email" />
 
         <!-- Contact number -->
-        <div class="form-input-title">Contact number:</div>
-        <input type="text" name="contact_no" id="contact_no" required value="<?php echo $data['contact_no'] ?>" />
+        <input type="text" name="contact_no" id="contact_no" required value="<?php echo $data['contact_no'] ?>" placeholder="Contact number" />
 
         <!-- Password -->
-        <div class="form-input-title">Password:</div>
-        <input type="password" name="password" id="password" required />
+        <input type="password" name="password" id="password" required placeholder="Password" />
 
         <!-- Password Strength Indicator -->
         <div class="strength-text" id="strength-text"></div>
 
-
         <!-- Confirm Password -->
-        <div class="form-input-title">Confirm Password:</div>
-        <input type="password" name="confirm_password" id="confirm_password" required />
+        <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm Password" />
 
         <br><br>
 

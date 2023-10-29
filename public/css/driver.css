@@ -84,8 +84,8 @@
 }
 
 .page-container .section .container .table-container{
-    margin-left: 5vw;
-    margin-right: 5vw;
+    /*margin-left: 2vw;*/
+    margin-right: 2vw;
 }
 
 .page-container .section .container .table{
@@ -134,7 +134,7 @@
     background-color: #fccc04;
     text-align: left;
     padding: 10px;
-    border: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
 
 .page-container .section .container tr{
@@ -147,5 +147,5 @@
 
 .page-container .section .container td{
     padding: 10px;
-    border: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
