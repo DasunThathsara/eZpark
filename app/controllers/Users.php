@@ -5,6 +5,13 @@ class Users extends Controller{
     }
 
     public function register(){
+        $data = [
+            'title' => 'Register'
+        ];
+        $this->view('users/register', $data);
+    }
+
+    public function driverRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
             // input data
@@ -86,7 +93,7 @@ class Users extends Controller{
                 }
             } else {
                 // Load view with errors
-                $this->view('users/register', $data);
+                $this->view('users/driverRegister', $data);
             }
 
         } else {
@@ -103,7 +110,7 @@ class Users extends Controller{
             ];
 
             // Load view
-            $this->view('users/register', $data);
+            $this->view('users/driverRegister', $data);
         }
     }
 

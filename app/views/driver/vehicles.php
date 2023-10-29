@@ -35,12 +35,13 @@
                                 <td>
                                     <?php echo $data[$i]->vehicleType ?>
                                 </td>
-                                <td style="text-align: center">
+                                <td style="text-align: center; display: flex">
                                     <form action="<?php echo URLROOT ?>/driver/vehicleUpdateForm" method="post">
                                         <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
                                         <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $data[$i]->vehicleType ?>" />
                                         <input type="submit" class="sub-option" value="Update"/>
                                     </form>
+                                    &nbsp;
                                     <form action="<?php echo URLROOT ?>/driver/vehicleRemove" method="post">
                                         <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
                                         <input type="submit" class="sub-option" onclick="return confirmSubmit();" value="Delete"/>
