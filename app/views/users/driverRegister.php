@@ -1,5 +1,5 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-<div class="form-container">
+<div class="form-container" style="margin-top: 10vh;">
     <h1>Sign up</h1>
     <?php if (!empty($data['err'])){?>
         <div class="error-msg">
