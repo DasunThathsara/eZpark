@@ -8,13 +8,12 @@
         <?php } ?>
         <form action="<?php echo URLROOT ?>/users/login" method="post">
             <!-- Email -->
-            <div class="form-input-title">Email:</div>
-            <input type="text" name="email" id="email" required value="<?php echo $data['email'] ?>" />
+            <input type="text" name="email" id="email" required value="<?php echo $data['email'] ?>" placeholder="Email" />
 
             <!-- Password -->
-            <div class="form-input-title">Password:</div>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" required placeholder="Password" />
 
+            <br><br><br>
             <!-- Remember Me Checkbox -->
             <div class="form-check">
                 <input type="checkbox" name="remember_me" id="remember_me">
