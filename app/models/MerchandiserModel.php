@@ -11,16 +11,16 @@ class MerchandiserModel{
     public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO land (name, city, deed, car, bike, threeWheel, street, contactNo, id) VALUES (:name, :city, :deed, :car, :bike, :threeWheel, :street, :contactNo, :id)');
+        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, id) VALUES (:name, :city, :deed, :car, :bike, :threeWheel, :street, :contactNo, :id)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':city', $data['city']);
+        $this->db->bind(':street', $data['street']);
         $this->db->bind(':deed', $data['deed']);
         $this->db->bind(':car', $data['car']);
         $this->db->bind(':bike', $data['bike']);
         $this->db->bind(':threeWheel', $data['threeWheel']);
-        $this->db->bind(':street', $data['street']);
         $this->db->bind(':contactNo', $data['contactNo']);
         $this->db->bind(':id', $_SESSION['user_id']);
 
@@ -85,13 +85,15 @@ class MerchandiserModel{
     public function updateLand($data): bool
     {
         // Prepare statement
-        $this->db->query('UPDATE land SET name = :name, city = :city, deed = :deed, car = :car, bike = :bike, threeWheel = :threeWheel, street = :street, contactNo = :contactNo  WHERE id = :id and name = :old_name ');
+        $this->db->query('UPDATE land SET name = :name, city = :city, street = :street, deed = :deed, car = :car, bike = :bike, threeWheel = :threeWheel, contactNo = :contactNo  WHERE id = :id and name = :old_name ');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':old_name', $data['old_name']);
         $this->db->bind(':city', $data['city']);
         $this->db->bind(':old_city', $data['old_city']);
+        $this->db->bind(':street', $data['street']);
+        $this->db->bind(':old_street', $data['old_street']);
         $this->db->bind(':deed', $data['deed']);
         $this->db->bind(':old_deed', $data['old_deed']);
         $this->db->bind(':car', $data['car']);
@@ -100,8 +102,6 @@ class MerchandiserModel{
         $this->db->bind(':old_bike', $data['old_bike']);
         $this->db->bind(':threeWheel', $data['threeWheel']);
         $this->db->bind(':old_threeWheel', $data['old_threeWheel']);
-        $this->db->bind(':street', $data['street']);
-        $this->db->bind(':old_street', $data['old_street']);
         $this->db->bind(':contactNo', $data['contactNo']);
         $this->db->bind(':old_contactNo', $data['old_contactNo']);
         $this->db->bind(':id', $_SESSION['user_id']);

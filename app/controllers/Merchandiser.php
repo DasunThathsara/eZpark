@@ -30,11 +30,11 @@ public function landRegister(){
         $data = [
             'name' => trim($_POST['name']),
             'city' => trim($_POST['city']),
+            'street' => trim($_POST['street']),
             'deed' => trim($_POST['deed']),
             'car' => trim($_POST['car']),
             'bike' => trim($_POST['bike']),
             'threeWheel' => trim($_POST['threeWheel']),
-            'street' => trim($_POST['street']),
             'contactNo' => trim($_POST['contactNo']),
             'err' => ''
         ];
@@ -56,6 +56,15 @@ public function landRegister(){
             // Check city
             if ($this->merchandiserModel->findLandByName($data['city'])){
                 $data['err'] = 'City cannot be duplicate';
+            }
+        }
+
+        if (empty($data['street'])){
+            $data['err'] = 'Please enter street';
+        } else {
+            // Check street
+            if ($this->merchandiserModel->findLandByName($data['street'])){
+                $data['err'] = 'Street cannot be duplicate';
             }
         }
 
@@ -95,15 +104,6 @@ public function landRegister(){
             }
         }
 
-        if (empty($data['street'])){
-            $data['err'] = 'Please enter street';
-        } else {
-            // Check street
-            if ($this->merchandiserModel->findLandByName($data['street'])){
-                $data['err'] = 'Street cannot be duplicate';
-            }
-        }
-
         if (empty($data['contactNo'])){
             $data['err'] = 'Please enter contactNo';
         } else {
@@ -133,11 +133,11 @@ public function landRegister(){
         $data = [
             'name' => '',
             'city' => '',
+            'street' => '',
             'deed' => '',
             'car' => '',
             'bike' => '',
             'threeWheel' => '',
-            'street' => '',
             'contactNo' => '',
             'err' => ''
             
@@ -158,11 +158,11 @@ public function landRemove(){
         $data = [
             'name' => trim($_POST['name']),
             'city' => trim($_POST['city']),
+            'street' => trim($_POST['street']),
             'deed' => trim($_POST['deed']),
             'car' => trim($_POST['car']),
             'bike' => trim($_POST['bike']),
             'threeWheel' => trim($_POST['threeWheel']),
-            'street' => trim($_POST['street']),
             'contactNo' => trim($_POST['contactNo'])
         ];
 
@@ -181,11 +181,11 @@ public function landUpdateForm(){
         $data = [
             'name' => trim($_POST['name']),
             'city' => trim($_POST['city']),
+            'street' => trim($_POST['street']),
             'deed' => trim($_POST['deed']),
             'car' => trim($_POST['car']),
             'bike' => trim($_POST['bike']),
             'threeWheel' => trim($_POST['threeWheel']),
-            'street' => trim($_POST['street']),
             'contactNo' => trim($_POST['contactNo']),
             'err' => ''
         ];
@@ -204,6 +204,8 @@ public function landUpdate(){
             'old_name' => trim($_POST['old_name']),
             'city' => trim($_POST['city']),
             'old_city' => trim($_POST['old_city']),
+            'street' => trim($_POST['street']),
+            'old_street' => trim($_POST['old_street']),
             'deed' => trim($_POST['deed']),
             'old_deed' => trim($_POST['old_deed']),
             'car' => trim($_POST['car']),
@@ -212,8 +214,6 @@ public function landUpdate(){
             'old_bike' => trim($_POST['old_bike']),
             'threeWheel' => trim($_POST['threeWheel']),
             'old_threeWheel' => trim($_POST['old_threeWheel']),
-            'street' => trim($_POST['street']),
-            'old_street' => trim($_POST['old_street']),
             'contactNo' => trim($_POST['contactNo']),
             'old_contactNo' => trim($_POST['old_contactNo']),
             'err' => ''
@@ -236,6 +236,15 @@ public function landUpdate(){
             // Check city
             if ($this->merchandiserModel->findLandByName($data['city']) and $data['city'] != $data['old_city']){
                 $data['err'] = 'City cannot be duplicate';
+            }
+        }
+
+        if (empty($data['street'])){
+            $data['err'] = 'Please enter street';
+        } else {
+            // Check street
+            if ($this->merchandiserModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
+                $data['err'] = 'Street cannot be duplicate';
             }
         }
 
@@ -272,15 +281,6 @@ public function landUpdate(){
             // Check threeWheel
             if ($this->merchandiserModel->findLandByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
                 $data['err'] = 'Three Wheel cannot be duplicate';
-            }
-        }
-
-        if (empty($data['street'])){
-            $data['err'] = 'Please enter street';
-        } else {
-            // Check street
-            if ($this->merchandiserModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
-                $data['err'] = 'Street cannot be duplicate';
             }
         }
 
