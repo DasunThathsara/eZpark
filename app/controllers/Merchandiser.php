@@ -181,6 +181,12 @@ public function parkingUpdateForm(){
         $data = [
             'name' => trim($_POST['name']),
             'city' => trim($_POST['city']),
+            'deed' => trim($_POST['deed']),
+            'car' => trim($_POST['car']),
+            'bike' => trim($_POST['bike']),
+            'threeWheel' => trim($_POST['threeWheel']),
+            'street' => trim($_POST['street']),
+            'contactNo' => trim($_POST['contactNo']),
             'err' => ''
         ];
         $this->view('merchandiser/parkings/update', $data);
@@ -198,6 +204,18 @@ public function parkingUpdate(){
             'old_name' => trim($_POST['old_name']),
             'city' => trim($_POST['city']),
             'old_city' => trim($_POST['old_city']),
+            'deed' => trim($_POST['deed']),
+            'old_deed' => trim($_POST['old_deed']),
+            'car' => trim($_POST['car']),
+            'old_car' => trim($_POST['old_car']),
+            'bike' => trim($_POST['bike']),
+            'old_bike' => trim($_POST['old_bike']),
+            'threeWheel' => trim($_POST['threeWheel']),
+            'old_threeWheel' => trim($_POST['old_threeWheel']),
+            'street' => trim($_POST['street']),
+            'old_street' => trim($_POST['old_street']),
+            'contactNo' => trim($_POST['contactNo']),
+            'old_contactNo' => trim($_POST['old_contactNo']),
             'err' => ''
         ];
 
