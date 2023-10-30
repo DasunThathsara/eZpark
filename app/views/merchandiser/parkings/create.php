@@ -29,7 +29,41 @@
 
         <br><br>
 
-        
+        <!-- Street -->
+        <div class="form-input-title">Street:</div>
+        <input type="text" name="street" id="street" required value="" />
+
+        <br><br>
+
+        <!-- Deed -->
+        <div class="form-input-title">Deed:</div>
+        <input type="text" name="Deed" id="Deed" required value="" />
+
+        <br><br>
+
+        <!-- Car -->
+        <div class="form-input-title">How much the Car parking slots:</div>
+        <input type="text" name="car" id="car" required value="" />
+
+        <br><br>
+
+        <!-- Bike -->
+        <div class="form-input-title">How much the Bike parking slots:</div>
+        <input type="text" name="bike" id="bike" required value="" />
+
+        <br><br>
+
+        <!-- Three Wheel -->
+        <div class="form-input-title">How much the Three Wheel parking slots:</div>
+        <input type="text" name="threeWheel" id="threeWheel" required value="" />
+
+        <br><br>
+
+        <!-- contactNo -->
+        <div class="form-input-title">Contact Number:</div>
+        <input type="text" name="contactNo" id="contactNo" required value="" />
+
+        <br><br>
 
         <!-- Submit -->
         <input type="submit" value="Add">
