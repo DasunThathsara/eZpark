@@ -6,12 +6,12 @@ class MerchandiserModel{
         $this->db = new Database();
     }
 
-// ------------------------- Parking Functionalities -------------------------
-    // Register parking
-    public function registerParking($data): bool
+// ------------------------- land Functionalities -------------------------
+    // Register land
+    public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO parking (name, city, deed, car, bike, threeWheel, street, contactNo, id) VALUES (:name, :city, :deed, :car, :bike, :threeWheel, :street, :contactNo, :id)');
+        $this->db->query('INSERT INTO land (name, city, deed, car, bike, threeWheel, street, contactNo, id) VALUES (:name, :city, :deed, :car, :bike, :threeWheel, :street, :contactNo, :id)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -33,10 +33,10 @@ class MerchandiserModel{
         }
     }
 
-    // Find parking
-    public function findParkingByName($name): bool
+    // Find land
+    public function findLandByName($name): bool
     {
-        $this->db->query('SELECT * FROM parking WHERE name = :name and id = :id');
+        $this->db->query('SELECT * FROM land WHERE name = :name and id = :id');
         $this->db->bind(':name', $name);
         $this->db->bind(':id', $_SESSION['user_id']);
 
@@ -50,8 +50,8 @@ class MerchandiserModel{
         }
     }
 
-    public function viewParkings(){
-        $this->db->query('SELECT * FROM parking WHERE id = :id');
+    public function viewLands(){
+        $this->db->query('SELECT * FROM land WHERE id = :id');
         $this->db->bind(':id', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
@@ -59,11 +59,11 @@ class MerchandiserModel{
         return $row;
     }
 
-    // Romove parking
-    public function removeParking($data): bool
+    // Romove land
+    public function removeLand($data): bool
     {
         // Prepare statement
-        $this->db->query('DELETE FROM parking WHERE name = :name AND id = :id');
+        $this->db->query('DELETE FROM land WHERE name = :name AND id = :id');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -81,11 +81,11 @@ class MerchandiserModel{
         }
     }
 
-    // Update parking
-    public function updateParking($data): bool
+    // Update land
+    public function updateLand($data): bool
     {
         // Prepare statement
-        $this->db->query('UPDATE parking SET name = :name city = :city deed = :deed car = :car bike = :bike threeWheel = :threeWheel street = :street contactNo = :contactNo  WHERE id = :id and name = :old_name ');
+        $this->db->query('UPDATE land SET name = :name city = :city deed = :deed car = :car bike = :bike threeWheel = :threeWheel street = :street contactNo = :contactNo  WHERE id = :id and name = :old_name ');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
