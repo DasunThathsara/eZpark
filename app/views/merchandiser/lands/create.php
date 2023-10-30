@@ -37,7 +37,7 @@
 
         <!-- Deed -->
         <div class="form-input-title">Deed:</div>
-        <input type="text" name="Deed" id="Deed" required value="" />
+        <input type="text" name="deed" id="deed" required value="" />
 
         <br><br>
 
