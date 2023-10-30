@@ -30,6 +30,12 @@ public function ParkingRegister(){
         $data = [
             'name' => trim($_POST['name']),
             'city' => trim($_POST['city']),
+            'deed' => trim($_POST['deed']),
+            'car' => trim($_POST['car']),
+            'bike' => trim($_POST['bike']),
+            'threeWheel' => trim($_POST['threeWheel']),
+            'street' => trim($_POST['street']),
+            'contactNo' => trim($_POST['contactNo']),
             'err' => ''
         ];
 
