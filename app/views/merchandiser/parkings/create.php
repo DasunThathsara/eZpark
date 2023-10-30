@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-    $section = 'parkings';
+    $section = 'lands';
     require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -16,7 +16,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/merchandiser/parkingRegister" method="post">
+    <form action="<?php echo URLROOT ?>/merchandiser/landRegister" method="post">
         <!-- Name -->
         <div class="form-input-title">Name:</div>
         <input type="text" name="name" id="name" required value="" />
@@ -28,6 +28,8 @@
         <input type="text" name="city" id="city" required value="" />
 
         <br><br>
+
+        
 
         <!-- Submit -->
         <input type="submit" value="Add">
