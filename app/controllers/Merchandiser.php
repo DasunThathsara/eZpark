@@ -21,7 +21,7 @@ public function lands(){
 }
 
 // Register Land
-public function LandRegister(){
+public function landRegister(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Submitted form data
         // input data
@@ -118,7 +118,7 @@ public function LandRegister(){
             // Register land
             print_r($data);
             print_r($_SESSION['user_id']);
-            if ($this->merchandiserModel->registerland($data)){
+            if ($this->merchandiserModel->registerLand($data)){
                 redirect('merchandiser/lands');
             } else {
                 die('Something went wrong');
@@ -176,7 +176,7 @@ public function landRemove(){
 }
 
 // Update Land
-public function LandUpdateForm(){
+public function landUpdateForm(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $data = [
             'name' => trim($_POST['name']),
@@ -193,7 +193,7 @@ public function LandUpdateForm(){
     }
 }
 
-public function LandUpdate(){
+public function landUpdate(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Submitted form data
         // input data
