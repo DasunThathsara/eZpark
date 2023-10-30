@@ -85,7 +85,7 @@ class MerchandiserModel{
     public function updateLand($data): bool
     {
         // Prepare statement
-        $this->db->query('UPDATE land SET name = :name city = :city deed = :deed car = :car bike = :bike threeWheel = :threeWheel street = :street contactNo = :contactNo  WHERE id = :id and name = :old_name ');
+        $this->db->query('UPDATE land SET name = :name, city = :city, deed = :deed, car = :car, bike = :bike, threeWheel = :threeWheel, street = :street, contactNo = :contactNo  WHERE id = :id and name = :old_name ');
 
         // Bind values
         $this->db->bind(':name', $data['name']);

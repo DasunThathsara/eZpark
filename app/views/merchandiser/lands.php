@@ -17,7 +17,7 @@
             <a href="<?php echo URLROOT ?>/merchandiser/landRegister" style="font-weight: 1000; font-size: 20px">+</a>
 
             <?php if (sizeof($data) == 0) {?>
-                <div class="emptyLand">You have no any registered parkingss</div>
+                <div class="emptyLand">You have no any registered parkings</div>
             <?php }
             else {?>
                 <div class="table-container">
@@ -26,6 +26,7 @@
                             <th>Parking Name</th>
                             <th>City</th>
                             <th>Street</th>
+                            <th>Deed</th>
                             <th>No. of Cars</th>
                             <th>No. of Bikes</th>
                             <th>No. of Three Wheels</th>
@@ -44,6 +45,9 @@
                                     <?php echo $data[$i]->street ?>
                                 </td>
                                 <td>
+                                    <?php echo $data[$i]->deed ?>
+                                </td>
+                                <td>
                                     <?php echo $data[$i]->car ?>
                                 </td>
                                 <td>
@@ -60,6 +64,7 @@
                                         <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
                                         <input type="text" name="city" id="city" hidden value="<?php echo $data[$i]->city ?>" />
                                         <input type="text" name="street" id="street" hidden value="<?php echo $data[$i]->street ?>" />
+                                        <input type="text" name="deed" id="deed" hidden value="<?php echo $data[$i]->deed ?>" />
                                         <input type="number" name="car" id="car" hidden value="<?php echo $data[$i]->car ?>" />
                                         <input type="number" name="bike" id="bike" hidden value="<?php echo $data[$i]->bike ?>" />
                                         <input type="number" name="threeWheel" id="threeWheel" hidden value="<?php echo $data[$i]->threeWheel ?>" />
