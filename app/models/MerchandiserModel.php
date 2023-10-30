@@ -11,11 +11,17 @@ class MerchandiserModel{
     public function registerParking($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO parking (name, city, id) VALUES (:name, :city, :id)');
+        $this->db->query('INSERT INTO parking (name, city, deed, car, bike, threeWheel, street, contactNo, id) VALUES (:name, :city, :deed, :car, :bike, :threeWheel, :street, :contactNo, :id)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':city', $data['city']);
+        $this->db->bind(':deed', $data['deed']);
+        $this->db->bind(':car', $data['car']);
+        $this->db->bind(':bike', $data['bike']);
+        $this->db->bind(':threeWheel', $data['threeWheel']);
+        $this->db->bind(':street', $data['street']);
+        $this->db->bind(':contactNo', $data['contactNo']);
         $this->db->bind(':id', $_SESSION['user_id']);
 
         // Execute
