@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'parkings';
+$section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/merchandiser/parkingUpdate" method="post">
+    <form action="<?php echo URLROOT ?>/merchandiser/landUpdate" method="post">
         <!-- Name -->
         <div class="form-input-title">Name:</div>
         <input type="text" name="name" id="name" required value="<?php echo $data['name'] ?>" />
