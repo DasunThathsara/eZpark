@@ -14,14 +14,14 @@ class Merchandiser extends Controller {
         $this->view('merchandiser/index', $data);
     }
 
-public function parkings(){
-    $parkings = $this->merchandiserModel->viewparkings();
+public function lands(){
+    $lands = $this->merchandiserModel->viewlands();
 
-    $this->view('merchandiser/parkings', $parkings);
+    $this->view('merchandiser/lands', $lands);
 }
 
-// Register parking
-public function ParkingRegister(){
+// Register Land
+public function LandRegister(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Submitted form data
         // input data
@@ -45,7 +45,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter name';
         } else {
             // Check name
-            if ($this->merchandiserModel->findParkingByName($data['name'])){
+            if ($this->merchandiserModel->findLandByName($data['name'])){
                 $data['err'] = 'Name cannot be duplicate';
             }
         }
@@ -54,7 +54,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter city';
         } else {
             // Check city
-            if ($this->merchandiserModel->findParkingByName($data['city'])){
+            if ($this->merchandiserModel->findLandByName($data['city'])){
                 $data['err'] = 'City cannot be duplicate';
             }
         }
@@ -63,7 +63,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter deed';
         } else {
             // Check deed
-            if ($this->merchandiserModel->findParkingByName($data['deed'])){
+            if ($this->merchandiserModel->findLandByName($data['deed'])){
                 $data['err'] = 'Deed cannot be duplicate';
             }
         }
@@ -72,7 +72,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter car';
         } else {
             // Check car
-            if ($this->merchandiserModel->findParkingByName($data['car'])){
+            if ($this->merchandiserModel->findLandByName($data['car'])){
                 $data['err'] = 'Car cannot be duplicate';
             }
         }
@@ -81,7 +81,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter bike';
         } else {
             // Check bike
-            if ($this->merchandiserModel->findParkingByName($data['bike'])){
+            if ($this->merchandiserModel->findLandByName($data['bike'])){
                 $data['err'] = 'Bike cannot be duplicate';
             }
         }
@@ -90,7 +90,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter threeWheel';
         } else {
             // Check threeWheel
-            if ($this->merchandiserModel->findParkingByName($data['threeWheel'])){
+            if ($this->merchandiserModel->findLandByName($data['threeWheel'])){
                 $data['err'] = 'Three Wheel cannot be duplicate';
             }
         }
@@ -99,7 +99,7 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter street';
         } else {
             // Check street
-            if ($this->merchandiserModel->findParkingByName($data['street'])){
+            if ($this->merchandiserModel->findLandByName($data['street'])){
                 $data['err'] = 'Street cannot be duplicate';
             }
         }
@@ -108,24 +108,24 @@ public function ParkingRegister(){
             $data['err'] = 'Please enter contactNo';
         } else {
             // Check contactNo
-            if ($this->merchandiserModel->findParkingByName($data['contactNo'])){
+            if ($this->merchandiserModel->findLandByName($data['contactNo'])){
                 $data['err'] = 'Contact Number cannot be duplicate';
             }
         }
 
         // Validation is completed and no error found
         if (empty($data['err'])){
-            // Register parking
+            // Register land
             print_r($data);
             print_r($_SESSION['user_id']);
-            if ($this->merchandiserModel->registerparking($data)){
-                redirect('merchandiser/parkings');
+            if ($this->merchandiserModel->registerland($data)){
+                redirect('merchandiser/lands');
             } else {
                 die('Something went wrong');
             }
         } else {
             // Load view with errors
-            $this->view('merchandiser/parkings/create', $data);
+            $this->view('merchandiser/lands/create', $data);
         }
 
     } else {
@@ -144,12 +144,12 @@ public function ParkingRegister(){
         ];
 
         // Load view
-        $this->view('merchandiser/parkings/create', $data);
+        $this->view('merchandiser/lands/create', $data);
     }
 }
 
-// Remove Parking
-public function parkingRemove(){
+// Remove land
+public function landRemove(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Submitted form data
         // input data
@@ -166,17 +166,17 @@ public function parkingRemove(){
             'contactNo' => trim($_POST['contactNo'])
         ];
 
-        // Delete the Parking
-        if ($this->merchandiserModel->removeParking($data)){
-            redirect('merchandiser/parkings');
+        // Delete the land
+        if ($this->merchandiserModel->removeLand($data)){
+            redirect('merchandiser/lands');
         } else {
             die('Something went wrong');
         }
     }
 }
 
-// Update Parking
-public function parkingUpdateForm(){
+// Update Land
+public function LandUpdateForm(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $data = [
             'name' => trim($_POST['name']),
@@ -189,11 +189,11 @@ public function parkingUpdateForm(){
             'contactNo' => trim($_POST['contactNo']),
             'err' => ''
         ];
-        $this->view('merchandiser/parkings/update', $data);
+        $this->view('merchandiser/lands/update', $data);
     }
 }
 
-public function parkingUpdate(){
+public function LandUpdate(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Submitted form data
         // input data
@@ -225,7 +225,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter name';
         } else {
             // Check name
-            if ($this->merchandiserModel->findParkingByName($data['name']) and $data['name'] != $data['old_name']){
+            if ($this->merchandiserModel->findLandByName($data['name']) and $data['name'] != $data['old_name']){
                 $data['err'] = 'Name cannot be duplicate';
             }
         }
@@ -234,7 +234,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter city';
         } else {
             // Check city
-            if ($this->merchandiserModel->findParkingByName($data['city']) and $data['city'] != $data['old_city']){
+            if ($this->merchandiserModel->findLandByName($data['city']) and $data['city'] != $data['old_city']){
                 $data['err'] = 'City cannot be duplicate';
             }
         }
@@ -243,7 +243,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter deed';
         } else {
             // Check deed
-            if ($this->merchandiserModel->findParkingByName($data['deed']) and $data['deed'] != $data['old_deed']){
+            if ($this->merchandiserModel->findLandByName($data['deed']) and $data['deed'] != $data['old_deed']){
                 $data['err'] = 'Deed cannot be duplicate';
             }
         }
@@ -252,7 +252,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter car';
         } else {
             // Check car
-            if ($this->merchandiserModel->findParkingByName($data['car']) and $data['car'] != $data['old_car']){
+            if ($this->merchandiserModel->findLandByName($data['car']) and $data['car'] != $data['old_car']){
                 $data['err'] = 'Car cannot be duplicate';
             }
         }
@@ -261,7 +261,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter bike';
         } else {
             // Check bike
-            if ($this->merchandiserModel->findParkingByName($data['bike']) and $data['bike'] != $data['old_bike']){
+            if ($this->merchandiserModel->findLandByName($data['bike']) and $data['bike'] != $data['old_bike']){
                 $data['err'] = 'Bike cannot be duplicate';
             }
         }
@@ -270,7 +270,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter threeWheel';
         } else {
             // Check threeWheel
-            if ($this->merchandiserModel->findParkingByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
+            if ($this->merchandiserModel->findLandByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
                 $data['err'] = 'Three Wheel cannot be duplicate';
             }
         }
@@ -279,7 +279,7 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter street';
         } else {
             // Check street
-            if ($this->merchandiserModel->findParkingByName($data['street']) and $data['street'] != $data['old_street']){
+            if ($this->merchandiserModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
                 $data['err'] = 'Street cannot be duplicate';
             }
         }
@@ -288,23 +288,23 @@ public function parkingUpdate(){
             $data['err'] = 'Please enter contactNo';
         } else {
             // Check contactNo
-            if ($this->merchandiserModel->findParkingByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
+            if ($this->merchandiserModel->findLandByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
                 $data['err'] = 'Contact Number cannot be duplicate';
             }
         }
 
         // Validation is completed and no error found
         if (empty($data['err'])){
-            // Register parking
+            // Register Land
             print_r($_SESSION['user_id']);
-            if ($this->merchandiserModel->updateParking($data)){
-                redirect('merchandiser/parkings');
+            if ($this->merchandiserModel->updateLand($data)){
+                redirect('merchandiser/lands');
             } else {
                 die('Something went wrong');
             }
         } else {
             // Load view with errors
-            $this->view('merchandiser/parkings/update', $data);
+            $this->view('merchandiser/lands/update', $data);
         }
     }
 }
