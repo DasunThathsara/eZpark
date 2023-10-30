@@ -239,6 +239,60 @@ public function parkingUpdate(){
             }
         }
 
+        if (empty($data['deed'])){
+            $data['err'] = 'Please enter deed';
+        } else {
+            // Check deed
+            if ($this->merchandiserModel->findParkingByName($data['deed']) and $data['deed'] != $data['old_deed']){
+                $data['err'] = 'Deed cannot be duplicate';
+            }
+        }
+
+        if (empty($data['car'])){
+            $data['err'] = 'Please enter car';
+        } else {
+            // Check car
+            if ($this->merchandiserModel->findParkingByName($data['car']) and $data['car'] != $data['old_car']){
+                $data['err'] = 'Car cannot be duplicate';
+            }
+        }
+
+        if (empty($data['bike'])){
+            $data['err'] = 'Please enter bike';
+        } else {
+            // Check bike
+            if ($this->merchandiserModel->findParkingByName($data['bike']) and $data['bike'] != $data['old_bike']){
+                $data['err'] = 'Bike cannot be duplicate';
+            }
+        }
+
+        if (empty($data['threeWheel'])){
+            $data['err'] = 'Please enter threeWheel';
+        } else {
+            // Check threeWheel
+            if ($this->merchandiserModel->findParkingByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
+                $data['err'] = 'Three Wheel cannot be duplicate';
+            }
+        }
+
+        if (empty($data['street'])){
+            $data['err'] = 'Please enter street';
+        } else {
+            // Check street
+            if ($this->merchandiserModel->findParkingByName($data['street']) and $data['street'] != $data['old_street']){
+                $data['err'] = 'Street cannot be duplicate';
+            }
+        }
+
+        if (empty($data['contactNo'])){
+            $data['err'] = 'Please enter contactNo';
+        } else {
+            // Check contactNo
+            if ($this->merchandiserModel->findParkingByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
+                $data['err'] = 'Contact Number cannot be duplicate';
+            }
+        }
+
         // Validation is completed and no error found
         if (empty($data['err'])){
             // Register parking
