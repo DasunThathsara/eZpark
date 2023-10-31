@@ -98,6 +98,10 @@
                     </a>
                 </div>
             </div>
+
+            <div class="report">
+                <input type="submit" class="sub-option" value="Get Report"/>
+            </div>   
         </div>
     </section>
 </main>
