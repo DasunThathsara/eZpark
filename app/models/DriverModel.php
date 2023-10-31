@@ -86,7 +86,6 @@ class DriverModel{
         $this->db->bind(':id', $_SESSION['user_id']);
 
 
-        print_r($data);
         // Execute
         if ($this->db->execute()){
             return true;

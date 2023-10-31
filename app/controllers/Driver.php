@@ -41,7 +41,7 @@ class Driver extends Controller {
         $this->view('driver/history', $vehicles);
     }
 
-    // ------------------------ Bookings ------------------------
+    // ------------------------ Rating ------------------------
     public function rating(){
         $vehicles = $this->driverModel->viewVehicles();
 
