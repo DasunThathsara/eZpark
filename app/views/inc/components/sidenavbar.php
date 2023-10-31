@@ -71,8 +71,8 @@
 
             <!------------------------------------------ Merchandiser ------------------------------------------>
             <?php if ($_SESSION['user_type'] == 'merchandiser'){ ?>
-                <a href="<?php echo URLROOT ?>/merchandiser/parkings">
-                    <?php if ($section == 'parkings'){?>
+                <a href="<?php echo URLROOT ?>/merchandiser/lands">
+                    <?php if ($section == 'lands'){?>
                         <div class="item selected"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
                     <?php }
                     else{ ?>
