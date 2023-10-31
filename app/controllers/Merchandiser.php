@@ -119,7 +119,7 @@ public function landRegister(){
             print_r($data);
             print_r($_SESSION['user_id']);
             if ($this->merchandiserModel->registerLand($data)){
-                redirect('merchandiser/lands');
+                redirect('merchandiser/lands/aboutSecurityOfficer');
             } else {
                 die('Something went wrong');
             }
