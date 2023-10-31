@@ -100,8 +100,8 @@
             </div>
 
             <div class="report">
-                <input type="submit" class="sub-option" value="Get Report"/>
-            </div>   
+                <input type="submit" class="sub-option" value="Delete Your Account"/>
+            </div>    
         </div>
     </section>
 </main>
