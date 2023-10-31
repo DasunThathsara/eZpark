@@ -16,22 +16,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/merchandiser/secAvailSet" method="post">
-        <!-- Name -->
-        <select name="secAvail">
-            <option value="" hidden disabled selected>Security availability</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-
-        <!-- Hidden Input for User Type -->
-        <input type="hidden" name="name" id="vehicle_type" value="<?php echo $data['name'] ?>" />
-
-        <br><br>
-
-        <!-- Submit -->
-        <input type="submit" value="Add">
-    </form>
+    
 </div>
 
 <script>

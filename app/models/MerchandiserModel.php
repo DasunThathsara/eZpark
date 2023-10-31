@@ -33,6 +33,25 @@ class MerchandiserModel{
         }
     }
 
+    public function updateSecurityOfficerAvail($data): bool{
+        // die(print_r($data));
+        // Prepare statement
+        $this->db->query('UPDATE land SET secAvail = :secAvail  WHERE uid = :uid and name = :name ');
+
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':secAvail', $data['secAvail']);
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     // Find land
     public function findLandByName($name): bool
     {
