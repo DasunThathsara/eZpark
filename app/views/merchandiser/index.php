@@ -119,10 +119,6 @@
                         </table>
                     </a>
                 </div>
-            </div>
-
-            <div class="report">
-                <input type="submit" class="sub-option" value="Delete Your Account"/>
             </div>    
         </div>
     </section>
