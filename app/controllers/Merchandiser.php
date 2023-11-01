@@ -20,6 +20,60 @@ public function lands(){
     $this->view('merchandiser/lands', $lands);
 }
 
+public function setPrice($data){
+    $this->view('merchandiser/lands/setPrice', $data);
+}
+
+public function secAvailSet(){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Submitted form data
+        // input data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+            'name' => trim($_POST['name']),
+            'secAvail' => trim($_POST['secAvail'])
+        ];
+
+        // Validate data
+        // Validate email
+        if (empty($data['name'])){
+            $data['err'] = 'Please enter name';
+        }
+
+        if (empty($data['secAvail'])){
+            $data['err'] = 'Please enter secAvail';
+        }
+
+        // Validation is completed and no error found
+        if (empty($data['err'])){
+            // Register land
+            if ($this->merchandiserModel->updateSecurityOfficerAvail($data)){
+                $this->setPrice($data);
+            } else {
+                die('Something went wrong');
+            }
+        } else {
+            // Load view with errors
+            $this->view('merchandiser/lands', $data);
+        }
+
+    } else {
+        // Initial form data
+        $data = [
+            'name' => ''
+        ];
+
+        // Load view
+        $this->view('merchandiser/lands/create', $data);
+    }
+}
+
+public function aboutSecurityOfficer($data){
+    $this->view('merchandiser/lands/aboutSecurityOfficer', $data);
+}
+
+
 // Register Land
 public function landRegister(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -116,10 +170,8 @@ public function landRegister(){
         // Validation is completed and no error found
         if (empty($data['err'])){
             // Register land
-            print_r($data);
-            print_r($_SESSION['user_id']);
             if ($this->merchandiserModel->registerLand($data)){
-                redirect('merchandiser/lands');
+                $this->aboutSecurityOfficer($data);
             } else {
                 die('Something went wrong');
             }

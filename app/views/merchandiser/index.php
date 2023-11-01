@@ -97,7 +97,27 @@
                         </table>
                     </a>
                 </div>
+                
+                <!-- Card 6 -->
+                <div class="card">
+                    <a href="#">
+                        <table>
+                            <tr>
+                                <th>
+                                    <img src="<?php echo URLROOT ?>/images/useridenty.png" alt="">
+                                </th>
+                                <td>
+                                    <p>Get Report</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </div>
             </div>
+
+            <div class="report">
+                <input type="submit" class="sub-option" value="Delete Your Account"/>
+            </div>    
         </div>
     </section>
 </main>
