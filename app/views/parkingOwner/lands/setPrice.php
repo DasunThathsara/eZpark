@@ -16,7 +16,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/merchandiser/successPropertyRegister" method="post">
+    <form action="<?php echo URLROOT ?>/parkingOwner/successPropertyRegister" method="post">
         <!-- Car -->
         <div class="form-input-title">Car:</div>
         <input type="text" name="name" id="name" required value="" />
