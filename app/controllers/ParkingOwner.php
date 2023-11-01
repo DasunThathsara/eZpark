@@ -59,6 +59,60 @@ class ParkingOwner extends Controller {
                 }
             }
 
+            if (empty($data['street'])){
+                $data['err'] = 'please enter street';
+            } else {
+                //check street
+                if ($this->parkingOwnerModel->findLandByName($data['street'])){
+                    $data['err'] = 'Street cannot be duplicate';
+                }
+            }
+
+            if (empty($data['deed'])){
+                $data['err'] = 'please enter deed';
+            } else {
+                //check deed
+                if ($this->parkingOwnerModel->findLandByName($data['deed'])){
+                    $data['err'] = 'Deed cannot be duplicate';
+                }
+            }
+
+            if (empty($data['car'])){
+                $data['err'] = 'please enter price for a car';
+            } else {
+                //check price for a car
+                if ($this->parkingOwnerModel->findLandByName($data['car'])){
+                    $data['err'] = 'Price cannot be duplicate';
+                }
+            }
+
+            if (empty($data['bike'])){
+                $data['err'] = 'please enter price for a bike';
+            } else {
+                //check price for a bike
+                if ($this->parkingOwnerModel->findLandByName($data['bike'])){
+                    $data['err'] = 'Price cannot be duplicate';
+                }
+            }
+
+            if (empty($data['threeWheel'])){
+                $data['err'] = 'please enter price for a three-wheeler';
+            } else {
+                //check price for a three-wheeler
+                if ($this->parkingOwnerModel->findLandByName($data['threeWheel'])){
+                    $data['err'] = 'Price cannot be duplicate';
+                }
+            }
+
+            if (empty($data['contactNo'])){
+                $data['err'] = 'please enter contact number';
+            } else {
+                //check contact number
+                if ($this->parkingOwnerModel->findLandByName($data['contactNo'])){
+                    $data['err'] = 'Contact number cannot be duplicate';
+                }
+            }
+
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Register land
@@ -79,6 +133,12 @@ class ParkingOwner extends Controller {
             $data = [
                 'name' => '',
                 'city' => '',
+                'street' => '',
+                'deed' => '',
+                'car' => '',
+                'bike' => '',
+                'threeWheel' => '',
+                'contactNo' => '',
                 'err' => '',
             ];
 
@@ -96,7 +156,13 @@ class ParkingOwner extends Controller {
 
             $data = [
                 'name' => trim($_POST['name']),
-                'city' => trim($_POST['city'])
+                'city' => trim($_POST['city']),
+                'street' => trim($_POST['street']),
+                'deed' => trim($_POST['deed']),
+                'car' => trim($_POST['car']),
+                'bike' => trim($_POST['bike']),
+                'threeWheel' => trim($_POST['threeWheel']),
+                'contactNo' => trim($_POST['contactNo'])
             ];
 
             // Delete the land
@@ -114,6 +180,12 @@ class ParkingOwner extends Controller {
             $data = [
                 'name' => trim($_POST['name']),
                 'city' => trim($_POST['city']),
+                'street' => trim($_POST['street']),
+                'deed' => trim($_POST['deed']),
+                'car' => trim($_POST['car']),
+                'bike' => trim($_POST['bike']),
+                'threeWheel' => trim($_POST['threeWheel']),
+                'contactNo' => trim($_POST['contactNo']),
                 //'land_type' => trim($_POST['land_type']),
                 'err' => ''
             ];
@@ -132,6 +204,18 @@ class ParkingOwner extends Controller {
                 'old_name' => trim($_POST['old_name']),
                 'city' => trim($_POST['city']),
                 'old_city' => trim($_POST['old_city']),
+                'street' => trim($_POST['street']),
+                'old_street' => trim($_POST['old_street']),
+                'deed' => trim($_POST['deed']),
+                'old_deed' => trim($_POST['old_deed']),
+                'car' => trim($_POST['car']),
+                'old_car' => trim($_POST['old_car']),
+                'bike' => trim($_POST['bike']),
+                'old_bike' => trim($_POST['old_bike']),
+                'threeWheel' => trim($_POST['threeWheel']),
+                'old_threeWheel' => trim($_POST['old_threeWheel']),
+                'contactNo' => trim($_POST['contactNo']),
+                'old_contactNo' => trim($_POST['old_contactNo']),
                 'err' => ''
             ];
 
@@ -152,6 +236,60 @@ class ParkingOwner extends Controller {
                 // Check city
                 if ($this->parkingOwnerModel->findLandByName($data['city']) and $data['city'] != $data['old_city']){
                     $data['err'] = 'City cannot be duplicate';
+                }
+            }
+
+            if (empty($data['street'])){
+                $data['err'] = 'Please enter street';
+            } else {
+                // Check street
+                if ($this->merchandiserModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
+                    $data['err'] = 'Street cannot be duplicate';
+                }
+            }
+    
+            if (empty($data['deed'])){
+                $data['err'] = 'Please enter deed';
+            } else {
+                // Check deed
+                if ($this->merchandiserModel->findLandByName($data['deed']) and $data['deed'] != $data['old_deed']){
+                    $data['err'] = 'Deed cannot be duplicate';
+                }
+            }
+
+            if (empty($data['car'])){
+                $data['err'] = 'Please enter car';
+            } else {
+                // Check car
+                if ($this->merchandiserModel->findLandByName($data['car']) and $data['car'] != $data['old_car']){
+                    $data['err'] = 'Car cannot be duplicate';
+                }
+            }
+    
+            if (empty($data['bike'])){
+                $data['err'] = 'Please enter bike';
+            } else {
+                // Check bike
+                if ($this->merchandiserModel->findLandByName($data['bike']) and $data['bike'] != $data['old_bike']){
+                    $data['err'] = 'Bike cannot be duplicate';
+                }
+            }
+    
+            if (empty($data['threeWheel'])){
+                $data['err'] = 'Please enter threeWheel';
+            } else {
+                // Check threeWheel
+                if ($this->merchandiserModel->findLandByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
+                    $data['err'] = 'Three Wheel cannot be duplicate';
+                }
+            }
+
+            if (empty($data['contactNo'])){
+                $data['err'] = 'Please enter contactNo';
+            } else {
+                // Check contactNo
+                if ($this->merchandiserModel->findLandByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
+                    $data['err'] = 'Contact Number cannot be duplicate';
                 }
             }
 
