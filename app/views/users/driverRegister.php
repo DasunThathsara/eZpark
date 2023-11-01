@@ -7,7 +7,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/users/register" method="post">
+    <form action="<?php echo URLROOT ?>/users/driverRegister" method="post">
         <!-- Username -->
         <input type="text" name="username" id="username" required value="<?php echo $data['username'] ?>" placeholder="Username" />
 
@@ -28,6 +28,9 @@
 
         <!-- Confirm Password -->
         <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm Password" />
+
+        <!-- User Type -->
+        <input type="text" name="user_type" id="user_type" required hidden value="driver" />
 
         <br><br>
 

@@ -7,7 +7,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/users/register" method="post">
+    <form action="<?php echo URLROOT ?>/users/merchandiserRegister" method="post">
         <!-- Username -->
         <input type="text" name="username" id="username" required value="<?php echo $data['username'] ?>" placeholder="Username" />
 
@@ -37,6 +37,9 @@
 
         <!-- Type -->
         <input type="text" name="type" id="type" required value="<?php echo $data['type'] ?>" placeholder="Type" />
+
+        <!-- User Type -->
+        <input type="text" name="user_type" id="user_type" required hidden value="merchandiser" />
 
         <br><br>
 
