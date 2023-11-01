@@ -54,4 +54,11 @@ class Driver extends Controller {
 
         $this->view('driver/packages', $vehicles);
     }
+
+       // ------------------------ Direction To Parking ------------------------
+    public function directionToParking(){
+        $vehicles = $this->driverModel->viewVehicles();
+
+        $this->view('driver/directionToParking', $vehicles);
+    }
 }
