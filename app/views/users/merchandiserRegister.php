@@ -38,6 +38,9 @@
         <!-- Type -->
         <input type="text" name="type" id="type" required value="<?php echo $data['type'] ?>" placeholder="Type" />
 
+        <!-- User Type -->
+        <input type="text" name="user_type" id="user_type" required hidden value="merchandiser" />
+
         <br><br>
 
         <!-- Submit -->
