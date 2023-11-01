@@ -361,4 +361,11 @@ public function landUpdate(){
     }
 }
 
+ // ------------------------ Success Property Register ------------------------
+ public function successPropertyRegister(){
+    $lands = $this->merchandiserModel->viewLands();
+
+    $this->view('merchandiser/lands/successPropertyRegister', $lands);
+}
+
 }
