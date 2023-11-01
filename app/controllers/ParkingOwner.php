@@ -370,4 +370,11 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/packages', $lands);
     }
 
+     // ------------------------ Success Property Register ------------------------
+ public function successPropertyRegister(){
+    $lands = $this->parkingOwnerModel->viewLands();
+
+    $this->view('parkingOwner/lands/successPropertyRegister', $lands);
+}
+
 }
