@@ -12,7 +12,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
         <img class="mechandiserParkingImage" src="<?php echo URLROOT ?>/images/parkingForMerchandiser.jpg" alt="Phone">
-        <h2>Cool planet - Nugegoda</h2>
+        <h2>Ratha Gala - Colombo03</h2>
         </div>
 
         <div class="container">
