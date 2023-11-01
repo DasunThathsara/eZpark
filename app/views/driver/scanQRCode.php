@@ -5,13 +5,13 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <div class="mapDirection">
-                <img src="<?php echo URLROOT ?>/images/directionToParking.jpg" alt="">
+            <div class="scanQR">
+                    <h1>Scan QR Code</h1>
             </div>
 
-            <div class="mapDirection">
-                <a href="<?php echo URLROOT ?>/driver/scanQRCode">
-                    <button><img src="<?php echo URLROOT ?>/images/QR_icon.png" alt="QR icon">Scan QR Code</button>
+            <div class="QRCode">
+                <a href="#">
+                    <img src="<?php echo URLROOT ?>/images/QRCode.jpg" alt="">
                 </a>
             </div>
         </div>
