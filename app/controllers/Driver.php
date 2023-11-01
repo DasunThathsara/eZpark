@@ -55,11 +55,18 @@ class Driver extends Controller {
         $this->view('driver/packages', $vehicles);
     }
 
-       // ------------------------ Direction To Parking ------------------------
+           // ------------------------ Direction To Parking ------------------------
     public function directionToParking(){
         $vehicles = $this->driverModel->viewVehicles();
 
         $this->view('driver/directionToParking', $vehicles);
+    }
+
+       // ------------------------ After Select Location ------------------------
+    public function afterSelectLocation(){
+        $vehicles = $this->driverModel->viewVehicles();
+
+        $this->view('driver/afterSelectLocation', $vehicles);
     }
 
                // ------------------------ Scan QR Code ------------------------
