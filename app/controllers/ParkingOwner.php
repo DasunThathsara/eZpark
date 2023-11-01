@@ -30,6 +30,12 @@ class ParkingOwner extends Controller {
             $data = [
                 'name' => trim($_POST['name']),
                 'city' => trim($_POST['city']),
+                'street' => trim($_POST['street']),
+                'deed' => trim($_POST['deed']),
+                'car' => trim($_POST['car']),
+                'bike' => trim($_POST['bike']),
+                'threeWheel' => trim($_POST['threeWheel']),
+                'contactNo' => trim($_POST['contactNo']),
                 'err' => ''
             ];
 
