@@ -30,7 +30,7 @@
         <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm Password" />
 
         <!-- User Type -->
-        <input type="text" name="user_type" id="user_type" required hidden value="parkingOwner" />
+        <input type="text" name="user_type" id="user_type" value="parkingOwner" required hidden  />
 
         <br><br>
 

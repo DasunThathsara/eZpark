@@ -36,7 +36,7 @@
         <input type="text" name="experience" id="experience" required value="<?php echo $data['experience'] ?>" placeholder="experience" />
 
         <!-- User Type -->
-        <input type="text" name="user_type" id="user_type" required hidden value="merchandiser" />
+        <input type="text" name="user_type" id="user_type" required hidden value="security" />
 
         <br><br>
 
