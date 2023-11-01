@@ -66,7 +66,7 @@
         <br><br>
 
         <!-- Submit -->
-        <input type="submit" value="Add">
+        <input type="submit" value="Next">
     </form>
 </div>
 
