@@ -9,7 +9,7 @@
 ?>
 
 <div class="form-container">
-    <h1>About Security Officer</h1>
+    <h1>Set Prices For Vehicle Types</h1>
     <?php if (!empty($data['err'])){?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>
