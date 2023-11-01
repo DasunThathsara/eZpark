@@ -16,6 +16,12 @@ class ParkingOwnerModel{
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':city', $data['city']);
+        $this->db->bind(':street', $data['street']);
+        $this->db->bind(':deed', $data['deed']);
+        $this->db->bind(':car', $data['car']);
+        $this->db->bind(':bike', $data['bike']);
+        $this->db->bind(':threeWheel', $data['threeWheel']);
+        $this->db->bind(':contactNo', $data['contactNo']);
         $this->db->bind(':id', $_SESSION['user_id']);
 
         // Execute
@@ -79,13 +85,18 @@ class ParkingOwnerModel{
     public function updateLand($data): bool
     {
         // Prepare statement
-        $this->db->query('UPDATE land SET name = :name, city = :city WHERE id = :id and name = :old_name');
+        $this->db->query('UPDATE land SET name = :name, city = :city, street = :street, deed = :deed, car = :car, bike = :bike, threeWheel = :threeWheel, contactNo = :contactNo WHERE id = :id and name = :old_name');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':old_name', $data['old_name']);
         $this->db->bind(':city', $data['city']);
-        $this->db->bind(':old_city', $data['old_city']);
+        $this->db->bind(':street', $data['street']);
+        $this->db->bind(':deed', $data['deed']);
+        $this->db->bind(':car', $data['car']);
+        $this->db->bind(':bike', $data['bike']);
+        $this->db->bind(':threeWheel', $data['threeWheel']);
+        $this->db->bind(':contactNo', $data['contactNo']);
         $this->db->bind(':id', $_SESSION['user_id']);
 
 
