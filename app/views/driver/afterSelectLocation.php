@@ -49,7 +49,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <button>Packages</button>
                 </a>
 
-                <a href="#">
+                <a href="<?php echo URLROOT ?>/driver/directionToParking">
                     <button>Direction</button>
                 </a>
             </div> 
