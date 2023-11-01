@@ -40,19 +40,19 @@
         <br><br>
 
          <!-- Car -->
-         <div class="form-input-title">Price per hour for a Car:</div>
+         <div class="form-input-title">Car parking slots:</div>
         <input type="text" name="car" id="car" required value="" />
 
         <br><br>
 
         <!-- Bike -->
-        <div class="form-input-title">Price per hour for a Bike:</div>
+        <div class="form-input-title">Bike parking slots:</div>
         <input type="text" name="bike" id="bike" required value="" />
 
         <br><br>
 
         <!-- Three Wheel -->
-        <div class="form-input-title">Price per hour for a Three-wheeler:</div>
+        <div class="form-input-title">Three Wheel parking slots:</div>
         <input type="text" name="threeWheel" id="threeWheel" required value="" />
 
         <br><br>
@@ -65,6 +65,5 @@
         <input type="submit" value="Add">
     </form>
 </div>
-<!--
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

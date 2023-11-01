@@ -20,8 +20,61 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/lands', $lands);
     }
 
+    public function setPrice($data){
+        $this->view('parkingOwner/lands/setPrice', $data);
+    }
+    
+    public function secAvailSet(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+            $data = [
+                'name' => trim($_POST['name']),
+                'secAvail' => trim($_POST['secAvail'])
+            ];
+    
+            // Validate data
+            // Validate email
+            if (empty($data['name'])){
+                $data['err'] = 'Please enter name';
+            }
+    
+            if (empty($data['secAvail'])){
+                $data['err'] = 'Please enter secAvail';
+            }
+    
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Register land
+                if ($this->parkingOwnerModel->updateSecurityOfficerAvail($data)){
+                    $this->setPrice($data);
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('parkingOwner/lands', $data);
+            }
+    
+        } else {
+            // Initial form data
+            $data = [
+                'name' => ''
+            ];
+    
+            // Load view
+            $this->view('parkingOwner/lands/create', $data);
+        }
+    }
+    
+    public function aboutSecurityOfficer($data){
+        $this->view('parkingOwner/lands/aboutSecurityOfficer', $data);
+    }
+
     // Register Land
-    public function LandRegister(){
+    public function landRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
             // input data
@@ -103,6 +156,7 @@ class ParkingOwner extends Controller {
                     $data['err'] = 'Price cannot be duplicate';
                 }
             }
+        
 
             if (empty($data['contactNo'])){
                 $data['err'] = 'please enter contact number';
@@ -139,7 +193,7 @@ class ParkingOwner extends Controller {
                 'bike' => '',
                 'threeWheel' => '',
                 'contactNo' => '',
-                'err' => '',
+                'err' => ''
             ];
 
             // Load view
@@ -243,7 +297,7 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter street';
             } else {
                 // Check street
-                if ($this->merchandiserModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
+                if ($this->parkingOwnerModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
                     $data['err'] = 'Street cannot be duplicate';
                 }
             }
@@ -252,7 +306,7 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter deed';
             } else {
                 // Check deed
-                if ($this->merchandiserModel->findLandByName($data['deed']) and $data['deed'] != $data['old_deed']){
+                if ($this->parkingOwnerModel->findLandByName($data['deed']) and $data['deed'] != $data['old_deed']){
                     $data['err'] = 'Deed cannot be duplicate';
                 }
             }
@@ -261,7 +315,7 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter car';
             } else {
                 // Check car
-                if ($this->merchandiserModel->findLandByName($data['car']) and $data['car'] != $data['old_car']){
+                if ($this->parkingOwnerModel->findLandByName($data['car']) and $data['car'] != $data['old_car']){
                     $data['err'] = 'Car cannot be duplicate';
                 }
             }
@@ -270,7 +324,7 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter bike';
             } else {
                 // Check bike
-                if ($this->merchandiserModel->findLandByName($data['bike']) and $data['bike'] != $data['old_bike']){
+                if ($this->parkingOwnerModel->findLandByName($data['bike']) and $data['bike'] != $data['old_bike']){
                     $data['err'] = 'Bike cannot be duplicate';
                 }
             }
@@ -279,7 +333,7 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter threeWheel';
             } else {
                 // Check threeWheel
-                if ($this->merchandiserModel->findLandByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
+                if ($this->parkingOwnerModel->findLandByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
                     $data['err'] = 'Three Wheel cannot be duplicate';
                 }
             }
@@ -288,7 +342,7 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter contactNo';
             } else {
                 // Check contactNo
-                if ($this->merchandiserModel->findLandByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
+                if ($this->parkingOwnerModel->findLandByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
                     $data['err'] = 'Contact Number cannot be duplicate';
                 }
             }
