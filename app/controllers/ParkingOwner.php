@@ -173,7 +173,7 @@ class ParkingOwner extends Controller {
                 print_r($data);
                 print_r($_SESSION['user_id']);
                 if ($this->parkingOwnerModel->registerLand($data)){
-                    redirect('parkingOwner/lands');
+                    $this->aboutSecurityOfficer($data);
                 } else {
                     die('Something went wrong');
                 }
