@@ -5,6 +5,13 @@ class Users extends Controller{
     }
 
     public function register(){
+        $data = [
+            'title' => 'Register'
+        ];
+        $this->view('users/register', $data);
+    }
+
+    public function parkingOwnerRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
             // input data
@@ -86,7 +93,7 @@ class Users extends Controller{
                 }
             } else {
                 // Load view with errors
-                $this->view('users/register', $data);
+                $this->view('users/parkingOwnerRegister', $data);
             }
 
         } else {
@@ -103,7 +110,215 @@ class Users extends Controller{
             ];
 
             // Load view
-            $this->view('users/register', $data);
+            $this->view('users/parkingOwnerRegister', $data);
+        }
+    }
+
+    public function driverRegister(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'password' => trim($_POST['password']),
+                'username' => trim($_POST['username']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'user_type' => trim($_POST['user_type']),
+                'contact_no' => trim($_POST['contact_no']),
+                'err' => ''
+            ];
+
+            // Validate data
+            // Validate name
+            if (empty($data['name'])){
+                $data['err'] = 'Please enter name';
+            }
+
+            // Validate email
+            if (empty($data['email'])){
+                $data['err'] = 'Please enter email';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByEmail($data['email'])){
+                    $data['err'] = 'Email is already taken';
+                }
+            }
+
+            // Validate username
+            if (empty($data['username'])){
+                $data['err'] = 'Please enter username';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByUsername($data['username'])){
+                    $data['err'] = 'Username is already taken';
+                }
+            }
+
+            // Validate password
+            if (empty($data['password'])){
+                $data['err'] = 'Please enter password';
+            } elseif (strlen($data['password']) < 6){
+                $data['err'] = 'Password must be at least 6 characters';
+            }
+
+            // Validate confirm password
+            if (empty($data['confirm_password'])){
+                $data['err'] = 'Please confirm password';
+            } else {
+                if ($data['password'] != $data['confirm_password']){
+                    $data['err'] = 'Passwords do not match';
+                }
+            }
+
+            // Validate user type
+            if (empty($data['user_type'])){
+                $data['err'] = 'Please select user type';
+            }
+
+            // Validate contact number
+            if (empty($data['contact_no'])){
+                $data['err'] = 'Please enter contact number';
+            }
+
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                // Register user
+                if ($this->userModel->register($data)){
+                    redirect('users/login');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('users/driverRegister', $data);
+            }
+
+        } else {
+            // Initial form data
+            $data = [
+                'name' => '',
+                'email' => '',
+                'username' => '',
+                'password' => '',
+                'confirm_password' => '',
+                'user_type' => '',
+                'contact_no' => '',
+                'err' => '',
+            ];
+
+            // Load view
+            $this->view('users/driverRegister', $data);
+        }
+    }
+
+    public function merchandiserRegister(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'password' => trim($_POST['password']),
+                'username' => trim($_POST['username']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'user_type' => trim($_POST['user_type']),
+                'contact_no' => trim($_POST['contact_no']),
+                'website' => trim($_POST['website']),
+                'website' => trim($_POST['website']),
+                'err' => ''
+            ];
+
+            // Validate data
+            // Validate name
+            if (empty($data['name'])){
+                $data['err'] = 'Please enter name';
+            }
+
+            // Validate email
+            if (empty($data['email'])){
+                $data['err'] = 'Please enter email';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByEmail($data['email'])){
+                    $data['err'] = 'Email is already taken';
+                }
+            }
+
+            // Validate username
+            if (empty($data['username'])){
+                $data['err'] = 'Please enter username';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByUsername($data['username'])){
+                    $data['err'] = 'Username is already taken';
+                }
+            }
+
+            // Validate password
+            if (empty($data['password'])){
+                $data['err'] = 'Please enter password';
+            } elseif (strlen($data['password']) < 6){
+                $data['err'] = 'Password must be at least 6 characters';
+            }
+
+            // Validate confirm password
+            if (empty($data['confirm_password'])){
+                $data['err'] = 'Please confirm password';
+            } else {
+                if ($data['password'] != $data['confirm_password']){
+                    $data['err'] = 'Passwords do not match';
+                }
+            }
+
+            // Validate user type
+            if (empty($data['user_type'])){
+                $data['err'] = 'Please select user type';
+            }
+
+            // Validate contact number
+            if (empty($data['contact_no'])){
+                $data['err'] = 'Please enter contact number';
+            }
+
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                // Register user
+                if ($this->userModel->register($data)){
+                    redirect('users/login');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('users/merchandiserRegister', $data);
+            }
+
+        } else {
+            // Initial form data
+            $data = [
+                'name' => '',
+                'email' => '',
+                'username' => '',
+                'password' => '',
+                'confirm_password' => '',
+                'user_type' => '',
+                'contact_no' => '',
+                'err' => '',
+            ];
+
+            // Load view
+            $this->view('users/merchandiserRegister', $data);
         }
     }
 

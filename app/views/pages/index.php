@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
     <!--  TOP NAVIGATION  -->
-    <div class="topnav" style="width: 96%; background-color: rgba(255,255,255,0); padding-left: 2%; padding-right: 2%; z-index: 1">
+    <div class="topnav" style="width: 96%; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0)); padding-left: 2%; padding-right: 2%; z-index: 1">
         <div class="container">
             <div class="items">
                 <?php if (empty($_SESSION['user_id'])){ ?>
@@ -32,17 +32,8 @@
         </div>
         <div class="yellow-circle-3"></div>
         <!--<div class="yellow-circle-4"></div>-->
-        <div class="yellow-circle-5"></div>
+        <div class="yellow-circle-5 anm"></div>
 
     </div>
-
-    <script>
-        const rightCol = document.querySelector(".right-col");
-        const leftCol = document.querySelector(".left-col");
-        setTimeout(function() {
-            rightCol.classList.add("reveal");
-            leftCol.classList.add("reveal");
-        }, 500);
-    </script>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

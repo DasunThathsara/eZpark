@@ -1,6 +1,6 @@
 .topnav{
     overflow: hidden;
-    background-color: #ffb700;
+    background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
     width: 100vw;
     position: absolute;
     top: 0;
