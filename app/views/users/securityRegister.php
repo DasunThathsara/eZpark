@@ -7,7 +7,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/users/parkingOwnerRegister" method="post">
+    <form action="<?php echo URLROOT ?>/users/securityRegister" method="post">
         <!-- Username -->
         <input type="text" name="username" id="username" required value="<?php echo $data['username'] ?>" placeholder="Username" />
 
@@ -29,8 +29,14 @@
         <!-- Confirm Password -->
         <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm Password" />
 
+        <!-- NIC -->
+        <input type="text" name="NIC" id="NIC" required value="<?php echo $data['NIC'] ?>" placeholder="NIC" />
+
+        <!-- Experience -->
+        <input type="text" name="experience" id="experience" required value="<?php echo $data['experience'] ?>" placeholder="experience" />
+
         <!-- User Type -->
-        <input type="text" name="user_type" id="user_type" value="parkingOwner" required hidden  />
+        <input type="text" name="user_type" id="user_type" required hidden value="security" />
 
         <br><br>
 
