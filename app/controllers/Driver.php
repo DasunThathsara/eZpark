@@ -61,4 +61,11 @@ class Driver extends Controller {
 
         $this->view('driver/directionToParking', $vehicles);
     }
+
+               // ------------------------ Scan QR Code ------------------------
+    public function scanQRCode(){
+        $vehicles = $this->driverModel->viewVehicles();
+
+        $this->view('driver/scanQRCode', $vehicles);
+    }
 }
