@@ -70,7 +70,7 @@
         </div>
 
         <div class="container">        
-            <a href="<?php echo URLROOT ?>/driver/directionToParking">
+            <a href="<?php echo URLROOT ?>/driver/scanQRCodeToExit">
                 <button>Scan QR to Exit</button>
             </a>
         </div>        
