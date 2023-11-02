@@ -80,10 +80,10 @@
                     <?php } ?>
                 </a>
             <?php } ?>
-            
 
 
-          
+ 
+        
 
                 <!-----------------------------Parking owner--------------------------->
             <?php if ($_SESSION['user_type'] == 'parkingOwner'){ ?>
