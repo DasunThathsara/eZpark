@@ -83,4 +83,11 @@ class Driver extends Controller {
 
         $this->view('driver/enterParking', $vehicles);
     }
+    
+                    // ------------------------ Start Time ------------------------
+    public function startTime(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/startTime', $vehicles);
+    }
 }
