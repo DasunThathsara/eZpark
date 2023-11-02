@@ -40,12 +40,22 @@ class UserModel{
         $this->db->bind(':password', $data['password']);
 
         $row = $this->db->single();
+        $id = $row->id;
 
         // Prepare statement
-        $this->db->query('INSERT INTO driver (id) VALUES (:id)');
 
-        // Bind values
-        $this->db->bind(':id', $row->id);
+        if ($data['user_type'] == 'merchandiser'){
+            $this->db->query('INSERT INTO parkingowner (id) VALUES (:id)');
+            $this->db->bind(':id', $id);
+            $row = $this->db->single();
+
+            $this->db->query('INSERT INTO merchandiser (id, website, merchandiserName, merchantType) VALUES (:id, :website, :merchandiserName, :merchantType)');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':website', $data['website']);
+            $this->db->bind(':merchandiserName', $data['merchantName']);
+            $this->db->bind(':merchantType', $data['merchantType']);
+        }
+
 
         // Execute
         if ($this->db->execute()){

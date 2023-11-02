@@ -55,10 +55,69 @@ class Driver extends Controller {
         $this->view('driver/packages', $vehicles);
     }
 
-       // ------------------------ Direction To Parking ------------------------
+           // ------------------------ Direction To Parking ------------------------
     public function directionToParking(){
         $vehicles = $this->driverModel->viewVehicles();
 
         $this->view('driver/directionToParking', $vehicles);
     }
+
+       // ------------------------ After Select Location ------------------------
+    public function afterSelectLocation(){
+        $vehicles = $this->driverModel->viewVehicles();
+
+        $this->view('driver/afterSelectLocation', $vehicles);
+    }
+
+               // ------------------------ Scan QR Code ------------------------
+    public function scanQRCode(){
+        $vehicles = $this->driverModel->viewVehicles();
+
+        $this->view('driver/scanQRCode', $vehicles);
+    }
+
+    
+                   // ------------------------ Enter Parking ------------------------
+    public function enterParking(){
+        $vehicles = $this->driverModel->viewVehicles();
+
+        $this->view('driver/enterParking', $vehicles);
+    }
+    
+                    // ------------------------ Start Time ------------------------
+    public function startTime(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/startTime', $vehicles);
+    }
+
+                    // ------------------------ Scan QR Code To Exit ------------------------
+    public function scanQRCodeToExit(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/scanQRCodeToExit', $vehicles);
+    }
+    
+                    // ------------------------ Parking Fee ------------------------
+    public function parkingFee(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/parkingFee', $vehicles);
+    }
+
+    
+                    // ------------------------ Online Payment ------------------------
+    public function onlinePayment(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/onlinePayment', $vehicles);
+    } 
+
+    
+                        // ------------------------ Payment Successful ------------------------
+    public function paymentSuccessful(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/paymentSuccessful', $vehicles);
+    } 
 }
