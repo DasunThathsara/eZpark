@@ -104,4 +104,12 @@ class Driver extends Controller {
                         
         $this->view('driver/parkingFee', $vehicles);
     }
+
+    
+                    // ------------------------ Online Payment ------------------------
+    public function onlinePayment(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/onlinePayment', $vehicles);
+    } 
 }
