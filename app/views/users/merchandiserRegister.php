@@ -36,7 +36,7 @@
         <input type="text" name="merchantName" id="merchantName" required value="<?php echo $data['merchantName'] ?>" placeholder="merchantName" />
 
         <!-- Type -->
-        <input type="text" name="type" id="type" required value="<?php echo $data['type'] ?>" placeholder="Type" />
+        <input type="text" name="merchantType" id="merchantType" required value="<?php echo $data['merchantType'] ?>" placeholder="Type" />
 
         <!-- User Type -->
         <input type="text" name="user_type" id="user_type" required hidden value="merchandiser" />
