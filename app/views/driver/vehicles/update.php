@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/driver/vehicleUpdate" method="post">
+    <form action="<?php echo URLROOT ?>/vehicle/vehicleUpdate" method="post">
         <!-- Name -->
         <div class="form-input-title">Name:</div>
         <input type="text" name="name" id="name" required value="<?php echo $data['name'] ?>" />

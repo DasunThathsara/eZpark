@@ -103,8 +103,7 @@ class Vehicle extends Controller
         }
     }
 
-    public function vehicleUpdate()
-    {
+    public function vehicleUpdate(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Submitted form data
             // input data
