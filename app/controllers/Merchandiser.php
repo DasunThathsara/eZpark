@@ -360,4 +360,11 @@ class Merchandiser extends Controller {
         }
     }
 
+ // ------------------------ Success Property Register ------------------------
+ public function successPropertyRegister(){
+    $lands = $this->merchandiserModel->viewLands();
+
+    $this->view('merchandiser/lands/successPropertyRegister', $lands);
+}
+
 }

@@ -173,7 +173,7 @@ class ParkingOwner extends Controller {
                 print_r($data);
                 print_r($_SESSION['user_id']);
                 if ($this->parkingOwnerModel->registerLand($data)){
-                    redirect('parkingOwner/lands');
+                    $this->aboutSecurityOfficer($data);
                 } else {
                     die('Something went wrong');
                 }
@@ -369,5 +369,12 @@ class ParkingOwner extends Controller {
 
         $this->view('parkingOwner/packages', $packages);
     }
+
+     // ------------------------ Success Property Register ------------------------
+ public function successPropertyRegister(){
+    $lands = $this->parkingOwnerModel->viewLands();
+
+    $this->view('parkingOwner/lands/successPropertyRegister', $lands);
+}
 
 }
