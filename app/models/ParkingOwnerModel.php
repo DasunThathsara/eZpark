@@ -215,7 +215,7 @@ class ParkingOwnerModel{
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':price', $data['price']);
-        $this->db->bind(':packageType', $data['packageType']);
+        $this->db->bind(':packageType', $data['package_type']);
         $this->db->bind(':pid', $_SESSION['user_id']);
 
         // Execute
@@ -282,7 +282,7 @@ class ParkingOwnerModel{
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':old_name', $data['old_name']);
         $this->db->bind(':price', $data['price']);
-        $this->db->bind(':packageType', $data['packageType']);
+        $this->db->bind(':packageType', $data['package_type']);
         $this->db->bind(':pid', $_SESSION['user_id']);
 
 

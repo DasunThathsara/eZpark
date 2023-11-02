@@ -17,7 +17,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <a href="<?php echo URLROOT ?>/package/packageRegister" style="font-weight: 1000; font-size: 20px">+</a>
 
             <?php if (sizeof($data) == 0) {?>
-                <div class="emptyVehicle">You have no any registered vehicles</div>
+                <div class="emptyVehicle">You have no any registered packages</div>
             <?php }
             else {?>
                 <div class="table-container">
@@ -48,7 +48,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     </form>
                                     &nbsp;
                                     <form action="<?php echo URLROOT ?>/package/packageRemove" method="post">
-                                        <input type="text" name="pid" id="pid" hidden value="<?php echo $data[$i]->pid ?>" />
+                                        <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
                                         <input type="submit" class="sub-option" onclick="return confirmSubmit();" value="Delete"/>
                                     </form>
                                 </td>

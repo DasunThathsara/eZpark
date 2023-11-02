@@ -20,7 +20,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     
         <!-- package name -->
-        <input type="text" name="price" id="price" required hidden value="<?php echo $data['name'] ?>" />
+        <!-- <input type="text" name="name" id="name" required hidden value="<?php echo $data['name'] ?>" /> -->
         <select name="name" >
             <option value="" hidden disabled selected>Package Name</option>
             <option value="weekly">weekly</option>
@@ -33,7 +33,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         
         <br><br>
         <!-- package Type -->
-        <input type="text" name="price" id="price" required hidden="<?php echo $data['packageType'] ?>" />
+        <!-- <input type="text" name="package_type" id="package_type" required hidden="<?php echo $data['packageType'] ?>" /> -->
         <select name="package_type" >
             <option value="" hidden disabled selected>Package Type</option>
             <option value="car">Car</option>
