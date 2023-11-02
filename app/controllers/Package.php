@@ -82,7 +82,7 @@ class Package extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'pid' => trim($_POST['pid'])
+                'name' => trim($_POST['name'])
             ];
 
             // Delete the package
@@ -117,6 +117,7 @@ class Package extends Controller
 
             $data = [
                 'name' => trim($_POST['name']),
+                'old_name' => trim($_POST['old_name']),
                 'price' => trim($_POST['price']),
                 'packageType' => trim($_POST['package_type']),
                 'err' => ''

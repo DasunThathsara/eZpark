@@ -20,6 +20,68 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/lands', $lands);
     }
 
+    public function setPriceForm(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'car' => trim($_POST['car']),
+                'bike' => trim($_POST['bike']),
+                'threeWheel' => trim($_POST['threeWheel']),
+                'err' => ''
+            ];
+
+            // Validate data
+            if (empty($data['car'])){
+                $data['err'] = 'Please enter car';
+            } else if (!preg_match('/^[1-9]\d*(\.\d+)?$/', $data['car'])){
+                $data['err'] = 'Invalid data type for cars';
+            }
+
+            if (empty($data['bike'])){
+                $data['err'] = 'Please enter bike';
+            } else if (!preg_match('/^[1-9]\d*(\.\d+)?$/', $data['bike'])){
+                $data['err'] = 'Invalid data type for bikes';
+            }
+
+            if (empty($data['threeWheel'])){
+                $data['err'] = 'Please enter threeWheel';
+            } else if (!preg_match('/^[1-9]\d*(\.\d+)?$/', $data['threeWheel'])){
+                $data['err'] = 'Invalid data type for three wheels';
+            }
+
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Register land
+                if ($this->parkingOwnerModel->setPrice($data)){
+                   redirect('parkingOwner/lands');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('parkingOwner/lands/setPrice', $data);
+            }
+
+        } else {
+            // Initial form data
+            $data = [
+                'name' => '',
+                'car' => '',
+                'bike' => '',
+                'threeWheel' => '',
+                'err' => ''
+
+            ];
+
+            // Load view
+            $this->view('parkingOwner/lands/create', $data);
+        }
+    }
+
     public function setPrice($data){
         $this->view('parkingOwner/lands/setPrice', $data);
     }
