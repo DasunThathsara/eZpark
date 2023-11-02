@@ -20,9 +20,11 @@ class Package extends Controller
             $data = [
                 'name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
-                'package_type' => trim($_POST['package_type']),
+                'packageType' => trim($_POST['package_type']),
                 'err' => ''
             ];
+
+            
 
             // Validate data
             // Validate email
@@ -34,11 +36,11 @@ class Package extends Controller
 
             if (empty($data['price'])) {
                 $data['err'] = 'Please enter price';
-            }
+            } 
            
-            if (empty($data['package_type'])) {
+            if (empty($data['packageType'])) {
                 $data['err'] = 'Please select package type';
-            } else if ($data['package_type'] != 'car' and $data['package_type'] != 'bike' and $data['package_type'] != '3wheel') {
+            } else if ($data['packageType'] != 'car' and $data['packageType'] != 'bike' and $data['packageType'] != '3wheel') {
                 $data['err'] = 'Invalid package type';
             }
 
@@ -62,7 +64,7 @@ class Package extends Controller
             $data = [
                 'name' => '',
                 'price' => '',
-                'package_type' => '',
+                'packageType' => '',
                 'err' => '',
             ];
 
@@ -99,7 +101,7 @@ class Package extends Controller
             $data = [
                 'name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
-                'package_type' => trim($_POST['package_type']),
+                'packageType' => trim($_POST['package_type']),
                 'err' => ''
             ];
             $this->view('parkingOwner/packages/update', $data);
@@ -116,7 +118,7 @@ class Package extends Controller
             $data = [
                 'name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
-                'package_type' => trim($_POST['package_type']),
+                'packageType' => trim($_POST['package_type']),
                 'err' => ''
             ];
 
@@ -132,9 +134,9 @@ class Package extends Controller
                 $data['err'] = 'Please enter price';
             }
            
-            if (empty($data['package_type'])) {
+            if (empty($data['packageType'])) {
                 $data['err'] = 'Please select package type';
-            } else if ($data['package_type'] != 'car' and $data['package_type'] != 'bike' and $data['package_type'] != '3wheel') {
+            } else if ($data['packageType'] != 'car' and $data['packageType'] != 'bike' and $data['packageType'] != '3wheel') {
                 $data['err'] = 'Invalid package type';
             }
             // Validation is completed and no error found
