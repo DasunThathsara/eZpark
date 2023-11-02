@@ -10,7 +10,7 @@
         </div>
 
         <div class="container">
-                <a href="<?php echo URLROOT ?>/driver/directionToParking">
+                <a href="<?php echo URLROOT ?>/driver/startTime">
                     <button>Enter the parking</button>
                 </a>
         </div>        
