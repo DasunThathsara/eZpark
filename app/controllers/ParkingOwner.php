@@ -365,9 +365,9 @@ class ParkingOwner extends Controller {
 
     // ------------------------ Packages ------------------------
     public function packages(){
-        $lands = $this->parkingOwnerModel->viewLands();
+        $packages = $this->parkingOwnerModel->viewPackages();
 
-        $this->view('parkingOwner/packages', $lands);
+        $this->view('parkingOwner/packages', $packages);
     }
 
 }
