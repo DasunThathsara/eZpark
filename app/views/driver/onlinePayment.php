@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                    <a href="<?php echo URLROOT ?>/driver/">
+                    <a href="<?php echo URLROOT ?>/driver/paymentSuccessful">
                         <button class="btn btn-primary" type="button" id="validate">Pay</button>
                     </a>
         </div>        
