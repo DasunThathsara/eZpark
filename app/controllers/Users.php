@@ -232,7 +232,8 @@ class Users extends Controller{
                 'user_type' => trim($_POST['user_type']),
                 'contact_no' => trim($_POST['contact_no']),
                 'website' => trim($_POST['website']),
-                'website' => trim($_POST['website']),
+                'merchantName' => trim($_POST['website']),
+                'merchantType' => trim($_POST['merchantType']),
                 'err' => ''
             ];
 
@@ -314,7 +315,10 @@ class Users extends Controller{
                 'confirm_password' => '',
                 'user_type' => '',
                 'contact_no' => '',
-                'err' => '',
+                'website' => '',
+                'merchantType' => '',
+                'merchantName' => '',
+                'err' => ''
             ];
 
             // Load view
