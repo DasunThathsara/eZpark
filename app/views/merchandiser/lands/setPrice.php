@@ -19,19 +19,19 @@
     <form action="<?php echo URLROOT ?>/merchandiser/priceSetForm" method="post">
         <!-- Car -->
         <div class="form-input-title">Car:</div>
-        <input type="text" name="carPrice" id="carPrice" required value="" />
+        <input type="text" name="carPrice" id="carPrice" required value="<?php echo $data['carPrice'] ?>" />
 
         <br><br>
 
         <!-- Bike -->
         <div class="form-input-title">Bike:</div>
-        <input type="text" name="bikePrice" id="bikePrice" required value="" />
+        <input type="text" name="bikePrice" id="bikePrice" required value="<?php echo $data['bikePrice'] ?>" />
 
         <br><br>
 
         <!-- Three Wheel -->
         <div class="form-input-title">Three Wheel:</div>
-        <input type="text" name="3wheelPrice" id="3wheelPrice" required value="" />
+        <input type="text" name="3wheelPrice" id="3wheelPrice" required value="<?php echo $data['3wheelPrice'] ?>" />
 
         <br><br>
         <!-- Hidden Input for User Type -->

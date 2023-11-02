@@ -39,25 +39,27 @@ public function priceSetForm(){
         // Validate email
         if (empty($data['carPrice'])) {
             $data['err'] = 'Please enter car';
-        } else if (is_numeric(carPrice)){
+        } else if (!preg_match('/^-?\d+(\.\d+)?$/', $data['carPrice'])){
             $data['err'] = 'Please enter valid data type for car count';
         }
 
         if (empty($data['bikePrice'])){
             $data['err'] = 'Please enter bike';
-        } else if (is_numeric(bikePrice)){
+        } else if (!preg_match('/^-?\d+(\.\d+)?$/', $data['bikePrice'])){
             $data['err'] = 'Please enter valid data type for bike count';
         }
 
         if (empty($data['3wheelPrice'])){
             $data['err'] = 'Please enter threeWheel';
-        } else if (is_numeric($data)){
+        } else if (!preg_match('/^-?\d+(\.\d+)?$/', $data['3wheelPrice'])){
             $data['3wheelPrice'] = 'Please enter valid data type for three wheel count';
         }
 
         if (empty($data['name'])){
             $data['err'] = 'Please fill previous form';
         }
+
+//        die(print_r($data));
 
         // Validation is completed and no error found
         if (empty($data['err'])){
@@ -141,7 +143,6 @@ public function aboutSecurityOfficer($data){
     $this->view('merchandiser/lands/aboutSecurityOfficer', $data);
 }
 
-
 // Register Land
 public function landRegister(){
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -186,19 +187,19 @@ public function landRegister(){
 
         if (empty($data['car'])) {
             $data['err'] = 'Please enter car';
-        } else if (!is_int($data)){
+        } else if (!preg_match('/^-?\d+$/', $data['car'])){
             $data['err'] = 'Please enter valid data type for car count';
         }
 
         if (empty($data['bike'])){
             $data['err'] = 'Please enter bike';
-        } else if (!is_int($data)){
+        } else if (!preg_match('/^-?\d+$/', $data['bike'])){
             $data['err'] = 'Please enter valid data type for bike count';
         }
 
         if (empty($data['threeWheel'])){
             $data['err'] = 'Please enter threeWheel';
-        } else if (!is_int($data)){
+        } else if (!preg_match('/^-?\d+$/', $data['threeWheel'])){
             $data['err'] = 'Please enter valid data type for three wheel count';
         }
 
