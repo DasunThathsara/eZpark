@@ -302,78 +302,46 @@ class Merchandiser extends Controller {
             if (empty($data['name'])){
                 $data['err'] = 'Please enter name';
             } else {
-                // Check email
-                if ($data['username'] != $_SESSION['username'] and $this->userModel->findUserByUsername($data['username'])){
-                    $data['err'] = 'Username is already taken';
-                }
-            else {
                 // Check name
-                if ($this->merchandiserModel->findLandByName($data['name']) and $data['name'] != $data['old_name']){
+                if ($data['name'] != $data['old_name'] and $this->merchandiserModel->findLandByName($data['name'])){
                     $data['err'] = 'Name cannot be duplicate';
                 }
             }
 
             if (empty($data['city'])){
                 $data['err'] = 'Please enter city';
-            } else {
-                // Check city
-                if ($this->merchandiserModel->findLandByName($data['city']) and $data['city'] != $data['old_city']){
-                    $data['err'] = 'City cannot be duplicate';
-                }
             }
 
             if (empty($data['street'])){
                 $data['err'] = 'Please enter street';
-            } else {
-                // Check street
-                if ($this->merchandiserModel->findLandByName($data['street']) and $data['street'] != $data['old_street']){
-                    $data['err'] = 'Street cannot be duplicate';
-                }
             }
 
             if (empty($data['deed'])){
                 $data['err'] = 'Please enter deed';
-            } else {
-                // Check deed
-                if ($this->merchandiserModel->findLandByName($data['deed']) and $data['deed'] != $data['old_deed']){
-                    $data['err'] = 'Deed cannot be duplicate';
-                }
             }
 
             if (empty($data['car'])){
                 $data['err'] = 'Please enter car';
-            } else {
-                // Check car
-                if ($this->merchandiserModel->findLandByName($data['car']) and $data['car'] != $data['old_car']){
-                    $data['err'] = 'Car cannot be duplicate';
-                }
+            } else if (!preg_match('/^-?\d+$/', $data['car'])){
+                $data['err'] = 'Invalid data type for cars';
             }
 
             if (empty($data['bike'])){
                 $data['err'] = 'Please enter bike';
-            } else {
-                // Check bike
-                if ($this->merchandiserModel->findLandByName($data['bike']) and $data['bike'] != $data['old_bike']){
-                    $data['err'] = 'Bike cannot be duplicate';
-                }
+            } else if (!preg_match('/^-?\d+$/', $data['bike'])){
+                $data['err'] = 'Invalid data type for bikes';
             }
 
             if (empty($data['threeWheel'])){
                 $data['err'] = 'Please enter threeWheel';
-            } else {
-                // Check threeWheel
-                if ($this->merchandiserModel->findLandByName($data['threeWheel']) and $data['threeWheel'] != $data['old_threeWheel']){
-                    $data['err'] = 'Three Wheel cannot be duplicate';
-                }
+            } else if (!preg_match('/^-?\d+$/', $data['threeWheel'])){
+                $data['err'] = 'Invalid data type for three wheels';
             }
 
             if (empty($data['contactNo'])){
                 $data['err'] = 'Please enter contactNo';
-            } else {
-                // Check contactNo
-                if ($this->merchandiserModel->findLandByName($data['contactNo']) and $data['contactNo'] != $data['old_contactNo']){
-                    $data['err'] = 'Contact Number cannot be duplicate';
-                }
+            } else if(!preg_match('/^(0\d{9}|[1-9]\d{8}|\+94\d{7})$/', $data['contactNo'])) {
+                $data['err'] = 'Invalid contact number format';
             }
 
             // Validation is completed and no error found
