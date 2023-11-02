@@ -10,7 +10,7 @@
             </div>
 
             <div class="QRCode">
-                <a href="<?php echo URLROOT ?>/driver/enterParking">
+                <a href="<?php echo URLROOT ?>/driver/parkingFee">
                     <img src="<?php echo URLROOT ?>/images/QRCode.png" alt="">
                 </a>
             </div>

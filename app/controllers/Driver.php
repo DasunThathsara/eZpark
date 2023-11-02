@@ -90,4 +90,12 @@ class Driver extends Controller {
                         
         $this->view('driver/startTime', $vehicles);
     }
+
+                        // ------------------------ Scan QR Code To Exit ------------------------
+    public function scanQRCodeToExit(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/scanQRCodeToExit', $vehicles);
+    }
+    
 }

@@ -5,7 +5,7 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h2>Independence Square Parking Lot - Colombo07</h2>
+            <h1>Independence Square Parking Lot - Colombo07</h1>
         </div>
 
         <div class="timer-group">
