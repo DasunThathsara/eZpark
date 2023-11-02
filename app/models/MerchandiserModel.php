@@ -33,8 +33,71 @@ class MerchandiserModel{
         }
     }
 
+    public function setPrice($data): bool
+    {
+        if ($this->setCarPrice($data) and $this->setBikePrice($data) and $this->setThreeWheelPrice($data)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function setCarPrice($data){
+        // Prepare statement
+        $this->db->query('INSERT INTO price (pid, vehicleType, hourPrice, additionalHourPrice) VALUES (:pid, :vehicleType, :hourPrice, :additionalHourPrice)');
+
+        // Bind values
+        $this->db->bind(':pid', $data['id']);
+        $this->db->bind(':vehicleType', 'car');
+        $this->db->bind(':hourPrice', $data['carPrice']);
+        $this->db->bind(':additionalHourPrice', 0);
+
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function setBikePrice($data){
+        // Prepare statement
+        $this->db->query('INSERT INTO price (pid, vehicleType, hourPrice, additionalHourPrice) VALUES (:pid, :vehicleType, :hourPrice, :additionalHourPrice)');
+
+        // Bind values
+        $this->db->bind(':pid', $data['id']);
+        $this->db->bind(':vehicleType', 'bike');
+        $this->db->bind(':hourPrice', $data['bikePrice']);
+        $this->db->bind(':additionalHourPrice', 0);
+
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function setThreeWheelPrice($data){
+        // Prepare statement
+        $this->db->query('INSERT INTO price (pid, vehicleType, hourPrice, additionalHourPrice) VALUES (:pid, :vehicleType, :hourPrice, :additionalHourPrice)');
+
+        // Bind values
+        $this->db->bind(':pid', $data['id']);
+        $this->db->bind(':vehicleType', '3wheel');
+        $this->db->bind(':hourPrice', $data['3wheelPrice']);
+        $this->db->bind(':additionalHourPrice', 0);
+
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public function updateSecurityOfficerAvail($data): bool{
-        // die(print_r($data));
         // Prepare statement
         $this->db->query('UPDATE land SET secAvail = :secAvail  WHERE uid = :uid and name = :name ');
 
@@ -67,6 +130,18 @@ class MerchandiserModel{
         } else {
             return false;
         }
+    }
+
+
+    public function findLandIdByName($name)
+    {
+        $this->db->query('SELECT * FROM land WHERE name = :name and uid = :uid');
+        $this->db->bind(':name', $name);
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
     }
 
     public function viewLands(){

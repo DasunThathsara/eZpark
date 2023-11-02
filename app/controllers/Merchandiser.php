@@ -20,8 +20,76 @@ public function lands(){
     $this->view('merchandiser/lands', $lands);
 }
 
-public function setPrice($data){
-    $this->view('merchandiser/lands/setPrice', $data);
+public function priceSetForm(){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Submitted form data
+        // input data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+            'bikePrice' => trim($_POST['bikePrice']),
+            '3wheelPrice' => trim($_POST['3wheelPrice']),
+            'carPrice' => trim($_POST['carPrice']),
+            'name' => trim($_POST['name']),
+            'id' => $this->merchandiserModel->findLandIdByName(trim($_POST['name']))[0]->id,
+            'err' => ''
+        ];
+
+        // Validate data
+        // Validate email
+        if (empty($data['carPrice'])) {
+            $data['err'] = 'Please enter car';
+        } else if (is_numeric(carPrice)){
+            $data['err'] = 'Please enter valid data type for car count';
+        }
+
+        if (empty($data['bikePrice'])){
+            $data['err'] = 'Please enter bike';
+        } else if (is_numeric(bikePrice)){
+            $data['err'] = 'Please enter valid data type for bike count';
+        }
+
+        if (empty($data['3wheelPrice'])){
+            $data['err'] = 'Please enter threeWheel';
+        } else if (is_numeric($data)){
+            $data['3wheelPrice'] = 'Please enter valid data type for three wheel count';
+        }
+
+        if (empty($data['name'])){
+            $data['err'] = 'Please fill previous form';
+        }
+
+        // Validation is completed and no error found
+        if (empty($data['err'])){
+            // Register land
+            if ($this->merchandiserModel->setPrice($data)){
+                redirect('merchandiser/lands');
+            } else {
+                die('Something went wrong');
+            }
+        } else {
+            // Load view with errors
+            $this->view('merchandiser/lands/setPrice', $data);
+        }
+
+    } else {
+        // Initial form data
+        $data = [
+            'name' => ''
+        ];
+
+        // Load view
+        $this->view('merchandiser/lands/create', $data);
+    }
+}
+
+public function setPrice(&$data = array()) {
+    if (empty($data)) {
+        redirect('merchandiser/lands/create');
+    }
+    else{
+        $this->view('merchandiser/lands/setPrice', $data);
+    }
 }
 
 public function secAvailSet(){
@@ -106,65 +174,38 @@ public function landRegister(){
 
         if (empty($data['city'])){
             $data['err'] = 'Please enter city';
-        } else {
-            // Check city
-            if ($this->merchandiserModel->findLandByName($data['city'])){
-                $data['err'] = 'City cannot be duplicate';
-            }
         }
 
         if (empty($data['street'])){
             $data['err'] = 'Please enter street';
-        } else {
-            // Check street
-            if ($this->merchandiserModel->findLandByName($data['street'])){
-                $data['err'] = 'Street cannot be duplicate';
-            }
         }
 
         if (empty($data['deed'])){
             $data['err'] = 'Please enter deed';
-        } else {
-            // Check deed
-            if ($this->merchandiserModel->findLandByName($data['deed'])){
-                $data['err'] = 'Deed cannot be duplicate';
-            }
         }
 
-        if (empty($data['car'])){
+        if (empty($data['car'])) {
             $data['err'] = 'Please enter car';
-        } else {
-            // Check car
-            if ($this->merchandiserModel->findLandByName($data['car'])){
-                $data['err'] = 'Car cannot be duplicate';
-            }
+        } else if (!is_int($data)){
+            $data['err'] = 'Please enter valid data type for car count';
         }
 
         if (empty($data['bike'])){
             $data['err'] = 'Please enter bike';
-        } else {
-            // Check bike
-            if ($this->merchandiserModel->findLandByName($data['bike'])){
-                $data['err'] = 'Bike cannot be duplicate';
-            }
+        } else if (!is_int($data)){
+            $data['err'] = 'Please enter valid data type for bike count';
         }
 
         if (empty($data['threeWheel'])){
             $data['err'] = 'Please enter threeWheel';
-        } else {
-            // Check threeWheel
-            if ($this->merchandiserModel->findLandByName($data['threeWheel'])){
-                $data['err'] = 'Three Wheel cannot be duplicate';
-            }
+        } else if (!is_int($data)){
+            $data['err'] = 'Please enter valid data type for three wheel count';
         }
 
         if (empty($data['contactNo'])){
             $data['err'] = 'Please enter contactNo';
-        } else {
-            // Check contactNo
-            if ($this->merchandiserModel->findLandByName($data['contactNo'])){
-                $data['err'] = 'Contact Number cannot be duplicate';
-            }
+        } else if (!preg_match('/^(0\d{9}|[1-9]\d{8}|\+94\d{7})$/', $data['contactNo'])) {
+            $data['err'] = "Invalid contact number format";
         }
 
         // Validation is completed and no error found

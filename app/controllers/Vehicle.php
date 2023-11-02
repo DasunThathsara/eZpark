@@ -9,6 +9,8 @@ class Vehicle extends Controller
         $this->driverModel = $this->model('DriverModel');
     }
 
+
+
     // Register Vehicle
     public function vehicleRegister()
     {
