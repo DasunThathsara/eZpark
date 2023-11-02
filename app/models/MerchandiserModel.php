@@ -166,8 +166,6 @@ class MerchandiserModel{
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':uid', $_SESSION['user_id']);
-        print_r($data['name']);
-        print_r($_SESSION['user_id']);
         // Execute
         if ($this->db->execute()){
             return true;
