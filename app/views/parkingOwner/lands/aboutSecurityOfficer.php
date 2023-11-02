@@ -16,24 +16,14 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/merchandiser/secAvailSet" method="post">
-        <!-- Car -->
-        <div class="form-input-title">Car:</div>
-        <input type="text" name="name" id="name" required value="" />
+    <form action="<?php echo URLROOT ?>/parkingOwner/secAvailSet" method="post">
+        <!-- Name -->
+        <select name="secAvail">
+            <option value="" hidden disabled selected>Security availability</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
 
-        <br><br>
-
-        <!-- Bike -->
-        <div class="form-input-title">Bike:</div>
-        <input type="text" name="city" id="city" required value="" />
-
-        <br><br>
-
-        <!-- Three Wheel -->
-        <div class="form-input-title">Three Wheel:</div>
-        <input type="text" name="street" id="street" required value="" />
-
-        <br><br>
         <!-- Hidden Input for User Type -->
         <input type="hidden" name="name" id="vehicle_type" value="<?php echo $data['name'] ?>" />
 
