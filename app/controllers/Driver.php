@@ -112,4 +112,12 @@ class Driver extends Controller {
                         
         $this->view('driver/onlinePayment', $vehicles);
     } 
+
+    
+                        // ------------------------ Payment Successful ------------------------
+    public function paymentSuccessful(){
+        $vehicles = $this->driverModel->viewVehicles();
+                        
+        $this->view('driver/paymentSuccessful', $vehicles);
+    } 
 }
