@@ -124,7 +124,100 @@ class MerchandiserModel{
             return false;
         }
     }
+
+
+    // ------------------------- package Functionalities -------------------------
+    // Register package
+    public function registerPackage($data): bool
+    {
+        // Prepare statement
+        $this->db->query('INSERT INTO package (name, price, packageType, pid) VALUES (:name, :price, :packageType, :pid)');
+
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':packageType', $data['package_type']);
+        $this->db->bind(':pid', $_SESSION['user_id']);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Find package
+    public function findPackageByName($name): bool
+    {
+        $this->db->query('SELECT * FROM package WHERE name = :name and pid = :pid');
+        $this->db->bind(':name', $name);
+        $this->db->bind(':pid', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function viewPackages(){
+        $this->db->query('SELECT * FROM package WHERE pid = :pid');
+        $this->db->bind(':pid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    public function removePackage($data): bool
+    {
+        // Prepare statement
+        $this->db->query('DELETE FROM package WHERE name = :name AND pid = :pid');
+
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':pid', $_SESSION['user_id']);
+        print_r($data['name']);
+        print_r($_SESSION['user_id']);
+        // Execute
+        if ($this->db->execute()){
+            print_r("check 4");
+            return true;
+        }
+        else {
+            print_r("check 5");
+            return false;
+        }
+    }
+
+    public function updatePackage($data): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE package SET name = :name, price=:price, packageType =:packageType WHERE pid = :pid and name = :old_name');
+
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':old_name', $data['old_name']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':packageType', $data['package_type']);
+        $this->db->bind(':pid', $_SESSION['user_id']);
+
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
+
 
 
 
