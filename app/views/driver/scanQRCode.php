@@ -10,8 +10,8 @@
             </div>
 
             <div class="QRCode">
-                <a href="#">
-                    <img src="<?php echo URLROOT ?>/images/QRCode.jpg" alt="">
+                <a href="<?php echo URLROOT ?>/driver/enterParking">
+                    <img src="<?php echo URLROOT ?>/images/QRCode.png" alt="">
                 </a>
             </div>
         </div>
