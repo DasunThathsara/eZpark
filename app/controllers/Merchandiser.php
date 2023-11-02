@@ -183,21 +183,15 @@ class Merchandiser extends Controller {
                 $data['err'] = 'Please enter deed';
             }
 
-            if (empty($data['car'])){
-                $data['err'] = 'Please enter car';
-            } else if (!preg_match('/^-?\d+$/', $data['car'])){
+            if (!preg_match('/^(0|\d+)$/', $data['car'])){
                 $data['err'] = 'Invalid data type for cars';
             }
 
-            if (empty($data['bike'])){
-                $data['err'] = 'Please enter bike';
-            } else if (!preg_match('/^-?\d+$/', $data['bike'])){
+            if (!preg_match('/^(0|\d+)$/', $data['bike'])){
                 $data['err'] = 'Invalid data type for bikes';
             }
 
-            if (empty($data['threeWheel'])){
-                $data['err'] = 'Please enter threeWheel';
-            } else if (!preg_match('/^-?\d+$/', $data['threeWheel'])){
+            if (!preg_match('/^(0|\d+)$/', $data['threeWheel'])) {
                 $data['err'] = 'Invalid data type for three wheels';
             }
 
@@ -320,23 +314,18 @@ class Merchandiser extends Controller {
                 $data['err'] = 'Please enter deed';
             }
 
-            if (empty($data['car'])){
-                $data['err'] = 'Please enter car';
-            } else if (!preg_match('/^-?\d+$/', $data['car'])){
+            if (!preg_match('/^(0|\d+)$/', $data['car'])){
                 $data['err'] = 'Invalid data type for cars';
             }
 
-            if (empty($data['bike'])){
-                $data['err'] = 'Please enter bike';
-            } else if (!preg_match('/^-?\d+$/', $data['bike'])){
+            if (!preg_match('/^(0|\d+)$/', $data['bike'])){
                 $data['err'] = 'Invalid data type for bikes';
             }
 
-            if (empty($data['threeWheel'])){
-                $data['err'] = 'Please enter threeWheel';
-            } else if (!preg_match('/^-?\d+$/', $data['threeWheel'])){
+            if (!preg_match('/^(0|\d+)$/', $data['threeWheel'])) {
                 $data['err'] = 'Invalid data type for three wheels';
             }
+
 
             if (empty($data['contactNo'])){
                 $data['err'] = 'Please enter contactNo';
