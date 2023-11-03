@@ -14,9 +14,12 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <h1>Packages</h1>
 
             <br><br>
-            <a href="<?php echo URLROOT ?>/package/packageRegister" style="font-weight: 1000; font-size: 20px">+</a>
+            <form action="<?php echo URLROOT ?>/package/packageRegisterForm" method="POST">
+                <input type="text" name="pname" id="pname" hidden required value="<?php echo $data['Pname'] ?>">
+                <button type="submit" style="font-weight: 1000; font-size: 20px">+</button>
+            </form>
 
-            <?php if (sizeof($data) == 0) {?>
+            <?php if (sizeof($data) == 1) {?>
                 <div class="emptyVehicle">You have no any registered vehicles</div>
             <?php }
             else {?>
