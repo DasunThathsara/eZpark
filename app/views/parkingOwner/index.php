@@ -12,11 +12,6 @@
     <section class="section" id="main">
         <div class="container">
             <h1>Parking Owner Dashboard</h1>
-
-                        <!-- select parkings -->
-        <select name="selectParking">
-            <option value="" hidden disabled selected>Select Parking</option>
-        </select>
         
             <div class="cards">
                 <!-- Card 1 -->
@@ -114,7 +109,7 @@
                                 </th>
                                 <td>
                                     <p>3</p>
-                                    <p>Packages</p>
+                                    <p>Go to parking</p>
                                 </td>
                             </tr>
                         </table>

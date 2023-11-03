@@ -9,6 +9,24 @@ class Package extends Controller
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
+    public function packageRegisterForm()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'pname' => trim($_POST['pname']),
+                'name' => '',
+                'price' => '',
+                'packageType' => '',
+                'err' => '',
+            ];
+
+            // Load view
+            $this->view('parkingOwner/packages/create', $data);
+        }
+    }
+
     // Register Package
     public function packageRegister()
     {
@@ -18,6 +36,7 @@ class Package extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'pname' => trim($_POST['pname']),
                 'name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
                 'package_type' => trim($_POST['package_type']),
@@ -60,6 +79,7 @@ class Package extends Controller
         } else {
             // Initial form data
             $data = [
+                'pname' => '',
                 'name' => '',
                 'price' => '',
                 'package_type' => '',

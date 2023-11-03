@@ -42,19 +42,31 @@
         <br><br>
 
         <!-- Car -->
+<<<<<<< HEAD
         <div class="form-input-title">How many the Car parking slots:</div>
+=======
+        <div class="form-input-title">Number of available car parking slots:</div>
+>>>>>>> 5451f0ea4df564052eda7e1a30404127d53b27d3
         <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" />
 
         <br><br>
 
         <!-- Bike -->
+<<<<<<< HEAD
         <div class="form-input-title">How many the Bike parking slots:</div>
+=======
+        <div class="form-input-title">Number of available bike parking slots:</div>
+>>>>>>> 5451f0ea4df564052eda7e1a30404127d53b27d3
         <input type="text" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
 
         <br><br>
 
         <!-- Three Wheel -->
+<<<<<<< HEAD
         <div class="form-input-title">How many the Three Wheel parking slots:</div>
+=======
+        <div class="form-input-title">Number of available threewheel parking slots:</div>
+>>>>>>> 5451f0ea4df564052eda7e1a30404127d53b27d3
         <input type="text" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
 
         <br><br>

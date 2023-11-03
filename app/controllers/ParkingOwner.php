@@ -57,7 +57,8 @@ class ParkingOwner extends Controller {
             if (empty($data['err'])){
                 // Register land
                 if ($this->parkingOwnerModel->setPrice($data)){
-                   redirect('parkingOwner/lands');
+//                       redirect('parkingOwner/lands');
+                    $this->successPropertyRegister($data);
                 } else {
                     die('Something went wrong');
                 }
@@ -91,22 +92,25 @@ class ParkingOwner extends Controller {
             // Submitted form data
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    
+
             $data = [
                 'name' => trim($_POST['name']),
-                'secAvail' => trim($_POST['secAvail'])
+                'secAvail' => trim($_POST['secAvail']),
+                'car' => '',
+                'bike' => '',
+                'threeWheel' => ''
             ];
-    
+
             // Validate data
             // Validate email
             if (empty($data['name'])){
                 $data['err'] = 'Please enter name';
             }
-    
+
             if (empty($data['secAvail'])){
                 $data['err'] = 'Please enter secAvail';
             }
-    
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
@@ -119,13 +123,16 @@ class ParkingOwner extends Controller {
                 // Load view with errors
                 $this->view('parkingOwner/lands', $data);
             }
-    
+
         } else {
             // Initial form data
             $data = [
-                'name' => ''
+                'name' => '',
+                'car' => '',
+                'bike' => '',
+                'threeWheel' => ''
             ];
-    
+
             // Load view
             $this->view('parkingOwner/lands/create', $data);
         }
@@ -167,31 +174,25 @@ class ParkingOwner extends Controller {
 
             if (empty($data['city'])){
                 $data['err'] = 'Please enter city';
-            } 
+            }
 
             if (empty($data['street'])){
-                $data['err'] = 'please enter street';
-            } 
+                $data['err'] = 'Please enter street';
+            }
 
             if (empty($data['deed'])){
-                $data['err'] = 'please enter deed';
-            } 
+                $data['err'] = 'Please enter deed';
+            }
 
-            if (empty($data['car'])){
-                $data['err'] = 'Please enter car';
-            } else if (!preg_match('/^-?\d+$/', $data['car'])){
+            if (!preg_match('/^(0|\d+)$/', $data['car'])){
                 $data['err'] = 'Invalid data type for cars';
             }
 
-            if (empty($data['bike'])){
-                $data['err'] = 'Please enter bike';
-            } else if (!preg_match('/^-?\d+$/', $data['bike'])){
+            if (!preg_match('/^(0|\d+)$/', $data['bike'])){
                 $data['err'] = 'Invalid data type for bikes';
             }
 
-            if (empty($data['threeWheel'])){
-                $data['err'] = 'Please enter threeWheel';
-            } else if (!preg_match('/^-?\d+$/', $data['threeWheel'])){
+            if (!preg_match('/^(0|\d+)$/', $data['threeWheel'])) {
                 $data['err'] = 'Invalid data type for three wheels';
             }
 
@@ -200,22 +201,10 @@ class ParkingOwner extends Controller {
             } else if(!preg_match('/^(0\d{9}|[1-9]\d{8}|\+94\d{7})$/', $data['contactNo'])) {
                 $data['err'] = 'Invalid contact number format';
             }
-        
-
-            if (empty($data['contactNo'])){
-                $data['err'] = 'please enter contact number';
-            } else {
-                //check contact number
-                if ($this->parkingOwnerModel->findLandByName($data['contactNo'])){
-                    $data['err'] = 'Contact number cannot be duplicate';
-                }
-            }
 
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Register land
-                print_r($data);
-                print_r($_SESSION['user_id']);
                 if ($this->parkingOwnerModel->registerLand($data)){
                     $this->aboutSecurityOfficer($data);
                 } else {
@@ -253,14 +242,7 @@ class ParkingOwner extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'name' => trim($_POST['name']),
-                'city' => trim($_POST['city']),
-                'street' => trim($_POST['street']),
-                'deed' => trim($_POST['deed']),
-                'car' => trim($_POST['car']),
-                'bike' => trim($_POST['bike']),
-                'threeWheel' => trim($_POST['threeWheel']),
-                'contactNo' => trim($_POST['contactNo'])
+                'name' => trim($_POST['name'])
             ];
 
             // Delete the land
@@ -284,7 +266,6 @@ class ParkingOwner extends Controller {
                 'bike' => trim($_POST['bike']),
                 'threeWheel' => trim($_POST['threeWheel']),
                 'contactNo' => trim($_POST['contactNo']),
-                //'land_type' => trim($_POST['land_type']),
                 'err' => ''
             ];
             $this->view('parkingOwner/lands/update', $data);
@@ -333,23 +314,18 @@ class ParkingOwner extends Controller {
                 $data['err'] = 'Please enter deed';
             }
 
-            if (empty($data['car'])){
-                $data['err'] = 'Please enter car';
-            } else if (!preg_match('/^-?\d+$/', $data['car'])){
+            if (!preg_match('/^(0|\d+)$/', $data['car'])){
                 $data['err'] = 'Invalid data type for cars';
             }
 
-            if (empty($data['bike'])){
-                $data['err'] = 'Please enter bike';
-            } else if (!preg_match('/^-?\d+$/', $data['bike'])){
+            if (!preg_match('/^(0|\d+)$/', $data['bike'])){
                 $data['err'] = 'Invalid data type for bikes';
             }
 
-            if (empty($data['threeWheel'])){
-                $data['err'] = 'Please enter threeWheel';
-            } else if (!preg_match('/^-?\d+$/', $data['threeWheel'])){
+            if (!preg_match('/^(0|\d+)$/', $data['threeWheel'])) {
                 $data['err'] = 'Invalid data type for three wheels';
             }
+
 
             if (empty($data['contactNo'])){
                 $data['err'] = 'Please enter contactNo';
@@ -359,7 +335,7 @@ class ParkingOwner extends Controller {
 
             // Validation is completed and no error found
             if (empty($data['err'])){
-                // Register land
+                // Register Land
                 print_r($_SESSION['user_id']);
                 if ($this->parkingOwnerModel->updateLand($data)){
                     redirect('parkingOwner/lands');
@@ -373,18 +349,42 @@ class ParkingOwner extends Controller {
         }
     }
 
+    public function gotoLand(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name'])
+            ];
+
+            $this->view('parkingOwner/land', $data);
+        }
+    }
+
     // ------------------------ Packages ------------------------
     public function packages(){
-        $packages = $this->parkingOwnerModel->viewPackages();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        $this->view('parkingOwner/packages', $packages);
+            $data = [
+                'name' => trim($_POST['name'])
+            ];
+
+            $packages = $this->parkingOwnerModel->viewPackages($data);
+            $packages['Pname'] = $data['name'];
+//            die(print_r($packages));
+
+            $this->view('parkingOwner/packages', $packages);
+        }
     }
 
      // ------------------------ Success Property Register ------------------------
- public function successPropertyRegister(){
-    $lands = $this->parkingOwnerModel->viewLands();
-
-    $this->view('parkingOwner/lands/successPropertyRegister', $lands);
-}
+    public function successPropertyRegister($data){
+        $this->view('parkingOwner/lands/successPropertyRegister', $data);
+    }
 
 }

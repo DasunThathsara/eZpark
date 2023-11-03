@@ -131,7 +131,6 @@ class ParkingOwnerModel{
         }
     }
 
-
     // Find land
     public function findLandByName($name): bool
     {
@@ -176,7 +175,6 @@ class ParkingOwnerModel{
         }
     }
 
-
     // Update land
     public function updateLand($data): bool
     {
@@ -215,8 +213,8 @@ class ParkingOwnerModel{
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':price', $data['price']);
-        $this->db->bind(':packageType', $data['package_type']);
-        $this->db->bind(':pid', $_SESSION['user_id']);
+        $this->db->bind(':packageType', $data['packageType']);
+        $this->db->bind(':pid', $data['pname']);
 
         // Execute
         if ($this->db->execute()){
@@ -244,9 +242,9 @@ class ParkingOwnerModel{
         }
     }
 
-    public function viewPackages(){
+    public function viewPackages($data){
         $this->db->query('SELECT * FROM package WHERE pid = :pid');
-        $this->db->bind(':pid', $_SESSION['user_id']);
+        $this->db->bind(':pid', $data['name']);
 
         $row = $this->db->resultSet();
 

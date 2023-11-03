@@ -9,7 +9,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
 <div class="form-container">
-    <h1>Update Land</h1>
+    <h1>Update Parking</h1>
     <?php if (!empty($data['err'])){?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>
@@ -23,11 +23,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         <input type="text" name="old_name" id="old_name" required value="<?php echo $data['name'] ?>"  disable hidden />
 
         <br><br>
-
-         <!-- City -->
-         <div class="form-input-title">City:</div>
+        <!-- City -->
+        <div class="form-input-title">City:</div>
         <input type="text" name="city" id="city" required value="<?php echo $data['city'] ?>" />
-        <input type="text" name="old_city" id="old_city" required value="<?php echo $data['city'] ?>"  disable hidden />
 
         <br><br>
 
@@ -44,23 +42,24 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         <br><br>
 
         <!-- car -->
-        <div class="form-input-title">Price per hour for a Car:</div>
+        <div class="form-input-title">How much the Car parking slots:</div>
         <input type="number" name="car" id="car" required value="<?php echo $data['car'] ?>" />
 
         <br><br>
 
         <!-- Bike -->
-        <div class="form-input-title">Price per hour for a Bike:</div>
+        <div class="form-input-title">How much the Bike parking slots:</div>
         <input type="number" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
 
         <br><br>
 
         <!-- Three Wheel -->
-        <div class="form-input-title">Price per hour for a Three-wheeler:</div>
+        <div class="form-input-title">How much the Three Wheel parking slots:</div>
         <input type="number" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
 
         <br><br>
 
+        <br><br>
         <!-- contactNo -->
         <div class="form-input-title">Contact Number:</div>
         <input type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />

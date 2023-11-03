@@ -201,6 +201,7 @@ class MerchandiserModel{
             return false;
         }
     }
+}
 
 
 }   

@@ -4,34 +4,34 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-    $section = 'vehicles';
-    require APPROOT.'/views/inc/components/sidenavbar.php';
+$section = 'vehicles';
+require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
 <div class="form-container">
-    <h1>Set Prices For Vehicle Types</h1>
+    <h1>Set Prices</h1>
     <?php if (!empty($data['err'])){?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/parkingOwner/successPropertyRegister" method="post">
+    <form action="<?php echo URLROOT ?>/parkingOwner/setPriceForm" method="post">
         <!-- Car -->
         <div class="form-input-title">Car:</div>
-        <input type="text" name="name" id="name" required value="" />
+        <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" />
 
         <br><br>
 
         <!-- Bike -->
         <div class="form-input-title">Bike:</div>
-        <input type="text" name="city" id="city" required value="" />
+        <input type="text" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
 
         <br><br>
 
         <!-- Three Wheel -->
         <div class="form-input-title">Three Wheel:</div>
-        <input type="text" name="street" id="street" required value="" />
+        <input type="text" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
 
         <br><br>
         <!-- Hidden Input for User Type -->
