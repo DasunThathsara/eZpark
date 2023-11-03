@@ -16,7 +16,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/merchandiser/successPropertyRegister" method="post">
+    <form action="<?php echo URLROOT ?>/merchandiser/setPriceForm" method="post">
         <!-- Car -->
         <div class="form-input-title">Car:</div>
         <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" />

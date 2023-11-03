@@ -57,7 +57,8 @@ class Merchandiser extends Controller {
                 if (empty($data['err'])){
                     // Register land
                     if ($this->merchandiserModel->setPrice($data)){
-                       redirect('merchandiser/lands');
+//                       redirect('merchandiser/lands');
+                        $this->successPropertyRegister($data);
                     } else {
                         die('Something went wrong');
                     }
@@ -350,10 +351,7 @@ class Merchandiser extends Controller {
     }
 
  // ------------------------ Success Property Register ------------------------
- public function successPropertyRegister(){
-    $lands = $this->merchandiserModel->viewLands();
-
-    $this->view('merchandiser/lands/successPropertyRegister', $lands);
-}
-
+    public function successPropertyRegister($data){
+        $this->view('merchandiser/lands/successPropertyRegister', $data);
+    }
 }

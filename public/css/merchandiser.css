@@ -15,6 +15,8 @@
 
 .page-container .section .container .cards{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .page-container .section .container .cards .card{
@@ -23,6 +25,7 @@
     border-radius: 10px;
     margin: 10px;
     transition: 0.5s;
+    height: 100px;
 }
 
 .page-container .section .container .cards .card a{
@@ -30,6 +33,14 @@
     padding: 0;
     margin: 0;
     background-color: white;
+}
+
+.page-container .section .container .cards .card button{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border: none;
 }
 
 .page-container .section .container .cards .card:hover{

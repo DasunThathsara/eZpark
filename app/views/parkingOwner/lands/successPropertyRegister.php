@@ -4,19 +4,22 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'rating';
+$section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-        <img class="mechandiserParkingImage" src="<?php echo URLROOT ?>/images/parkingForMerchandiser.jpg" alt="Phone">
-        <h2>Ratha Gala - Colombo03</h2>
-        </div>
-
-        <div class="container">
-        <h1>Parking Added Successfully</h1>
+            <img class="table" style="height: 50vh" src="<?php echo URLROOT ?>/images/parkingForMerchandiser.jpg" alt="Phone">
+            <div class="content" style="width: 100%; text-align: center">
+                <h2><?php echo $data['name'] ?> Added Successfully</h2>
+                <dl>
+                    <dd>Car : <?php echo $data['car'] ?></dd>
+                    <dd>Bike : <?php echo $data['bike'] ?></dd>
+                    <dd>Three Wheel : <?php echo $data['threeWheel'] ?></dd>
+                </dl>
+            </div>
         </div>
     </section>
 </main>

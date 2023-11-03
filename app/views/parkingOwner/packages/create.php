@@ -18,6 +18,8 @@
 
     <form action="<?php echo URLROOT ?>/package/packageRegister" method="post">
 
+        <input type="text" name="pname" id="pname"  required value="<?php echo $data['pname'] ?>">
+
         <!-- package name -->
         <select name="name">
             <option value="" hidden disabled selected>Package Name</option>
