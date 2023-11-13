@@ -8,10 +8,8 @@ class ParkingOwner extends Controller {
     }
 
     public function index(){
-        $data = [
-            'title' => 'Home page'
-        ];
-        $this->view('parkingOwner/index', $data);
+        $lands = $this->parkingOwnerModel->viewLands();
+        $this->view('parkingOwner/index', $lands);
     }
 
     public function lands(){

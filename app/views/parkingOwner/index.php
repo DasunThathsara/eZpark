@@ -11,8 +11,17 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Parking Owner Dashboard</h1>
-        
+            <h1>Dashboard</h1>
+
+            <div class="dropdown">
+                <button class="dropbtn">Select Parking</button>
+                <div class="dropdown-content">
+                    <?php for ($i = 0; $i < sizeof($data); $i++) {?>     
+                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data[$i]->id ?>"><?php echo $data[$i]->name ?></a>  
+                    <?php } ?>
+                </div>
+            </div>
+            
             <div class="cards">
                 <!-- Card 1 -->
                 <div class="card">
