@@ -23,9 +23,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="table-container">
                     <table class="table">
                         <tr>
-                            <th>Package Name</th>
+                            <th>Name</th>
                             <th>Price</th>
-                            <th>Package Type</th>
+                            <th>Type</th>
                             <th width="60px"></th>
                         </tr>
                         <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
@@ -41,14 +41,16 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                 </td>
                                 <td style="text-align: center; display: flex">
                                     <form action="<?php echo URLROOT ?>/package/packageUpdateForm" method="post">
-                                        <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
-                                        <input type="text" name="price" id="price" hidden value="<?php echo $data[$i]->price ?>" />
-                                        <input type="text" name="package_type" id="package_type" hidden value="<?php echo $data[$i]->packageType ?>" />
+                                        <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->package_type ?>" />
+                                        <input type="text" name="package_price" id="package_price" hidden value="<?php echo $other_data[$i]->package_price ?>" />
+                                        <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicle_type ?>" />
                                         <input type="submit" class="sub-option" value="Update"/>
                                     </form>
                                     &nbsp;
                                     <form action="<?php echo URLROOT ?>/package/packageRemove" method="post">
-                                        <input type="text" name="pid" id="pid" hidden value="<?php echo $data[$i]->pid ?>" />
+                                    <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->package_type ?>" />
+                                        <input type="text" name="package_price" id="package_price" hidden value="<?php echo $other_data[$i]->package_price ?>" />
+                                        <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicle_type ?>" />
                                         <input type="submit" class="sub-option" onclick="return confirmSubmit();" value="Delete"/>
                                     </form>
                                 </td>
