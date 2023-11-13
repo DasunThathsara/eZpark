@@ -24,7 +24,6 @@
                     <table class="table">
                         <tr>
                             <th>Vehicle Name</th>
-                            <!-- <th>Vehicle Type</th> -->
                             <th width="60px"></th>
                         </tr>
                         <?php for ($i = 0; $i < sizeof($data); $i++) {?>
