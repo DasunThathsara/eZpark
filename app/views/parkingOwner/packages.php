@@ -14,11 +14,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <h1>Packages</h1>
 
             <br><br>
-            <form action="<?php echo URLROOT ?>/package/packageRegisterForm" method="POST">
-                <input type="text" name="pname" id="pname" hidden required value="<?php echo $data['Pname'] ?>">
-                <button type="submit" style="font-weight: 1000; font-size: 20px">+</button>
-            </form>
-
+            <a class="add-btn" href="<?php echo URLROOT ?>/package/packageRegister/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>" style="font-weight: 1000; font-size: 20px">+</a>
+            
             <?php if (sizeof($data) == 1) {?>
                 <div class="emptyVehicle">You have no any registered vehicles</div>
             <?php }
@@ -31,16 +28,16 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             <th>Package Type</th>
                             <th width="60px"></th>
                         </tr>
-                        <?php for ($i = 0; $i < sizeof($data); $i++) {?>
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
                             <tr>
                                 <td>
-                                    <?php echo $data[$i]->name ?>
+                                    <?php echo $other_data[$i]->name ?>
                                 </td>
                                 <td>
-                                    <?php echo $data[$i]->price ?>
+                                    <?php echo $other_data[$i]->price ?>
                                 </td>
                                 <td>
-                                    <?php echo $data[$i]->packageType ?>
+                                    <?php echo $other_data[$i]->packageType ?>
                                 </td>
                                 <td style="text-align: center; display: flex">
                                     <form action="<?php echo URLROOT ?>/package/packageUpdateForm" method="post">
