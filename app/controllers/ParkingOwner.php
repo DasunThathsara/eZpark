@@ -355,6 +355,12 @@ class ParkingOwner extends Controller {
 
         $lands = $this->parkingOwnerModel->viewLands();
 
+        $data = [
+            'id' => $land_ID,
+            'name' => $land_name,
+            'package_count' => $this->parkingOwnerModel->getPackageCount($data)
+        ];
+
         $this->view('parkingOwner/land', $data, $lands);
     }
 

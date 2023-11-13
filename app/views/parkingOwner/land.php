@@ -117,8 +117,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                         <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
                                     </th>
                                     <td>
-                                        <p>3</p>
-                                        <p>Total Registered Users</p>
+                                        <p><?php echo $data['package_count'] ?></p>
+                                        <p>Packages</p>
                                     </td>
                                 </tr>
                             </table>

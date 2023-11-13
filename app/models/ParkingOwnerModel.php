@@ -295,4 +295,16 @@ class ParkingOwnerModel{
             return false;
         }
     }
+
+    public function getPackageCount($data){
+        // Prepare statement
+        $this->db->query('SELECT COUNT(*) FROM package  WHERE pid = :pid');
+
+        // Bind values
+        $this->db->bind(':pid', $data['id']);
+
+
+        $row = $this->db->single();
+        return $row->{'COUNT(*)'};
+    }
 }
