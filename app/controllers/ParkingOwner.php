@@ -347,31 +347,27 @@ class ParkingOwner extends Controller {
         }
     }
 
-    public function gotoLand($land_ID = null){
+    public function gotoLand($land_ID = null, $land_name = null){
         $data = [
-            'name' => $land_ID
+            'id' => $land_ID,
+            'name' => $land_name
         ];
 
-        $this->view('parkingOwner/land', $data);
+        $lands = $this->parkingOwnerModel->viewLands();
+
+        $this->view('parkingOwner/land', $data, $lands);
     }
 
     // ------------------------ Packages ------------------------
-    public function packages(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            // Submitted form data
-            // input data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    public function packages($parking_ID = null, $parking_name = null){
+        $data = [
+            'id' => $parking_ID,
+            'name' => $parking_name
+        ];
 
-            $data = [
-                'name' => trim($_POST['name'])
-            ];
+        $packages = $this->parkingOwnerModel->viewPackages($data);
 
-            $packages = $this->parkingOwnerModel->viewPackages($data);
-            $packages['Pname'] = $data['name'];
-//            die(print_r($packages));
-
-            $this->view('parkingOwner/packages', $packages);
-        }
+        $this->view('parkingOwner/packages', $data, $packages);
     }
 
      // ------------------------ Success Property Register ------------------------

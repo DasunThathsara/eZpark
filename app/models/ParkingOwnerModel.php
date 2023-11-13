@@ -244,7 +244,7 @@ class ParkingOwnerModel{
 
     public function viewPackages($data){
         $this->db->query('SELECT * FROM package WHERE pid = :pid');
-        $this->db->bind(':pid', $data['name']);
+        $this->db->bind(':pid', $data['id']);
 
         $row = $this->db->resultSet();
 

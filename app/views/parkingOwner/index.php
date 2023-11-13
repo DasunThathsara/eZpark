@@ -17,11 +17,11 @@
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
                     <?php for ($i = 0; $i < sizeof($data); $i++) {?>     
-                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data[$i]->id ?>"><?php echo $data[$i]->name ?></a>  
+                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data[$i]->id ?>/<?php echo $data[$i]->name ?>"><?php echo $data[$i]->name ?></a>  
                     <?php } ?>
                 </div>
             </div>
-            
+
             <div class="cards">
                 <!-- Card 1 -->
                 <div class="card">
@@ -102,23 +102,6 @@
                                 <td>
                                     <p>3</p>
                                     <p>Total Registered Users</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
-
-                 <!-- Card 6 -->
-                 <div class="card">
-                    <a href="<?php echo URLROOT ?>/parkingOwner/packages">
-                        <table>
-                            <tr>
-                            <th>
-                                    <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
-                                </th>
-                                <td>
-                                    <p>3</p>
-                                    <p>Go to parking</p>
                                 </td>
                             </tr>
                         </table>

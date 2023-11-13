@@ -13,6 +13,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <div class="container">
                 <h1><?php echo $data['name'] ?> Dashboard</h1>
 
+                <div class="dropdown">
+                    <button class="dropbtn">Select Parking</button>
+                    <div class="dropdown-content">
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>     
+                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>  
+                        <?php } ?>
+                    </div>
+                </div>
+
                 <div class="cards">
                     <!-- Card 1 -->
                     <div class="card">
@@ -101,23 +110,19 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <!-- Card 6 -->
                     <div class="card">
-                        <form action="<?php echo URLROOT ?>/parkingOwner/packages" method="POST">
-                            <input hidden required type="text" name="name" id="name" value="<?php echo $data['name'] ?>">
-                            <button type="submit">
-                                <table>
-                                    <tr>
-                                        <th>
-                                            <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
-                                        </th>
-                                        <td>
-                                            <p>3</p>
-                                            <p>Packages</p>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </button>
-                        </form>
-
+                        <a href="<?php echo URLROOT ?>/parkingOwner/packages/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
+                                    </th>
+                                    <td>
+                                        <p>3</p>
+                                        <p>Total Registered Users</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </a>
                     </div>
                 </div>
             </div>

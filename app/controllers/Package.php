@@ -9,41 +9,20 @@ class Package extends Controller
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
-    public function packageRegisterForm()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'pname' => trim($_POST['pname']),
-                'name' => '',
-                'price' => '',
-                'packageType' => '',
-                'err' => '',
-            ];
-
-            // Load view
-            $this->view('parkingOwner/packages/create', $data);
-        }
-    }
-
     // Register Package
-    public function packageRegister()
-    {
+    public function packageRegister($parking_ID = null, $parking_name = null){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Submitted form data
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'pname' => trim($_POST['pname']),
-                'name' => trim($_POST['name']),
-                'price' => trim($_POST['price']),
-                'packageType' => trim($_POST['package_type']),
+                'id' => trim($_POST['id']),
+                'vehicle_type' => trim($_POST['vehicle_type']),
+                'package_price' => trim($_POST['package_price']),
+                'package_type' => trim($_POST['package_type']),
                 'err' => ''
             ];
-
-            
 
             // Validate data
             // Validate email
@@ -81,11 +60,12 @@ class Package extends Controller
         } else {
             // Initial form data
             $data = [
-                'pname' => '',
-                'name' => '',
-                'price' => '',
-                'packageType' => '',
-                'err' => '',
+                'id' => $parking_ID,
+                'name'=> $parking_name,
+                'vehicle_type' => '',
+                'package_price' => '',
+                'package_type' => '',
+                'err' => ''
             ];
 
             // Load view

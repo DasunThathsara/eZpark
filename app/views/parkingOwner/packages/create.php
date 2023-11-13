@@ -17,24 +17,22 @@
     <?php } ?>
 
     <form action="<?php echo URLROOT ?>/package/packageRegister" method="post">
-
-        <input type="text" name="pname" id="pname"  required value="<?php echo $data['pname'] ?>">
-
+    <input type="text" name="id" id="id" required hidden value="<?php echo $data['id'] ?>" />
         <!-- package name -->
-        <select name="name">
-            <option value="" hidden disabled selected>Package Name</option>
+        <select name="package_type">
+            <option value="" hidden disabled selected>Package Type</option>
             <option value="weekly">weekly</option>
             <option value="monthly">monthly</option>
         </select>
 
         <!-- Price -->
         <div class="form-input-title">Price:</div>
-        <input type="text" name="price" id="price" required value="" />
+        <input type="text" name="package_price" id="package_price" required value="<?php echo $data['package_price'] ?>" />
         
         <br><br>
         <!-- package Type -->
-        <select name="package_type">
-            <option value="" hidden disabled selected>Package Type</option>
+        <select name="vehicle_type">
+            <option value="" hidden disabled selected>Vehicle Type</option>
             <option value="car">Car</option>
             <option value="bike">Bike</option>
             <option value="3wheel">Three wheel</option>
