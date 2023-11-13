@@ -349,18 +349,12 @@ class ParkingOwner extends Controller {
         }
     }
 
-    public function gotoLand(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            // Submitted form data
-            // input data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    public function gotoLand($land_ID = null){
+        $data = [
+            'name' => $land_ID
+        ];
 
-            $data = [
-                'name' => trim($_POST['name'])
-            ];
-
-            $this->view('parkingOwner/land', $data);
-        }
+        $this->view('parkingOwner/land', $data);
     }
 
     // ------------------------ Packages ------------------------

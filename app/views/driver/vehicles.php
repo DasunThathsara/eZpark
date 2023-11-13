@@ -14,7 +14,7 @@
             <h1>My Vehicles</h1>
 
             <br><br>
-            <a href="<?php echo URLROOT ?>/vehicle/vehicleRegister" style="font-weight: 1000; font-size: 20px">+</a>
+            <a class="add-btn" href="<?php echo URLROOT ?>/vehicle/vehicleRegister" style="font-weight: 1000; font-size: 20px">+</a>
 
             <?php if (sizeof($data) == 0) {?>
                 <div class="emptyVehicle">You have no any registered vehicles</div>
@@ -24,28 +24,38 @@
                     <table class="table">
                         <tr>
                             <th>Vehicle Name</th>
-                            <th>Vehicle Type</th>
+                            <!-- <th>Vehicle Type</th> -->
                             <th width="60px"></th>
                         </tr>
                         <?php for ($i = 0; $i < sizeof($data); $i++) {?>
                             <tr>
                                 <td>
-                                    <?php echo $data[$i]->name ?>
-                                </td>
-                                <td>
-                                    <?php echo $data[$i]->vehicleType ?>
-                                </td>
-                                <td style="text-align: center; display: flex">
-                                    <form action="<?php echo URLROOT ?>/vehicle/vehicleUpdateForm" method="post">
-                                        <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
-                                        <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $data[$i]->vehicleType ?>" />
-                                        <input type="submit" class="sub-option" value="Update"/>
-                                    </form>
-                                    &nbsp;
-                                    <form action="<?php echo URLROOT ?>/vehicle/vehicleRemove" method="post">
-                                        <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
-                                        <input type="submit" class="sub-option" onclick="return confirmSubmit();" value="Delete"/>
-                                    </form>
+                                    <a class="tile">
+                                        <div class="content">
+                                            <div class="left" style="width:50%">
+                                                <?php echo $data[$i]->name ?>
+                                            </div>
+                                            <div class="left" style="width:20%">
+                                                <?php echo $data[$i]->vehicleType ?>
+                                            </div>
+                                            <div class="right">
+                                                <form action="<?php echo URLROOT ?>/vehicle/vehicleUpdateForm" method="post">
+                                                    <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
+                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $data[$i]->vehicleType ?>" />
+                                                    <button type="submit" class="edit">
+                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/vehicle/vehicleRemove" method="post">
+                                                    <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
+                                                    <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                        <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </td>
                             </tr>
                         <?php } ?>
