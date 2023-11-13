@@ -276,14 +276,15 @@ class ParkingOwnerModel{
     public function updatePackage($data): bool
     {
         // Prepare statement
-        $this->db->query('UPDATE package SET name = :name, price=:price, packageType =:packageType WHERE pid = :pid and name = :old_name');
+        $this->db->query('UPDATE package SET name = :name, price=:price, packageType =:packageType WHERE pid = :pid and name = :oldName and packageType = :oldPackageType');
 
         // Bind values
-        $this->db->bind(':name', $data['name']);
-        $this->db->bind(':old_name', $data['old_name']);
-        $this->db->bind(':price', $data['price']);
-        $this->db->bind(':packageType', $data['packageType']);
-        $this->db->bind(':pid', $_SESSION['user_id']);
+        $this->db->bind(':oldPackageType', $data['old_vehicle_type']);
+        $this->db->bind(':packageType', $data['vehicle_type']);
+        $this->db->bind(':price', $data['package_price']);
+        $this->db->bind(':oldName', $data['old_package_type']);
+        $this->db->bind(':name', $data['package_type']);
+        $this->db->bind(':pid', $data['id']);
 
 
         // Execute
