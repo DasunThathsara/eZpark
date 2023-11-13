@@ -23,34 +23,56 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="table-container">
                     <table class="table">
                         <tr>
-                            <th>Package Name</th>
-                            <th>Price</th>
-                            <th>Package Type</th>
-                            <th width="60px"></th>
+                            <th width="60px">
+                            <div class="content" style="display:flex;">
+                                <div class="left" style="width:31%">
+                                    Name
+                                </div>
+                                <div class="left" style="width:20%; padding-left:5px">
+                                    Price
+                                </div>
+                                <div class="left" style="width:20%; padding-left:12px;">
+                                    Type
+                                </div>
+                            </div>
+                            </th>
                         </tr>
                         <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
                             <tr>
                                 <td>
-                                    <?php echo $other_data[$i]->name ?>
-                                </td>
-                                <td>
-                                    <?php echo $other_data[$i]->price ?>
-                                </td>
-                                <td>
-                                    <?php echo $other_data[$i]->packageType ?>
-                                </td>
-                                <td style="text-align: center; display: flex">
-                                    <form action="<?php echo URLROOT ?>/package/packageUpdateForm" method="post">
-                                        <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
-                                        <input type="text" name="price" id="price" hidden value="<?php echo $data[$i]->price ?>" />
-                                        <input type="text" name="package_type" id="package_type" hidden value="<?php echo $data[$i]->packageType ?>" />
-                                        <input type="submit" class="sub-option" value="Update"/>
-                                    </form>
-                                    &nbsp;
-                                    <form action="<?php echo URLROOT ?>/package/packageRemove" method="post">
-                                        <input type="text" name="pid" id="pid" hidden value="<?php echo $data[$i]->pid ?>" />
-                                        <input type="submit" class="sub-option" onclick="return confirmSubmit();" value="Delete"/>
-                                    </form>
+                                    <a class="tile">
+                                        <div class="content">
+                                            <div class="left" style="width:30%">
+                                                <?php echo $other_data[$i]->name ?>
+                                            </div>
+                                            <div class="left" style="width:20%">
+                                                <?php echo $other_data[$i]->price ?>
+                                            </div>
+                                            <div class="left" style="width:20%">
+                                                <?php echo $other_data[$i]->packageType ?>
+                                            </div>
+                                            <div class="right">
+                                                <form action="<?php echo URLROOT ?>/package/packageUpdateForm" method="post">
+                                                    <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->name ?>" />
+                                                    <input type="text" name="package_price" id="package_price" hidden value="<?php echo $other_data[$i]->price ?>" />
+                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->packageType ?>" />
+                                                    <button type="submit" class="edit">
+                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/package/packageRemove" method="post">
+                                                    <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->name ?>" />
+                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                    <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
+                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->packageType ?>" />
+                                                    <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                        <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </td>
                             </tr>
                         <?php } ?>
