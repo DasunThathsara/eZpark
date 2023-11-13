@@ -255,13 +255,13 @@ class ParkingOwnerModel{
     public function removePackage($data): bool
     {
         // Prepare statement
-        $this->db->query('DELETE FROM package WHERE name = :name AND pid = :pid');
+        $this->db->query('DELETE FROM package WHERE name = :name AND pid = :pid AND packageType = :packageType');
 
         // Bind values
-        $this->db->bind(':name', $data['name']);
-        $this->db->bind(':pid', $_SESSION['user_id']);
-        print_r($data['name']);
-        print_r($_SESSION['user_id']);
+        $this->db->bind(':name', $data['package_type']);
+        $this->db->bind(':packageType', $data['vehicle_type']);
+        $this->db->bind(':pid', $data['id']);
+
         // Execute
         if ($this->db->execute()){
             print_r("check 4");

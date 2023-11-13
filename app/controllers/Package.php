@@ -87,12 +87,15 @@ class Package extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'pid' => trim($_POST['pid'])
+                'id' => trim($_POST['id']),
+                'name' => trim($_POST['name']),
+                'package_type' => trim($_POST['package_type']),
+                'vehicle_type' => trim($_POST['vehicle_type'])
             ];
 
             // Delete the package
             if ($this->parkingOwnerModel->removePackage($data)) {
-                redirect('parkingOwner/packages');
+                redirect('parkingOwner/packages/'.$data['id'].'/'.$data['name']);
             } else {
                 die('Something went wrong');
             }
