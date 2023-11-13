@@ -13,6 +13,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <div class="container">
                 <h1><?php echo $data['name'] ?> Dashboard</h1>
 
+                <div class="dropdown">
+                    <button class="dropbtn">Select Parking</button>
+                    <div class="dropdown-content">
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>     
+                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>  
+                        <?php } ?>
+                    </div>
+                </div>
+
                 <div class="cards">
                     <!-- Card 1 -->
                     <div class="card">

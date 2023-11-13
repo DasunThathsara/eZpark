@@ -29,7 +29,7 @@
                         <?php for ($i = 0; $i < sizeof($data); $i++) {?>
                             <tr>
                                 <td width="70%">
-                                    <a class="tile" href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data[$i]->id ?>">
+                                    <a class="tile" href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data[$i]->id ?>/<?php echo $data[$i]->name ?>">
                                         <div class="content">
                                             <div class="left">
                                                 <?php echo $data[$i]->name ?>

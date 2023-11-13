@@ -347,12 +347,15 @@ class ParkingOwner extends Controller {
         }
     }
 
-    public function gotoLand($land_ID = null){
+    public function gotoLand($land_ID = null, $land_name = null){
         $data = [
-            'name' => $land_ID
+            'id' => $land_ID,
+            'name' => $land_name
         ];
 
-        $this->view('parkingOwner/land', $data);
+        $lands = $this->parkingOwnerModel->viewLands();
+
+        $this->view('parkingOwner/land', $data, $lands);
     }
 
     // ------------------------ Packages ------------------------
