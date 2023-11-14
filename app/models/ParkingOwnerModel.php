@@ -307,4 +307,15 @@ class ParkingOwnerModel{
         $row = $this->db->single();
         return $row->{'COUNT(*)'};
     }
+
+    // ------------------------- Price Functionalities -------------------------
+    // Register package
+    public function viewPrice($data){
+        $this->db->query('SELECT * FROM price WHERE pid = :pid');
+        $this->db->bind(':pid', $data['id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
 }

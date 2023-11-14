@@ -14,7 +14,7 @@
             <h1>Lands</h1>
 
             <br><br>
-            <a class="add-btn" href="<?php echo URLROOT ?>/parkingOwner/landRegister" style="font-weight: 1000; font-size: 20px">+</a>
+            <a class="add-btn" href="<?php echo URLROOT ?>/land/landRegister" style="font-weight: 1000; font-size: 20px">+</a>
 
             <?php if (sizeof($data) == 0) {?>
                 <div class="emptyLand">You have no any registered lands</div>
@@ -35,7 +35,15 @@
                                                 <?php echo $data[$i]->name ?>
                                             </div>
                                             <div class="right">
-                                                <form action="<?php echo URLROOT ?>/parkingOwner/landUpdateForm" method="post">
+                                                <form action="<?php echo URLROOT ?>/land/prices" method="get">
+                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                    <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
+                                                    <button type="submit" class="price">
+                                                        <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="post">
                                                 <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
                                                     <input type="text" name="city" id="city" hidden value="<?php echo $data[$i]->city ?>" />
                                                     <input type="text" name="street" id="street" hidden value="<?php echo $data[$i]->street ?>" />
@@ -49,7 +57,7 @@
                                                     </button>
                                                 </form>
                                                 &nbsp;
-                                                <form action="<?php echo URLROOT ?>/parkingOwner/landRemove" method="post">
+                                                <form action="<?php echo URLROOT ?>/land/landRemove" method="post">
                                                     <input type="text" name="name" id="name" hidden value="<?php echo $data[$i]->name ?>" />
                                                     <button type="submit" class="delete" onclick="return confirmSubmit();">
                                                         <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">

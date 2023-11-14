@@ -199,6 +199,22 @@
     justify-content: flex-end;
 }
 
+.page-container .section .container td .content .right .price{
+    background-color: white;
+    border: none;
+    margin-top: 12px;
+}
+
+.page-container .section .container td .content .right .price img{
+    width: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.page-container .section .container td .content .right .price img:hover{
+    scale: 1.1;
+}
+
 .page-container .section .container td .content .right .delete{
     background-color: white;
     border: none;
