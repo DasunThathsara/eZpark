@@ -309,7 +309,7 @@ class ParkingOwnerModel{
     }
 
     // ------------------------- Price Functionalities -------------------------
-    // Register package
+    // View slot prices
     public function viewPrice($data){
         $this->db->query('SELECT * FROM price WHERE pid = :pid');
         $this->db->bind(':pid', $data['id']);
@@ -317,5 +317,27 @@ class ParkingOwnerModel{
         $row = $this->db->resultSet();
 
         return $row;
+    }
+
+    // Update slot price
+    public function updatePrice($data): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE price SET hourPrice = :hourPrice, additionalHourPrice = :additionalHourPrice WHERE pid = :pid and vehicleType = :vehicleType');
+
+        // Bind values
+        $this->db->bind(':hourPrice', $data['hour_price']);
+        $this->db->bind(':additionalHourPrice', $data['additional_hour_price']);
+        $this->db->bind(':vehicleType', $data['vehicle_type']);
+        $this->db->bind(':pid', $data['id']);
+
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

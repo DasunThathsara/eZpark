@@ -4,85 +4,86 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'vehicles';
-require APPROOT.'/views/inc/components/sidenavbar.php';
+    $section = 'lands';
+    require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
-<div class="form-container">
-    <h1>Update Package</h1>
-    <?php if (!empty($data['err'])){?>
-        <div class="error-msg">
-            <span class="form-invalid"><?php echo $data["err"] ?></span>
+<main class="page-container">
+    <section class="section" id="main">
+        <div class="container">
+            <h1>Prices</h1>
+
+            <?php if (!empty($data['err'])){?>
+                <div class="error-msg">
+                    <span class="form-invalid"><?php echo $data["err"] ?></span>
+                </div>
+            <?php } ?>
+
+            <br><br>
+            <?php if (sizeof($data) == 0) {?>
+                <div class="emptyLand">You have no any registered lands</div>
+            <?php }
+            else {?>
+                <div class="table-container">
+                    <table class="table">
+                        <tr>
+                            <th width="60px">
+                                <div class="content" style="display:flex;">
+                                    <div class="left" style="width:28%">
+                                        Vehicle Type
+                                    </div>
+                                    <div class="left" style="width:20%;">
+                                        Hour Price
+                                    </div>
+                                    <div class="left" style="width:20%; padding-left:45px;">
+                                        Additional Hour Price
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {
+                            if($other_data[$i]->hourPrice == 0 or $data['vehicle_type'] != $other_data[$i]->vehicleType){
+                                continue;
+                            }?>
+                            <tr>
+                                <td width="70%">
+                                    <a class="tile">
+                                        <div class="content">
+                                            <form action="<?php echo URLROOT ?>/landprice/priceUpdate" style="display:flex;" method="POST">
+                                                <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
+                                                <div class="left">
+                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />
+                                                    <?php echo $other_data[$i]->vehicleType ?>
+                                                </div>
+                                                <div class="left">
+                                                    <input type="text" name="hour_price" id="hour_price"  value="<?php echo $other_data[$i]->hourPrice ?>" />
+                                                </div>
+                                                <div class="left">
+                                                    <input type="text" name="additional_hour_price" id="additional_hour_price"  value="<?php echo $other_data[$i]->additionalHourPrice ?>" />
+                                                </div>
+                                                <div class="right">
+                                                    <input type="submit">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </a>
+                                </td>
+
+                                <!-- <td style="text-align: center; display: flex; justify-content: space-between;">
+                                    
+                                </td> -->
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+            <?php } ?>
         </div>
-    <?php } ?>
-
-    <form action="<?php echo URLROOT ?>/Package/packageUpdate" method="post">
-        <input type="text" name="id" id="id" required hidden value="<?php echo $data['id'] ?>" />
-        <input type="text" name="name" id="name" required hidden value="<?php echo $data['name'] ?>" />
-        <input type="text" name="old_vehicle_type" id="old_vehicle_type" required hidden value="<?php echo $data['vehicle_type'] ?>" />
-        <input type="text" name="old_package_type" id="old_package_type" required hidden value="<?php echo $data['package_type'] ?>" />
-        <!-- package name -->
-        <select name="package_type">
-            <?php if($data['package_type'] == 'weekly') {?>
-                <option value="weekly" selected>weekly</option>
-                <option value="monthly">monthly</option>
-            <?php }
-            else if($data['package_type'] == 'monthly') {?>
-                <option value="weekly">weekly</option>
-                <option value="monthly selected">monthly</option>
-            <?php }
-            else{?>
-                <option value="" hidden disabled selected>Package Type</option>
-                <option value="weekly">weekly</option>
-                <option value="monthly">monthly</option>
-            <?php }?>
-        </select>
-
-        <!-- Price -->
-        <div class="form-input-title">Price:</div>
-        <input type="text" name="package_price" id="package_price" required value="<?php echo $data['package_price'] ?>" />
-        
-        <br><br>
-        <!-- package Type -->
-        <select name="vehicle_type">
-            <?php if($data['vehicle_type'] == 'car') {?>
-                <option value="car" selected>Car</option>
-                <option value="bike">Bike</option>
-                <option value="3wheel">Three wheel</option>
-            <?php }
-            else if($data['vehicle_type'] == 'bike') {?>
-                <option value="car">Car</option>
-                <option value="bike" selected>Bike</option>
-                <option value="3wheel">Three wheel</option>
-            <?php }
-            else if($data['vehicle_type'] == '3wheel') {?>
-                <option value="car">Car</option>
-                <option value="bike">Bike</option>
-                <option value="3wheel" selected>Three wheel</option>
-            <?php }
-            else{?>
-                <option value="" hidden disabled selected>Vehicle Type</option>
-                <option value="car">Car</option>
-                <option value="bike">Bike</option>
-                <option value="3wheel">Three wheel</option>
-            <?php }?>
-        </select>
-
-        <br><br>
-
-        <!-- Submit -->
-        <input type="submit" value="Update">
-    </form>
-</div>
-
+    </section>
+</main>
 <script>
-    const userSelectionList = document.querySelector('.user-selection-list');
-
-    userSelectionList.addEventListener('click', function(event) {
-        if (event.target.tagName === 'LI') {
-            document.getElementById('name').value = event.target.getAttribute('data-user-type');
-            document.getElementById('vehicle_type').value = event.target.getAttribute('data-user-type');
-        }
-    });
+    function confirmSubmit() {
+        return confirm("Are you sure you want to delete this land?");
+    }
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>
