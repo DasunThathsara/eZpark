@@ -35,13 +35,10 @@
                                 </div>
                             </th>
                         </tr>
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {
-                            if($other_data[$i]->hourPrice == 0){
-                                continue;
-                            }?>
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
                             <tr>
                                 <td width="70%">
-                                    <a class="tile" href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                                    <a class="tile">
                                         <div class="content">
                                             <div class="left">
                                                 <?php echo $other_data[$i]->vehicleType ?>
@@ -61,15 +58,7 @@
                                                     <input type="text" name="hour_price" id="hour_price" hidden value="<?php echo $other_data[$i]->hourPrice ?>" />
                                                     <input type="text" name="additional_hour_price" id="additional_hour_price" hidden value="<?php echo $other_data[$i]->additionalHourPrice ?>" />
                                                     <button type="submit" class="edit">
-                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
-                                                    </button>
-                                                </form>
-                                                &nbsp;
-                                                <form action="<?php echo URLROOT ?>/parkingOwner/landRemove" method="post">
-                                                    <input type="text" name="id" id="id" hidden value="<?php echo $other_data[$i]->pid ?>" />
-                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />
-                                                    <button type="submit" class="delete" onclick="return confirmSubmit();">
-                                                        <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="Edit">
                                                     </button>
                                                 </form>
                                             </div>
