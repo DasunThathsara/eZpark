@@ -16,7 +16,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="dropdown">
                     <button class="dropbtn">Select Parking</button>
                     <div class="dropdown-content">
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>     
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {
+                            if($data['id'] == $other_data[$i]->id){
+                                continue;
+                            }?>     
                             <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>  
                         <?php } ?>
                     </div>
@@ -93,15 +96,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <!-- Card 5 -->
                     <div class="card">
-                        <a href="#">
+                        <a href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
                             <table>
                                 <tr>
                                     <th>
-                                        <img src="<?php echo URLROOT ?>/images/useridenty.png" alt="">
+                                        <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
                                     </th>
                                     <td>
-                                        <p>3</p>
-                                        <p>Total Registered Users</p>
+                                        <p>Price Rate</p>
                                     </td>
                                 </tr>
                             </table>
