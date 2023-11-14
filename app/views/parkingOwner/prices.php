@@ -35,7 +35,10 @@
                                 </div>
                             </th>
                         </tr>
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
+                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {
+                            if($other_data[$i]->hourPrice == 0){
+                                continue;
+                            }?>
                             <tr>
                                 <td width="70%">
                                     <a class="tile" href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
@@ -50,8 +53,10 @@
                                                 <?php echo $other_data[$i]->additionalHourPrice ?>
                                             </div>
                                             <div class="right">
-                                                <form action="<?php echo URLROOT ?>/parkingOwner/landUpdateForm" method="post">
-                                                    <input type="text" name="id" id="id" hidden value="<?php echo $other_data[$i]->pid ?>" />
+                                                <form action="<?php echo URLROOT ?>/landprice/priceUpdateForm" method="post">
+                                                    <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
+                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                    <input type="text" name="pid" id="pid" hidden value="<?php echo $other_data[$i]->pid ?>" />
                                                     <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />
                                                     <input type="text" name="hour_price" id="hour_price" hidden value="<?php echo $other_data[$i]->hourPrice ?>" />
                                                     <input type="text" name="additional_hour_price" id="additional_hour_price" hidden value="<?php echo $other_data[$i]->additionalHourPrice ?>" />
