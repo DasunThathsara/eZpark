@@ -69,10 +69,10 @@ class LandPrice extends Controller
             // die(print_r($data));
 
             // Validate data
-            // Validate package type
+            // Validate vehicle type
             if (empty($data['vehicle_type'])) {
                 $data['err'] = 'Please select vehicle type';
-            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
+            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != 'threeWheel') {
                 $data['err'] = 'Invalid vehicle type';
             }
 
@@ -84,13 +84,6 @@ class LandPrice extends Controller
             // Validate additional hour price
             if (empty($data['additional_hour_price'])) {
                 $data['err'] = 'Please enter additional hour price';
-            } 
-           
-            // Validate vehicle type
-            if (empty($data['vehicle_type'])) {
-                $data['err'] = 'Please select vehicle type';
-            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
-                $data['err'] = 'Invalid vehicle type';
             }
 
             // if($data['old_vehicle_type'] != $data['vehicle_type'] or $data['old_package_type'] != $data['package_type']){

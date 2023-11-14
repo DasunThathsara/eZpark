@@ -11,7 +11,7 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Prices</h1>
+            <h1>Update Price</h1>
 
             <?php if (!empty($data['err'])){?>
                 <div class="error-msg">
@@ -29,10 +29,10 @@
                         <tr>
                             <th width="60px">
                                 <div class="content" style="display:flex;">
-                                    <div class="left" style="width:28%">
+                                    <div class="left" style="width:31%">
                                         Vehicle Type
                                     </div>
-                                    <div class="left" style="width:20%;">
+                                    <div class="left" style="width:18%;">
                                         Hour Price
                                     </div>
                                     <div class="left" style="width:20%; padding-left:45px;">
@@ -49,30 +49,28 @@
                                 <td width="70%">
                                     <a class="tile">
                                         <div class="content">
-                                            <form action="<?php echo URLROOT ?>/landprice/priceUpdate" style="display:flex;" method="POST">
+                                            <form action="<?php echo URLROOT ?>/landprice/priceUpdate" style="display:flex; width: 100%" method="POST">
                                                 <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
                                                 <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
-                                                <div class="left">
-                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />
+                                                <div class="left" style="padding-top: 20px;">
+                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />
                                                     <?php echo $other_data[$i]->vehicleType ?>
                                                 </div>
                                                 <div class="left">
-                                                    <input type="text" name="hour_price" id="hour_price"  value="<?php echo $other_data[$i]->hourPrice ?>" />
+                                                    <input type="text" name="hour_price" id="hour_price"  value="<?php echo $other_data[$i]->hourPrice ?>" style="margin: 0; padding: 5px; width: 80%; border: 1px solid #ccc; border-radius: 5px; max-width: 80px; text-align: center;" />
                                                 </div>
                                                 <div class="left">
-                                                    <input type="text" name="additional_hour_price" id="additional_hour_price"  value="<?php echo $other_data[$i]->additionalHourPrice ?>" />
+                                                    <input type="text" name="additional_hour_price" id="additional_hour_price"  value="<?php echo $other_data[$i]->additionalHourPrice ?>" style="margin: 0; padding: 5px; width: 80%; border: 1px solid #ccc; border-radius: 5px; max-width: 80px; text-align: center;" />
                                                 </div>
                                                 <div class="right">
-                                                    <input type="submit">
+                                                    <button type="submit" class="edit">
+                                                        <img src="<?php echo URLROOT ?>/images/tick.svg" alt="Edit" style="width: 25px; margin-right: 10px">
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
                                     </a>
                                 </td>
-
-                                <!-- <td style="text-align: center; display: flex; justify-content: space-between;">
-                                    
-                                </td> -->
                             </tr>
                         <?php } ?>
                     </table>
