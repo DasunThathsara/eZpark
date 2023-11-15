@@ -81,7 +81,7 @@
                                 <tr>
                                     <td class="header" data-header></td>
                                     <td class="options">
-                                        <form action="<?php echo URLROOT ?>/land/prices" method="get">
+                                        <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
                                             <input type="text" name="id" id="id" hidden value="" />
                                             <input type="text" name="name" id="name" hidden value="" />
                                             <button type="submit" class="price">
@@ -89,8 +89,8 @@
                                             </button>
                                         </form>
                                         &nbsp;
-                                        <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="post">
-                                        <input type="text" name="name" id="name" hidden value="" />
+                                        <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="post" class="update-form">
+                                            <input type="text" name="name" id="name" hidden value="" />
                                             <input type="text" name="city" id="city" hidden value="" />
                                             <input type="text" name="street" id="street" hidden value="" />
                                             <input type="text" name="deed" id="deed" hidden value="" />
@@ -103,7 +103,7 @@
                                             </button>
                                         </form>
                                         &nbsp;
-                                        <form action="<?php echo URLROOT ?>/land/landRemove" method="post">
+                                        <form action="<?php echo URLROOT ?>/land/landRemove" method="post" class="delete-form">
                                             <input type="text" name="name" id="name" hidden value="" />
                                             <button type="submit" class="delete" onclick="return confirmSubmit();">
                                                 <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
@@ -119,6 +119,7 @@
         </div>
     </section>
 </main>
+
 <script>
     function confirmSubmit() {
         return confirm("Are you sure you want to delete this land?");
@@ -148,11 +149,67 @@
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
     
+        // Set the parking view link
         if (tileLink) {
             tileLink.href = `gotoLand/${land.id}/${land.name}`;
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
+        
+        // Set id and name to go to the price page
+        const priceForm = card.querySelector('.price-form');
+        if (priceForm) {
+            const idInput = priceForm.querySelector('#id');
+            const nameInput = priceForm.querySelector('#name');
+        
+            if (idInput && nameInput) {
+                idInput.value = land.id;
+                nameInput.value = land.name;
+            } else {
+                console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
+            }
+        }
+
+
+        // Set id and name to delete the land
+        const deleteForm = card.querySelector('.delete-form');
+        if (deleteForm) {
+            const nameInput = deleteForm.querySelector('#name');
+            
+            if (nameInput) {
+                nameInput.value = land.name; // Set the value dynamically
+            } else {
+                console.error("Form input with id 'name' not found in the cloned card:", card);
+            }
+        }
+
+
+        // Set values to go to the update page
+        const updateForm = card.querySelector('.update-form');
+        if (updateForm) {
+            const nameInput = updateForm.querySelector('#name');
+            const cityInput = updateForm.querySelector('#city');
+            const streetInput = updateForm.querySelector('#street');
+            const deedInput = updateForm.querySelector('#deed');
+            const carInput = updateForm.querySelector('#car');
+            const bikeInput = updateForm.querySelector('#bike');
+            const threeWheelInput = updateForm.querySelector('#threeWheel');
+            const contactNoInput = updateForm.querySelector('#contactNo');
+            
+            if (nameInput && cityInput && streetInput && deedInput && carInput && bikeInput && threeWheelInput && contactNoInput) {
+                nameInput.value = land.name;
+                cityInput.value = land.city;
+                streetInput.value = land.street;
+                deedInput.value = land.deed;
+                carInput.value = land.car;
+                bikeInput.value = land.bike;
+                threeWheelInput.value = land.threeWheel;
+                contactNoInput.value = land.contactNo;
+            } else {
+                console.error("One or more form inputs not found in the cloned card:", card);
+            }
+        }
+
         return { id: land.id, name: land.name, city: land.city, street: land.street, element: card };
     });
 </script>
