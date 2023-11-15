@@ -247,19 +247,37 @@ class Land extends Controller {
     }
 
     // Update Land
-    public function landUpdateForm(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    public function landUpdateForm($land_ID = null, $land_name = null){
+        if (sizeof($_GET) > 1){
             $data = [
-                'name' => trim($_POST['name']),
-                'city' => trim($_POST['city']),
-                'street' => trim($_POST['street']),
-                'deed' => trim($_POST['deed']),
-                'car' => trim($_POST['car']),
-                'bike' => trim($_POST['bike']),
-                'threeWheel' => trim($_POST['threeWheel']),
-                'contactNo' => trim($_POST['contactNo']),
-                'err' => ''
+                'name' => trim($_GET['name']),
+                'id' => trim($_GET['id'])
             ];
+    
+            redirect('land/landUpdateForm/'.$data['id'].'/'.$data['name']);
+        }
+        else{
+            $data = [
+                'name' => $land_name,
+                'id' => $land_ID
+            ];
+
+            $prices = $this->parkingOwnerModel->viewToBeUpdatedLand($data);
+            
+
+            $data = [
+                'name' => $prices[0]->name,
+                'city' => $prices[0]->city,
+                'street' => $prices[0]->street,
+                'deed' => $prices[0]->deed,
+                'car' => $prices[0]->car,
+                'bike' => $prices[0]->bike,
+                'threeWheel' => $prices[0]->threeWheel,
+                'contactNo' => $prices[0]->contactNo,
+                'err' => '',
+            ];
+
             $this->view('parkingOwner/lands/update', $data);
         }
     }
@@ -368,5 +386,4 @@ class Land extends Controller {
             $this->view('parkingOwner/prices', $data, $prices);
         }
     }
-    
 }

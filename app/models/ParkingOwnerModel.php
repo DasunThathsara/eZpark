@@ -202,6 +202,15 @@ class ParkingOwnerModel{
         }
     }
 
+    public function viewToBeUpdatedLand($data){
+        $this->db->query('SELECT * FROM land WHERE id = :id');
+        $this->db->bind(':id', $data['id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
 
     // ------------------------- package Functionalities -------------------------
     // Register package

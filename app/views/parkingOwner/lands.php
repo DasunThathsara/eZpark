@@ -89,15 +89,9 @@
                                             </button>
                                         </form>
                                         &nbsp;
-                                        <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="post" class="update-form">
+                                        <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
                                             <input type="text" name="name" id="name" hidden value="" />
-                                            <input type="text" name="city" id="city" hidden value="" />
-                                            <input type="text" name="street" id="street" hidden value="" />
-                                            <input type="text" name="deed" id="deed" hidden value="" />
-                                            <input type="number" name="car" id="car" hidden value="" />
-                                            <input type="number" name="bike" id="bike" hidden value="" />
-                                            <input type="number" name="threeWheel" id="threeWheel" hidden value="" />
-                                            <input type="number" name="contactNo" id="contactNo" hidden value=""/>
+                                            <input type="text" name="id" id="id" hidden value="" />
                                             <button type="submit" class="edit">
                                                 <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
                                             </button>
@@ -187,24 +181,12 @@
         // Set values to go to the update page
         const updateForm = card.querySelector('.update-form');
         if (updateForm) {
+            const idInput = updateForm.querySelector('#id');
             const nameInput = updateForm.querySelector('#name');
-            const cityInput = updateForm.querySelector('#city');
-            const streetInput = updateForm.querySelector('#street');
-            const deedInput = updateForm.querySelector('#deed');
-            const carInput = updateForm.querySelector('#car');
-            const bikeInput = updateForm.querySelector('#bike');
-            const threeWheelInput = updateForm.querySelector('#threeWheel');
-            const contactNoInput = updateForm.querySelector('#contactNo');
             
-            if (nameInput && cityInput && streetInput && deedInput && carInput && bikeInput && threeWheelInput && contactNoInput) {
+            if (nameInput && idInput) {
                 nameInput.value = land.name;
-                cityInput.value = land.city;
-                streetInput.value = land.street;
-                deedInput.value = land.deed;
-                carInput.value = land.car;
-                bikeInput.value = land.bike;
-                threeWheelInput.value = land.threeWheel;
-                contactNoInput.value = land.contactNo;
+                idInput.value = land.id;
             } else {
                 console.error("One or more form inputs not found in the cloned card:", card);
             }
