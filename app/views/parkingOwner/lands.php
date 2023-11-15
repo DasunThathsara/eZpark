@@ -20,7 +20,7 @@
                 <div class="emptyLand">You have no any registered lands</div>
             <?php }
             else {?>
-                <div class="table-container">
+                <!-- <div class="table-container">
                     <table class="table">
                         <tr>
                             <th>Parking Name</th>
@@ -67,14 +67,54 @@
                                         </div>
                                     </a>
                                 </td>
-
-                                <!-- <td style="text-align: center; display: flex; justify-content: space-between;">
-                                    
-                                </td> -->
                             </tr>
                         <?php } ?>
                     </table>
-                </div>
+                </div> -->
+
+                <input type="search" class="data-search">
+                <div class="user-cards"></div>
+                <template class="data-user-template">
+                    <div class="card">
+                        <a href="" class="tile">
+                            <table>
+                                <tr>
+                                    <td class="header" data-header></td>
+                                    <td class="options">
+                                        <form action="<?php echo URLROOT ?>/land/prices" method="get">
+                                            <input type="text" name="id" id="id" hidden value="" />
+                                            <input type="text" name="name" id="name" hidden value="" />
+                                            <button type="submit" class="price">
+                                                <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                            </button>
+                                        </form>
+                                        &nbsp;
+                                        <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="post">
+                                        <input type="text" name="name" id="name" hidden value="" />
+                                            <input type="text" name="city" id="city" hidden value="" />
+                                            <input type="text" name="street" id="street" hidden value="" />
+                                            <input type="text" name="deed" id="deed" hidden value="" />
+                                            <input type="number" name="car" id="car" hidden value="" />
+                                            <input type="number" name="bike" id="bike" hidden value="" />
+                                            <input type="number" name="threeWheel" id="threeWheel" hidden value="" />
+                                            <input type="number" name="contactNo" id="contactNo" hidden value=""/>
+                                            <button type="submit" class="edit">
+                                                <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                            </button>
+                                        </form>
+                                        &nbsp;
+                                        <form action="<?php echo URLROOT ?>/land/landRemove" method="post">
+                                            <input type="text" name="name" id="name" hidden value="" />
+                                            <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </a>
+                    </div>
+                </template>
             <?php } ?>
         </div>
     </section>
@@ -83,5 +123,37 @@
     function confirmSubmit() {
         return confirm("Are you sure you want to delete this land?");
     }
+
+    // ------------------------------- Search Bar -------------------------------
+    const userCardTemplate = document.querySelector(".data-user-template");
+    const searchInput = document.querySelector(".data-search");
+
+    searchInput.addEventListener("input", (data) => {
+        const value = data.target.value.toLowerCase();
+        lands.forEach(land => {
+            const isVisible = land.name.toLowerCase().includes(value) || land.city.toLowerCase().includes(value) || land.street.toLowerCase().includes(value);
+            if (land.element) {
+                land.element.classList.toggle("hide", !isVisible);
+            }
+        });
+    });
+
+    let lands = [];
+    var backendData = <?php echo json_encode($data); ?>;
+
+    lands = backendData.map(land => {
+        const card = userCardTemplate.content.cloneNode(true).children[0];
+        console.log(card);
+        card.querySelector(".header").textContent = land.name;
+        document.querySelector(".user-cards").appendChild(card);
+        const tileLink = card.querySelector('.tile');
+    
+        if (tileLink) {
+            tileLink.href = `gotoLand/${land.id}/${land.name}`;
+        } else {
+            console.error("Anchor element with class 'tile' not found in the cloned card:", card);
+        }
+        return { id: land.id, name: land.name, city: land.city, street: land.street, element: card };
+    });
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>

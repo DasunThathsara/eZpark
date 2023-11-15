@@ -31,8 +31,6 @@ userSelectionList.addEventListener("click", function (e) {
 });
 
 
-
-
 // ------------------------------- Password Check -------------------------------
 
 const passwordInput = document.getElementById('password');
@@ -69,4 +67,3 @@ function updateStrengthText(strength) {
     }
     strengthText.textContent = text;
 }
-
