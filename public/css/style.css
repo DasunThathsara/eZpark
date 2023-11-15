@@ -308,7 +308,6 @@ a{
 }
 
 
-
 /* ---------------------------------- Dynamic Content Table ---------------------------------- */
 .hide{
     display: none;
@@ -384,4 +383,27 @@ a{
 
 .user-cards .card .options .edit img:hover{
     scale: 1.1;
+}
+
+
+/* ---------------------------------- Land Search Bar ---------------------------------- */
+.data-search{
+    position: absolute;
+    right: 35px;
+    top: 190px;
+    border-radius: 20px;
+    outline: none;
+    border: 0px solid rgba(0, 0, 0, 0.247);
+    padding: 10px 5px 10px 15px;
+    width: 150px;
+    transition: 0.5s;
+    box-shadow: 0 0 4px 0.1px rgba(0, 0, 0, 0.2);
+}
+
+.data-search:hover{
+    width: 250px;
+}
+
+.data-search:focus{
+    width: 250px;
 }
