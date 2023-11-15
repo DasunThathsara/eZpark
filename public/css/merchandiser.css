@@ -13,64 +13,6 @@
     font-size: 20px;
 }
 
-.page-container .section .container .cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 100px;
-}
-
-.page-container .section .container .cards .card{
-    width: 200px;
-    box-shadow: 0px 0px 15px 0.1px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    margin: 10px;
-    transition: 0.5s;
-    height: 100px;
-}
-
-.page-container .section .container .cards .card a{
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
-    background-color: white;
-}
-
-.page-container .section .container .cards .card button{
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
-    background-color: white;
-    border: none;
-}
-
-.page-container .section .container .cards .card:hover{
-    scale: 1.05;
-    box-shadow: 0px 0px 15px 0.1px rgba(252, 212, 38, 0.27);
-}
-
-.page-container .section .container .cards .card table{
-    width: 100%;
-    border-radius: 10px;
-}
-
-.page-container .section .container .cards .card table th{
-    background: white;
-    width: 30%;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.page-container .section .container .cards .card table td{
-    background: white;
-    width: 70%;
-    border-radius: 10px;
-}
-
-.page-container .section .container .cards .card img{
-    width: 20px;
-}
-
 /* ----------------- Mechandiser Land Styles ---------------- */
 .page-container .section .container .emptyLand{
     margin-top: 100px;

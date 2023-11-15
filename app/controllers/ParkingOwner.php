@@ -16,6 +16,7 @@ class ParkingOwner extends Controller {
     // View all lands
     public function lands(){
         $lands = $this->parkingOwnerModel->viewLands();
+        
 
         $this->view('parkingOwner/lands', $lands);
     }

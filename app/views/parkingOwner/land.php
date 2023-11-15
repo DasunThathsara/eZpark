@@ -95,8 +95,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="card">
-                        <a href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                    <a href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                        <div class="card">
                             <table>
                                 <tr>
                                     <th>
@@ -107,12 +107,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     </td>
                                 </tr>
                             </table>
-                        </a>
-                    </div>
-
+                        </div>
+                    </a>
                     <!-- Card 6 -->
-                    <div class="card">
-                        <a href="<?php echo URLROOT ?>/parkingOwner/packages/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                    <a href="<?php echo URLROOT ?>/parkingOwner/packages/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                        <div class="card">
                             <table>
                                 <tr>
                                     <th>
@@ -124,8 +123,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     </td>
                                 </tr>
                             </table>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
