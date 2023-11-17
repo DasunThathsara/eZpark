@@ -28,55 +28,55 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                 <div class="cards">
                     <!-- Card 1 -->
-                    <div class="card">
-                        <a href="#">
-                            <table>
-                                <tr>
-                                    <th>
-                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                    </th>
-                                    <td>
-                                        <p>0</p>
-                                        <p>Today's Vehicle Entries</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </a>
-                    </div>
+                    <a class="card-link" href="">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                        </div>
+                                        <div class="bottom-row">8</div>
+                                    </div>
+                                </div>
+                                <div class="right-col">Total Lands</div>
+                            </div>
+                        </div>
+                    </a>
 
                     <!-- Card 2 -->
-                    <div class="card">
-                        <a href="#">
-                            <table>
-                                <tr>
-                                    <th>
-                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                    </th>
-                                    <td>
-                                        <p>0</p>
-                                        <p>Yesterday's Vehicle Entries</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </a>
-                    </div>
+                    <a class="card-link" href="">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                        </div>
+                                        <div class="bottom-row">8</div>
+                                    </div>
+                                </div>
+                                <div class="right-col">Total Lands</div>
+                            </div>
+                        </div>
+                    </a>
 
                     <!-- Card 3 -->
-                    <div class="card">
-                        <a href="#">
-                            <table>
-                                <tr>
-                                    <th>
-                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                    </th>
-                                    <td>
-                                        <p>3</p>
-                                        <p>Last 7 days Vehicle Entries</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </a>
-                    </div>
+                    <a class="card-link" href="">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                        </div>
+                                        <div class="bottom-row">8</div>
+                                    </div>
+                                </div>
+                                <div class="right-col">Total Lands</div>
+                            </div>
+                        </div>
+                    </a>
 
                     <!-- Card 4 -->
                     <a class="card-link" href="">
