@@ -62,7 +62,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         <br><br>
         <!-- contactNo -->
         <div class="form-input-title">Contact Number:</div>
-        <input type="tex" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />
+        <input type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />
 
         <br><br>
 

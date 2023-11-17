@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="dropdown">
                     <button class="dropbtn">Select Parking</button>
                     <div class="dropdown-content">
-                    <a href="<?php echo URLROOT ?>//parkingOwner/index">Main Dashboard</a>  
+                    <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
                         <?php for ($i = 0; $i < sizeof($other_data); $i++) {
                             if($data['id'] == $other_data[$i]->id){
                                 continue;
@@ -79,7 +79,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     </a>
 
                     <!-- Card 4 -->
-                    <a class="card-link" href="">
+                    <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/parkingCapacity">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
@@ -87,10 +87,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                         <div class="top-row">
                                             <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                         </div>
-                                        <div class="bottom-row">8</div>
+                                        <div class="bottom-row"><?php echo $data['land_count'] ?></div>
                                     </div>
                                 </div>
-                                <div class="right-col">Total Lands</div>
+                                <div class="right-col">Parking Capacity</div>
                             </div>
                         </div>
                     </a>

@@ -211,6 +211,18 @@ class ParkingOwnerModel{
         return $row;
     }
 
+    public function getLandCount(){
+        // Prepare statement
+        $this->db->query('SELECT COUNT(*) FROM land  WHERE uid = :id');
+
+        // Bind values
+        $this->db->bind(':id', $_SESSION['user_id']);
+
+
+        $row = $this->db->single();
+        return $row->{'COUNT(*)'};
+    }
+
 
     // ------------------------- package Functionalities -------------------------
     // Register package
