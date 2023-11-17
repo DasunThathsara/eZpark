@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="<?php echo URLROOT ?>/css/style.css">
 
         <!-- External js -->
-        <script src="<?php echo URLROOT ?>/js/script.js" defer></script>s
+        <script src="<?php echo URLROOT ?>/js/script.js" defer></script>
     </head>
     <body>
 
