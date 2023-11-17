@@ -16,97 +16,114 @@
             <div class="dropdown">
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
-                    <?php for ($i = 0; $i < sizeof($data); $i++) {?>     
-                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $data[$i]->id ?>/<?php echo $data[$i]->name ?>"><?php echo $data[$i]->name ?></a>  
+                    <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
+                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>
                     <?php } ?>
                 </div>
             </div>
 
             <div class="cards">
                 <!-- Card 1 -->
-                <div class="card">
-                    <a href="#">
-                        <table>
-                            <tr>
-                                <th>
-                                    <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                </th>
-                                <td>
-                                    <p>0</p>
-                                    <p>Today's Vehicle Entries</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
-                
+                <a class="card-link" href="">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row">8</div>
+                                </div>
+                            </div>
+                            <div class="right-col">Total Lands</div>
+                        </div>
+                    </div>
+                </a>
+
                 <!-- Card 2 -->
-                <div class="card">
-                    <a href="#">
-                        <table>
-                            <tr>
-                                <th>
-                                    <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                </th>
-                                <td>
-                                    <p>0</p>
-                                    <p>Yesterday's Vehicle Entries</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
+                <a class="card-link" href="">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row">8</div>
+                                </div>
+                            </div>
+                            <div class="right-col">Total Lands</div>
+                        </div>
+                    </div>
+                </a>
 
                 <!-- Card 3 -->
-                <div class="card">
-                    <a href="#">
-                        <table>
-                            <tr>
-                                <th>
-                                    <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                </th>
-                                <td>
-                                    <p>3</p>
-                                    <p>Last 7 days Vehicle Entries</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
+                <a class="card-link" href="">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row">8</div>
+                                </div>
+                            </div>
+                            <div class="right-col">Total Lands</div>
+                        </div>
+                    </div>
+                </a>
 
                 <!-- Card 4 -->
-                <div class="card">
-                    <a href="#">
-                        <table>
-                            <tr>
-                                <th>
-                                    <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                </th>
-                                <td>
-                                    <p>8</p>
-                                    <p>Total Vehicle Entries</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
+                <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/lands">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row"><?php echo $data['land_count'] ?></div>
+                                </div>
+                            </div>
+                            <div class="right-col">Total Lands</div>
+                        </div>
+                    </div>
+                </a>
 
                 <!-- Card 5 -->
-                <div class="card">
-                    <a href="#">
-                        <table>
-                            <tr>
-                                <th>
-                                    <img src="<?php echo URLROOT ?>/images/useridenty.png" alt="">
-                                </th>
-                                <td>
-                                    <p>3</p>
-                                    <p>Total Registered Users</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
+                <a class="card-link" href="">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row"></div>
+                                </div>
+                            </div>
+                            <div class="right-col">Price Rate</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 6 -->
+                <a class="card-link" href="">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row"></div>
+                                </div>
+                            </div>
+                            <div class="right-col">Packages</div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

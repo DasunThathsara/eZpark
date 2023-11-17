@@ -98,7 +98,7 @@
     margin-top: 10px;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], input[type=number]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0 20px 0;
@@ -113,9 +113,13 @@ input[placeholder]{
     color: rgba(0, 0, 0, 0.47);
 }
 
-input[type=text]:hover, input[type=password]:hover, input[type=email]:hover {
+input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.input-box-err{
+    border: 1px solid red;
 }
 
 input[type=submit] {

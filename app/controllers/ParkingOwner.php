@@ -9,7 +9,11 @@ class ParkingOwner extends Controller {
 
     public function index(){
         $lands = $this->parkingOwnerModel->viewLands();
-        $this->view('parkingOwner/index', $lands);
+
+        $data = [
+            'land_count' => $this->parkingOwnerModel->getLandCount()
+        ];
+        $this->view('parkingOwner/index', $data, $lands);
     }
 
     // ------------------------------ Lands ------------------------------
@@ -33,7 +37,8 @@ class ParkingOwner extends Controller {
         $data = [
             'id' => $land_ID,
             'name' => $land_name,
-            'package_count' => $this->parkingOwnerModel->getPackageCount($data)
+            'package_count' => $this->parkingOwnerModel->getPackageCount($data),
+            'land_count' => $this->parkingOwnerModel->getLandCount($data)
         ];
 
         $this->view('parkingOwner/land', $data, $lands);
@@ -50,5 +55,14 @@ class ParkingOwner extends Controller {
         $packages = $this->parkingOwnerModel->viewPackages($data);
 
         $this->view('parkingOwner/packages', $data, $packages);
+    }
+
+    // ----------------------------- Parking Capacity -----------------------------
+    // View all packages
+    public function parkingCapacity($parking_ID = null, $parking_name = null){
+        $lands = $this->parkingOwnerModel->viewLands();
+
+
+        $this->view('parkingOwner/capacity', $lands);
     }
 }
