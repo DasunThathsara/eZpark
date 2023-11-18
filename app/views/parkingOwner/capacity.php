@@ -27,7 +27,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="user-cards"></div>
                 <template class="data-user-template">
                     <div class="card">
-                        <a href="" class="tile">
+                        <a href="#" class="tile">
                             <table>
                                 <tr>
                                     <td class="header" data-header></td>
@@ -81,7 +81,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
         // Set the parking view link
         if (tileLink) {
-            tileLink.href = `gotoLand/${land.id}/${land.name}`;
+            tileLink.href = `<?php echo URLROOT ?>/LandCapacity/viewCapacity/${land.id}/${land.name}`;
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }

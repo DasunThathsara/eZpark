@@ -223,6 +223,15 @@ class ParkingOwnerModel{
         return $row->{'COUNT(*)'};
     }
 
+    public function viewCapacity($data){
+        $this->db->query('SELECT car, bike, threeWheel FROM land WHERE id = :id');
+        $this->db->bind(':id', $data['id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
 
     // ------------------------- package Functionalities -------------------------
     // Register package
@@ -315,6 +324,17 @@ class ParkingOwnerModel{
         else {
             return false;
         }
+    }
+
+    public function viewToBeUpdatedPackage($data){
+        $this->db->query('SELECT * FROM package WHERE pid = :pid and name = :name and packageType = :packageType');
+        $this->db->bind(':pid', $data['id']);
+        $this->db->bind(':name', $data['package_type']);
+        $this->db->bind(':packageType', $data['vehicle_type']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
     }
 
     public function getPackageCount($data){
