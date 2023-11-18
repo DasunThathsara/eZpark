@@ -247,7 +247,6 @@ class Land extends Controller {
     }
 
     // Update Land
-
     public function landUpdateForm($land_ID = null, $land_name = null){
         if (sizeof($_GET) > 1){
             $data = [
@@ -346,7 +345,6 @@ class Land extends Controller {
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register Land
-                print_r($_SESSION['user_id']);
                 if ($this->parkingOwnerModel->updateLand($data)){
                     redirect('parkingOwner/lands');
                 } else {

@@ -101,17 +101,37 @@ class Package extends Controller
         }
     }
 
-    // Update package
-    public function packageUpdateForm(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function packageUpdateForm($land_ID = null, $land_name = null, $package_type = null, $vehicle_type = null){
+        if (sizeof($_GET) > 1){
             $data = [
-                'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
-                'package_type' => trim($_POST['package_type']),
-                'vehicle_type' => trim($_POST['vehicle_type']),
-                'package_price' => trim($_POST['package_price']),
+                'name' => trim($_GET['name']),
+                'id' => trim($_GET['id']),
+                'package_type' => trim($_GET['package_type']),
+                'vehicle_type' => trim($_GET['vehicle_type'])
+            ];
+
+            redirect('package/packageUpdateForm/'.$data['id'].'/'.$data['name'].'/'.$data['package_type'].'/'.$data['vehicle_type']);
+        }
+        else{
+            $data = [
+                'name' => $land_name,
+                'id' => $land_ID,
+                'package_type' => $package_type,
+                'vehicle_type' => $vehicle_type
+            ];
+
+            $package = $this->parkingOwnerModel->viewToBeUpdatedPackage($data);
+
+
+            $data = [
+                'id' => $package[0]->pid,
+                'name' => $land_name,
+                'package_type' => $package[0]->name,
+                'vehicle_type' => $package[0]->packageType,
+                'package_price' => $package[0]->price,
                 'err' => ''
             ];
+
             $this->view('parkingOwner/packages/update', $data);
         }
     }

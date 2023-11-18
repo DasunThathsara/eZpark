@@ -1,11 +1,12 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-    <!--  TOP NAVIGATION  -->
+
+<!--  TOP NAVIGATION  -->
 <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
-    <!--  SIDE NAVIGATION  -->
+<!--  SIDE NAVIGATION  -->
 <?php
-$section = 'dashboard';
-require APPROOT.'/views/inc/components/sidenavbar.php';
+    $section = 'dashboard';
+    require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
     <main class="page-container">
