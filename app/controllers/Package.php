@@ -9,6 +9,17 @@ class Package extends Controller
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
+    public function viewPackages($parking_ID = null, $parking_name = null){
+        $data = [
+            'id' => $parking_ID,
+            'name' => $parking_name
+        ];
+
+        $packages = $this->parkingOwnerModel->viewPackages($data);
+
+        $this->view('parkingOwner/packages/viewPackage', $data, $packages);
+    }
+
     // Register Package
     public function packageRegister($parking_ID = null, $parking_name = null){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -186,7 +197,7 @@ class Package extends Controller
             if (empty($data['err'])) {
                 // Register package
                 if ($this->parkingOwnerModel->updatePackage($data)) {
-                    redirect('parkingOwner/packages/'.$data['id'].'/'.$data['name']);
+                    redirect('package/viewPackages/'.$data['id'].'/'.$data['name']);
                 } else {
                     die('Something went wrong');
                 }

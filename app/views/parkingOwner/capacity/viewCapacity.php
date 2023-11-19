@@ -46,16 +46,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <?php echo $other_data[0]->car?>
                                         </div>
                                         <div class="right">
-<!--                                            <form action="--><?php //echo URLROOT ?><!--/package/packageUpdateForm" method="post">-->
-<!--                                                <input type="text" name="id" id="id" hidden value="--><?php //echo $data['id'] ?><!--" />-->
-<!--                                                <input type="text" name="name" id="name" hidden value="--><?php //echo $data['name'] ?><!--" />-->
-<!--                                                <input type="text" name="package_type" id="package_type" hidden value="--><?php //echo $other_data[$i]->name ?><!--" />-->
-<!--                                                <input type="text" name="package_price" id="package_price" hidden value="--><?php //echo $other_data[$i]->price ?><!--" />-->
-<!--                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="--><?php //echo $other_data[$i]->packageType ?><!--" />-->
-<!--                                                <button type="submit" class="edit">-->
-<!--                                                    <img src="--><?php //echo URLROOT ?><!--/images/edit-solid.svg" alt="">-->
-<!--                                                </button>-->
-<!--                                            </form>-->
+                                            <form action="<?php echo URLROOT ?>/landCapacity/capacityUpdateForm" method="get">
+                                                <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
+                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="car" />
+                                                <button type="submit" class="edit">
+                                                    <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                </button>
+                                            </form>
 <!--                                            &nbsp;-->
 <!--                                            <form action="--><?php //echo URLROOT ?><!--/package/packageRemove" method="post">-->
 <!--                                                <input type="text" name="package_type" id="package_type" hidden value="--><?php //echo $other_data[$i]->name ?><!--" />-->
@@ -83,16 +81,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <?php echo $other_data[0]->bike?>
                                         </div>
                                         <div class="right">
-                                            <!--                                            <form action="--><?php //echo URLROOT ?><!--/package/packageUpdateForm" method="post">-->
-                                            <!--                                                <input type="text" name="id" id="id" hidden value="--><?php //echo $data['id'] ?><!--" />-->
-                                            <!--                                                <input type="text" name="name" id="name" hidden value="--><?php //echo $data['name'] ?><!--" />-->
-                                            <!--                                                <input type="text" name="package_type" id="package_type" hidden value="--><?php //echo $other_data[$i]->name ?><!--" />-->
-                                            <!--                                                <input type="text" name="package_price" id="package_price" hidden value="--><?php //echo $other_data[$i]->price ?><!--" />-->
-                                            <!--                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="--><?php //echo $other_data[$i]->packageType ?><!--" />-->
-                                            <!--                                                <button type="submit" class="edit">-->
-                                            <!--                                                    <img src="--><?php //echo URLROOT ?><!--/images/edit-solid.svg" alt="">-->
-                                            <!--                                                </button>-->
-                                            <!--                                            </form>-->
+                                            <form action="<?php echo URLROOT ?>/landCapacity/capacityUpdateForm" method="get">
+                                                <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
+                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="bike" />
+                                                <button type="submit" class="edit">
+                                                    <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                </button>
+                                            </form>
                                             <!--                                            &nbsp;-->
                                             <!--                                            <form action="--><?php //echo URLROOT ?><!--/package/packageRemove" method="post">-->
                                             <!--                                                <input type="text" name="package_type" id="package_type" hidden value="--><?php //echo $other_data[$i]->name ?><!--" />-->
@@ -120,16 +116,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <?php echo $other_data[0]->threeWheel?>
                                         </div>
                                         <div class="right">
-                                            <!--                                            <form action="--><?php //echo URLROOT ?><!--/package/packageUpdateForm" method="post">-->
-                                            <!--                                                <input type="text" name="id" id="id" hidden value="--><?php //echo $data['id'] ?><!--" />-->
-                                            <!--                                                <input type="text" name="name" id="name" hidden value="--><?php //echo $data['name'] ?><!--" />-->
-                                            <!--                                                <input type="text" name="package_type" id="package_type" hidden value="--><?php //echo $other_data[$i]->name ?><!--" />-->
-                                            <!--                                                <input type="text" name="package_price" id="package_price" hidden value="--><?php //echo $other_data[$i]->price ?><!--" />-->
-                                            <!--                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="--><?php //echo $other_data[$i]->packageType ?><!--" />-->
-                                            <!--                                                <button type="submit" class="edit">-->
-                                            <!--                                                    <img src="--><?php //echo URLROOT ?><!--/images/edit-solid.svg" alt="">-->
-                                            <!--                                                </button>-->
-                                            <!--                                            </form>-->
+                                            <form action="<?php echo URLROOT ?>/landCapacity/capacityUpdateForm" method="get">
+                                                <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
+                                                <input type="text" name="vehicle_type" id="vehicle_type" hidden value="threeWheel" />
+                                                <button type="submit" class="edit">
+                                                    <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                </button>
+                                            </form>
                                             <!--                                            &nbsp;-->
                                             <!--                                            <form action="--><?php //echo URLROOT ?><!--/package/packageRemove" method="post">-->
                                             <!--                                                <input type="text" name="package_type" id="package_type" hidden value="--><?php //echo $other_data[$i]->name ?><!--" />-->

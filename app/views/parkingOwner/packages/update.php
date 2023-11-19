@@ -21,6 +21,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         <input type="text" name="name" id="name" required hidden value="<?php echo $data['name'] ?>" />
         <input type="text" name="old_vehicle_type" id="old_vehicle_type" required hidden value="<?php echo $data['vehicle_type'] ?>" />
         <input type="text" name="old_package_type" id="old_package_type" required hidden value="<?php echo $data['package_type'] ?>" />
+
         <!-- package name -->
         <select name="package_type">
             <?php if($data['package_type'] == 'weekly') {?>
@@ -29,7 +30,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <?php }
             else if($data['package_type'] == 'monthly') {?>
                 <option value="weekly">weekly</option>
-                <option value="monthly selected">monthly</option>
+                <option value="monthly" selected>monthly</option>
             <?php }
             else{?>
                 <option value="" hidden disabled selected>Package Type</option>
