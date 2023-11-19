@@ -22,17 +22,17 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <form action="<?php echo URLROOT ?>/users/updateProfile" method="post" enctype="multipart/form-data">
                     <div class="profile-container">
                         <?php if($_SESSION['profile_photo']){ ?>
-                            <img class="profile-pic" src="<?php echo URLROOT ?>/profile_pics/<?php echo $data['profile_photo']?>" alt="<?php echo $_SESSION['user_name'] ?>">
+                            <img class="profile-pic" id="preview" src="<?php echo URLROOT ?>/profile_pics/<?php echo $data['profile_photo']?>" alt="<?php echo $_SESSION['user_name'] ?>">
                         <?php }
                         else{ ?>
-                            <img class="profile-pic" src="<?php echo URLROOT ?>/images/user.png" alt="<?php echo $_SESSION['user_name'] ?>">
+                            <img class="profile-pic" id="preview" src="<?php echo URLROOT ?>/images/user.png" alt="<?php echo $_SESSION['user_name'] ?>">
                         <?php } ?>
 
                         <div class="profile-dropdown-container">
                             <img class="profile-pic-edit" src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="" onclick="dropdownBtn()">
                             <div class="profile-dropdown-content">
-                                <input type="file" id="profile_photo" name="profile_photo" hidden/>
-                                <label for="profile_photo" class="dropdown-item">Choose File</label>
+                                <input type="file" id="profile_photo" name="profile_photo" hidden onchange="previewImage(this)"/>
+                                <label for="profile_photo" class="dropdown-item" onclick="dropdownBtn()">Choose File</label>
                                 <a class="dropdown-item" href="<?php echo URLROOT ?>/users/profilePhotoRemove" onclick="return confirmSubmit();">Remove photo</a>
                             </div>
                         </div>
@@ -68,9 +68,25 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     const actualBtn = document.getElementById('profile_photo');
 
     actualBtn.addEventListener('change', function(){
-        fileChosen.textContent = this.files[0].name
-    })
+        fileChosen.textContent = this.files[0].name;
+        previewImage(this);
+    });
 
+    function previewImage(input) {
+        const preview = document.getElementById('preview');
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "<?php echo URLROOT ?>/images/user.png";
+        }
+    }
 
     function confirmSubmit() {
         return confirm("Are you sure you want to remove your profile photo?");

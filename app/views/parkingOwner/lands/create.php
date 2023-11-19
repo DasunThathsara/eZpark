@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/land/landRegister" method="post">
+    <form action="<?php echo URLROOT ?>/land/landRegister" method="post" enctype="multipart/form-data">
         <!-- Name -->
         <div class="form-input-title">Name:</div>
         <input type="text" name="name" id="name" required value="<?php echo $data['name'] ?>" />
@@ -37,7 +37,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
         <!-- Deed -->
         <div class="form-input-title">Deed:</div>
-        <input type="text" name="deed" id="deed" required value="<?php echo $data['deed'] ?>" />
+        <div class="file-upload-container">
+            <label class="file-upload" for="deed">Upload File</label>
+            <input type="file" name="deed" id="deed" hidden />
+            <div class="description">*Upload deed in PDF format</div>
+        </div>
 
         <br><br>
 

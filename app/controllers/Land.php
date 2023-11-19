@@ -134,6 +134,40 @@ class Land extends Controller {
         $this->view('parkingOwner/lands/aboutSecurityOfficer', $data);
     }
 
+    public function deedUpload($file){
+        $data = [
+            'deed' => '',
+            'err' => ''
+        ];
+
+        $file_name = $_FILES[$file]['name'];
+        $file_size = $_FILES[$file]['size'];
+        $tmp_name = $_FILES[$file]['tmp_name'];
+        $error = $_FILES[$file]['error'];
+
+        if ($error === 0){
+            $file_ex = pathinfo($file_name, PATHINFO_EXTENSION);
+            $file_ex_lc = strtolower($file_ex);
+
+            $allowed_exs = array("pdf", "PDF");
+
+            if (in_array($file_ex_lc, $allowed_exs)){
+                // Move into mag_img folder
+                $new_file_name = uniqid("DEED-", true).'.'.$file_ex_lc;
+                $file_upload_path = PUBLICROOT.'/deeds/'.$new_file_name;
+                move_uploaded_file($tmp_name, $file_upload_path);
+
+                $data['deed'] = $new_file_name;
+                return $data;
+            }
+
+            else{
+                $data['err'] = "You can't upload files of this type";
+                return $data;
+            }
+        }
+    }
+
     // Register Land
     public function landRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -145,7 +179,7 @@ class Land extends Controller {
                 'name' => trim($_POST['name']),
                 'city' => trim($_POST['city']),
                 'street' => trim($_POST['street']),
-                'deed' => trim($_POST['deed']),
+                'deed' => '',
                 'car' => trim($_POST['car']),
                 'bike' => trim($_POST['bike']),
                 'threeWheel' => trim($_POST['threeWheel']),
@@ -172,10 +206,6 @@ class Land extends Controller {
                 $data['err'] = 'Please enter street';
             }
 
-            if (empty($data['deed'])){
-                $data['err'] = 'Please enter deed';
-            }
-
             if (!preg_match('/^(0|\d+)$/', $data['car'])){
                 $data['err'] = 'Invalid data type for cars';
             }
@@ -194,6 +224,21 @@ class Land extends Controller {
                 $data['err'] = 'Invalid contact number format';
             }
 
+            if (empty($data['err']) and !empty($_FILES['deed']['name'])){
+                $deed = $this->deedUpload('deed');
+                $data['deed'] = $deed['deed'];
+                if(empty($deed['err']))
+                    $data['err'] = '';
+                else
+                    $data['err'] = $deed['err'];
+            }
+
+            if (empty($data['deed']) and empty($data['err'])){
+                $data['err'] = 'Please upload deed';
+            }
+
+//            die(print_r($data));
+
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Register land
@@ -204,6 +249,7 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
+//                die(print_r($data));
                 $this->view('parkingOwner/lands/create', $data);
             }
 
@@ -220,6 +266,7 @@ class Land extends Controller {
                 'contactNo' => '',
                 'err' => ''
             ];
+//            die(print_r($data));
 
             // Load view
             $this->view('parkingOwner/lands/create', $data);

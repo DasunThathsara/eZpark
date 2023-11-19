@@ -113,6 +113,31 @@ input[placeholder]{
     color: rgba(0, 0, 0, 0.47);
 }
 
+.form-container .file-upload-container{
+    display: flex;
+    padding-top: 10px;
+}
+
+.form-container .file-upload-container .file-upload{
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 0.1px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+    transition: 0.5s;
+}
+
+.form-container .file-upload-container .file-upload:hover{
+    box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.form-container .file-upload-container .description{
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.38);
+}
+
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
     border: 1px solid #ccc;
     border-radius: 5px;

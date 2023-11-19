@@ -17,9 +17,11 @@
                 <div class="dropdown">
                     <button class="dropbtn">Select Parking</button>
                     <div class="dropdown-content">
+                    <?php $parking_index = 0?>
                     <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
                         <?php for ($i = 0; $i < sizeof($other_data); $i++) {
                             if($data['id'] == $other_data[$i]->id){
+                                $parking_index = $i;
                                 continue;
                             }?>     
                             <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>  
@@ -63,18 +65,18 @@
                     </a>
 
                     <!-- Card 3 -->
-                    <a class="card-link" href="">
+                    <a class="card-link" href="<?php echo URLROOT ?>/deeds/<?php echo $other_data[$parking_index]->deed?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
                                     <div class="sub-row">
                                         <div class="top-row">
-                                            <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
+                                            <img src="<?php echo URLROOT ?>/images/deed.svg" alt="">
                                         </div>
-                                        <div class="bottom-row">8</div>
+                                        <div class="bottom-row"></div>
                                     </div>
                                 </div>
-                                <div class="right-col">Total Lands</div>
+                                <div class="right-col">Deed</div>
                             </div>
                         </div>
                     </a>
