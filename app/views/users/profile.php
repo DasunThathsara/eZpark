@@ -84,7 +84,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            preview.src = "<?php echo URLROOT ?>/images/user.png"; // Default image
+            preview.src = "<?php echo URLROOT ?>/images/user.png";
         }
     }
 
