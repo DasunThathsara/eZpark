@@ -66,7 +66,6 @@ class UserModel{
         }
     }
 
-
     // Find user
     public function findUserByEmail($email): bool
     {
@@ -114,12 +113,11 @@ class UserModel{
         }
     }
 
-
     // Update user profile
     public function updateProfile($data): bool
     {
         // Prepare statement
-        $this->db->query('UPDATE user SET username = :username, email = :email, name = :name, contactNo = :contactNo WHERE id = :id');
+        $this->db->query('UPDATE user SET username = :username, email = :email, name = :name, contactNo = :contactNo, profilePhoto = :profile_photo WHERE id = :id');
 
         // Bind values
         $this->db->bind(':id', $_SESSION['user_id']);
@@ -127,6 +125,7 @@ class UserModel{
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':username', $data['username']);
         $this->db->bind(':contactNo', $data['contact_no']);
+        $this->db->bind(':profile_photo', $data['profile_photo']);
 
         // Execute
         if ($this->db->execute()){
@@ -135,6 +134,24 @@ class UserModel{
         else {
             return false;
         }
+    }
 
+    // Remove user profile photo
+    public function removeProfilePhoto(): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE user SET profilePhoto = :profile_photo WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':profile_photo', '');
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

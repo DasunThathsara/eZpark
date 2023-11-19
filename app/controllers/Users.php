@@ -527,6 +527,7 @@ class Users extends Controller{
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_type'] = $user->userType;
         $_SESSION['contact_no'] = $user->contactNo;
+        $_SESSION['profile_photo'] = $user->profilePhoto;
 
         redirect($_SESSION['user_type'].'/index');
     }
@@ -539,6 +540,7 @@ class Users extends Controller{
         unset($_SESSION['user_name']);
         unset($_SESSION['user_type']);
         unset($_SESSION['contact_no']);
+        unset($_SESSION['profile_photo']);
 
         session_destroy();
 
@@ -586,9 +588,54 @@ class Users extends Controller{
             'email' => $_SESSION['user_email'],
             'username' => $_SESSION['username'],
             'name' => $_SESSION['user_name'],
-            'contact_no' => $_SESSION['contact_no']
+            'contact_no' => $_SESSION['contact_no'],
+            'profile_photo' => $_SESSION['profile_photo']
         ];
         $this->view('users/profile', $data);
+    }
+
+    public function imgUpload($profile_photo){
+        $data = [
+            'profile_photo' => '',
+            'err' => ''
+        ];
+
+        $img_name = $_FILES[$profile_photo]['name'];
+        $img_size = $_FILES[$profile_photo]['size'];
+        $tmp_name = $_FILES[$profile_photo]['tmp_name'];
+        $error = $_FILES[$profile_photo]['error'];
+
+        if ($error === 0){
+            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+            $img_ex_lc = strtolower($img_ex);
+
+            $allowed_exs = array("jpg", "jpeg", "png");
+
+            if (in_array($img_ex_lc, $allowed_exs)){
+                // Move into mag_img folder
+                $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+//                $img_upload_path = URLROOT.'/profile_pics/'.$new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/eZpark/public/profile_pics/'.$new_img_name;
+                move_uploaded_file($tmp_name, $img_upload_path);
+
+                $data['profile_photo'] = $new_img_name;
+                return $data;
+            }
+
+            else{
+                $data['err'] = "You can't upload files of this type";
+                return $data;
+            }
+        }
+    }
+
+    public function profilePhotoRemove(){
+        if ($this->userModel->removeProfilePhoto()){
+            $_SESSION['profile_photo'] = '';
+            redirect($_SESSION['user_type'].'/index');
+        } else {
+            die('Something went wrong');
+        }
     }
 
     public function updateProfile(){
@@ -602,8 +649,15 @@ class Users extends Controller{
                 'email' => trim($_POST['email']),
                 'username' => trim($_POST['username']),
                 'contact_no' => trim($_POST['contact_no']),
+                'profile_photo' => '',
                 'err' => ''
             ];
+
+            if(isset($_FILES['profile_photo'])){
+                $img_details = $this->imgUpload('profile_photo');
+                $data['profile_photo'] = $img_details['profile_photo'];
+                $data['err'] = $img_details['err'];
+            }
 
             // Validate data
             // Validate name
@@ -636,6 +690,8 @@ class Users extends Controller{
                 $data['err'] = 'Please enter contact number';
             }
 
+//            die(print_r($data));
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Update user
@@ -644,6 +700,7 @@ class Users extends Controller{
                     $_SESSION['username'] = $data['username'];
                     $_SESSION['user_name'] = $data['name'];
                     $_SESSION['contact_no'] = $data['contact_no'];
+                    $_SESSION['profile_photo'] = $data['profile_photo'];
                     redirect($_SESSION['user_type'].'/index');
                 } else {
                     die('Something went wrong');

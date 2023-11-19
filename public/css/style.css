@@ -199,7 +199,7 @@ a{
 .page-container .section .container td .content .right{
     width: 30%;
     display: flex;
-    align-items: right;
+    align-items: end;
     padding-top: 7px;
     justify-content: flex-end;
 }
@@ -406,4 +406,62 @@ a{
 
 .data-search:focus{
     width: 250px;
+}
+
+/* ---------------------------------- Profile Styles ---------------------------------- */
+.page-container .section .container .form-container .profile-container{
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.page-container .section .container .form-container .profile-container .profile-pic{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.page-container .section .container .form-container .profile-container .profile-pic:hover{
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
+    scale: 1.05;
+    cursor: pointer;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-pic-edit{
+    width: 15px;
+    transition: 0.5s;
+    position: relative;
+    transform: translate(20px, -20px);
+    background-color: white;
+    padding: 5px;
+    border-radius: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-pic-edit:hover{
+    scale: 1.05;
+    transform: translate(19px, -19px);
+    cursor: pointer;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-dropdown-content{
+    display: grid;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.16);
+    position: relative;
+    transform: translate(22px, -20px);
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .dropdown-item{
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .dropdown-item:hover{
+    background-color: #f6f6f6;
+    padding: 10px;
 }
