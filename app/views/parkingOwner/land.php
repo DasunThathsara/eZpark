@@ -114,7 +114,7 @@
                     </a>
 
                     <!-- Card 6 -->
-                    <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/packages/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                    <a class="card-link" href="<?php echo URLROOT ?>/package/viewPackages/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
