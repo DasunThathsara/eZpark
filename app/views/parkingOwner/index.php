@@ -92,18 +92,18 @@
                 </a>
 
                 <!-- Card 5 -->
-                <a class="card-link" href="">
+                <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/parkingCapacity">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
                                 <div class="sub-row">
                                     <div class="top-row">
-                                        <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                        <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                     </div>
                                     <div class="bottom-row"></div>
                                 </div>
                             </div>
-                            <div class="right-col">Price Rate</div>
+                            <div class="right-col">Parking Capacity</div>
                         </div>
                     </div>
                 </a>

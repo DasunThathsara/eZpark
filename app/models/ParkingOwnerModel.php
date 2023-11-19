@@ -232,6 +232,30 @@ class ParkingOwnerModel{
         return $row;
     }
 
+    public function updateCapacity($data): bool
+    {
+        // Prepare statement
+        if($data['vehicle_type'] == 'car')
+            $this->db->query('UPDATE land SET car = :capacity WHERE id = :id');
+        else if($data['vehicle_type'] == 'bike')
+            $this->db->query('UPDATE land SET bike = :capacity WHERE id = :id');
+        else if($data['vehicle_type'] == 'threeWheel')
+            $this->db->query('UPDATE land SET threeWheel = :capacity WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':capacity', $data['capacity']);
+        $this->db->bind(':id', $data['id']);
+
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     // ------------------------- package Functionalities -------------------------
     // Register package
