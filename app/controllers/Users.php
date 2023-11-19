@@ -614,8 +614,7 @@ class Users extends Controller{
             if (in_array($img_ex_lc, $allowed_exs)){
                 // Move into mag_img folder
                 $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-//                $img_upload_path = URLROOT.'/profile_pics/'.$new_img_name;
-                $img_upload_path = 'C:/xampp/htdocs/eZpark/public/profile_pics/'.$new_img_name;
+                $img_upload_path = PUBLICROOT.'/profile_pics/'.$new_img_name;
                 move_uploaded_file($tmp_name, $img_upload_path);
 
                 $data['profile_photo'] = $new_img_name;
@@ -631,6 +630,10 @@ class Users extends Controller{
 
     public function profilePhotoRemove(){
         if ($this->userModel->removeProfilePhoto()){
+            $img_path = PUBLICROOT.'/profile_pics/'.$_SESSION['profile_photo'];
+            if (file_exists($img_path)) {
+                unlink($img_path);
+            }
             $_SESSION['profile_photo'] = '';
             redirect($_SESSION['user_type'].'/index');
         } else {
