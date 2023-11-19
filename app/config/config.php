@@ -2,6 +2,9 @@
     // APPROOT
     define('APPROOT', dirname(dirname(__FILE__)));
 
+    // PUBLICROOT
+    define('PUBLICROOT', dirname(dirname(dirname(__FILE__)) ). '\public');
+
     // URLROOT
     define('URLROOT', 'http://localhost/eZpark');
 

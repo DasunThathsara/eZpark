@@ -29,13 +29,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <?php } ?>
 
                         <div class="profile-dropdown-container">
-                            <img class="profile-pic-edit" src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                            <img class="profile-pic-edit" src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="" onclick="dropdownBtn()">
                             <div class="profile-dropdown-content">
-                                <input class="dropdown-item" type="file" id="profile_photo" name="profile_photo"/>
+                                <input type="file" id="profile_photo" name="profile_photo" hidden/>
+                                <label for="profile_photo" class="dropdown-item">Choose File</label>
                                 <a class="dropdown-item" href="<?php echo URLROOT ?>/users/profilePhotoRemove" onclick="return confirmSubmit();">Remove photo</a>
                             </div>
                         </div>
                     </div>
+
                     <!-- Username -->
                     <div class="form-input-title">Username:</div>
                     <input type="text" name="username" id="username" required value="<?php echo $data['username'] ?>" />
@@ -63,17 +65,24 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 
 <script>
+    const actualBtn = document.getElementById('profile_photo');
+
+    actualBtn.addEventListener('change', function(){
+        fileChosen.textContent = this.files[0].name
+    })
+
+
     function confirmSubmit() {
         return confirm("Are you sure you want to remove your profile photo?");
     }
 
     function dropdownBtn() {
         var element1, element2;
-        element1 = document.querySelector('.chat-box');
-        element1.classList.toggle("chat-box-active");
+        element1 = document.querySelector('.profile-dropdown-content');
+        element1.classList.toggle("profile-dropdown-content-active");
 
-        element2 = document.querySelector('.chatbtn');
-        element2.classList.toggle("chatbtn-active");
+        element2 = document.querySelector('.profile-pic-edit');
+        element2.classList.toggle("profile-pic-edit-active");
     }
 </script>
 
