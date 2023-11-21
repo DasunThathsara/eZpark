@@ -1,8 +1,8 @@
 .page-container .section .container .cards{
     margin-top: 80px;
-    margin-right: 30px;
+    margin-right: 400px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
 .page-container .section .container .cards .card-link {
@@ -11,8 +11,8 @@
 }
 
 .page-container .section .container .cards .card{
-    width: 180px;
-    box-shadow: 0px 0px 10px 0.1px rgba(0, 0, 0, 0.1);
+    width: 210px;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 10px;
     transition: 0.3s;
@@ -21,7 +21,6 @@
 
 .page-container .section .container .cards .card:hover{
     scale: 1.05;
-    box-shadow: 0px 0px 15px 0.1px rgba(252, 213, 38, 0.452);
 }
 
 .page-container .section .container .cards .card-link .card{

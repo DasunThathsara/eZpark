@@ -11,7 +11,9 @@
                     <a class="item" href="<?php echo URLROOT ?>/users/viewProfile"><img src="<?php echo URLROOT ?>/profile_pics/<?php echo $_SESSION['profile_photo']?>" style="width: 30px; height: 30px; border-radius: 50%" alt="<?php echo $_SESSION['user_name'] ?>"></a>
                 <?php }
                 else{ ?>
+                    <div class="notification">10</div>
                     <a class="item" href="<?php echo URLROOT ?>/users/viewProfile"><img src="<?php echo URLROOT ?>/images/user.png" style="width: 30px; height: 30px; border-radius: 50%" alt="<?php echo $_SESSION['user_name'] ?>"></a>
+                    <a class="item" href="<?php echo URLROOT ?>/users/viewProfile"><img src="<?php echo URLROOT ?>/images/bell.svg" style="width: 20px; height: 30px; border-radius: 50%; margin-right: -15px;" alt="<?php echo $_SESSION['user_name'] ?>"></a>
                 <?php } ?>
             <?php } ?>
         </div>

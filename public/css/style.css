@@ -10,6 +10,9 @@
 @import url('merchandiser.css');
 
 /* ----------------- General Styles ---------------- */
+body{
+    background-color: #f8f8f8;
+}
 *{
     font-family: 'Trebuchet MS', sans-serif;
 }
@@ -30,10 +33,117 @@ a{
     margin: 1vh 2vw;
 }
 
-.page-container .section .container h1{
+.page-container .section .container{
+    transition: 0.5s;
+    margin-left: 270px;
+}
+
+@media screen and (max-width: 720px){
+    .page-container .section .container{
+        margin-left: 20px;
+        transition: left 0.5s ease-in;
+    }
+}
+
+.page-container .section .side-cards{
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    right: 30px;
+    top: 100px;
+    width: 360px;
+    padding: 20px 0 20px 0;
+    height: 75vh;
+    overflow-scrolling: auto;
+}
+
+.page-container .section .side-cards h2{
     text-align: center;
+}
+
+.page-container .section .side-cards p{
+    margin-left: 20px;
+    font-size: 15px;
+    width: calc(100% - 40px);
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.089);
+}
+
+.page-container .section .side-cards p span{
+    width: 50px;
+    height: 50px;
+    color: #fdc63e;
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.page-container .section .side-cards .side-card{
+    background-color: white;
+    width: calc(100% - 20px);
+    /*margin: 10px;*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.page-container .section .side-cards .side-card .date-time{
+    width: 40%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #8c8c8c;
+    text-align: center;
+}
+
+.page-container .section .side-cards .side-card .parking{
+    width: 40%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*background-color: green;*/
+}
+
+.page-container .section .side-cards .side-card .transaction-type{
+    width: 20%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*background-color: blue;*/
+}
+
+.page-container .section .side-cards .side-card .in{
+    color: red;
+}
+
+.page-container .section .side-cards .side-card .out{
+    color: #00bb00;
+}
+
+.page-container .section .container h1{
+    text-align: left;
     margin-top: 50px;
-    font-size: 50px;
+    font-size: 30px;
+}
+
+.page-container .section .container .charts{
+    margin-right: 400px;
+    margin-top: -15px;
+}
+
+.page-container .section .container .charts .row{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 20px;
+    padding: 2px 20px 10px 10px;
+    margin-top: -20px;
+
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
+}
+
+.page-container .section .container .charts .row .cell{
+    scale: 0.85;
 }
 
 .container .error-img{
