@@ -85,7 +85,7 @@
  
         
 
-                <!-----------------------------Parking owner--------------------------->
+            <!-----------------------------Parking owner--------------------------->
             <?php if ($_SESSION['user_type'] == 'parkingOwner'){ ?>
                 <a href="<?php echo URLROOT ?>/parkingOwner/lands">
                     <?php if ($section == 'lands'){?>
@@ -95,9 +95,16 @@
                         <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
                     <?php } ?>
                 </a>
-            <?php } ?>
-            
 
+                <a href="<?php echo URLROOT ?>/parkingOwner/viewReport">
+                    <?php if ($section == 'reports'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                    <?php } ?>
+                </a>
+            <?php } ?>
 
             <a href="<?php echo URLROOT ?>/users/viewProfile">
                 <?php if ($section == 'profile'){?>
@@ -106,10 +113,7 @@
                 else{ ?>
                     <div class="item"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
                 <?php } ?>
-
-
-
-
+            </a>
             <div class="logout"><a href="<?php echo URLROOT ?>/users/logout">Logout</a></div>
         </div>
     </div>

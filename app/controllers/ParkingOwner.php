@@ -65,4 +65,12 @@ class ParkingOwner extends Controller {
 
         $this->view('parkingOwner/capacity', $lands);
     }
+
+    // -------------------------- Report ---------------------------
+    public function viewReport(){
+        $data = [
+            'title' => 'Home page'
+        ];
+        $this->view('parkingOwner/report', $data);
+    }
 }
