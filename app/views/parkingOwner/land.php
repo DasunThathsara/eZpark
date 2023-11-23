@@ -132,8 +132,125 @@
                         </div>
                     </a>
                 </div>
+
+                <div class="charts">
+                    <h2>Analysis</h2>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <canvas id="lineChart1" style="width:100%;max-width:600px"></canvas>
+                        </div>
+                        <div class="chart">
+                            <canvas id="lineChart2" style="width:100%;max-width:600px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-cards">
+                <h2>Recent Transaction</h2>
+
+                <p><span>&#9632;</span>Today</p>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Nolimit</div>
+                    <div class="transaction-type in">In</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Keels</div>
+                    <div class="transaction-type out">Out</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Nolimit</div>
+                    <div class="transaction-type in">In</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Keels</div>
+                    <div class="transaction-type out">Out</div>
+                </div>
+
+                <p><span>&#9632;</span>Yesterday</p>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Nolimit</div>
+                    <div class="transaction-type in">In</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Keels</div>
+                    <div class="transaction-type out">Out</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Nolimit</div>
+                    <div class="transaction-type in">In</div>
+                </div>
+
+                <div class="side-card">
+                    <div class="date-time">2023.11.22</div>
+                    <div class="parking">Keels</div>
+                    <div class="transaction-type out">Out</div>
+                </div>
             </div>
         </section>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+        const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+        var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
+        var yValues2 = [55, 49, 44, 24, 15];
+        var barColors = ["red", "green","blue","orange","brown"];
+
+        new Chart("lineChart1", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(0,0,0)",
+                    borderColor: "rgb(252,212,38)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                scales: {
+                    yAxes: [{ticks: {min: 6, max:16}}],
+                }
+            }
+        });
+
+        // Create a new chart with a different id for the second canvas
+        new Chart("lineChart2", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Vehicle Count"
+                }
+            }
+        });
+    </script>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

@@ -2,10 +2,11 @@
     overflow: hidden;
     background-color: white;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
 .topnav .items .item{
