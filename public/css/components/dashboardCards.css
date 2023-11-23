@@ -5,6 +5,12 @@
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
+@media screen and (max-width: 720px){
+    .page-container .section .container .cards{
+        margin-right: 30px;
+    }
+}
+
 .page-container .section .container .cards .card-link {
     text-decoration: none;
     color: black;

@@ -38,7 +38,7 @@ a{
     margin-left: 270px;
 }
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 940px){
     .page-container .section .container{
         margin-left: 20px;
         transition: left 0.5s ease-in;
@@ -56,6 +56,7 @@ a{
     padding: 20px 0 20px 0;
     height: 75vh;
     overflow-scrolling: auto;
+    transition: right 0.5s ease-in;
 }
 
 .page-container .section .side-cards h2{
@@ -128,22 +129,67 @@ a{
 
 .page-container .section .container .charts{
     margin-right: 400px;
-    margin-top: -15px;
-}
-
-.page-container .section .container .charts .row{
-    display: flex;
-    justify-content: space-between;
+    margin-left: 10px;
+    margin-top: 35px;
     background-color: white;
     border-radius: 20px;
-    padding: 2px 20px 10px 10px;
-    margin-top: -20px;
-
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
+    padding: 20px 5px 20px 6px;
 }
 
-.page-container .section .container .charts .row .cell{
-    scale: 0.85;
+.page-container .section .container .charts h2{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.page-container .section .container .charts .chart-container{
+    display: flex;
+    justify-items: center;
+}
+
+.page-container .section .container .charts .chart-container .chart{
+    width: 50%;
+}
+
+@media screen and (max-width: 1330px){
+    .page-container .section .container .charts .chart-container{
+        display: grid;
+    }
+
+    .page-container .section .container .charts .chart-container .chart{
+        width: 80%;
+    }
+
+    .page-container .section .side-cards{
+        width: 300px;
+    }
+
+    .page-container .section .container .charts{
+        margin-right: 350px;
+    }
+}
+
+@media screen and (max-width: 1140px){
+    .page-container .section .container .charts .chart-container .chart{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1070px){
+    .page-container .section .container .charts .chart-container .chart{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 720px){
+    .page-container .section .side-cards{
+        right: -300px;
+        transition: right 0.5s ease-in;
+    }
+
+    .page-container .section .container .charts{
+        margin-right: 30px;
+    }
 }
 
 .container .error-img{
@@ -382,7 +428,7 @@ a{
     transition: 0.5s;
 }
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 940px){
     .dropdown{
         left: 40px;
         transition: left 0.5s ease-in;

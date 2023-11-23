@@ -11,7 +11,7 @@
     transition: left 0.5s ease-in;
 }
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 940px){
     .sidenav{
         left: -270px;
         transition: left 0.5s ease-in;
