@@ -13,15 +13,6 @@
         <div class="container">
             <h1>Dashboard</h1>
 
-            <div class="dropdown">
-                <button class="dropbtn">Select Parking</button>
-                <div class="dropdown-content">
-                    <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
-                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>
-                    <?php } ?>
-                </div>
-            </div>
-
             <div class="cards">
                 <!-- Card 1 -->
                 <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/lands">
@@ -32,10 +23,10 @@
                                     <div class="top-row">
                                         <img src="<?php echo URLROOT ?>/images/parking.svg" alt="">
                                     </div>
-                                    <div class="bottom-row"><?php echo $data['land_count'] ?></div>
+                                    <div class="bottom-row"></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Lands</div>
+                            <div class="right-col">Registration Requests</div>
                         </div>
                     </div>
                 </a>
@@ -52,7 +43,7 @@
                                     <div class="bottom-row">20</div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Capacity</div>
+                            <div class="right-col">Complaints</div>
                         </div>
                     </div>
                 </a>

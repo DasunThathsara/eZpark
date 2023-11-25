@@ -12,7 +12,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
             <div class="form-container">
-                <h1>Profile</h1>
+                <h1 style="text-align: center;">Profile</h1>
                 <?php if (!empty($data['err'])){?>
                     <div class="error-msg">
                         <span class="form-invalid"><?php echo $data["err"] ?></span>

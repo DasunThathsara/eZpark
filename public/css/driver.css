@@ -1,9 +1,4 @@
 /* ----------------- Driver Dashboard Styles ---------------- */
-.page-container .section .container{
-    transition: 0.5s;
-    margin-left: 270px;
-}
-
 .page-container .section .container .map{
     margin-right: 20px;
     margin-top: 30px;

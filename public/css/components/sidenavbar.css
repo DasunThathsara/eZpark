@@ -1,17 +1,17 @@
 .sidenav{
     background-color: #ffffff;
-    z-index: 1;
+    z-index: 100;
     position: fixed;
     top: 0;
     border-radius: 0 50px 50px 0;
     height: 100vh;
     width: 250px;
-    box-shadow: 0 0 20px 0.1px rgba(0, 0, 0, 0.49);
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.25);
     left: 0;
     transition: left 0.5s ease-in;
 }
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 940px){
     .sidenav{
         left: -270px;
         transition: left 0.5s ease-in;
@@ -57,7 +57,7 @@
     
 }
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 940px){
     .sidenav .container .sidenav-close-btn{
         display: none;
     }
@@ -68,7 +68,7 @@
 }
 
 .sidenav .container .items .item{
-    padding: 15px 10px 15px 10px;
+    padding: 15px 10px 15px 20px;
     border-radius: 0 50px 50px 0;
     transition: 0.3s;
 }
