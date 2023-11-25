@@ -57,7 +57,7 @@
     
 }
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 940px){
     .sidenav .container .sidenav-close-btn{
         display: none;
     }

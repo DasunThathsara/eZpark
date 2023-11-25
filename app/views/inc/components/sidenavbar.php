@@ -120,10 +120,5 @@
 </div>
 
 <script>
-    function navToggle() {
-        console.log("pushed")
-        var element;
-        element = document.querySelector('.sidenav');
-        element.classList.toggle("sidenav-toggled");
-    }
+    
 </script>

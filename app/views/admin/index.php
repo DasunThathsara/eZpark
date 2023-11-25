@@ -187,34 +187,6 @@
             }
         }
     });
-
-
-    // Side card close button
-    function closeRightCard(){
-        var screenWidth = window.innerWidth;
-        var element1, element2, element3, element4;
-
-        if (screenWidth <= 720){
-            element1 = document.querySelector('.side-cards');
-            element1.classList.toggle("side-cards-active");
-
-            element2 = document.querySelector('.open-side-cards-btn');
-            element2.classList.toggle("open-side-cards-btn-hide");
-        }
-        else {
-            element1 = document.querySelector('.side-cards');
-            element1.classList.toggle("side-cards-hide");
-
-            element2 = document.querySelector('.cards');
-            element2.classList.toggle("cards-active");
-
-            element3 = document.querySelector('.charts');
-            element3.classList.toggle("charts-active");
-
-            element4 = document.querySelector('.open-side-cards-btn');
-            element4.classList.toggle("open-side-cards-btn-active");
-        }
-    }
 </script>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

@@ -5,8 +5,8 @@
     margin-top: 80px;
     margin-right: 400px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    transition: right 0.5s ease-in;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    transition: 1s, transform 1s;
 }
 
 .page-container .section .container .cards .card-link {
@@ -15,7 +15,7 @@
 }
 
 .page-container .section .container .cards .card{
-    width: 210px;
+    width: 200px;
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 10px;
@@ -102,12 +102,18 @@
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     position: fixed;
     right: 30px;
-    top: 100px;
+    top: 150px;
     width: 360px;
     padding: 20px 0 20px 0;
     height: 75vh;
     overflow-scrolling: auto;
-    transition: right 0.5s ease-in;
+    transition: 1s, transform 1s;
+    opacity: 0;
+}
+
+.page-container .section .side-cards.reveal {
+    top: 100px;
+    opacity: 1;
 }
 
 .page-container .section .side-cards .close-btn{
@@ -194,6 +200,15 @@
     border-radius: 20px;
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     padding: 20px 5px 20px 6px;
+    position: relative;
+    transform: translateY(40px);
+    transition: 1s, transform 1s;
+    opacity: 0;
+}
+
+.page-container .section .container .charts.reveal {
+    transform: translateY(0px);
+    opacity: 1;
 }
 
 .page-container .section .container .charts h2{
@@ -204,6 +219,7 @@
 .page-container .section .container .charts .chart-container{
     display: flex;
     justify-items: center;
+    transition: 1s, transform 1s;
 }
 
 .page-container .section .container .charts .chart-container .chart{
@@ -244,7 +260,7 @@
 @media screen and (max-width: 1160px){
     .page-container .section .container .cards-active{
         margin-right: 30px;
-        transition: right 0.5s ease-in;
+        transition: 1s, transform 1s;
     }
 
     .page-container .section .side-cards .close-btn{
@@ -261,7 +277,7 @@
 
     .page-container .section .side-cards-hide{
         right: -300px;
-        transition: right 0.5s ease-in;
+        transition: 1s, transform 1s;
     }
 
     .page-container .section .container .charts-active{
@@ -272,7 +288,7 @@
 @media screen and (max-width: 720px){
     .page-container .section .container .cards{
         margin-right: 30px;
-        transition: right 0.5s ease-in;
+        transition: 1s, transform 1s;
     }
 
     .page-container .section .side-cards{
