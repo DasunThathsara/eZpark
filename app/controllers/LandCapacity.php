@@ -6,7 +6,7 @@ class LandCapacity extends Controller
         $this->middleware = new AuthMiddleware();
         // Only parkingOwners are allowed to access parkingOwner pages
         $this->middleware->checkAccess(['parkingOwner']);
-        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
+        $this->landModel = $this->model('LandModel');
     }
 
     // View capacity
@@ -16,7 +16,7 @@ class LandCapacity extends Controller
             'name' => $parking_name
         ];
 
-        $capacity = $this->parkingOwnerModel->viewCapacity($data);
+        $capacity = $this->landModel->viewCapacity($data);
 
         $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
     }
@@ -39,7 +39,7 @@ class LandCapacity extends Controller
             ];
 
 
-            $capacity = $this->parkingOwnerModel->viewCapacity($data);
+            $capacity = $this->landModel->viewCapacity($data);
 
             if ($data['vehicle_type'] == 'car'){
                 $data = [
@@ -102,7 +102,7 @@ class LandCapacity extends Controller
             // Validation is completed and no error found
             if (empty($data['err'])) {
                 // Register package
-                if ($this->parkingOwnerModel->updateCapacity($data)) {
+                if ($this->landModel->updateCapacity($data)) {
                     redirect('LandCapacity/viewCapacity/'.$data['id'].'/'.$data['name']);
                 } else {
                     die('Something went wrong');

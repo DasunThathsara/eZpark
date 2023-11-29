@@ -6,7 +6,7 @@ class LandPrice extends Controller
         $this->middleware = new AuthMiddleware();
         // Only parkingOwners are allowed to access parkingOwner pages
         $this->middleware->checkAccess(['parkingOwner']);
-        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
+        $this->landModel = $this->model('LandModel');
     }
 
     // Remove package
@@ -24,7 +24,7 @@ class LandPrice extends Controller
             ];
 
             // Delete the package
-            if ($this->parkingOwnerModel->removePackage($data)) {
+            if ($this->landModel->removePackage($data)) {
                 redirect('parkingOwner/packages/'.$data['id'].'/'.$data['name']);
             } else {
                 die('Something went wrong');
@@ -45,7 +45,7 @@ class LandPrice extends Controller
                 'err' => ''
             ];
 
-            $prices = $this->parkingOwnerModel->viewPrice($data);
+            $prices = $this->landModel->viewPrice($data);
 
             $this->view('parkingOwner/prices/update', $data, $prices);
         }
@@ -87,7 +87,7 @@ class LandPrice extends Controller
             }
 
             // if($data['old_vehicle_type'] != $data['vehicle_type'] or $data['old_package_type'] != $data['package_type']){
-            //     if ($this->parkingOwnerModel->findPackage($data['id'], $data['package_type'], $data['vehicle_type'])){
+            //     if ($this->landModel->findPackage($data['id'], $data['package_type'], $data['vehicle_type'])){
             //         $data['err'] = 'Package cannot be duplicate';
             //     }
             // }
@@ -97,14 +97,14 @@ class LandPrice extends Controller
             // Validation is completed and no error found
             if (empty($data['err'])) {
                 // Register package
-                if ($this->parkingOwnerModel->updatePrice($data)) {
+                if ($this->landModel->updatePrice($data)) {
                     redirect('land/prices/'.$data['id'].'/'.$data['name']);
                 } else {
                     die('Something went wrong');
                 }
             } else {
                 // Load view with errors
-                $prices = $this->parkingOwnerModel->viewPrice($data);
+                $prices = $this->landModel->viewPrice($data);
                 $this->view('parkingOwner/prices/update', $data, $prices);
             }
         }

@@ -1,7 +1,7 @@
 <div class="sidenav">
     <div class="container">
         <div class="logo"><img src="<?php echo URLROOT ?>/images/logo.png" alt=""></div>
-        <a class="sidenav-close-btn" onclick="navToggle()">X</a>
+        <a class="sidenav-close-btn" onclick="navToggleClose()">X</a>
         <div class="items">
             <a href="<?php echo URLROOT ?>/<?php echo $_SESSION['user_type'] ?>/index">
                 <?php if ($section == 'dashboard'){?>

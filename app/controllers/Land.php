@@ -4,11 +4,11 @@ class Land extends Controller {
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access parkingOwner pages
         $this->middleware->checkAccess(['parkingOwner']);
-        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
+        $this->landModel = $this->model('LandModel');
     }
 
     public function index(){
-        $lands = $this->parkingOwnerModel->viewLands();
+        $lands = $this->landModel->viewLands();
         $this->view('parkingOwner/index', $lands);
     }
 
@@ -49,7 +49,7 @@ class Land extends Controller {
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
-                if ($this->parkingOwnerModel->setPrice($data)){
+                if ($this->landModel->setPrice($data)){
                     $this->successPropertyRegister($data);
                 } else {
                     die('Something went wrong');
@@ -106,7 +106,7 @@ class Land extends Controller {
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
-                if ($this->parkingOwnerModel->updateSecurityOfficerAvail($data)){
+                if ($this->landModel->updateSecurityOfficerAvail($data)){
                     $this->setPrice($data);
                 } else {
                     die('Something went wrong');
@@ -193,7 +193,7 @@ class Land extends Controller {
                 $data['err'] = 'Please enter name';
             } else {
                 // Check name
-                if ($this->parkingOwnerModel->findLandByName($data['name'])){
+                if ($this->landModel->findLandByName($data['name'])){
                     $data['err'] = 'Name cannot be duplicate';
                 }
             }
@@ -242,7 +242,7 @@ class Land extends Controller {
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Register land
-                if ($this->parkingOwnerModel->registerLand($data)){
+                if ($this->landModel->registerLand($data)){
                     $this->aboutSecurityOfficer($data);
                 } else {
                     die('Something went wrong');
@@ -285,7 +285,7 @@ class Land extends Controller {
             ];
 
             // Delete the land
-            if ($this->parkingOwnerModel->removeLand($data)){
+            if ($this->landModel->removeLand($data)){
                 redirect('parkingOwner/lands');
             } else {
                 die('Something went wrong');
@@ -309,7 +309,7 @@ class Land extends Controller {
                 'id' => $land_ID
             ];
 
-            $prices = $this->parkingOwnerModel->viewToBeUpdatedLand($data);
+            $prices = $this->landModel->viewToBeUpdatedLand($data);
             
 
             $data = [
@@ -353,7 +353,7 @@ class Land extends Controller {
                 $data['err'] = 'Please enter name';
             } else {
                 // Check name
-                if ($data['name'] != $data['old_name'] and $this->parkingOwnerModel->findLandByName($data['name'])){
+                if ($data['name'] != $data['old_name'] and $this->landModel->findLandByName($data['name'])){
                     $data['err'] = 'Name cannot be duplicate';
                 }
             }
@@ -392,7 +392,7 @@ class Land extends Controller {
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register Land
-                if ($this->parkingOwnerModel->updateLand($data)){
+                if ($this->landModel->updateLand($data)){
                     redirect('parkingOwner/lands');
                 } else {
                     die('Something went wrong');
@@ -426,7 +426,7 @@ class Land extends Controller {
                 'id' => $land_ID
             ];
 
-            $prices = $this->parkingOwnerModel->viewPrice($data);
+            $prices = $this->landModel->viewPrice($data);
 
             $this->view('parkingOwner/prices', $data, $prices);
         }
