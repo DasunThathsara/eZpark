@@ -73,16 +73,24 @@ function updateStrengthText(strength) {
 // ------------------------------- Navbar Toggle -------------------------------
 function navToggle() {
     var element1 = document.querySelector('.sidenav');
-    element1.classList.toggle("sidenav-toggled");
+    element1.classList.add("sidenav-toggled");
 
     var element2 = document.querySelector('.overlay-container');
-    element2.classList.toggle("overlay-container-active");
+    element2.classList.add("overlay-container-active");
 
     if (window.innerWidth <= 1160) {
         setTimeout(function() {
             document.body.addEventListener('click', handleOutsideClick);
-        }, 100);
+        });
     }
+}
+
+function navToggleClose() {
+    var element1 = document.querySelector('.sidenav');
+    element1.classList.remove("sidenav-toggled");
+
+    var element2 = document.querySelector('.overlay-container');
+    element2.classList.remove("overlay-container-active");
 }
 
 // Close the navbar when clicking outside of it
@@ -91,7 +99,7 @@ function handleOutsideClick(event) {
     var toggleButton = document.querySelector('.sidenav-close-btn');
     var overlayContainer = document.querySelector('.overlay-container');
 
-    if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+    if (!sidebar.contains(event.target) || toggleButton.contains(event.target)) {
         sidebar.classList.remove("sidenav-toggled");
         overlayContainer.classList.remove("overlay-container-active");
         document.body.removeEventListener('click', handleOutsideClick);

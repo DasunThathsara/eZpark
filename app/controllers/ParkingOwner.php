@@ -5,13 +5,14 @@ class ParkingOwner extends Controller {
         // Only parkingOwner are allowed to access parkingOwner pages
         $this->middleware->checkAccess(['parkingOwner']);
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
+        $this->landModel = $this->model('LandModel');
     }
 
     public function index(){
-        $lands = $this->parkingOwnerModel->viewLands();
+        $lands = $this->landModel->viewLands();
 
         $data = [
-            'land_count' => $this->parkingOwnerModel->getLandCount()
+            'land_count' => $this->landModel->getLandCount()
         ];
         $this->view('parkingOwner/index', $data, $lands);
     }
@@ -19,7 +20,7 @@ class ParkingOwner extends Controller {
     // ------------------------------ Lands ------------------------------
     // View all lands
     public function lands(){
-        $lands = $this->parkingOwnerModel->viewLands();
+        $lands = $this->landModel->viewLands();
         
 
         $this->view('parkingOwner/lands', $lands);
@@ -32,7 +33,7 @@ class ParkingOwner extends Controller {
             'name' => $land_name
         ];
 
-        $lands = $this->parkingOwnerModel->viewLands();
+        $lands = $this->landModel->viewLands();
 
         $data = [
             'id' => $land_ID,
@@ -60,7 +61,7 @@ class ParkingOwner extends Controller {
     // ----------------------------- Parking Capacity -----------------------------
     // View all packages
     public function parkingCapacity($parking_ID = null, $parking_name = null){
-        $lands = $this->parkingOwnerModel->viewLands();
+        $lands = $this->landModel->viewLands();
 
 
         $this->view('parkingOwner/capacity', $lands);
