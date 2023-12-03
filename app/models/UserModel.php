@@ -60,7 +60,7 @@ class UserModel{
         $this->mail->send();
 
         // Prepare statement
-        $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo, otp) VALUES (:name, :username, :email, :password, :userType, :contactNo, :otp)');
+        $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo, otp, regTime) VALUES (:name, :username, :email, :password, :userType, :contactNo, :otp, :regTime)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -70,9 +70,23 @@ class UserModel{
         $this->db->bind(':userType', $data['user_type']);
         $this->db->bind(':contactNo', $data['contact_no']);
         $this->db->bind(':otp', $verification_code);
+        $this->db->bind(':regTime', date("Y-m-d H:i:s"));
 
         // Execute
         if ($this->db->execute() and $this->userTableUpdate($data)){;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function updateStatus($id):bool
+    {
+        $this->db->query('UPDATE user SET status = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()){
             return true;
         }
         else {
@@ -118,6 +132,38 @@ class UserModel{
     }
 
     // Find user
+    public function findUserByEmailV($email, $state): bool
+    {
+        $this->db->query('SELECT * FROM user WHERE email = :email AND status = :status');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':status', $state);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function findUserByUsernameV($username, $state): bool
+    {
+        $this->db->query('SELECT * FROM user WHERE username = :username AND status = :status');
+        $this->db->bind(':username', $username);
+        $this->db->bind(':status', $state);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function findUserByEmail($email): bool
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -143,6 +189,19 @@ class UserModel{
         // Check row
         if ($this->db->rowCount() > 0){
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getUserByUsername($username){
+        $this->db->query('SELECT * FROM user WHERE username = :username');
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount() > 0){
+            return $row;
         } else {
             return false;
         }
