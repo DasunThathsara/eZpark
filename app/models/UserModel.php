@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require 'vendor/autoload.php';
+require APPROOT.'/libraries/vendor/autoload.php';
 class UserModel{
     private $db;
     private $mail;
@@ -19,37 +19,49 @@ class UserModel{
     {
         $name = $data['name'];
         $email = $data['email'];
+
         // Prepare statement
-        $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo,otp) VALUES (:name, :username, :email, :password, :userType, :contactNo,:otp');
-        $this->mail->isSMTP();                                            //Send using SMTP
-        $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
-        $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
-        $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
-        $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
-        $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+        $this->mail->isSMTP();                             //Send using SMTP
+        $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
+        $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
+        $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
+        $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
+        $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
 
         //Recipients
-        $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
-        $this->mail->addAddress($email, $name);     //Add a recipient
+        $this->mail->setFrom('ezpark.help@gmail.com', 'Your One-Time Password (OTP) for eZpark Registration');
+        $this->mail->addAddress($email, $name);            //Add a recipient
 
         //Attachments
-//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+//    $mail->addAttachment('/var/tmp/file.tar.gz');        //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
 
         //Content
-        $this->mail->isHTML(true);                                  //Set email format to HTML
-        $this->mail->Subject = 'Here is the subject';
+        $this->mail->isHTML(true);                   //Set email format to HTML
+        $this->mail->Subject = 'Verification code';
         $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
-        $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
-          <h1 style="">Hello '.$name.'</h1>
-          <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">Thank you for choosing Symphony. We are excited to have you on board!</p>
-          <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
-          <p style="font-size: 20px; color: #2e043a;">To complete your account creation, please use the following verification code:</p>
-          <p style="font-size: 24px; color: #333;  cursor: pointer; margin: 15px 10px;">' . $verification_code . '</p>
+        $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear '.$name.',<br><br>
+        
+                Thank you for choosing eZpark! We\'re excited to have you on board. To ensure the security of your account, we require you to verify your registration by entering the One-Time Password (OTP) provided below.
+                <br><br>
+                Please enter this code on the registration page to complete the verification process. Please note that this OTP is valid for a limited time, so make sure to use it promptly. Your account security is important to us, and we recommend not sharing this OTP with anyone.
+                <br>
+            </p>
+            <p style="font-size: 18px; text-align: center;"><span style=" background-color: #EAEAEAFF; padding:8px; border-radius: 10px;">'.$verification_code.'</span></p>
+            <p>
+                Best regards,<br>
+                eZpark Team
+            </p>
         </div>';
         $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $this->mail->send();
+
+        // Prepare statement
+        $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo, otp) VALUES (:name, :username, :email, :password, :userType, :contactNo, :otp)');
+
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':email', $data['email']);
