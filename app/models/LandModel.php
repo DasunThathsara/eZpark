@@ -168,6 +168,14 @@ class LandModel{
         return $row;
     }
 
+    public function viewLand($id){
+        $this->db->query('SELECT * FROM land WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+        return $row;
+    }
+
     // Remove land
     public function removeLand($data): bool
     {
@@ -256,6 +264,41 @@ class LandModel{
 
         $row = $this->db->resultSet();
         return $row;
+    }
+
+    public function verifyLand($id): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE land SET status = :status WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':status', 1);
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function unverifyLand($id): bool
+    {
+        // Prepare statement
+        $this->db->query('DELETE FROM land WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public function viewCapacity($data){
