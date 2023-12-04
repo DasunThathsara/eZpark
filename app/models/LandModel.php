@@ -11,7 +11,7 @@ class LandModel{
     public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability)');
+        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, QR) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :QR)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -25,6 +25,7 @@ class LandModel{
         $this->db->bind(':uid', $_SESSION['user_id']);
         $this->db->bind(':status', 0);
         $this->db->bind(':availability', 0);
+        $this->db->bind(':QR', $data['qrcode']);
 
         // Execute
         if ($this->db->execute()){
@@ -167,6 +168,14 @@ class LandModel{
         return $row;
     }
 
+    public function viewLand($id){
+        $this->db->query('SELECT * FROM land WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+        return $row;
+    }
+
     // Remove land
     public function removeLand($data): bool
     {
@@ -243,6 +252,53 @@ class LandModel{
 
         $row = $this->db->single();
         return $row->{'COUNT(*)'};
+    }
+
+    public function viewUnVerifyLands(){
+        // Prepare statement
+        $this->db->query('SELECT * FROM land  WHERE status = :status');
+
+        // Bind values
+        $this->db->bind(':status', 0);
+
+
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function verifyLand($id): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE land SET status = :status WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':status', 1);
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function unverifyLand($id): bool
+    {
+        // Prepare statement
+        $this->db->query('DELETE FROM land WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public function viewCapacity($data){
