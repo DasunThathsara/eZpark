@@ -246,6 +246,18 @@ class LandModel{
         return $row->{'COUNT(*)'};
     }
 
+    public function viewUnVerifyLands(){
+        // Prepare statement
+        $this->db->query('SELECT * FROM land  WHERE status = :status');
+
+        // Bind values
+        $this->db->bind(':status', 0);
+
+
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
     public function viewCapacity($data){
         $this->db->query('SELECT car, bike, threeWheel FROM land WHERE id = :id');
         $this->db->bind(':id', $data['id']);
