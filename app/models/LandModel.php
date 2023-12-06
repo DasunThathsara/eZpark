@@ -242,10 +242,11 @@ class LandModel{
 
     public function getLandCount(){
         // Prepare statement
-        $this->db->query('SELECT COUNT(*) FROM land  WHERE uid = :id');
+        $this->db->query('SELECT COUNT(*) FROM land  WHERE uid = :id and status = :status');
 
         // Bind values
         $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':status', 1);
 
 
         $row = $this->db->single();
@@ -345,7 +346,7 @@ class LandModel{
             </p>
         </div>';
 
-            $this->sendEmail($email, $name, $message, 'Your land is now verified.');
+            $this->sendEmail($email, $name, 'Your land is now verified.', $message);
 
             return true;
         }
