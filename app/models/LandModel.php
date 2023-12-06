@@ -1,9 +1,19 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require APPROOT.'/libraries/vendor/autoload.php';
+
 class LandModel{
     private $db;
+    private $mail;
 
     public function __construct(){
         $this->db = new Database();
+        $this->mail = new PHPMailer(true);
     }
 
     // ------------------------- Land Functionalities -------------------------
@@ -266,8 +276,43 @@ class LandModel{
         return $row;
     }
 
+    public function sendEmail($email, $name, $subject, $message){
+        $this->mail->isSMTP();                             //Send using SMTP
+        $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
+        $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
+        $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
+        $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
+        $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+
+        //Recipients
+        $this->mail->setFrom('ezpark.help@gmail.com', $subject);
+        $this->mail->addAddress($email, $name);            //Add a recipient
+
+        //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');        //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
+
+        //Content
+        $this->mail->isHTML(true);                     //Set email format to HTML
+        $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $this->mail->Body = $message;
+        $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $this->mail->send();
+    }
+
     public function verifyLand($id): bool
     {
+        // Get the landowner's id
+        $this->db->query('SELECT uid, name FROM land  WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+
+        $uid = $row->uid;
+        $parking_name = $row->name;
+
         // Prepare statement
         $this->db->query('UPDATE land SET status = :status WHERE id = :id');
 
@@ -277,6 +322,31 @@ class LandModel{
 
         // Execute
         if ($this->db->execute()){
+            // Get email and name
+            $this->db->query('SELECT name, email FROM user WHERE id = :id');
+
+            // Bind values
+            $this->db->bind(':id', $uid);
+            $data = $this->db->single();
+
+//            die(print_r($data));
+
+            $name = $data->name;
+            $email = $data->email;
+
+            $message = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear '.$name.',<br><br>
+        
+                Your land '.$parking_name.' is now vrified. You can now login to your account and start using it.<br>
+                <br>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+
+            $this->sendEmail($email, $name, $message, 'Your land is now verified.');
+
             return true;
         }
         else {
@@ -286,6 +356,16 @@ class LandModel{
 
     public function unverifyLand($id): bool
     {
+        // Get the landowner's id
+        $this->db->query('SELECT uid, name FROM land  WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+
+        $uid = $row->uid;
+        $parking_name = $row->name;
+
         // Prepare statement
         $this->db->query('DELETE FROM land WHERE id = :id');
 
@@ -294,6 +374,51 @@ class LandModel{
 
         // Execute
         if ($this->db->execute()){
+            // Get email and name
+            $this->db->query('SELECT name, email FROM user WHERE id = :id');
+
+            // Bind values
+            $this->db->bind(':id', $uid);
+            $data = $this->db->single();
+
+//            die(print_r($data));
+
+            $name = $data->name;
+            $email = $data->email;
+
+            // Prepare statement
+            $this->mail->isSMTP();                             //Send using SMTP
+            $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
+            $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
+            $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
+            $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
+            $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+
+            //Recipients
+            $this->mail->setFrom('ezpark.help@gmail.com', 'Your land request was rejected.');
+            $this->mail->addAddress($email, $name);            //Add a recipient
+
+            //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');        //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
+
+            //Content
+            $this->mail->isHTML(true);                     //Set email format to HTML
+            $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+            $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear '.$name.',<br><br>
+        
+                Your land '.$parking_name.'\'s registration request was rejected. now vrified. Try again with the correct details, and if you have any clarifications, contact us.<br>
+                <br>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+            $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $this->mail->send();
+
             return true;
         }
         else {
