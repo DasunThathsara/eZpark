@@ -305,7 +305,7 @@ class LandModel{
     public function verifyLand($id): bool
     {
         // Get the landowner's id
-        $this->db->query('SELECT uid, name FROM land  WHERE id = :id');
+        $this->db->query('SELECT * FROM land  WHERE id = :id');
 
         // Bind values
         $this->db->bind(':id', $id);
@@ -313,6 +313,9 @@ class LandModel{
 
         $uid = $row->uid;
         $parking_name = $row->name;
+        $deed = $row->deed;
+
+    die(print_r(PUBLICROOT.'/deeds/'.$deed));
 
         // Prepare statement
         $this->db->query('UPDATE land SET status = :status WHERE id = :id');
