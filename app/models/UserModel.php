@@ -17,30 +17,31 @@ class UserModel{
     // Register user
     public function register($data): bool
     {
-        $name = $data['name'];
-        $email = $data['email'];
+        if ($data['user_type'] != 'admin'){
+            $name = $data['name'];
+            $email = $data['email'];
 
-        // Prepare statement
-        $this->mail->isSMTP();                             //Send using SMTP
-        $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
-        $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
-        $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
-        $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
-        $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+            // Prepare statement
+            $this->mail->isSMTP();                             //Send using SMTP
+            $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
+            $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
+            $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
+            $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
+            $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
 
-        //Recipients
-        $this->mail->setFrom('ezpark.help@gmail.com', 'Your One-Time Password (OTP) for eZpark Registration');
-        $this->mail->addAddress($email, $name);            //Add a recipient
+            //Recipients
+            $this->mail->setFrom('ezpark.help@gmail.com', 'Your One-Time Password (OTP) for eZpark Registration');
+            $this->mail->addAddress($email, $name);            //Add a recipient
 
-        //Attachments
+            //Attachments
 //    $mail->addAttachment('/var/tmp/file.tar.gz');        //Add attachments
 //    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
 
-        //Content
-        $this->mail->isHTML(true);                   //Set email format to HTML
-        $this->mail->Subject = 'Verification code';
-        $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
-        $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            //Content
+            $this->mail->isHTML(true);                   //Set email format to HTML
+            $this->mail->Subject = 'Verification code';
+            $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+            $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
             <p style="color: black">
                 Dear '.$name.',<br><br>
         
@@ -55,9 +56,13 @@ class UserModel{
                 eZpark Team
             </p>
         </div>';
-        $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-        $this->mail->send();
+            $this->mail->send();
+        }
+        else{
+            $verification_code = '000000';
+        }
 
         // Prepare statement
         $this->db->query('INSERT INTO user (name, username, email, password, userType, contactNo, otp, otpTime) VALUES (:name, :username, :email, :password, :userType, :contactNo, :otp, :otpTime)');
@@ -324,5 +329,24 @@ class UserModel{
         else {
             return false;
         }
+    }
+
+    // View all admins
+    public function viewAdmins(){
+        $this->db->query('SELECT * FROM user WHERE userType = "admin"');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    // View specific admin
+    public function viewAdmin($admin_id){
+        $this->db->query('SELECT * FROM user WHERE id = :id');
+        $this->db->bind(':id', $admin_id);
+
+        $row = $this->db->single();
+
+        return $row;
     }
 }
