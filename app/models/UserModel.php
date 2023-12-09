@@ -363,4 +363,19 @@ class UserModel{
             return false;
         }
     }
+
+    // Ban admin
+    public function banAdmin($admin_id){
+        $this->db->query('UPDATE user SET status = 2, banCount = banCount + 1, banTime = :banTime WHERE id = :id');
+        $this->db->bind(':id', $admin_id);
+        $this->db->bind(':banTime', date("Y-m-d H:i:s"));
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
