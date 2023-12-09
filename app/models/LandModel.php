@@ -315,8 +315,6 @@ class LandModel{
         $parking_name = $row->name;
         $deed = $row->deed;
 
-    die(print_r(PUBLICROOT.'/deeds/'.$deed));
-
         // Prepare statement
         $this->db->query('UPDATE land SET status = :status WHERE id = :id');
 

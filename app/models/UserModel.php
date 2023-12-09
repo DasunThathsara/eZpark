@@ -325,4 +325,13 @@ class UserModel{
             return false;
         }
     }
+
+    // View all admins
+    public function viewAdmins(){
+        $this->db->query('SELECT * FROM user WHERE userType = "admin"');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
 }
