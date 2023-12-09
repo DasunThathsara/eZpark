@@ -349,4 +349,18 @@ class UserModel{
 
         return $row;
     }
+
+    // Remove admin
+    public function removeAdmin($admin_id){
+        $this->db->query('DELETE FROM user WHERE id = :id');
+        $this->db->bind(':id', $admin_id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
