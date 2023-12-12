@@ -14,6 +14,28 @@ class UserModel{
         $this->mail = new PHPMailer(true);
     }
 
+    // Email Sender
+    public function sendEmail($email, $name, $subject, $message){
+        $this->mail->isSMTP();                             //Send using SMTP
+        $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
+        $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
+        $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
+        $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
+        $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+
+        //Recipients
+        $this->mail->setFrom('ezpark.help@gmail.com', $subject);
+        $this->mail->addAddress($email, $name);            //Add a recipient
+
+        //Content
+        $this->mail->isHTML(true);                  //Set email format to HTML
+        $this->mail->Subject = $subject;
+        $this->mail->Body = $message;
+        $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $this->mail->send();
+    }
+
     // Register user
     public function register($data): bool
     {
@@ -21,25 +43,7 @@ class UserModel{
             $name = $data['name'];
             $email = $data['email'];
 
-            // Prepare statement
-            $this->mail->isSMTP();                             //Send using SMTP
-            $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
-            $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
-            $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
-            $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
-            $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
-
-            //Recipients
-            $this->mail->setFrom('ezpark.help@gmail.com', 'Your One-Time Password (OTP) for eZpark Registration');
-            $this->mail->addAddress($email, $name);            //Add a recipient
-
-            //Attachments
-//    $mail->addAttachment('/var/tmp/file.tar.gz');        //Add attachments
-//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
-
             //Content
-            $this->mail->isHTML(true);                   //Set email format to HTML
-            $this->mail->Subject = 'Verification code';
             $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
             $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
             <p style="color: black">
@@ -56,9 +60,7 @@ class UserModel{
                 eZpark Team
             </p>
         </div>';
-            $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $this->mail->send();
+            $this->sendEmail($email, $name, 'Verification code', $this->mail->Body);
         }
         else{
             $verification_code = '000000';
@@ -273,6 +275,45 @@ class UserModel{
         }
     }
 
+    // Get ban count
+    public function getStatus($username){
+        $this->db->query('SELECT banCount FROM user WHERE username = :username');
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+
+        return $row->banCount;
+    }
+
+    // Get ban time
+    public function getBanTime($username){
+        $this->db->query('SELECT banTime FROM user WHERE username = :username');
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+
+        return $row->banTime;
+    }
+
+    // Unban according to the time
+    public function UnbanAccordingTime(){
+        $this->db->query('UPDATE user
+SET status = :status
+WHERE (banCount = 1 OR banCount = 2) 
+    AND (banCount = 1 AND DATE_ADD(banTime, INTERVAL 1 DAY) <= NOW()
+         OR banCount = 2 AND DATE_ADD(banTime, INTERVAL 7 DAY) <= NOW());');
+
+        $this->db->bind(':status', 1);
+
+        // Execute
+        if ($this->db->execute()){;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     // Login user
     public function login($email, $password, $username){
         $this->db->query('SELECT * FROM user WHERE email = :email OR username = :username');
@@ -366,6 +407,37 @@ class UserModel{
 
     // Ban admin
     public function banAdmin($admin_id){
+        $this->db->query('SELECT name, email FROM user WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $admin_id);
+        $data = $this->db->single();
+
+        $name = $data->name;
+        $email = $data->email;
+
+        //Content
+        $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear '.$name.',<br><br>
+        
+                We regret to inform you that your account with eZpark has been banned. This action has been taken due to a violation of our terms of service or community guidelines.
+                <br><br>
+                Reasons for account bans include, but are not limited to, engaging in prohibited activities, violation of user policies, or repeated breaches of our terms.
+                <br><br>
+                If you believe this action has been taken in error or if you have any questions, please contact our support team at support@ezpark.com.
+                <br><br>
+                We take the security and well-being of our community seriously, and we appreciate your understanding.
+                <br>
+            </p>
+            <p>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+
+        $this->sendEmail($email, $name, 'Your account has been banned', $this->mail->Body);
+
         $this->db->query('UPDATE user SET status = 2, banCount = banCount + 1, banTime = :banTime WHERE id = :id');
         $this->db->bind(':id', $admin_id);
         $this->db->bind(':banTime', date("Y-m-d H:i:s"));
