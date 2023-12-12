@@ -2,6 +2,7 @@
 class Users extends Controller{
     public function __construct(){
         $this->userModel = $this->model('UserModel');
+        $this->landModel = $this->model('LandModel');
     }
 
     public function register(){
@@ -87,7 +88,7 @@ class Users extends Controller{
 
                 // Register user
                 if ($this->userModel->register($data)){
-                    redirect('users/login');
+                    redirect('users/emailVerify/'.$data['username']);
                 } else {
                     die('Something went wrong');
                 }
@@ -190,7 +191,7 @@ class Users extends Controller{
 
                 // Register user
                 if ($this->userModel->register($data)){
-                    redirect('users/login');
+                    redirect('users/emailVerify/'.$data['username']);
                 } else {
                     die('Something went wrong');
                 }
@@ -296,7 +297,7 @@ class Users extends Controller{
 
                 // Register user
                 if ($this->userModel->register($data)){
-                    redirect('users/login');
+                    redirect('users/emailVerify/'.$data['username']);
                 } else {
                     die('Something went wrong');
                 }
@@ -404,7 +405,7 @@ class Users extends Controller{
 
                 // Register user
                 if ($this->userModel->register($data)){
-                    redirect('users/login');
+                    redirect('users/emailVerify/'.$data['username']);
                 } else {
                     die('Something went wrong');
                 }
@@ -433,8 +434,209 @@ class Users extends Controller{
         }
     }
 
+    public function adminRegister(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'password' => trim($_POST['password']),
+                'username' => trim($_POST['username']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'user_type' => 'admin',
+                'contact_no' => trim($_POST['contact_no']),
+                'err' => ''
+            ];
+
+            // Validate data
+            // Validate name
+            if (empty($data['name'])){
+                $data['err'] = 'Please enter name';
+            }
+
+            // Validate email
+            if (empty($data['email'])){
+                $data['err'] = 'Please enter email';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByEmail($data['email'])){
+                    $data['err'] = 'Email is already taken';
+                }
+            }
+
+            // Validate username
+            if (empty($data['username'])){
+                $data['err'] = 'Please enter username';
+            } else {
+                // Check email
+                if ($this->userModel->findUserByUsername($data['username'])){
+                    $data['err'] = 'Username is already taken';
+                }
+            }
+
+            // Validate password
+            if (empty($data['password'])){
+                $data['err'] = 'Please enter password';
+            } elseif (strlen($data['password']) < 6){
+                $data['err'] = 'Password must be at least 6 characters';
+            }
+
+            // Validate confirm password
+            if (empty($data['confirm_password'])){
+                $data['err'] = 'Please confirm password';
+            } else {
+                if ($data['password'] != $data['confirm_password']){
+                    $data['err'] = 'Passwords do not match';
+                }
+            }
+
+            // Validate contact number
+            if (empty($data['contact_no'])){
+                $data['err'] = 'Please enter contact number';
+            }
+
+            // Validation is completed and no error found
+            if (empty($data['err'])){
+                // Hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                // Register user
+                if ($this->userModel->register($data)){
+                    redirect('superAdmin/viewAdmins');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('superAdmin/admins/add', $data);
+            }
+
+        }
+    }
+
+    public function verifiedMessage(){
+        // Initial form load
+        $data = [
+            'email' => '',
+            'username' => '',
+            'password' => '',
+            'err' => ''
+        ];
+
+        // Load view
+        $this->view('users/verifiedMessage', $data);
+    }
+
+    public function emailVerify($username = null){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Form is submitting
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // Input data
+            $data = [
+                'email' => trim($_POST['email']),
+                'username' => trim($_POST['email']),
+                'otp' => trim($_POST['otp']),
+                'err' => ''
+            ];
+
+            // Validate data
+            // Validate email
+            if (empty($data['email'])){
+                $data['err'] = 'Please enter email';
+            }
+            else{
+                if ($this->userModel->findUserByEmailV($data['email'], 0) or $this->userModel->findUserByUsernameV($data['username'], 0)){
+                    // User found
+                }
+                else{
+                    // User not found
+                    $data['err'] = 'No user found';
+                }
+            }
+
+            // Validate password
+            if (empty($data['otp'])){
+                $data['err'] = 'Invalid OTP';
+            }
+
+            $user_data = $this->userModel->getUserByUsername($data['username']);
+
+            $date1 = new DateTime($user_data->otpTime);
+            $date2 = new DateTime(date("Y-m-d H:i:s"));
+
+            $interval = $date1->diff($date2);
+
+            if ($interval->format('%i') > 5){
+                $data['err'] = 'OTP expired';
+            }
+
+
+            // Check if error is empty
+            if (empty($data['err'])){
+                // log the user
+
+                if ($user_data){
+                    if ($user_data->otp == $data['otp']){
+                        $this->userModel->updateStatus($user_data->id);
+                        redirect('users/verifiedMessage');
+                    }
+                    else{
+                        $user_data->err = 'Incorrect OTP';
+
+                        // Load view with errors
+                        $this->view('users/emailVerify', $user_data);
+                    }
+                }
+                else{
+                    $user_data->err = 'Incorrect OTP';
+
+                    // Load view with errors
+                    $this->view('users/emailVerify', $user_data);
+                }
+            }
+            else{
+                // Load view with errors
+                $user_data->err = $data['err'];
+                $this->view('users/emailVerify', $user_data);
+            }
+        }
+        else{
+            // Initial form load
+            $data = $this->userModel->getUserByUsername($username);
+
+            if ($data->status == 1){
+                redirect('users/login');
+            }
+            else{
+                $this->view('users/emailVerify', $data);
+            }
+
+        }
+    }
+
+    public function resendOTP($username = null){
+        $fetched_data = $this->userModel->getUserByUsername($username);
+        $data = [
+            'email' => $fetched_data->email,
+            'name' => $fetched_data->name,
+            'id' => $fetched_data->id
+        ];
+
+        $this->userModel->resendOTP($data);
+
+        $this->emailVerify($username);
+    }
+
     public function login(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Unban users according to the time
+            $this->userModel->UnbanAccordingTime();
+
             // Form is submitting
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -454,7 +656,7 @@ class Users extends Controller{
                 $data['err'] = 'Please enter email';
             }
             else{
-                if ($this->userModel->findUserByEmail($data['email']) or $this->userModel->findUserByUsername($data['username'])){
+                if ($this->userModel->findUserByEmailV($data['email'], 1) or $this->userModel->findUserByUsernameV($data['username'], 1)){
                     // User found
                 }
                 else{
@@ -494,6 +696,9 @@ class Users extends Controller{
             }
         }
         else{
+            // Unban users according to the time
+            $this->userModel->UnbanAccordingTime();
+
             // Initial form load
             $data = [
                 'email' => '',
@@ -576,6 +781,9 @@ class Users extends Controller{
                 case 'merchandiser':
                     redirect('merchandiser/index');
                     break;
+                case 'superAdmin':
+                    redirect('superAdmin/index');
+                    break;
                 default:
                     redirect('pages/index');
             }
@@ -591,7 +799,13 @@ class Users extends Controller{
             'contact_no' => $_SESSION['contact_no'],
             'profile_photo' => $_SESSION['profile_photo']
         ];
-        $this->view('users/profile', $data);
+
+        $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('users/profile', $data, $other_data);
     }
 
     public function imgUpload($profile_photo){

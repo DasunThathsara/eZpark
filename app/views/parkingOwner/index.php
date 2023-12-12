@@ -69,7 +69,7 @@
                                     <div class="bottom-row"></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Income</div>
+                            <div class="right-col">Monthly Income</div>
                         </div>
                     </div>
                 </a>

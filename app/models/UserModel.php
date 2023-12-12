@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
+// Load Composer's autoloader
 require APPROOT.'/libraries/vendor/autoload.php';
 class UserModel{
     private $db;
@@ -88,6 +88,7 @@ class UserModel{
         }
     }
 
+    // Update user status
     public function updateStatus($id):bool
     {
         $this->db->query('UPDATE user SET status = 1 WHERE id = :id');
@@ -101,6 +102,7 @@ class UserModel{
         }
     }
 
+    // Resend OTP
     public function resendOTP($data): bool
     {
         $name = $data['name'];
@@ -199,7 +201,7 @@ class UserModel{
         }
     }
 
-    // Find user
+    // Find verified user by email
     public function findUserByEmailV($email, $state): bool
     {
         $this->db->query('SELECT * FROM user WHERE email = :email AND status = :status');
@@ -216,6 +218,7 @@ class UserModel{
         }
     }
 
+    // Find verified user by username
     public function findUserByUsernameV($username, $state): bool
     {
         $this->db->query('SELECT * FROM user WHERE username = :username AND status = :status');
@@ -232,6 +235,7 @@ class UserModel{
         }
     }
 
+    // Find user by email
     public function findUserByEmail($email): bool
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -247,6 +251,7 @@ class UserModel{
         }
     }
 
+    // Find user by username
     public function findUserByUsername($username): bool
     {
         $this->db->query('SELECT * FROM user WHERE username = :username');
@@ -262,6 +267,7 @@ class UserModel{
         }
     }
 
+    // Find user count by username
     public function getUserByUsername($username){
         $this->db->query('SELECT * FROM user WHERE username = :username');
         $this->db->bind(':username', $username);
@@ -370,6 +376,15 @@ WHERE (banCount = 1 OR banCount = 2)
         else {
             return false;
         }
+    }
+
+    // Get admin count
+    public function getAdminCount(){
+        $this->db->query('SELECT COUNT(*) AS adminCount FROM user WHERE userType = "admin"');
+
+        $row = $this->db->single();
+
+        return $row->adminCount;
     }
 
     // View all admins

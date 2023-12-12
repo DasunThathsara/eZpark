@@ -1,4 +1,28 @@
-<?php require APPROOT.'/views/inc/header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
+    <title><?php echo SITENAME ?></title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/css/style.css">
+
+    <!-- External js -->
+    <script src="<?php echo URLROOT ?>/js/script.js" defer></script>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div class="loader-wrapper">
+    <div class="logo-container">
+        <img src="<?php echo URLROOT ?>/images/logo.png" alt="">
+    </div>
+    <div class="loader"></div>
+</div>
+
 <!--  TOP NAVIGATION  -->
 <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
@@ -15,7 +39,7 @@
 
             <div class="cards">
                 <!-- Card 1 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/lands">
+                <a class="card-link" href="<?php echo URLROOT ?>/admin/viewRegistrationRequests">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
@@ -23,7 +47,7 @@
                                     <div class="top-row">
                                         <img src="<?php echo URLROOT ?>/images/parking.svg" alt="">
                                     </div>
-                                    <div class="bottom-row"></div>
+                                    <div class="bottom-row"><?php echo $data['request_count'] ?></div>
                                 </div>
                             </div>
                             <div class="right-col">Registration Requests</div>

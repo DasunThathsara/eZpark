@@ -15,9 +15,42 @@
 /* ----------------- General Styles ---------------- */
 body{
     background-color: #f8f8f8;
+    overflow-x: hidden;
 }
 *{
     font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* --- Selection styles --- */
+::selection {
+    background-color: rgba(252, 204, 4, 0.34);
+    color: black;
+}
+
+::-moz-selection {
+    background-color: rgba(252, 204, 4, 0.34);
+    color: black;
+}
+
+/* --- Scroll bar styles --- */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(255,167,41);
+    border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #fccc04;
 }
 
 a{
@@ -267,23 +300,25 @@ a{
 }
 
 
-
-
-
-
-
-.overlay-container{
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.25);
-    z-index: 10;
+/* ---------------------------------- Parking view styles ---------------------------------- */
+.page-container .section .container .cover-img{
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 1px solid black;
+    height: 300px;
+    overflow: clip;
+    transform: translateY(50px);
 }
 
-.overlay-container-active{
-    display: block;
+.page-container .section .container .cover-photo{
+    width: 100%;
+    height: 300%;
+    transform: translateY(-250px);
+    border-radius: 20px;
 }
 
+.page-container .section .container .details{
+    transform: translateY(50px);
+}

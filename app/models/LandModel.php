@@ -167,10 +167,20 @@ class LandModel{
         }
     }
 
-    // View all lands
+    // View all lands of current user
     public function viewLands(){
         $this->db->query('SELECT * FROM land WHERE uid = :uid and status = :status');
         $this->db->bind(':uid', $_SESSION['user_id']);
+        $this->db->bind(':status', 1);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // View all lands
+    public function viewAllLands(){
+        $this->db->query('SELECT * FROM land WHERE status = :status');
         $this->db->bind(':status', 1);
 
         $row = $this->db->resultSet();
