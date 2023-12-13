@@ -44,6 +44,7 @@
 
                 // Get parameter list
                 $this->param = $url ? array_values($url) : [];
+                
 
                 // Call method and pass the parameter list
                 call_user_func_array([$this->currentController, $this->currentMethod], $this->param);

@@ -1,4 +1,4 @@
-    <script src="<?php echo URLROOT ?>/js/script.js"></script>
+    <div class="overlay-container"></div>
     <script>
         window.addEventListener("load", function() {
             const loader = document.querySelector(".loader-wrapper");
@@ -16,6 +16,16 @@
         setTimeout(function() {
             reveal_anm.classList.add("reveal");
         }, 200);
+
+        const side_cards = document.querySelector(".side-cards");
+        setTimeout(function() {
+            side_cards.classList.add("reveal");
+        }, 100);
+
+        const charts = document.querySelector(".charts");
+        setTimeout(function() {
+            charts.classList.add("reveal");
+        }, 100);
     </script>
     </body>
 </html>

@@ -16,7 +16,7 @@
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/parkingOwner/secAvailSet" method="post">
+    <form action="<?php echo URLROOT ?>/land/secAvailSet" method="post">
         <!-- Name -->
         <select name="secAvail">
             <option value="" hidden disabled selected>Security availability</option>

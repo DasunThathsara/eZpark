@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     <?php } ?>
 
-    <form action="<?php echo URLROOT ?>/parkingOwner/setPriceForm" method="post">
+    <form action="<?php echo URLROOT ?>/land/setPriceForm" method="post">
         <!-- Car -->
         <div class="form-input-title">Car:</div>
         <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" />

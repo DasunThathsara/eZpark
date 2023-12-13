@@ -2,6 +2,10 @@
 @import url('components/topnavbar.css');
 @import url('components/formStyles.css');
 @import url('components/sidenavbar.css');
+@import url('components/dashboardCards.css');
+@import url('components/dashboard.css');
+@import url('components/dynamicContentTable.css');
+@import url('components/staticContentTable.css');
 
 /* ---------------- External Styles ---------------- */
 @import url('landingpage.css');
@@ -9,8 +13,16 @@
 @import url('merchandiser.css');
 
 /* ----------------- General Styles ---------------- */
+body{
+    background-color: #f8f8f8;
+}
 *{
     font-family: 'Trebuchet MS', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
 
 .page-container{
@@ -25,10 +37,16 @@
     margin: 1vh 2vw;
 }
 
-.page-container .section .container h1{
-    text-align: center;
-    margin-top: 50px;
-    font-size: 50px;
+.page-container .section .container{
+    transition: 0.5s;
+    margin-left: 270px;
+}
+
+@media screen and (max-width: 940px){
+    .page-container .section .container{
+        margin-left: 20px;
+        transition: 1s, transform 1s;
+    }
 }
 
 .container .error-img{
@@ -104,3 +122,168 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* ---------------------------------- Dropdown Styles ---------------------------------- */
+.dropbtn {
+    background-color: #fdc63e;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    left: 300px;
+    top: 100px;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 940px){
+    .dropdown{
+        left: 40px;
+        transition: left 0.5s ease-in;
+    }
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #fdc63e;
+}
+
+
+/* ---------------------------------- Land Search Bar ---------------------------------- */
+.data-search{
+    position: absolute;
+    right: 35px;
+    top: 150px;
+    border-radius: 20px;
+    outline: none;
+    border: 0px solid rgba(0, 0, 0, 0.247);
+    padding: 10px 5px 10px 15px;
+    width: 150px;
+    transition: 0.5s;
+    box-shadow: 0 0 4px 0.1px rgba(0, 0, 0, 0.2);
+}
+
+.data-search:hover{
+    width: 250px;
+}
+
+.data-search:focus{
+    width: 250px;
+}
+
+/* ---------------------------------- Profile Styles ---------------------------------- */
+.page-container .section .container .form-container .profile-container{
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.page-container .section .container .form-container .profile-container .profile-pic{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.page-container .section .container .form-container .profile-container .profile-pic:hover{
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
+    scale: 1.05;
+    cursor: pointer;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-pic-edit{
+    width: 15px;
+    transition: 0.5s;
+    position: relative;
+    transform: translate(-26px, -20px);
+    background-color: white;
+    padding: 5px;
+    border-radius: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-pic-edit:hover{
+    cursor: pointer;
+    background-color: #f6f6f6;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-dropdown-content{
+    display: none;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.16);
+    position: absolute;
+    transform: translate(-26px, -20px);
+    margin-top: 10px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-dropdown-content-active{
+    display: grid;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-dropdown-content .dropdown-item{
+    padding: 10px;
+    transition: 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+
+.page-container .section .container .form-container .profile-container .profile-dropdown-container .profile-dropdown-content .dropdown-item:hover{
+    background-color: #f6f6f6;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+.overlay-container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.overlay-container-active{
+    display: block;
+}
+

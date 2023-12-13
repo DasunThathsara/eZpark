@@ -31,8 +31,6 @@ userSelectionList.addEventListener("click", function (e) {
 });
 
 
-
-
 // ------------------------------- Password Check -------------------------------
 
 const passwordInput = document.getElementById('password');
@@ -70,3 +68,68 @@ function updateStrengthText(strength) {
     strengthText.textContent = text;
 }
 
+
+
+// ------------------------------- Navbar Toggle -------------------------------
+function navToggle() {
+    var element1 = document.querySelector('.sidenav');
+    element1.classList.add("sidenav-toggled");
+
+    var element2 = document.querySelector('.overlay-container');
+    element2.classList.add("overlay-container-active");
+
+    if (window.innerWidth <= 1160) {
+        setTimeout(function() {
+            document.body.addEventListener('click', handleOutsideClick);
+        });
+    }
+}
+
+function navToggleClose() {
+    var element1 = document.querySelector('.sidenav');
+    element1.classList.remove("sidenav-toggled");
+
+    var element2 = document.querySelector('.overlay-container');
+    element2.classList.remove("overlay-container-active");
+}
+
+// Close the navbar when clicking outside of it
+function handleOutsideClick(event) {
+    var sidebar = document.querySelector('.sidenav');
+    var toggleButton = document.querySelector('.sidenav-close-btn');
+    var overlayContainer = document.querySelector('.overlay-container');
+
+    if (!sidebar.contains(event.target) || toggleButton.contains(event.target)) {
+        sidebar.classList.remove("sidenav-toggled");
+        overlayContainer.classList.remove("overlay-container-active");
+        document.body.removeEventListener('click', handleOutsideClick);
+    }
+}
+
+// ------------------------------- Side Card Toggle -------------------------------
+// Side card close button
+function closeRightCard(){
+    var screenWidth = window.innerWidth;
+    var element1, element2, element3, element4;
+
+    if (screenWidth <= 720){
+        element1 = document.querySelector('.side-cards');
+        element1.classList.toggle("side-cards-active");
+
+        element2 = document.querySelector('.open-side-cards-btn');
+        element2.classList.toggle("open-side-cards-btn-hide");
+    }
+    else {
+        element1 = document.querySelector('.side-cards');
+        element1.classList.toggle("side-cards-hide");
+
+        element2 = document.querySelector('.cards');
+        element2.classList.toggle("cards-active");
+
+        element3 = document.querySelector('.charts');
+        element3.classList.toggle("charts-active");
+
+        element4 = document.querySelector('.open-side-cards-btn');
+        element4.classList.toggle("open-side-cards-btn-active");
+    }
+}

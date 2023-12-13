@@ -1,7 +1,7 @@
 <div class="sidenav">
     <div class="container">
         <div class="logo"><img src="<?php echo URLROOT ?>/images/logo.png" alt=""></div>
-        <a class="sidenav-close-btn" onclick="navToggle()">X</a>
+        <a class="sidenav-close-btn" onclick="navToggleClose()">X</a>
         <div class="items">
             <a href="<?php echo URLROOT ?>/<?php echo $_SESSION['user_type'] ?>/index">
                 <?php if ($section == 'dashboard'){?>
@@ -85,7 +85,7 @@
  
         
 
-                <!-----------------------------Parking owner--------------------------->
+            <!-----------------------------Parking owner--------------------------->
             <?php if ($_SESSION['user_type'] == 'parkingOwner'){ ?>
                 <a href="<?php echo URLROOT ?>/parkingOwner/lands">
                     <?php if ($section == 'lands'){?>
@@ -95,9 +95,16 @@
                         <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
                     <?php } ?>
                 </a>
-            <?php } ?>
-            
 
+                <a href="<?php echo URLROOT ?>/parkingOwner/viewReport">
+                    <?php if ($section == 'reports'){?>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                    <?php } ?>
+                </a>
+            <?php } ?>
 
             <a href="<?php echo URLROOT ?>/users/viewProfile">
                 <?php if ($section == 'profile'){?>
@@ -106,20 +113,12 @@
                 else{ ?>
                     <div class="item"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
                 <?php } ?>
-
-
-
-
+            </a>
             <div class="logout"><a href="<?php echo URLROOT ?>/users/logout">Logout</a></div>
         </div>
     </div>
 </div>
 
 <script>
-    function navToggle() {
-        console.log("pushed")
-        var element;
-        element = document.querySelector('.sidenav');
-        element.classList.toggle("sidenav-toggled");
-    }
+    
 </script>
