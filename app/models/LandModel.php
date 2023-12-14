@@ -447,6 +447,20 @@ class LandModel{
         return $row;
     }
 
+    // Get total capacity
+    public function getTotalCapacity(){
+        $this->db->query('SELECT car + bike + threeWheel AS totCap FROM land WHERE uid = :uid');
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        $total_capacity = 0;
+        foreach ($row as $item){
+            $total_capacity += $item->totCap;
+        }
+        return $total_capacity;
+    }
+
     public function updateCapacity($data): bool
     {
         // Prepare statement
