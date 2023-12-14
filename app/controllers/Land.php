@@ -1,4 +1,7 @@
 <?php
+
+require_once APPROOT.'/libraries/phpqrcode/qrlib.php';
+
 class Land extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
@@ -237,10 +240,16 @@ class Land extends Controller {
                 $data['err'] = 'Please upload deed';
             }
 
-//            die(print_r($data));
-
             // Validation is completed and no error found*/
             if (empty($data['err'])){
+                // Generate QR code
+                $path = PUBLICROOT.'/QRs/';
+                $img_name = 'QR-'.time().'.'.uniqid();
+                $qrcode = $path.$img_name.'.png';
+                QRcode :: png("dasun thaths", $qrcode, 'H', 4, 4);
+
+                $data['qrcode'] = $img_name.'.png';
+
                 // Register land
                 if ($this->landModel->registerLand($data)){
                     $this->aboutSecurityOfficer($data);

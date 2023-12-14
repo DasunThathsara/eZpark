@@ -42,13 +42,8 @@
 }
 
 .page-container .section .container th{
-    background-color: #ffffff;
     text-align: left;
     border-bottom: 1px solid rgba(0, 0, 0, 0.089);
-}
-
-.page-container .section .container tr{
-    background-color: #fff;
 }
 
 .page-container .section .container td{
@@ -67,10 +62,13 @@
     border-radius: 10px;
     transition: 0.5s;
     padding-right: 20px;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    padding-bottom: 15px;
+    margin-top: 5px;
 }
 
 .page-container .section .container td .content:hover{
-    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
     scale: 1.02;
     display: flex;
     width: 100%;

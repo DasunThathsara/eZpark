@@ -167,10 +167,20 @@ class LandModel{
         }
     }
 
-    // View all lands
+    // View all lands of current user
     public function viewLands(){
         $this->db->query('SELECT * FROM land WHERE uid = :uid and status = :status');
         $this->db->bind(':uid', $_SESSION['user_id']);
+        $this->db->bind(':status', 1);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // View all lands
+    public function viewAllLands(){
+        $this->db->query('SELECT * FROM land WHERE status = :status');
         $this->db->bind(':status', 1);
 
         $row = $this->db->resultSet();
@@ -435,6 +445,20 @@ class LandModel{
         $row = $this->db->resultSet();
 
         return $row;
+    }
+
+    // Get total capacity
+    public function getTotalCapacity(){
+        $this->db->query('SELECT car + bike + threeWheel AS totCap FROM land WHERE uid = :uid');
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        $total_capacity = 0;
+        foreach ($row as $item){
+            $total_capacity += $item->totCap;
+        }
+        return $total_capacity;
     }
 
     public function updateCapacity($data): bool

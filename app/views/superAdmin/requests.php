@@ -39,14 +39,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                         </div>
                                     </td>
                                     <td class="options">                                        &nbsp;
-                                        <form action="<?php echo URLROOT ?>/admin/verifyLand" method="post" class="update-form">
+                                        <form action="<?php echo URLROOT ?>/superAdmin/verifyLand" method="post" class="update-form">
                                             <input type="text" name="id" id="id" hidden value="" />
                                             <button type="submit" class="edit" onclick="return confirmSubmit();">
                                                 <img src="<?php echo URLROOT ?>/images/tick.svg" style="width: 18px" alt="">
                                             </button>
                                         </form>
                                         &nbsp;
-                                        <form action="<?php echo URLROOT ?>/admin/unverifyLand" method="post" class="delete-form">
+                                        <form action="<?php echo URLROOT ?>/superAdmin/unverifyLand" method="post" class="delete-form">
                                             <input type="text" name="id" id="id" hidden value="" />
                                             <button type="submit" class="delete" onclick="return confirmSubmit();">
                                                 <img src="<?php echo URLROOT ?>/images/circle-xmark-regular.svg" style="width: 18px;" alt="">

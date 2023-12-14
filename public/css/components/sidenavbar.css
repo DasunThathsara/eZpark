@@ -96,3 +96,18 @@
 .selected{
     background: linear-gradient(to right, rgba(252, 212, 38, 0.56), rgba(255, 153, 0, 0.58));
 }
+
+.overlay-container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.overlay-container-active{
+    display: block;
+}
