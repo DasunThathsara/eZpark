@@ -465,4 +465,25 @@ WHERE (banCount = 1 OR banCount = 2)
             return false;
         }
     }
+
+    // Update admin
+    public function updateAdmin($data): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE user SET username = :username, name = :name, password = :password WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':username', $data['username']);
+        $this->db->bind(':password', $data['password']);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

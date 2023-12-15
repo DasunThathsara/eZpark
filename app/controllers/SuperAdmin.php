@@ -220,4 +220,94 @@ class SuperAdmin extends Controller {
             redirect('superAdmin/viewAdmins');
         }
     }
+
+    // Update admin
+    public function updateAdmin($admin_id = null){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => trim($_POST['id']),
+                'username' => trim($_POST['username']),
+                'old_username' => trim($_POST['old_username']),
+                'name' => trim($_POST['name']),
+                'password' => trim($_POST['password']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'err' => ''
+            ];
+
+            // Validate username
+            if (empty($data['username'])) {
+                $data['err'] = 'Please enter username';
+            } else {
+                // Check if username exists
+                if ($this->userModel->findUserByUsername($data['username']) and $data['username'] != $data['old_username']) {
+                    $data['err'] = 'Username is already taken';
+                }
+            }
+
+            // Validate name
+            if (empty($data['name'])) {
+                $data['err'] = 'Please enter name';
+            }
+
+            // Validate password
+            if (empty($data['password'])) {
+                $data['err'] = 'Please enter password';
+            } elseif (strlen($data['password']) < 6) {
+                $data['err'] = 'Password must be at least 6 characters';
+            }
+
+            // Validate confirm password
+            if (empty($data['confirm_password'])) {
+                $data['err'] = 'Please confirm password';
+            } else {
+                if ($data['password'] != $data['confirm_password']) {
+                    $data['err'] = 'Passwords do not match';
+                }
+            }
+
+//            die(print_r($data));
+
+            // Make sure errors are empty
+            if (empty($data['err'])){
+                // Hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                // Register user
+                if ($this->userModel->updateAdmin($data)){
+                    redirect('superAdmin/viewAdmins');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $data = (object)$data;
+
+                $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
+
+                if ($other_data['notification_count'] < 10)
+                    $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+
+                $this->view('superAdmin/admins/update', $data, $other_data);
+            }
+        }
+        else{
+            if (empty($admin_id))
+                $data = $this->userModel->viewAdmin($_GET['id']);
+            else
+                $data = $this->userModel->viewAdmin($admin_id);
+
+
+            $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            $this->view('superAdmin/admins/update', $data, $other_data);
+        }
+    }
 }
