@@ -11,7 +11,7 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Prices</h1>
+            <h1>Prices of the Lands</h1>
 
             <br><br>
             <?php if (sizeof($data) == 0) {?>
@@ -35,7 +35,7 @@
                                 </div>
                             </th>
                         </tr>
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
+                        <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
                             <tr>
                                 <td width="70%">
                                     <a class="tile">
@@ -51,7 +51,6 @@
                                             </div>
                                             <div class="right">
                                                 <form action="<?php echo URLROOT ?>/landprice/priceUpdateForm" method="post">
-                                                    <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
                                                     <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
                                                     <input type="text" name="pid" id="pid" hidden value="<?php echo $other_data[$i]->pid ?>" />
                                                     <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />

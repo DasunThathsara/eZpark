@@ -16,7 +16,7 @@
             <div class="dropdown">
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
-                    <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
+                    <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
                         <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>
                     <?php } ?>
                 </div>
@@ -49,7 +49,7 @@
                                     <div class="top-row">
                                         <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                     </div>
-                                    <div class="bottom-row">20</div>
+                                    <div class="bottom-row"><?php echo $data['total_capacity']?></div>
                                 </div>
                             </div>
                             <div class="right-col">Total Capacity</div>

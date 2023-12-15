@@ -37,7 +37,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             </div>
                             </th>
                         </tr>
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
+
+                        <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
                             <tr>
                                 <td>
                                     <a class="tile">

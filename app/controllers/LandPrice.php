@@ -33,11 +33,46 @@ class LandPrice extends Controller
     }
 
     // Update package
-    public function priceUpdateForm(){
+    public function packageUpdateForm(){
+        if (sizeof($_GET) > 1){
+            $data = [
+                'name' => trim($_GET['name']),
+                'id' => trim($_GET['id']),
+                'package_type' => trim($_GET['package_type']),
+                'vehicle_type' => trim($_GET['vehicle_type'])
+            ];
+
+            redirect('package/packageUpdateForm/'.$data['id'].'/'.$data['package_type'].'/'.$data['vehicle_type']);
+        }
+        else{
+            $data = [
+                'id' => $land_ID,
+                'package_type' => $package_type,
+                'vehicle_type' => $vehicle_type
+            ];
+
+            $package = $this->parkingOwnerModel->viewToBeUpdatedPackage($data);
+
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            $data = [
+                'id' => $package[0]->pid,
+                'package_type' => $package[0]->name,
+                'vehicle_type' => $package[0]->packageType,
+                'package_price' => $package[0]->price,
+                'err' => ''
+            ];
+
+            $this->view('parkingOwner/packages/update', $data, $other_data);
+        }
+    }
+    public function priceUpdateForm($land_ID = null, $package_type = null){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
                 'pid' => trim($_POST['pid']),
                 'vehicle_type' => trim($_POST['vehicle_type']),
                 'hour_price' => trim($_POST['hour_price']),
@@ -46,6 +81,12 @@ class LandPrice extends Controller
             ];
 
             $prices = $this->landModel->viewPrice($data);
+
+            $prices['notification_count'] = 0;
+
+            if ($prices['notification_count'] < 10)
+                $prices['notification_count'] = '0'.$prices['notification_count'];
+
 
             $this->view('parkingOwner/prices/update', $data, $prices);
         }
@@ -59,14 +100,11 @@ class LandPrice extends Controller
 
             $data = [
                 'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
                 'vehicle_type' => trim($_POST['vehicle_type']),
                 'hour_price' => trim($_POST['hour_price']),
                 'additional_hour_price' => trim($_POST['additional_hour_price']),
                 'err' => ''
             ];
-
-            // die(print_r($data));
 
             // Validate data
             // Validate vehicle type
@@ -86,19 +124,11 @@ class LandPrice extends Controller
                 $data['err'] = 'Please enter additional hour price';
             }
 
-            // if($data['old_vehicle_type'] != $data['vehicle_type'] or $data['old_package_type'] != $data['package_type']){
-            //     if ($this->landModel->findPackage($data['id'], $data['package_type'], $data['vehicle_type'])){
-            //         $data['err'] = 'Package cannot be duplicate';
-            //     }
-            // }
-            
-            
-
             // Validation is completed and no error found
             if (empty($data['err'])) {
                 // Register package
                 if ($this->landModel->updatePrice($data)) {
-                    redirect('land/prices/'.$data['id'].'/'.$data['name']);
+                    redirect('land/prices/'.$data['id']);
                 } else {
                     die('Something went wrong');
                 }

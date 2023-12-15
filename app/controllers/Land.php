@@ -420,10 +420,9 @@ class Land extends Controller {
 
     // ------------------------------ Price ------------------------------
     // View all lands
-    public function prices($land_ID = null, $land_name = null){
+    public function prices($land_ID = null){
         if (sizeof($_GET) > 1){
             $data = [
-                'name' => trim($_GET['name']),
                 'id' => trim($_GET['id'])
             ];
     
@@ -431,11 +430,15 @@ class Land extends Controller {
         }
         else{
             $data = [
-                'name' => $land_name,
                 'id' => $land_ID
             ];
 
             $prices = $this->landModel->viewPrice($data);
+
+            $prices['notification_count'] = 0;
+
+            if ($prices['notification_count'] < 10)
+                $prices['notification_count'] = '0'.$prices['notification_count'];
 
             $this->view('parkingOwner/prices', $data, $prices);
         }
