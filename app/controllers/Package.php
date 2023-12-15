@@ -9,19 +9,24 @@ class Package extends Controller
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
-    public function viewPackages($parking_ID = null, $parking_name = null){
+    public function viewPackages($parking_ID = null){
         $data = [
             'id' => $parking_ID,
-            'name' => $parking_name
+            'name' => ''
         ];
 
         $packages = $this->parkingOwnerModel->viewPackages($data);
+
+        $packages['notification_count'] = 0;
+
+        if ($packages['notification_count'] < 10)
+            $packages['notification_count'] = '0'.$packages['notification_count'];
 
         $this->view('parkingOwner/packages/viewPackage', $data, $packages);
     }
 
     // Register Package
-    public function packageRegister($parking_ID = null, $parking_name = null){
+    public function packageRegister($parking_ID = null){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Submitted form data
             // input data
@@ -29,7 +34,6 @@ class Package extends Controller
 
             $data = [
                 'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
                 'vehicle_type' => trim($_POST['vehicle_type']),
                 'package_price' => trim($_POST['package_price']),
                 'package_type' => trim($_POST['package_type']),
@@ -77,15 +81,19 @@ class Package extends Controller
             // Initial form data
             $data = [
                 'id' => $parking_ID,
-                'name'=> $parking_name,
                 'vehicle_type' => '',
                 'package_price' => '',
                 'package_type' => '',
                 'err' => ''
             ];
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Load view
-            $this->view('parkingOwner/packages/create', $data);
+            $this->view('parkingOwner/packages/create', $data, $other_data);
         }
     }
 
@@ -112,7 +120,7 @@ class Package extends Controller
         }
     }
 
-    public function packageUpdateForm($land_ID = null, $land_name = null, $package_type = null, $vehicle_type = null){
+    public function packageUpdateForm($land_ID = null, $package_type = null, $vehicle_type = null){
         if (sizeof($_GET) > 1){
             $data = [
                 'name' => trim($_GET['name']),
@@ -121,11 +129,10 @@ class Package extends Controller
                 'vehicle_type' => trim($_GET['vehicle_type'])
             ];
 
-            redirect('package/packageUpdateForm/'.$data['id'].'/'.$data['name'].'/'.$data['package_type'].'/'.$data['vehicle_type']);
+            redirect('package/packageUpdateForm/'.$data['id'].'/'.$data['package_type'].'/'.$data['vehicle_type']);
         }
         else{
             $data = [
-                'name' => $land_name,
                 'id' => $land_ID,
                 'package_type' => $package_type,
                 'vehicle_type' => $vehicle_type
@@ -133,17 +140,20 @@ class Package extends Controller
 
             $package = $this->parkingOwnerModel->viewToBeUpdatedPackage($data);
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
             $data = [
                 'id' => $package[0]->pid,
-                'name' => $land_name,
                 'package_type' => $package[0]->name,
                 'vehicle_type' => $package[0]->packageType,
                 'package_price' => $package[0]->price,
                 'err' => ''
             ];
 
-            $this->view('parkingOwner/packages/update', $data);
+            $this->view('parkingOwner/packages/update', $data, $other_data);
         }
     }
 

@@ -19,7 +19,7 @@
                     <div class="dropdown-content">
                     <?php $parking_index = 0?>
                     <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {
+                        <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {
                             if($data['id'] == $other_data[$i]->id){
                                 $parking_index = $i;
                                 continue;
@@ -30,40 +30,6 @@
                 </div>
 
                 <div class="cards">
-                    <!-- Card 1 -->
-                    <a class="card-link" href="">
-                        <div class="card">
-                            <div class="row">
-                                <div class="left-col">
-                                    <div class="sub-row">
-                                        <div class="top-row">
-                                            <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                        </div>
-                                        <div class="bottom-row">8</div>
-                                    </div>
-                                </div>
-                                <div class="right-col">Total Lands</div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Card 2 -->
-                    <a class="card-link" href="">
-                        <div class="card">
-                            <div class="row">
-                                <div class="left-col">
-                                    <div class="sub-row">
-                                        <div class="top-row">
-                                            <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
-                                        </div>
-                                        <div class="bottom-row">8</div>
-                                    </div>
-                                </div>
-                                <div class="right-col">Total Lands</div>
-                            </div>
-                        </div>
-                    </a>
-
                     <!-- Card 3 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/deeds/<?php echo $other_data[$parking_index]->deed?>">
                         <div class="card">
@@ -82,7 +48,7 @@
                     </a>
 
                     <!-- Card 4 -->
-                    <a class="card-link" href="<?php echo URLROOT ?>/LandCapacity/viewCapacity/<?php echo $data['id']?>/<?php echo $data['name']?>">
+                    <a class="card-link" href="<?php echo URLROOT ?>/LandCapacity/viewCapacity/<?php echo $data['id']?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
@@ -93,13 +59,13 @@
                                         <div class="bottom-row"><?php echo $data['land_count'] ?></div>
                                     </div>
                                 </div>
-                                <div class="right-col">Parking Capacity</div>
+                                <div class="right-col">Parking<br />Capacity</div>
                             </div>
                         </div>
                     </a>
 
                     <!-- Card 5 -->
-                    <a class="card-link" href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                    <a class="card-link" href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
@@ -116,7 +82,7 @@
                     </a>
 
                     <!-- Card 6 -->
-                    <a class="card-link" href="<?php echo URLROOT ?>/package/viewPackages/<?php echo $data['id'] ?>/<?php echo $data['name'] ?>">
+                    <a class="card-link" href="<?php echo URLROOT ?>/package/viewPackages/<?php echo $data['id'] ?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">

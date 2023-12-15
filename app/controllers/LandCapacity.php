@@ -10,18 +10,23 @@ class LandCapacity extends Controller
     }
 
     // View capacity
-    public function viewCapacity($parking_ID = null, $parking_name = null){
+    public function viewCapacity($parking_ID = null){
         $data = [
             'id' => $parking_ID,
-            'name' => $parking_name
+            'name' => ''
         ];
 
         $capacity = $this->landModel->viewCapacity($data);
 
+        $capacity['notification_count'] = 0;
+
+        if ($capacity['notification_count'] < 10)
+            $capacity['notification_count'] = '0'.$capacity['notification_count'];
+
         $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
     }
 
-    public function capacityUpdateForm($land_ID = null, $land_name = null, $vehicle_type = null){
+    public function capacityUpdateForm($land_ID = null, $vehicle_type = null){
         if (sizeof($_GET) > 1){
             $data = [
                 'name' => trim($_GET['name']),
@@ -29,11 +34,10 @@ class LandCapacity extends Controller
                 'vehicle_type' => trim($_GET['vehicle_type'])
             ];
 
-            redirect('landCapacity/capacityUpdateForm/'.$data['id'].'/'.$data['name'].'/'.$data['vehicle_type']);
+            redirect('landCapacity/capacityUpdateForm/'.$data['id'].'/'.$data['vehicle_type']);
         }
         else{
             $data = [
-                'name' => $land_name,
                 'id' => $land_ID,
                 'vehicle_type' => $vehicle_type
             ];
@@ -41,9 +45,13 @@ class LandCapacity extends Controller
 
             $capacity = $this->landModel->viewCapacity($data);
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             if ($data['vehicle_type'] == 'car'){
                 $data = [
-                    'name' => $land_name,
                     'id' => $land_ID,
                     'vehicle_type' => $vehicle_type,
                     'capacity' => $capacity[0]->car
@@ -51,7 +59,6 @@ class LandCapacity extends Controller
             }
             else if ($data['vehicle_type'] == 'bike'){
                 $data = [
-                    'name' => $land_name,
                     'id' => $land_ID,
                     'vehicle_type' => $vehicle_type,
                     'capacity' => $capacity[0]->bike
@@ -59,14 +66,13 @@ class LandCapacity extends Controller
             }
             else if ($data['vehicle_type'] == 'threeWheel'){
                 $data = [
-                    'name' => $land_name,
                     'id' => $land_ID,
                     'vehicle_type' => $vehicle_type,
                     'capacity' => $capacity[0]->threeWheel
                 ];
             }
 
-            $this->view('parkingOwner/capacity/update', $data);
+            $this->view('parkingOwner/capacity/update', $data, $other_data);
         }
     }
 

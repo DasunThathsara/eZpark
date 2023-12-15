@@ -12,8 +12,15 @@ class ParkingOwner extends Controller {
         $lands = $this->landModel->viewLands();
 
         $data = [
-            'land_count' => $this->landModel->getLandCount()
+            'land_count' => $this->landModel->getLandCount(),
+            'total_capacity' => $this->landModel->getTotalCapacity()
         ];
+
+        $lands['notification_count'] = 0;
+
+        if ($lands['notification_count'] < 10)
+            $lands['notification_count'] = '0'.$lands['notification_count'];
+
         $this->view('parkingOwner/index', $data, $lands);
     }
 
@@ -21,9 +28,13 @@ class ParkingOwner extends Controller {
     // View all lands
     public function lands(){
         $lands = $this->landModel->viewLands();
-        
 
-        $this->view('parkingOwner/lands', $lands);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands', $lands, $other_data);
     }
 
     // Go to specific land
@@ -34,6 +45,11 @@ class ParkingOwner extends Controller {
         ];
 
         $lands = $this->landModel->viewLands();
+
+        $lands['notification_count'] = 0;
+
+        if ($lands['notification_count'] < 10)
+            $lands['notification_count'] = '0'.$lands['notification_count'];
 
         $data = [
             'id' => $land_ID,
@@ -55,6 +71,11 @@ class ParkingOwner extends Controller {
 
         $packages = $this->parkingOwnerModel->viewPackages($data);
 
+        $packages['notification_count'] = 0;
+
+        if ($packages['notification_count'] < 10)
+            $packages['notification_count'] = '0'.$packages['notification_count'];
+
         $this->view('parkingOwner/packages', $data, $packages);
     }
 
@@ -63,8 +84,12 @@ class ParkingOwner extends Controller {
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
 
+        $other_data['notification_count'] = 0;
 
-        $this->view('parkingOwner/capacity', $lands);
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/capacity', $lands, $other_data);
     }
 
     // -------------------------- Report ---------------------------

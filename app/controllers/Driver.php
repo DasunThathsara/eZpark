@@ -98,16 +98,20 @@ class Driver extends Controller {
         $this->view('driver/directionToParking', $vehicles);
     }
 
-    // ------------------------ After Select Location ------------------------
-    public function afterSelectLocation(){
-        $vehicles = $this->driverModel->viewVehicles();
+    // Go to specific land
+    public function gotoLand($land_ID = null){
+        $data = [
+            'id' => $land_ID
+        ];
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/afterSelectLocation', $vehicles, $other_data);
+        $lands = $this->landModel->viewLand($land_ID);
+
+        $this->view('driver/viewParking', $lands, $other_data);
     }
 
     // ------------------------ Scan QR Code ------------------------
