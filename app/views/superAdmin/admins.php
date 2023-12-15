@@ -43,9 +43,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             </div>
                                         </td>
                                         <td class="options">
-                                            <form action="<?php echo URLROOT ?>/superAdmin/editAdmin" method="post" class="edit-form">
+                                            <form action="<?php echo URLROOT ?>/superAdmin/updateAdmin" method="get" class="edit-form">
                                                 <input type="text" name="id" id="id" hidden value="" />
-                                                <button type="submit" class="delete" onclick="return confirmDelete();">
+                                                <button type="submit" class="delete">
                                                     <img src="<?php echo URLROOT ?>/images/edit-solid.svg" style="width: 15px; margin-top: 4px" alt="" class="delete-ico">
                                                 </button>
                                             </form>
