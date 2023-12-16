@@ -177,8 +177,9 @@ class UserModel{
         $row = $this->db->single();
         $id = $row->id;
 
-        // Prepare statement
+        $result = true;
 
+        // Prepare statement
         if ($data['user_type'] == 'merchandiser'){
             $this->db->query('INSERT INTO parkingowner (id) VALUES (:id)');
             $this->db->bind(':id', $id);
@@ -189,11 +190,22 @@ class UserModel{
             $this->db->bind(':website', $data['website']);
             $this->db->bind(':merchandiserName', $data['merchantName']);
             $this->db->bind(':merchantType', $data['merchantType']);
+
+            $result = $this->db->execute();
+        }
+        else if ($data['user_type'] == 'security'){
+            $this->db->query('INSERT INTO security (id, NIC, experience, address, preferredDistrictToWork) VALUES (:id, :NIC, :experience, :address, :preferredDistrictToWork)');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':NIC', $data['NIC']);
+            $this->db->bind(':experience', $data['experience']);
+            $this->db->bind(':address', $data['address']);
+            $this->db->bind(':preferredDistrictToWork', $data['city']);
+
+            $result = $this->db->execute();
         }
 
-
         // Execute
-        if ($this->db->execute()){
+        if ($result){
             return true;
         }
         else {
@@ -223,7 +235,7 @@ class UserModel{
     {
         $this->db->query('SELECT * FROM user WHERE username = :username AND status = :status');
         $this->db->bind(':username', $username);
-        $this->db->bind(':status', $state);
+        $this->db->bind(':status', 1);
 
         $row = $this->db->single();
 
