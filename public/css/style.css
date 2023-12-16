@@ -21,6 +21,33 @@ body{
     font-family: 'Trebuchet MS', sans-serif;
 }
 
+select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(138,138,138,0.35);
+    color: #8a8a8a;
+    background-color: white;
+}
+
+textarea{
+    background-color: white;
+    border: 1px solid rgba(138,138,138,0.37);
+    border-radius: 10px;
+    color: #8a8a8a;
+    padding: 10px;
+    max-width: 100%;
+    width: 95%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    height: 100px;
+    resize: none;
+}
+
 /* --- Selection styles --- */
 ::selection {
     background-color: rgba(252, 204, 4, 0.34);
@@ -101,7 +128,7 @@ a{
 }
 
 /* ------------------------------- SVG Styles ------------------------------- */
-.svg .svg-1{
+.svg-1{
     width: 700px;
     position: absolute;
     top: -250px;
@@ -109,13 +136,12 @@ a{
     z-index: -1;
 }
 
-.svg .svg-2{
+.svg-2{
     width: 300px;
     position: absolute;
     bottom: 0;
     right: 0;
     z-index: -1;
-    overflow: hidden;
 }
 
 /* --------------------- Loading Page -------------------- */
