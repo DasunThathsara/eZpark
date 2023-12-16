@@ -5,10 +5,10 @@
         <div class="items">
             <a href="<?php echo URLROOT ?>/<?php echo $_SESSION['user_type'] ?>/index">
                 <?php if ($section == 'dashboard'){?>
-                    <div class="item selected"><img src="<?php echo URLROOT ?>/images/home.svg" alt="">Dashboard</div>
+                    <div class="item selected"><img style="transform: translateY(2px)" src="<?php echo URLROOT ?>/images/home.svg" alt="">Dashboard</div>
                 <?php }
                 else{ ?>
-                    <div class="item"><img src="<?php echo URLROOT ?>/images/home.svg" alt="">Dashboard</div>
+                    <div class="item"><img style="transform: translateY(2px)" src="<?php echo URLROOT ?>/images/home.svg" alt="">Dashboard</div>
                 <?php } ?>
             </a>
 
@@ -89,31 +89,42 @@
             <?php if ($_SESSION['user_type'] == 'parkingOwner'){ ?>
                 <a href="<?php echo URLROOT ?>/parkingOwner/lands">
                     <?php if ($section == 'lands'){?>
-                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
                     <?php }
                     else{ ?>
-                        <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
                     <?php } ?>
                 </a>
 
                 <a href="<?php echo URLROOT ?>/parkingOwner/viewReport">
                     <?php if ($section == 'reports'){?>
-                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                        <div class="item selected"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
                     <?php }
                     else{ ?>
-                        <div class="item"><img src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                        <div class="item"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
                     <?php } ?>
                 </a>
             <?php } ?>
 
-            <a href="<?php echo URLROOT ?>/users/viewProfile">
-                <?php if ($section == 'profile'){?>
-                    <div class="item selected"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+            <a href="<?php echo URLROOT ?>/parkingOwner/viewSecurity">
+                <?php if ($section == 'security'){?>
+                    <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/security-officer.svg" alt="">Security</div>
                 <?php }
                 else{ ?>
-                    <div class="item"><img src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+                    <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/security-officer.svg" alt="">Security</div>
                 <?php } ?>
             </a>
+
+            <a href="<?php echo URLROOT ?>/users/viewProfile">
+                <?php if ($section == 'profile'){?>
+                    <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+                <?php }
+            else{ ?>
+                    <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>
+                <?php } ?>
+            </a>
+
+
             <div class="logout"><a href="<?php echo URLROOT ?>/users/logout">Logout</a></div>
         </div>
     </div>

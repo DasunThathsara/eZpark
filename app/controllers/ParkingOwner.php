@@ -6,6 +6,7 @@ class ParkingOwner extends Controller {
         $this->middleware->checkAccess(['parkingOwner']);
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
         $this->landModel = $this->model('LandModel');
+        $this->securityModel = $this->model('SecurityModel');
     }
 
     public function index(){
@@ -24,7 +25,7 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/index', $data, $lands);
     }
 
-    // ------------------------------ Lands ------------------------------
+    // --------------------------------------- Lands ---------------------------------------
     // View all lands
     public function lands(){
         $lands = $this->landModel->viewLands();
@@ -55,13 +56,14 @@ class ParkingOwner extends Controller {
             'id' => $land_ID,
             'name' => $land_name,
             'package_count' => $this->parkingOwnerModel->getPackageCount($data),
-            'land_count' => $this->landModel->getLandCount($data)
+            'land_count' => $this->landModel->getLandCount($data),
+            'security_count' => $this->securityModel->getSecurityCount($land_ID)
         ];
 
         $this->view('parkingOwner/land', $data, $lands);
     }
 
-    // ----------------------------- Packages -----------------------------
+    // -------------------------------------- Packages -------------------------------------
     // View all packages
     public function packages($parking_ID = null, $parking_name = null){
         $data = [
@@ -79,7 +81,7 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/packages', $data, $packages);
     }
 
-    // ----------------------------- Parking Capacity -----------------------------
+    // --------------------------------- Parking Capacity ----------------------------------
     // View all packages
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
@@ -92,11 +94,26 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/capacity', $lands, $other_data);
     }
 
-    // -------------------------- Report ---------------------------
+    // -------------------------------------- Report ---------------------------------------
     public function viewReport(){
         $data = [
             'title' => 'Home page'
         ];
         $this->view('parkingOwner/report', $data);
+    }
+
+    // --------------------------------------- Lands ---------------------------------------
+    // View all securities
+    public function securities($landID){
+        $data = [
+            'securities' => $this->securityModel->getSecurityCount($landID)
+        ];
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands', $data, $other_data);
     }
 }

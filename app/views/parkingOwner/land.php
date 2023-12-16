@@ -30,24 +30,24 @@
                 </div>
 
                 <div class="cards">
-                    <!-- Card 3 -->
+                    <!-- Card 1 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/deeds/<?php echo $other_data[$parking_index]->deed?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
                                     <div class="sub-row">
                                         <div class="top-row">
-                                            <img src="<?php echo URLROOT ?>/images/deed.svg" alt="">
+                                            <img style="transform: translateY(7px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">
                                         </div>
                                         <div class="bottom-row"></div>
                                     </div>
                                 </div>
-                                <div class="right-col">Deed</div>
+                                <div style="transform: translateY(5px)" class="right-col">Deed</div>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 4 -->
+                    <!-- Card 2 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/LandCapacity/viewCapacity/<?php echo $data['id']?>">
                         <div class="card">
                             <div class="row">
@@ -64,24 +64,24 @@
                         </div>
                     </a>
 
-                    <!-- Card 5 -->
+                    <!-- Card 3 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
                                     <div class="sub-row">
                                         <div class="top-row">
-                                        <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                        <img style="transform: translateY(10px)" src="<?php echo URLROOT ?>/images/price.svg" alt="">
                                         </div>
                                         <div class="bottom-row"></div>
                                     </div>
                                 </div>
-                                <div class="right-col">Price Rate</div>
+                                <div style="transform: translateY(7px)" class="right-col">Price Rate</div>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 6 -->
+                    <!-- Card 4 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/package/viewPackages/<?php echo $data['id'] ?>">
                         <div class="card">
                             <div class="row">
@@ -94,6 +94,43 @@
                                     </div>
                                 </div>
                                 <div class="right-col">Packages</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 5 -->
+                    <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/securities/<?php echo $data['id'] ?>">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img src="<?php echo URLROOT ?>/images/security-officer.svg" alt="">
+                                        </div>
+                                        <div class="bottom-row"><?php echo $data['security_count'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="right-col">Security<br />Officers</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 6 -->
+                    <a class="card-link" href="">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/dollar.svg" alt="">
+                                        </div>
+                                        <div class="bottom-row"></div>
+                                    </div>
+                                </div>
+                                <div style="transform: translateY(-20px)" class="right-col">
+                                    <p style="font-size: 15px">Monthly Income</p>
+                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                                </div>
                             </div>
                         </div>
                     </a>
