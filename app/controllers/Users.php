@@ -343,6 +343,8 @@ class Users extends Controller{
                 'contact_no' => trim($_POST['contact_no']),
                 'NIC' => trim($_POST['NIC']),
                 'experience' => trim($_POST['experience']),
+                'city' => trim($_POST['city']),
+                'address' => trim($_POST['address']),
                 'err' => ''
             ];
 
@@ -353,49 +355,68 @@ class Users extends Controller{
             }
 
             // Validate email
-            if (empty($data['email'])){
+            if (empty($data['email']) and $data['err'] == ''){
                 $data['err'] = 'Please enter email';
             } else {
                 // Check email
-                if ($this->userModel->findUserByEmail($data['email'])){
+                if ($this->userModel->findUserByEmail($data['email']) and $data['err'] == ''){
                     $data['err'] = 'Email is already taken';
                 }
             }
 
             // Validate username
-            if (empty($data['username'])){
+            if (empty($data['username']) and $data['err'] == ''){
                 $data['err'] = 'Please enter username';
             } else {
                 // Check email
-                if ($this->userModel->findUserByUsername($data['username'])){
+                if ($this->userModel->findUserByUsername($data['username']) and $data['err'] == ''){
                     $data['err'] = 'Username is already taken';
                 }
             }
 
             // Validate password
-            if (empty($data['password'])){
+            if (empty($data['password']) and $data['err'] == ''){
                 $data['err'] = 'Please enter password';
-            } elseif (strlen($data['password']) < 6){
+            } elseif (strlen($data['password']) < 6 and $data['err'] == ''){
                 $data['err'] = 'Password must be at least 6 characters';
             }
 
             // Validate confirm password
-            if (empty($data['confirm_password'])){
+            if (empty($data['confirm_password']) and $data['err'] == ''){
                 $data['err'] = 'Please confirm password';
             } else {
-                if ($data['password'] != $data['confirm_password']){
+                if ($data['password'] != $data['confirm_password'] and $data['err'] == ''){
                     $data['err'] = 'Passwords do not match';
                 }
             }
 
             // Validate user type
-            if (empty($data['user_type'])){
+            if (empty($data['user_type']) and $data['err'] == ''){
                 $data['err'] = 'Please select user type';
             }
 
             // Validate contact number
-            if (empty($data['contact_no'])){
+            if (empty($data['contact_no']) and $data['err'] == '' and $data['err'] == ''){
                 $data['err'] = 'Please enter contact number';
+            }
+
+            // Validate NIC
+            if (empty($data['NIC']) and $data['err'] == ''){
+                $data['err'] = 'Please enter NIC';
+            }
+            else if (strlen($data['NIC']) == 10 and ($data['NIC'][9] == 'V' or $data['NIC'][9] == 'v')){
+                $data['err'] = '';
+            }
+            else if (strlen($data['NIC']) == 12 and ctype_digit($data['NIC'])){
+                $data['err'] = '';
+            }
+            else{
+                $data['err'] = 'Invalid NIC';
+            }
+
+            // Validate address
+            if (empty($data['address']) and $data['err'] == ''){
+                $data['err'] = 'Please enter address';
             }
 
             // Validation is completed and no error found
@@ -427,6 +448,8 @@ class Users extends Controller{
                 'NIC' => '',
                 'experience' => '',
                 'err' => '',
+                'city' => '',
+                'address' => ''
             ];
 
             // Load view

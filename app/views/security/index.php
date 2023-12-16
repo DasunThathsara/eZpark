@@ -12,6 +12,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
             <h1>Security Dashboard</h1>
+            <div class="emptyVehicle">Currently you have no any parking</div>
         </div>
     </section>
 </main>
