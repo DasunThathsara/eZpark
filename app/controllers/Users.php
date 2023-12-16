@@ -419,6 +419,25 @@ class Users extends Controller{
                 $data['err'] = 'Please enter address';
             }
 
+            // Validate city
+            if (empty($data['city']) and $data['err'] == ''){
+                $data['err'] = 'Please select city';
+            }
+
+            $province = ['Northern' => ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu', 'Vavuniya'], 'North Western' => ['Kurunegala', 'Puttalam'], 'Western' => ['Colombo', 'Gampaha', 'Kalutara'], 'North Central' => ['Anuradhapura', 'Polonnaruwa'], 'Central' => ['Kandy', 'Matale', 'Nuwara Eliya'], 'Sabaragamuwa' => ['Kegalle', 'Ratnapura'], 'Southern' => ['Galle', 'Matara', 'Hambantota'], 'Uva' => ['Badulla', 'Monaragala'], 'Eastern' => ['Ampara', 'Batticaloa', 'Trincomalee']];
+            $flag = 0;
+            foreach ($province as $key => $value){
+                if (in_array($data['city'], $value)){
+                    $data['province'] = $key;
+                    $flag = 1;
+                    break;
+                }
+            }
+
+            if ($flag == 0){
+                $data['err'] = 'Invalid District';
+            }
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Hash password
