@@ -18,10 +18,11 @@ class SecurityModel{
         return $row->{'COUNT(*)'};
     }
 
-    public function viewSecurities(){
-        $this->db->query('SELECT * FROM land WHERE uid = :uid and status = :status');
-        $this->db->bind(':uid', $_SESSION['user_id']);
-        $this->db->bind(':status', 1);
+    public function viewSecurities($landID){
+        $this->db->query('SELECT * FROM user u JOIN security s ON u.id = s.id WHERE s.landID = :landID;');
+
+        // Bind values
+        $this->db->bind(':landID', $landID);
 
         $row = $this->db->resultSet();
 

@@ -21,4 +21,6 @@ class Security extends Controller {
 
         $this->view('security/index', $data, $other_data);
     }
+
+    //
 }

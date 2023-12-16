@@ -102,18 +102,20 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/report', $data);
     }
 
-    // --------------------------------------- Lands ---------------------------------------
+    // ------------------------------------ Securities -------------------------------------
     // View all securities
     public function securities($landID){
         $data = [
-            'securities' => $this->securityModel->getSecurityCount($landID)
+            'id' => $landID
         ];
+
+        $other_data = $this->securityModel->viewSecurities($landID);
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('parkingOwner/lands', $data, $other_data);
+        $this->view('parkingOwner/securities', $data, $other_data);
     }
 }
