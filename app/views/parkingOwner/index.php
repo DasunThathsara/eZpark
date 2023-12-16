@@ -35,7 +35,7 @@
                                     <div class="bottom-row"><?php echo $data['land_count'] ?></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Lands</div>
+                            <div style="transform: translateY(10px)" class="right-col">Total Lands</div>
                         </div>
                     </div>
                 </a>
@@ -52,7 +52,7 @@
                                     <div class="bottom-row"><?php echo $data['total_capacity']?></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Capacity</div>
+                            <div style="transform: translateY(10px)" class="right-col">Total Capacity</div>
                         </div>
                     </div>
                 </a>
@@ -64,12 +64,15 @@
                             <div class="left-col">
                                 <div class="sub-row">
                                     <div class="top-row">
-                                        <img src="<?php echo URLROOT ?>/images/dollar.svg" alt="">
+                                        <img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/dollar.svg" alt="">
                                     </div>
                                     <div class="bottom-row"></div>
                                 </div>
                             </div>
-                            <div class="right-col">Monthly Income</div>
+                            <div style="transform: translateY(-20px)" class="right-col">
+                                <p style="font-size: 15px">Monthly Income</p>
+                                <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                            </div>
                         </div>
                     </div>
                 </a>
