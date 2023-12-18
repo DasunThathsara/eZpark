@@ -11,56 +11,76 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Lands</h1>
+            <h1 class="title">All Lands</h1>
+            <p class="subtitle">View and Edit information related to Lands</p>
 
             <br><br>
-            <a class="add-btn" href="<?php echo URLROOT ?>/land/landRegister" style="font-weight: 1000; font-size: 20px">+</a>
+            <a class="add-btn" href="<?php echo URLROOT ?>/land/landRegister">Add new <span>+</span></a>
 
-            <?php if (sizeof($data) == 0) {?>
-                <div class="emptyLand">You have no any registered lands</div>
-            <?php }
-            else {?>
-                <!-- Search bar -->
-                <input type="search" class="data-search" placeholder="Search..">
-
-                <!-- Card set -->
-                <div class="user-cards"></div>
-                <template class="data-user-template">
-                    <div class="card">
-                        <a href="" class="tile">
-                            <table>
-                                <tr>
-                                    <td class="header" data-header></td>
-                                    <td class="options">
-                                        <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
-                                            <input type="text" name="id" id="id" hidden value="" />
-                                            <input type="text" name="name" id="name" hidden value="" />
-                                            <button type="submit" class="price">
-                                                <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
-                                            </button>
-                                        </form>
-                                        &nbsp;
-                                        <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
-                                            <input type="text" name="name" id="name" hidden value="" />
-                                            <input type="text" name="id" id="id" hidden value="" />
-                                            <button type="submit" class="edit">
-                                                <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
-                                            </button>
-                                        </form>
-                                        &nbsp;
-                                        <form action="<?php echo URLROOT ?>/land/landRemove" method="post" class="delete-form">
-                                            <input type="text" name="name" id="name" hidden value="" />
-                                            <button type="submit" class="delete" onclick="return confirmSubmit();">
-                                                <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </table>
-                        </a>
+            <div class="content-body">
+                <?php if (sizeof($data) == 0) {?>
+                    <div class="emptyLand">You have no any registered lands</div>
+                <?php }
+                else {?>
+                    <!-- Search area -->
+                    <div class="search-area">
+                        <!-- Search bar -->
+                        <input type="search" class="data-search" placeholder="Search land...">
                     </div>
-                </template>
-            <?php } ?>
+
+                    <!-- Card set -->
+                    <div class="user-card-title">
+                        <div class="name">Name</div>
+                        <div class="location">Location</div>
+                        <div class="status">Status</div>
+                    </div>
+                    <div class="user-cards"></div>
+                    <template class="data-user-template">
+                        <div class="card">
+                            <a href="" class="tile">
+                                <table>
+                                    <tr>
+                                        <td style="min-width: 150px; width: 30%; font-size: 14px; border: 1px solid black;" data-header>
+                                            <p class="name" style="transform: translateY(5px);"></p>
+                                            <p style="font-size: 12px; color: #8a8a8a; transform: translateY(-5px);">Land ID: <span class="id"></span></p>
+                                        </td>
+                                        <td class="location" style="min-width: 150px; width: 30%; font-size: 14px; border: 1px solid black;" data-header>
+                                            <p class="name"></p>
+                                        </td>
+                                        <td class="status" style="width: 20%; font-size: 14px; border: 1px solid black;" data-header>Available</td>
+                                        <td class="status" style="width: 20%; font-size: 14px; border: 1px solid black;" data-header>Available</td>
+
+                                        <td class="options" style="border: 1px solid black;">
+                                            <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
+                                                <input type="text" name="id" id="id" hidden value="" />
+                                                <input type="text" name="name" id="name" hidden value="" />
+                                                <button type="submit" class="price">
+                                                    <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                                </button>
+                                            </form>
+                                            &nbsp;
+                                            <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
+                                                <input type="text" name="name" id="name" hidden value="" />
+                                                <input type="text" name="id" id="id" hidden value="" />
+                                                <button type="submit" class="edit">
+                                                    <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                </button>
+                                            </form>
+                                            &nbsp;
+                                            <form action="<?php echo URLROOT ?>/land/landRemove" method="post" class="delete-form">
+                                                <input type="text" name="name" id="name" hidden value="" />
+                                                <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                    <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </a>
+                        </div>
+                    </template>
+                <?php } ?>
+            </div>
         </div>
     </section>
 </main>
@@ -90,7 +110,9 @@
     lands = backendData.map(land => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
-        card.querySelector(".header").textContent = land.name;
+        card.querySelector(".name").textContent = land.name;
+        card.querySelector(".location").textContent = land.city;
+        card.querySelector(".id").textContent = land.id;
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
     

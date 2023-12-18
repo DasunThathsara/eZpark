@@ -14,9 +14,10 @@
 
 /* ----------------- General Styles ---------------- */
 body{
-    background-color: #f8f8f8;
+    /*background-color: #f8f8f8;*/
     overflow-x: hidden;
 }
+
 *{
     font-family: 'Trebuchet MS', sans-serif;
 }
@@ -107,6 +108,24 @@ a{
         margin-left: 20px;
         transition: 1s, transform 1s;
     }
+}
+
+.page-container .section .container .content-body{
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.12);
+    margin-right: 15px;
+}
+
+.page-container .section .container .title{
+    color: #ffc32d;
+    transform: translateY(15px);
+}
+
+.page-container .section .container .subtitle{
+    color: rgba(0, 0, 0, 0.34);
+    font-size: 10px;
 }
 
 .container .error-img{
@@ -238,24 +257,25 @@ a{
 
 
 /* ---------------------------------- Land Search Bar ---------------------------------- */
-.data-search{
-    position: absolute;
-    right: 35px;
-    top: 150px;
+.search-area{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.search-area .data-search{
     border-radius: 20px;
     outline: none;
-    border: 0px solid rgba(0, 0, 0, 0.247);
+    border: none;
     padding: 10px 5px 10px 15px;
     width: 150px;
     transition: 0.5s;
-    box-shadow: 0 0 4px 0.1px rgba(0, 0, 0, 0.2);
 }
 
-.data-search:hover{
+.search-area .data-search:hover{
     width: 250px;
 }
 
-.data-search:focus{
+.search-area .data-search:focus{
     width: 250px;
 }
 

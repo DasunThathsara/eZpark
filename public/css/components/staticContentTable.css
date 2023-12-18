@@ -1,19 +1,31 @@
 /* ---------------------------------- Content Table Style ---------------------------------- */
 .page-container .section .container .add-btn{
     text-decoration: none;
-    background-color: #fdc63e;
-    width: 100%;
-    color: #000000;
+    background-color: #ffc837;
+    color: #ffffff;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
     margin-left: 5vw;
+    position: absolute;
+    right: 30px;
+    top: 55px;
+    font-weight: 1000;
+    font-size: 15px
+}
+
+.page-container .section .container .add-btn span{
+    background-color: #ffffff;
+    color: #fdc63e;
+    border-radius: 50px;
+    padding: 0px 5px 1px 5px;
+    font-size: 18px;
 }
 
 .page-container .section .container .add-btn:hover{
-    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.20);
+   scale: 1.05;
 }
 
 .page-container .section .container .sub-option {
@@ -48,7 +60,7 @@
 
 .page-container .section .container td{
     border-bottom: none;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .page-container .section .container td .tile{
@@ -61,7 +73,7 @@
     width: 100%;
     border-radius: 10px;
     transition: 0.5s;
-    padding-right: 20px;
+    padding-right: 10px;
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
     background-color: white;
     padding-bottom: 15px;

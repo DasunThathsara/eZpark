@@ -5,6 +5,7 @@ class Security extends Controller {
         // Only security personnel are allowed to access security pages
         $this->middleware->checkAccess(['security']);
         $this->landModel = $this->model('LandModel');
+        $this->securityModel = $this->model('SecurityModel');
     }
 
     public function index(){
@@ -12,9 +13,7 @@ class Security extends Controller {
             'title' => 'Home page'
         ];
 
-
-
-        $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
+        $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -22,5 +21,21 @@ class Security extends Controller {
         $this->view('security/index', $data, $other_data);
     }
 
-    //
+    // Add security
+    public function securitySearch($landID = null){
+        $data = [
+            'id' => $landID
+        ];
+
+        $other_data = $this->securityModel->viewAllSecurities();
+
+        die(print_r($other_data));
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('security/securityRegister', $data, $other_data);
+    }
 }

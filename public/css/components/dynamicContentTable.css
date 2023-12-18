@@ -3,19 +3,33 @@
     display: none;
 }
 
+.user-card-title{
+    display: flex;
+}
+
+.user-card-title .name{
+    padding-left: 10px;
+    width: 10%;
+}
+
+.user-card-title .location{
+    padding-left: 10px;
+}
+
 .user-cards{
     width: 100%;
     margin-top: 40px;
 }
 
 .user-cards .card{
-    margin-top: 10px;
+    margin-top: -1px;
     transition: 0.5s;
-    margin-right: 20px;
-    border-radius: 10px;
+    /*margin-right: 20px;*/
+    /*border-radius: 10px;*/
     background-color: white;
-    box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    border: 1px solid #e1e1e1;
+    /*box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);*/
+    padding: 0 10px;
 }
 
 .user-cards .card:hover{
