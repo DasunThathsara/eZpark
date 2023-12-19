@@ -122,6 +122,18 @@
 }
 
 @media screen and (max-width: 660px){
+    .user-card-title .name{
+        width: 38%;
+    }
+
+    .user-card-title .location{
+        display: none;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
     .user-cards .card .name-td{
         width: 40%;
     }
@@ -140,6 +152,22 @@
 }
 
 @media screen and (max-width: 426px){
+    .user-card-title .name{
+        width: 38%;
+    }
+
+    .user-card-title .location{
+        display: none;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-card-title .status{
+        display: none;
+    }
+
     .user-cards .card .name-td{
         width: 80%;
     }
