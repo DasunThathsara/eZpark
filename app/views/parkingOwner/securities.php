@@ -11,10 +11,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Packages</h1>
+            <h1>Securities</h1>
 
             <br><br>
-            <a class="add-btn" href="<?php echo URLROOT ?>/package/packageRegister/<?php echo $data['id'] ?> ?>" style="font-weight: 1000; font-size: 20px">+</a>
+            <a class="add-btn" href="<?php echo URLROOT ?>/security/securitySearch/<?php echo $data['id'] ?> ?>" style="font-weight: 1000; font-size: 20px">+</a>
 
             <?php if (sizeof($other_data) == 1) {?>
                 <div class="emptyVehicle">You have no any securities</div>
@@ -40,7 +40,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <div class="left" style="width:50%;">
                                                 <?php echo $other_data[$i]->name ?>
                                             </div>
-                                            <div class="right" style="width:50%;">
+                                            <div class="right" style="width: calc(50% - 30px);">
                                                 <form action="<?php echo URLROOT ?>/security/securityRemove" method="post">
                                                     <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->id ?>" />
                                                     <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
@@ -60,9 +60,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     </section>
 </main>
+
 <script>
     function confirmSubmit() {
         return confirm("Are you sure you want to delete this vehicle?");
     }
 </script>
+
 <?php require APPROOT.'/views/inc/footer.php'; ?>

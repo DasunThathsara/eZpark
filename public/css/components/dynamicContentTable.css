@@ -3,31 +3,196 @@
     display: none;
 }
 
+.user-card-title{
+    display: flex;
+    border: 1px solid #e1e1e1;
+    transform: translateY(40px);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(140, 140, 140, 0.12);
+}
+
+.user-card-title .name{
+    padding-left: 10px;
+    width: 25%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .location{
+    width: 22%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .capacity{
+    width: 21%;
+    transition: 1s, transform 1s;
+    padding-left: 5px;
+}
+
+.ser-card-title .status{
+    padding-left: 30px;
+}
+
 .user-cards{
     width: 100%;
     margin-top: 40px;
 }
 
 .user-cards .card{
-    margin-top: 10px;
+    margin-top: -1px;
     transition: 0.5s;
-    margin-right: 20px;
-    border-radius: 10px;
+    /*margin-right: 20px;*/
+    /*border-radius: 10px;*/
     background-color: white;
-    box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    border: 1px solid #e1e1e1;
+    /*box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);*/
+    padding: 0 10px;
 }
 
 .user-cards .card:hover{
-    scale: 1.02;
+    background-color: rgba(176, 176, 176, 0.11);
+}
+
+.user-cards .card .name-td{
+    min-width: 80px;
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+    /*border: 1px solid black;*/
+}
+
+.user-cards .card .name-td .name{
+    transform: translateY(5px);
+}
+
+.user-cards .card .name-td .id-p{
+    font-size: 12px;
+    color: #8a8a8a;
+    transform: translateY(-5px);
+}
+
+.user-cards .card .location{
+    min-width: 80px;
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+    /*border: 1px solid black;*/
+}
+
+.user-cards .card .capacity{
+    width: 20%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+    /*border: 1px solid black;*/
+}
+
+.user-cards .card .status-td{
+    width: 20%;
+    font-size: 14px;
+    /*border: 1px solid black;*/
+}
+
+
+
+@media screen and (max-width: 690px){
+    .user-card-title .name{
+        width: 31%;
+    }
+
+    .user-card-title .location{
+        width: 33%;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-cards .card .name-td{
+        width: 35%;
+    }
+
+    .user-cards .card .location{
+        width: 35%;
+    }
+    .user-cards .card .capacity{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 660px){
+    .user-card-title .name{
+        width: 38%;
+    }
+
+    .user-card-title .location{
+        display: none;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-cards .card .name-td{
+        width: 40%;
+    }
+
+    .user-cards .card .location{
+        display: none;
+    }
+
+    .user-cards .card .capacity{
+        display: none;
+    }
+
+    .user-cards .card .status-td{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 426px){
+    .user-card-title .name{
+        width: 38%;
+    }
+
+    .user-card-title .location{
+        display: none;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-card-title .status{
+        display: none;
+    }
+
+    .user-cards .card .name-td{
+        width: 80%;
+    }
+
+    .user-cards .card .location{
+        display: none;
+    }
+
+    .user-cards .card .capacity{
+        display: none;
+    }
+
+    .user-cards .card .status-td{
+        display: none;
+    }
 }
 
 .user-cards .card .options{
     display: flex;
+    margin-top: 13px;
+    transition: 1s, transform 1s;
 }
 
 .user-cards .card .options .price{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     margin-top: 12px;
 }
@@ -43,7 +208,7 @@
 }
 
 .user-cards .card .options .delete{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     margin-top: 12px;
 }
@@ -59,7 +224,7 @@
 }
 
 .user-cards .card .options .edit{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     margin-top: 12px;
 }
