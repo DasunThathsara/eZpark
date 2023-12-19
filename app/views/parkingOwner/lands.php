@@ -32,6 +32,7 @@
                     <div class="user-card-title">
                         <div class="name">Name</div>
                         <div class="location">Location</div>
+                        <div class="capacity">Capacity</div>
                         <div class="status">Status</div>
                     </div>
                     <div class="user-cards"></div>
@@ -40,17 +41,15 @@
                             <a href="" class="tile">
                                 <table>
                                     <tr>
-                                        <td style="min-width: 150px; width: 30%; font-size: 14px; border: 1px solid black;" data-header>
-                                            <p class="name" style="transform: translateY(5px);"></p>
-                                            <p style="font-size: 12px; color: #8a8a8a; transform: translateY(-5px);">Land ID: <span class="id"></span></p>
-                                        </td>
-                                        <td class="location" style="min-width: 150px; width: 30%; font-size: 14px; border: 1px solid black;" data-header>
+                                        <td class="name-td" data-header>
                                             <p class="name"></p>
+                                            <p class="id-p">Land ID: <span class="id"></span></p>
                                         </td>
-                                        <td class="status" style="width: 20%; font-size: 14px; border: 1px solid black;" data-header>Available</td>
-                                        <td class="status" style="width: 20%; font-size: 14px; border: 1px solid black;" data-header>Available</td>
+                                        <td class="location" data-header></td>
+                                        <td class="capacity" data-header>100</td>
+                                        <td class="status-td" data-header><span class="status" style="background-color: rgba(1,255,1,0.15); padding: 1px 5px; border-radius: 10px; color: #006b00">&bull; Available</span></td>
 
-                                        <td class="options" style="border: 1px solid black;">
+                                        <td class="options">
                                             <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
                                                 <input type="text" name="id" id="id" hidden value="" />
                                                 <input type="text" name="name" id="name" hidden value="" />
