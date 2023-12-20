@@ -1,16 +1,102 @@
+/* ----------------------------------- Title Options ----------------------------------- */
+.title-options{
+    display: flex;
+    font-size: 14px;
+    color: #969696;
+    width: 230px;
+    justify-content: space-between;
+}
+
+.option-break{
+    transform: translateY(-10px);
+    z-index: -1;
+    color: rgba(0, 0, 0, 0.18);
+}
+
+.title-options .option-item{
+    cursor: pointer;
+    transition: 0.5s;
+    border-bottom: 2px solid rgba(85, 0, 255, 0);
+    padding-bottom: 10px;
+}
+
+.title-options .option-item:hover{
+    border-bottom: 2px solid #630072;
+    color: #630072;
+}
+
+.title-options .option-item-active{
+    border-bottom: 2px solid #630072;
+    color: #630072;
+}
+
+/* ---------------------------------- Land Search Bar ---------------------------------- */
+.search-area{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-5px);
+}
+
+.search-area .data-search{
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 5px 10px 15px;
+    width: 85%;
+    transition: 0.5s;
+    height: 50px;
+}
+
+.search-area .data-search:focus{
+    width: 250px;
+}
+
+.search-area .filter-area{
+    align-items: center;
+    display: flex;
+}
+
+.search-area .filter-area .filter-btn{
+    width: 25px;
+    height: 25px;
+    box-shadow: 0 0 3px 0.1px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.search-area .filter-area .filter-btn:hover{
+    cursor: pointer;
+    box-shadow: 0 0 3px 0.1px rgba(0, 0, 0, 0.3);
+}
+
+
 /* ---------------------------------- Dynamic Content Table ---------------------------------- */
 .hide{
     display: none;
 }
 
+.card-set-container{
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    height: 50vh;
+    overflow-x: scroll;
+    transform: translateY(-30px);
+}
+
 .user-card-title{
     display: flex;
     border: 1px solid #e1e1e1;
-    transform: translateY(40px);
+    transform: translateY(10px);
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 10px 10px 0 0;
-    background-color: rgba(140, 140, 140, 0.12);
+    background-color: rgb(239, 239, 239);
+    z-index: 10;
 }
 
 .user-card-title .name{
@@ -40,12 +126,11 @@
 }
 
 .user-cards .card{
-    margin-top: -1px;
     transition: 0.5s;
     /*margin-right: 20px;*/
     /*border-radius: 10px;*/
     background-color: white;
-    border: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
     /*box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);*/
     padding: 0 10px;
 }
@@ -59,17 +144,11 @@
     width: 30%;
     font-size: 14px;
     transition: 1s, transform 1s;
-    /*border: 1px solid black;*/
-}
-
-.user-cards .card .name-td .name{
-    transform: translateY(5px);
 }
 
 .user-cards .card .name-td .id-p{
     font-size: 12px;
     color: #8a8a8a;
-    transform: translateY(-5px);
 }
 
 .user-cards .card .location{
@@ -77,23 +156,18 @@
     width: 30%;
     font-size: 14px;
     transition: 1s, transform 1s;
-    /*border: 1px solid black;*/
 }
 
 .user-cards .card .capacity{
     width: 20%;
     font-size: 14px;
     transition: 1s, transform 1s;
-    /*border: 1px solid black;*/
 }
 
 .user-cards .card .status-td{
     width: 20%;
     font-size: 14px;
-    /*border: 1px solid black;*/
 }
-
-
 
 @media screen and (max-width: 690px){
     .user-card-title .name{
@@ -123,7 +197,7 @@
 
 @media screen and (max-width: 660px){
     .user-card-title .name{
-        width: 38%;
+        width: 42%;
     }
 
     .user-card-title .location{
@@ -135,7 +209,7 @@
     }
 
     .user-cards .card .name-td{
-        width: 40%;
+        width: 45%;
     }
 
     .user-cards .card .location{
@@ -147,7 +221,7 @@
     }
 
     .user-cards .card .status-td{
-        width: 40%;
+        width: 45%;
     }
 }
 
