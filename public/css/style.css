@@ -255,30 +255,6 @@ a{
     background-color: #fdc63e;
 }
 
-
-/* ---------------------------------- Land Search Bar ---------------------------------- */
-.search-area{
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-}
-
-.search-area .data-search{
-    border-radius: 20px;
-    outline: none;
-    border: none;
-    padding: 10px 5px 10px 15px;
-    width: 150px;
-    transition: 0.5s;
-}
-
-.search-area .data-search:hover{
-    width: 250px;
-}
-
-.search-area .data-search:focus{
-    width: 250px;
-}
-
 /* ---------------------------------- Profile Styles ---------------------------------- */
 .page-container .section .container .form-container .profile-container{
     width: 100%;

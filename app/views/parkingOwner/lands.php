@@ -22,62 +22,74 @@
                     <div class="emptyLand">You have no any registered lands</div>
                 <?php }
                 else {?>
+                    <div class="title-options">
+                        <div class="all-lands option-item option-item-active">All Lands</div>
+                        <div class="available-lands option-item">Available</div>
+                        <div class="unavailable-lands option-item">Unavailable</div>
+                    </div>
+                    <hr class="option-break" />
                     <!-- Search area -->
                     <div class="search-area">
                         <!-- Search bar -->
                         <input type="search" class="data-search" placeholder="Search land...">
+                        <div class="filter-area">
+                            <img class="filter-btn" src="<?php echo URLROOT?>/images/filter-ico.png" alt="">
+                        </div>
                     </div>
 
-                    <!-- Card set -->
                     <div class="user-card-title">
                         <div class="name">Name</div>
                         <div class="location">Location</div>
                         <div class="capacity">Capacity</div>
                         <div class="status">Status</div>
                     </div>
-                    <div class="user-cards"></div>
-                    <template class="data-user-template">
-                        <div class="card">
-                            <a href="" class="tile">
-                                <table>
-                                    <tr>
-                                        <td class="name-td" data-header>
-                                            <p class="name"></p>
-                                            <p class="id-p">Land ID: <span class="id"></span></p>
-                                        </td>
-                                        <td class="location" data-header></td>
-                                        <td class="capacity" data-header>100</td>
-                                        <td class="status-td" data-header><span class="status" style="background-color: rgba(1,255,1,0.15); padding: 1px 5px; border-radius: 10px; color: #006b00">&bull; Available</span></td>
 
-                                        <td class="options">
-                                            <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
-                                                <input type="text" name="id" id="id" hidden value="" />
-                                                <input type="text" name="name" id="name" hidden value="" />
-                                                <button type="submit" class="price">
-                                                    <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
-                                                </button>
-                                            </form>
-                                            &nbsp;
-                                            <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
-                                                <input type="text" name="name" id="name" hidden value="" />
-                                                <input type="text" name="id" id="id" hidden value="" />
-                                                <button type="submit" class="edit">
-                                                    <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
-                                                </button>
-                                            </form>
-                                            &nbsp;
-                                            <form action="<?php echo URLROOT ?>/land/landRemove" method="post" class="delete-form">
-                                                <input type="text" name="name" id="name" hidden value="" />
-                                                <button type="submit" class="delete" onclick="return confirmSubmit();">
-                                                    <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </a>
-                        </div>
-                    </template>
+                    <div class="card-set-container">
+                        <!-- Card set -->
+                        <div class="user-cards"></div>
+                        <template class="data-user-template">
+                            <div class="card">
+                                <a href="" class="tile">
+                                    <table>
+                                        <tr>
+                                            <td class="name-td" data-header>
+                                                <p class="name"></p>
+                                                <p class="id-p">Land ID: <span class="id"></span></p>
+                                            </td>
+                                            <td class="location" data-header></td>
+                                            <td class="capacity" data-header>100</td>
+                                            <td class="status-td" data-header><span class="status" style="background-color: rgba(1,255,1,0.15); padding: 1px 5px; border-radius: 10px; color: #006b00">&bull; Available</span></td>
+
+                                            <td class="options">
+                                                <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
+                                                    <input type="text" name="id" id="id" hidden value="" />
+                                                    <input type="text" name="name" id="name" hidden value="" />
+                                                    <button type="submit" class="price">
+                                                        <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
+                                                    <input type="text" name="name" id="name" hidden value="" />
+                                                    <input type="text" name="id" id="id" hidden value="" />
+                                                    <button type="submit" class="edit">
+                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/land/landRemove" method="post" class="delete-form">
+                                                    <input type="text" name="name" id="name" hidden value="" />
+                                                    <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                        <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </a>
+                            </div>
+                        </template>
+                    </div>
                 <?php } ?>
             </div>
         </div>
