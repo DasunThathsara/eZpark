@@ -58,7 +58,7 @@
                                             </td>
                                             <td class="location" data-header></td>
                                             <td class="capacity" data-header>100</td>
-                                            <td class="status-td" data-header><span class="status" style="background-color: rgba(1,255,1,0.15); padding: 1px 5px; border-radius: 10px; color: #006b00">&bull; Available</span></td>
+                                            <td class="status-td" data-header><span class="status"></span></td>
 
                                             <td class="options">
                                                 <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
@@ -124,6 +124,15 @@
         card.querySelector(".name").textContent = land.name;
         card.querySelector(".location").textContent = land.city;
         card.querySelector(".id").textContent = land.id;
+        if (land.availability === 0){
+            card.querySelector(".status").textContent = 'Unavailable';
+            card.querySelector(".status").classList.add("status-unavailable");
+        }else{
+
+            card.querySelector(".status").textContent = 'Available';
+            card.querySelector(".status").classList.add("status-available");
+        }
+
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
     
@@ -176,7 +185,47 @@
             }
         }
 
-        return { id: land.id, name: land.name, city: land.city, street: land.street, element: card };
+        return { id: land.id, name: land.name, city: land.city, street: land.street, availability: land.availability, element: card };
+    });
+    
+    // ------------------------------- Filter -------------------------------
+    const allLands = document.querySelector(".all-lands");
+    const availableLands = document.querySelector(".available-lands");
+    const unavailableLands = document.querySelector(".unavailable-lands");
+    
+    allLands.addEventListener("click", () => {
+        allLands.classList.add("option-item-active");
+        availableLands.classList.remove("option-item-active");
+        unavailableLands.classList.remove("option-item-active");
+        lands.forEach(land => {
+            land.element.classList.remove("hide");
+        });
+    });
+
+    availableLands.addEventListener("click", () => {
+        allLands.classList.remove("option-item-active");
+        availableLands.classList.add("option-item-active");
+        unavailableLands.classList.remove("option-item-active");
+        lands.forEach(land => {
+            if (land.availability === 1) {
+                land.element.classList.remove("hide");
+            } else {
+                land.element.classList.add("hide");
+            }
+        });
+    });
+    
+    unavailableLands.addEventListener("click", () => {
+        allLands.classList.remove("option-item-active");
+        availableLands.classList.remove("option-item-active");
+        unavailableLands.classList.add("option-item-active");
+        lands.forEach(land => {
+            if (land.availability === 0) {
+                land.element.classList.remove("hide");
+            } else {
+                land.element.classList.add("hide");
+            }
+        });
     });
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>

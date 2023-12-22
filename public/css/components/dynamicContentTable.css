@@ -118,6 +118,7 @@
 
 .ser-card-title .status{
     padding-left: 30px;
+    background-color: rgba(1,255,1,0.15); padding: 1px 5px; border-radius: 10px; color: #006b00
 }
 
 .user-cards{
@@ -167,6 +168,21 @@
 .user-cards .card .status-td{
     width: 20%;
     font-size: 14px;
+}
+
+.user-cards .card .status-td .status{
+    padding: 1px 5px;
+    border-radius: 10px;
+}
+
+.status-available{
+    color: #006b00;
+    background-color: rgba(1,255,1,0.15);
+}
+
+.status-unavailable{
+    color: #6b0000;
+    background-color: rgba(255, 51, 51, 0.34);
 }
 
 @media screen and (max-width: 690px){
