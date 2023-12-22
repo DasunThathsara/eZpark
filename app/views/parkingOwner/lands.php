@@ -178,5 +178,47 @@
 
         return { id: land.id, name: land.name, city: land.city, street: land.street, element: card };
     });
+    
+    // ------------------------------- Filter -------------------------------
+    const allLands = document.querySelector(".all-lands");
+    const availableLands = document.querySelector(".available-lands");
+    const unavailableLands = document.querySelector(".unavailable-lands");
+    
+    allLands.addEventListener("click", () => {
+        allLands.classList.add("option-item-active");
+        availableLands.classList.remove("option-item-active");
+        unavailableLands.classList.remove("option-item-active");
+        lands.forEach(land => {
+            land.element.classList.remove("hide");
+        });
+    });
+
+    console.log('------------------------------');
+    availableLands.addEventListener("click", () => {
+        allLands.classList.remove("option-item-active");
+        availableLands.classList.add("option-item-active");
+        unavailableLands.classList.remove("option-item-active");
+        lands.forEach(land => {
+            if (land.availability === 1) {
+                console.log('avail');
+                land.element.classList.remove("hide");
+            } else {
+                land.element.classList.add("hide");
+            }
+        });
+    });
+    
+    unavailableLands.addEventListener("click", () => {
+        allLands.classList.remove("option-item-active");
+        availableLands.classList.remove("option-item-active");
+        unavailableLands.classList.add("option-item-active");
+        lands.forEach(land => {
+            if (land.availability === 0) {
+                land.element.classList.remove("hide");
+            } else {
+                land.element.classList.add("hide");
+            }
+        });
+    });
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>
