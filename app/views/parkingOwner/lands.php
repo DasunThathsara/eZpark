@@ -57,7 +57,7 @@
                                                 <p class="id-p">Land ID: <span class="id"></span></p>
                                             </td>
                                             <td class="location" data-header></td>
-                                            <td class="capacity" data-header>100</td>
+                                            <td class="capacity" data-header></td>
                                             <td class="status-td" data-header><span class="status"></span></td>
 
                                             <td class="options">
@@ -123,6 +123,7 @@
         console.log(card);
         card.querySelector(".name").textContent = land.name;
         card.querySelector(".location").textContent = land.city;
+        card.querySelector(".capacity").textContent = land.car + land.bike + land.threeWheel;
         card.querySelector(".id").textContent = land.id;
         if (land.availability === 0){
             card.querySelector(".status").textContent = 'Unavailable';

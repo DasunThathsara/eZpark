@@ -1,3 +1,5 @@
+/* --------------------------- Common form styles ------------------------- */
+
 .form-container {
     margin-left: auto;
     margin-right: auto;
@@ -10,6 +12,11 @@
     opacity: 0;
     transform: translateY(50px);
     transition: 1s, transform 1s;
+}
+
+.form-container .form-input-title{
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.47);
 }
 
 .form-container .type-select{
@@ -139,8 +146,7 @@ input[placeholder]{
 }
 
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-bottom: 1px solid #9a9a9a;
 }
 
 .input-box-err{
@@ -175,7 +181,7 @@ input[type=submit]:hover {
     background-color: rgba(255, 0, 0, 0.07);
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 0 20px 10px 20px;
 }
 
 .user-selection-container {
@@ -219,3 +225,40 @@ input[type=submit]:hover {
     margin-top: 10px;
     display: none;
 }
+
+/* ----------------- Land register form ----------------- */
+.land-register-form {
+    margin-left: 0;
+    width: 80vw;
+    max-width: calc(80vw - 450px);
+    margin-top: 50px;
+}
+
+.land-register-form-expand {
+    margin-left: 0;
+    width: 80vw;
+    max-width: calc(80vw - 100px);
+}
+
+@media screen and (max-width: 940px){
+    .land-register-form {
+        margin-left: 0;
+        width: 80vw;
+        max-width: calc(80vw - 240px);
+    }
+
+    .land-register-form-expand {
+        margin-left: 0;
+        width: 95vw;
+        max-width: calc(95vw - 40px);
+    }
+}
+
+@media screen and (max-width: 720px){
+    .land-register-form {
+        margin-left: 0;
+        width: 100vw;
+        max-width: calc(100vw - 70px);
+    }
+}
+

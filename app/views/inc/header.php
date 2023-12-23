@@ -11,6 +11,8 @@
 
     <!-- External js -->
     <script src="<?php echo URLROOT ?>/js/script.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 

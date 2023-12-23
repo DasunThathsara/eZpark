@@ -240,6 +240,11 @@ class Land extends Controller {
                 $data['err'] = 'Please upload deed';
             }
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Generate QR code
@@ -259,7 +264,7 @@ class Land extends Controller {
             } else {
                 // Load view with errors
 //                die(print_r($data));
-                $this->view('parkingOwner/lands/create', $data);
+                $this->view('parkingOwner/lands/create', $data, $other_data);
             }
 
         } else {
@@ -275,10 +280,15 @@ class Land extends Controller {
                 'contactNo' => '',
                 'err' => ''
             ];
-//            die(print_r($data));
+
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
 
             // Load view
-            $this->view('parkingOwner/lands/create', $data);
+            $this->view('parkingOwner/lands/create', $data, $other_data);
         }
     }
 
