@@ -99,7 +99,13 @@ class ParkingOwner extends Controller {
         $data = [
             'title' => 'Home page'
         ];
-        $this->view('parkingOwner/report', $data);
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/report', $data, $other_data);
     }
 
     // ------------------------------------ Securities -------------------------------------

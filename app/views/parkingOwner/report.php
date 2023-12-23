@@ -12,16 +12,38 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <div class="row">
-            </div>
-            <div class="row mt-5">
-                <h3>Reports</h3>
-                <div class="col-xl-6">
-                    <h5>Generate a Sample Report</h5>
-                    <p class="text-warning" id="message"></p>
-                    <button class="btn btn-primary m-3" id="gen" onclick="generatePDF()">Genetate</button>
-                    <button class="btn btn-primary m-3" id="view" onclick="viewPDF()" style="display: none;">View</button>
-                    <button class="btn btn-success m-3" id="down" onclick="downloadBlob()" style="display: none;">Download</button>
+            <h1 class="title">Reports</h1>
+            <p class="subtitle">Generate a report for your land</p>
+
+
+            <div class="report-container">
+                <div class="report-img">
+                    <img src="<?php echo URLROOT ?>/images/report-pic.png" alt="logo">
+                    <p class="text-heading">Select Date Range</p>
+                    <input type="date" name="start_date" id="start_date" />
+                    -
+                    <input type="date" name="end_date" id="end_date" />
+
+                    <div class="gen-area">
+                        <p class="text-warning" id="message"></p>
+                        <button class="gen-btn" id="gen" onclick="generatePDF()">Generate Report</button>
+                        <button class="view-btn" id="view" onclick="viewPDF()" style="display: none;">View</button>
+                        <button class="download-btn" id="down" onclick="downloadBlob()" style="display: none;">Download</button>
+                    </div>
+                </div>
+
+                <div class="report-des">
+                    <h1 class="title">How to Generate</h1>
+                    <h1 class="title" style="color: #626262; transform: translateY(-35px)">Your Report</h1>
+
+                    <div class="report-ins">
+                        <ul>
+                            <li>Select the preferred Date Range for the Report</li>
+                            <li>Click “Generate Report”</li>
+                            <li>Report will be Automatically Downloaded</li>
+                            <li>Use Adobe PDF Viewer or any other suitable software to view the report</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

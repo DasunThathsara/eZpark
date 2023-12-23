@@ -344,3 +344,120 @@ a{
 .page-container .section .container .details{
     transform: translateY(50px);
 }
+
+/* -------------------------- Report Page -------------------------- */
+.page-container .section .container .report-container{
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 20px;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-img{
+    margin-left: 5%;
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-img img{
+    width: 300px;
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-img .text-heading{
+    text-align: center;
+    font-size: 18px;
+    color: #626262;
+}
+
+.page-container .section .container .report-container .report-img .gen-area{
+    text-align: center;
+}
+
+.page-container .section .container .report-container .report-img .gen-area .gen-btn, .view-btn, .download-btn{
+    padding: 10px;
+    background-color: #fdc63e;
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    transition: 0.3s;
+}
+
+.page-container .section .container .report-container .report-img .gen-area .gen-btn, .view-btn, .download-btn:hover{
+    cursor: pointer;
+    background-color: #ffb700;
+}
+
+.page-container .section .container .report-container .report-des{
+    padding-left: 5%;
+    padding-right: 5%;
+    margin: 10px;
+    /*background-color: green;*/
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-des .report-ins{
+    transform: translateX(-30px);
+    color: #626262;
+}
+
+.page-container .section .container .report-container .report-des .report-ins ul li{
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1560px){
+    .page-container .section .container .report-container .report-img{
+        margin-left: 1%;
+        padding: 20px;
+        width: 50%;
+        text-align: center;
+    }
+
+    .page-container .section .container .report-container .report-des{
+        padding-left: 1%;
+        padding-right: 1%;
+        margin: 10px;
+    }
+}
+
+@media screen and (max-width: 970px){
+    .page-container .section .container .report-container .report-img{
+        margin-left: 1%;
+        padding: 20px 10px;
+        width: 50%;
+        text-align: center;
+    }
+
+    .page-container .section .container .report-container .report-des{
+        padding-right: 1%;
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 680px){
+    .page-container .section .container .report-container .report-img{
+        margin-left: 1%;
+        padding: 20px 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-container .section .container .report-container .report-des{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .page-container .section .container .report-container .report-img img{
+        width: 250px;
+    }
+}

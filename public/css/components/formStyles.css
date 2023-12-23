@@ -116,6 +116,21 @@ input[type=text], input[type=password], input[type=email], input[type=number]{
     transition: ease-in 0.3s;
 }
 
+input[type=date]{
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: none;
+    transition: 1s, transform 1s;
+}
+
+@media screen and (max-width: 380px){
+    input[type=date]{
+        padding: 4px 4px;
+    }
+}
+
 input[placeholder]{
     color: rgba(0, 0, 0, 0.47);
 }
