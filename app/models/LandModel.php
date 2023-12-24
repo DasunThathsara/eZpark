@@ -49,6 +49,33 @@ class LandModel{
         }
     }
 
+    // Get land name
+    public function getLandName($land_ID){
+        $this->db->query('SELECT name FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->name;
+    }
+
+    // Set land availability
+    public function changeAvailability($land_ID): bool{
+        // Prepare statement
+        $this->db->query('UPDATE land SET availability = CASE WHEN availability = 1 THEN 0 WHEN availability = 0 THEN 1 ELSE availability END WHERE id = :id;');
+
+        // Bind values
+        $this->db->bind(':id', $land_ID);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     // Set security availability
     public function updateSecurityOfficerAvail($data): bool{
         // die(print_r($data));
@@ -67,6 +94,16 @@ class LandModel{
         else {
             return false;
         }
+    }
+
+    // Get availability
+    public function getAvailability($land_ID){
+        $this->db->query('SELECT availability FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->availability;
     }
 
     // Set three wheel price

@@ -39,10 +39,10 @@ class ParkingOwner extends Controller {
     }
 
     // Go to specific land
-    public function gotoLand($land_ID = null, $land_name = null){
+    public function gotoLand($land_ID = null){
         $data = [
             'id' => $land_ID,
-            'name' => $land_name
+            'name' => $this->landModel->getLandName($land_ID),
         ];
 
         $lands = $this->landModel->viewLands();
@@ -54,10 +54,11 @@ class ParkingOwner extends Controller {
 
         $data = [
             'id' => $land_ID,
-            'name' => $land_name,
+            'name' => $this->landModel->getLandName($land_ID),
             'package_count' => $this->parkingOwnerModel->getPackageCount($data),
             'land_count' => $this->landModel->getLandCount($data),
-            'security_count' => $this->securityModel->getSecurityCount($land_ID)
+            'security_count' => $this->securityModel->getSecurityCount($land_ID),
+            'availability' => $this->landModel->getAvailability($land_ID),
         ];
 
         $this->view('parkingOwner/land', $data, $lands);

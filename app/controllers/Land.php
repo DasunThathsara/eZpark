@@ -17,9 +17,8 @@ class Land extends Controller {
 
     // ------------------------------ Lands ------------------------------
     public function changeAvailability($land_ID = null){
-        die(print_r($land_ID));
-        if ($this->landModel->changeAvailability()){
-            redirect('parkingOwner/land');
+        if ($this->landModel->changeAvailability($land_ID)){
+            redirect('parkingOwner/gotoLand/'.$land_ID);
         } else {
             die('Something went wrong');
         }
