@@ -464,13 +464,17 @@ a{
 
 
 /* -------------------------------- Toggle button styles -------------------------------- */
+.toggle-title{
+    transform: translate(10px, 70px);
+}
+
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 35px;
     scale: 0.9;
-    transform: translate(200px, -5px);
+    transform: translate(120px, 50px);
 }
 
 .switch input {

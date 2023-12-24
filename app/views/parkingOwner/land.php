@@ -31,6 +31,10 @@
                 </div>
 
                 <!-- Toggle Button -->
+                <div class="toggle-title">
+                    Availability
+                </div>
+
                 <label class="switch">
                     <?php if($data['availability'] == 1){?>
                         <input type="checkbox" id="toggleButton" checked>
