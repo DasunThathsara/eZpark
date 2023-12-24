@@ -13,6 +13,7 @@
         <div class="container">
             <h1>Dashboard</h1>
 
+            <!-- Dropdown Menu -->
             <div class="dropdown">
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
@@ -22,6 +23,7 @@
                 </div>
             </div>
 
+            <!-- Card Set -->
             <div class="cards">
                 <!-- Card 1 -->
                 <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/lands">

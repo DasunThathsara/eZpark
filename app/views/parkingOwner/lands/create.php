@@ -29,15 +29,54 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <br><br>
 
-                    <!-- City -->
-                    <div class="form-input-title">City:</div>
-                    <input type="text" name="city" id="city" required value="<?php echo $data['city'] ?>" />
+                    <!-- Address -->
+                    <div class="form-input-title">Address:</div>
+                    <input type="text" name="address" id="address" required value="<?php echo $data['address'] ?>" />
 
                     <br><br>
 
                     <!-- Street -->
                     <div class="form-input-title">Street:</div>
                     <input type="text" name="street" id="street" required value="<?php echo $data['street'] ?>" />
+
+                    <br><br>
+
+                    <!-- City -->
+                    <div class="form-input-title">City:</div>
+                    <input type="text" name="city" id="city" required value="<?php echo $data['city'] ?>" />
+
+                    <br><br>
+
+                    <!-- District -->
+                    <div class="form-input-title">District:</div>
+                    <select name="district" id="district" required>
+                        <option value="" disabled selected>Select District</option>
+                        <option value="Ampara" <?php if ($data['district'] == 'Ampara') echo 'selected' ?>>Ampara</option>
+                        <option value="Anuradhapura" <?php if ($data['district'] == 'Anuradhapura') echo 'selected' ?>>Anuradhapura</option>
+                        <option value="Badulla" <?php if ($data['district'] == 'Badulla') echo 'selected' ?>>Badulla</option>
+                        <option value="Batticaloa" <?php if ($data['district'] == 'Batticaloa') echo 'selected' ?>>Batticaloa</option>
+                        <option value="Colombo" <?php if ($data['district'] == 'Colombo') echo 'selected' ?>>Colombo</option>
+                        <option value="Galle" <?php if ($data['district'] == 'Galle') echo 'selected' ?>>Galle</option>
+                        <option value="Gampaha" <?php if ($data['district'] == 'Gampaha') echo 'selected' ?>>Gampaha</option>
+                        <option value="Hambantota" <?php if ($data['district'] == 'Hambantota') echo 'selected' ?>>Hambantota</option>
+                        <option value="Jaffna" <?php if ($data['district'] == 'Jaffna') echo 'selected' ?>>Jaffna</option>
+                        <option value="Kandy" <?php if ($data['district'] == 'Kandy') echo 'selected' ?>>Kandy</option>
+                        <option value="Kalutara" <?php if ($data['district'] == 'Kalutara') echo 'selected' ?>>Kalutara</option>
+                        <option value="Kegalle" <?php if ($data['district'] == 'Kegalle') echo 'selected' ?>>Kegalle</option>
+                        <option value="Kilinochchi" <?php if ($data['district'] == 'Kilinochchi') echo 'selected' ?>>Kilinochchi</option>
+                        <option value="Kurunegala" <?php if ($data['district'] == 'Kurunegala') echo 'selected' ?>>Kurunegala</option>
+                        <option value="Mannar" <?php if ($data['district'] == 'Mannar') echo 'selected' ?>>Mannar</option>
+                        <option value="Matara" <?php if ($data['district'] == 'Matara') echo 'selected' ?>>Matara</option>
+                        <option value="Matale" <?php if ($data['district'] == 'Matale') echo 'selected' ?>>Matale</option>
+                        <option value="Monaragala" <?php if ($data['district'] == 'Monaragala') echo 'selected' ?>>Monaragala</option>
+                        <option value="Mullaitivu" <?php if ($data['district'] == 'Mullaitivu') echo 'selected' ?>>Mullaitivu</option>
+                        <option value="Nuwara Eliya" <?php if ($data['district'] == 'Nuwara Eliya') echo 'selected' ?>>Nuwara Eliya</option>
+                        <option value="Polonnaruwa" <?php if ($data['district'] == 'Polonnaruwa') echo 'selected' ?>>Polonnaruwa</option>
+                        <option value="Puttalam" <?php if ($data['district'] == 'Puttalam') echo 'selected' ?>>Puttalam</option>
+                        <option value="Ratnapura" <?php if ($data['district'] == 'Ratnapura') echo 'selected' ?>>Ratnapura</option>
+                        <option value="Trincomalee" <?php if ($data['district'] == 'Trincomalee') echo 'selected' ?>>Trincomalee</option>
+                        <option value="Vavuniya" <?php if ($data['district'] == 'Vavuniya') echo 'selected' ?>>Vavuniya</option>
+                    </select>
 
                     <br><br>
 
@@ -81,67 +120,29 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             </div>
         </div>
 
-        <div class="open-side-cards-btn" onclick="closeRightCardInForm()">View Transaction</div>
+        <div class="open-side-cards-btn" onclick="closeRightCardInForm()">View Instructions</div>
 
         <div class="side-cards">
             <div class="close-btn" onclick="closeRightCardInForm()">X</div>
-            <div class="close-btn" onclick="closeRightCardInForm()">X</div>
-            <div class="close-btn" onclick="closeRightCardInForm()">X</div>
-            <div class="close-btn" onclick="closeRightCardInForm()">X</div>
-            <div class="close-btn" onclick="closeRightCardInForm()">X</div>
-            <div class="close-btn" onclick="closeRightCardInForm()">X</div>
-            <h2>Recent Transaction</h2>
+            <h2>Instructions</h2>
 
-            <p><span>&#9632;</span>Today</p>
+            <br>
 
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
+            <p><span>&#9632;</span>Sample image</p>
+
+            <div style="display: flex; justify-content: center;">
+                <div class="instruction-img" style="width: 90%;">
+                    <img style="width: 100%; border-radius: 20px;" src="<?php echo URLROOT ?>/public/images/parking_bg1.jpg" alt="land-register-1">
+                </div>
             </div>
 
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
+            <br><br>
 
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
-
-            <p><span>&#9632;</span>Yesterday</p>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
+            <p><span>&#9632;</span>Sizes</p>
+            <div style="margin-left: 30px; font-size: 13px;">
+                <div style="margin-top: 10px;">Car: 4x5</div>
+                <div style="margin-top: 10px;">Bike: 2x4</div>
+                <div style="margin-top: 10px;">Three Wheel: 3x4</div>
             </div>
         </div>
     </section>
