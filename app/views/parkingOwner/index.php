@@ -18,7 +18,7 @@
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
                     <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
-                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>
+                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
                     <?php } ?>
                 </div>
             </div>

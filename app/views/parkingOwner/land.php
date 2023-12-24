@@ -25,14 +25,18 @@
                                 $parking_index = $i;
                                 continue;
                             }?>     
-                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>  
+                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
                         <?php } ?>
                     </div>
                 </div>
 
                 <!-- Toggle Button -->
                 <label class="switch">
-                    <input type="checkbox" id="toggleButton" checked>
+                    <?php if($data['availability'] == 1){?>
+                        <input type="checkbox" id="toggleButton" checked>
+                    <?php } else {?>
+                        <input type="checkbox" id="toggleButton">
+                    <?php }?>
                     <span class="slider round"></span>
                 </label>
 

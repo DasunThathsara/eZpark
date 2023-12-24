@@ -139,7 +139,7 @@
     
         // Set the parking view link
         if (tileLink) {
-            tileLink.href = `gotoLand/${land.id}/${land.name}`;
+            tileLink.href = `gotoLand/${land.id}`;
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
