@@ -12,6 +12,10 @@
     <!-- External js -->
     <script src="<?php echo URLROOT ?>/js/script.js" defer></script>
 
+    <!-- AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>

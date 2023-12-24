@@ -16,6 +16,15 @@ class Land extends Controller {
     }
 
     // ------------------------------ Lands ------------------------------
+    public function changeAvailability($land_ID = null){
+        die(print_r($land_ID));
+        if ($this->landModel->changeAvailability()){
+            redirect('parkingOwner/land');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
     public function setPriceForm(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
@@ -49,6 +58,11 @@ class Land extends Controller {
                 $data['err'] = 'Invalid data type for three wheels';
             }
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
@@ -59,7 +73,7 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
-                $this->view('parkingOwner/lands/setPrice', $data);
+                $this->view('parkingOwner/lands/setPrice', $data, $other_data);
             }
 
         } else {
@@ -73,13 +87,23 @@ class Land extends Controller {
 
             ];
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Load view
-            $this->view('parkingOwner/lands/create', $data);
+            $this->view('parkingOwner/lands/create', $data, $other_data);
         }
     }
 
     public function setPrice($data){
-        $this->view('parkingOwner/lands/setPrice', $data);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands/setPrice', $data, $other_data);
     }
     
     public function secAvailSet(){
@@ -106,6 +130,11 @@ class Land extends Controller {
                 $data['err'] = 'Please enter secAvail';
             }
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
@@ -116,7 +145,7 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
-                $this->view('parkingOwner/lands', $data);
+                $this->view('parkingOwner/lands', $data, $other_data);
             }
 
         } else {
@@ -128,13 +157,23 @@ class Land extends Controller {
                 'threeWheel' => ''
             ];
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Load view
-            $this->view('parkingOwner/lands/create', $data);
+            $this->view('parkingOwner/lands/create', $data, $other_data);
         }
     }
     
     public function aboutSecurityOfficer($data){
-        $this->view('parkingOwner/lands/aboutSecurityOfficer', $data);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands/aboutSecurityOfficer', $data, $other_data);
     }
 
     public function deedUpload($file){
@@ -187,6 +226,9 @@ class Land extends Controller {
                 'bike' => trim($_POST['bike']),
                 'threeWheel' => trim($_POST['threeWheel']),
                 'contactNo' => trim($_POST['contactNo']),
+                'address' => trim($_POST['address']),
+                'district' => trim($_POST['district']),
+                'province' => '',
                 'err' => ''
             ];
 
@@ -245,6 +287,31 @@ class Land extends Controller {
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
+
+            // Validate address
+            if (empty($data['address']) and $data['err'] == ''){
+                $data['err'] = 'Please enter address';
+            }
+
+            // Validate district
+            if (empty($data['district']) and $data['err'] == ''){
+                $data['err'] = 'Please select district';
+            }
+
+            $province = ['Northern' => ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu', 'Vavuniya'], 'North Western' => ['Kurunegala', 'Puttalam'], 'Western' => ['Colombo', 'Gampaha', 'Kalutara'], 'North Central' => ['Anuradhapura', 'Polonnaruwa'], 'Central' => ['Kandy', 'Matale', 'Nuwara Eliya'], 'Sabaragamuwa' => ['Kegalle', 'Ratnapura'], 'Southern' => ['Galle', 'Matara', 'Hambantota'], 'Uva' => ['Badulla', 'Monaragala'], 'Eastern' => ['Ampara', 'Batticaloa', 'Trincomalee']];
+            $flag = 0;
+            foreach ($province as $key => $value){
+                if (in_array($data['district'], $value)){
+                    $data['province'] = $key;
+                    $flag = 1;
+                    break;
+                }
+            }
+
+            if ($flag == 0){
+                $data['err'] = 'Invalid District';
+            }
+
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Generate QR code
@@ -278,6 +345,8 @@ class Land extends Controller {
                 'bike' => '',
                 'threeWheel' => '',
                 'contactNo' => '',
+                'address' => '',
+                'district' => '',
                 'err' => ''
             ];
 

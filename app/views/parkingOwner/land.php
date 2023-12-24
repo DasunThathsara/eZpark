@@ -14,6 +14,7 @@
             <div class="container">
                 <h1><?php echo $data['name'] ?> Dashboard</h1>
 
+                <!-- Dropdown Menu -->
                 <div class="dropdown">
                     <button class="dropbtn">Select Parking</button>
                     <div class="dropdown-content">
@@ -29,6 +30,13 @@
                     </div>
                 </div>
 
+                <!-- Toggle Button -->
+                <label class="switch">
+                    <input type="checkbox" id="toggleButton" checked>
+                    <span class="slider round"></span>
+                </label>
+
+                <!-- Card Set -->
                 <div class="cards">
                     <!-- Card 1 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/deeds/<?php echo $other_data[$parking_index]->deed?>">
@@ -258,5 +266,28 @@
             }
         });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#toggleButton').change(function () {
+                var isChecked = $(this).prop('checked');
+                console.log("Checkbox is checked: " + isChecked);
+
+                $.ajax({
+                    url: '<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>',
+                    method: 'GET',
+                    data: { isChecked: isChecked },
+                    success: function (response) {
+                        console.log("AJAX success:", response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error:", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
