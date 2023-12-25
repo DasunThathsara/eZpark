@@ -539,4 +539,23 @@ class Land extends Controller {
 
         $this->view('parkingOwner/securities/add', $data, $other_data);
     }
+
+    // Send request for security
+    public function sendRequest(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $landID = trim($_POST['landID']);
+            $securityID = trim($_POST['securityID']);
+
+            // Send request
+            if ($this->securityModel->sendRequest($landID, $securityID)){
+                redirect('land/securitySearch/'.$landID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
 }

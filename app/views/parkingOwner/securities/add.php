@@ -58,9 +58,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <td class="province" data-header></td>
 
                                             <td class="options">
-                                                <form action="<?php echo URLROOT ?>/security/prices" method="get" class="price-form">
-                                                    <input type="text" name="id" id="id" hidden value="" />
-                                                    <input type="text" name="name" id="name" hidden value="" />
+                                                <form action="<?php echo URLROOT ?>/land/sendRequest" method="POST" class="price-form">
+                                                    <input type="text" name="landID" id="landID" hidden value="" />
+                                                    <input type="text" name="securityID" id="securityID" hidden value="" />
                                                     <button type="submit" class="price">
                                                         <img src="<?php echo URLROOT ?>/images/sec-add.svg" alt="">
                                                     </button>
@@ -102,7 +102,6 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     securities = backendData.map(security => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
-        console.log(card);
         card.querySelector(".name").textContent = security.name;
         card.querySelector(".district").textContent = security.preferredDistrictToWork;
         card.querySelector(".province").textContent = security.preferredProvinceToWork;
@@ -121,12 +120,12 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         // Set id and name to go to the price page
         const priceForm = card.querySelector('.price-form');
         if (priceForm) {
-            const idInput = priceForm.querySelector('#id');
-            const nameInput = priceForm.querySelector('#name');
+            const landID = priceForm.querySelector('#landID');
+            const securityID = priceForm.querySelector('#securityID');
 
-            if (idInput && nameInput) {
-                idInput.value = security.id;
-                nameInput.value = security.name;
+            if (landID && securityID) {
+                securityID.value = security.id;
+                landID.value = <?php print_r($other_data['id']) ?>;
             } else {
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }
