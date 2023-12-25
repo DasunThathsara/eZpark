@@ -105,8 +105,19 @@
     transition: 1s, transform 1s;
 }
 
+.user-card-title .sec-name{
+    padding-left: 10px;
+    width: 26%;
+    transition: 1s, transform 1s;
+}
+
 .user-card-title .location{
     width: 24%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .district{
+    width: 28%;
     transition: 1s, transform 1s;
 }
 
@@ -116,9 +127,17 @@
     padding-left: 5px;
 }
 
+.user-card-title .province{
+    width: 21%;
+    transition: 1s, transform 1s;
+    padding-left: 5px;
+}
+
 .ser-card-title .status{
-    padding-left: 30px;
-    background-color: rgba(1,255,1,0.15); padding: 1px 5px; border-radius: 10px; color: #006b00
+    background-color: rgba(1,255,1,0.15);
+    padding: 1px 5px;
+    border-radius: 10px;
+    color: #006b00
 }
 
 .user-cards{
@@ -128,8 +147,6 @@
 
 .user-cards .card{
     transition: 0.5s;
-    /*margin-right: 20px;*/
-    /*border-radius: 10px;*/
     background-color: white;
     border-bottom: 1px solid #e1e1e1;
     /*box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);*/
@@ -147,7 +164,14 @@
     transition: 1s, transform 1s;
 }
 
-.user-cards .card .name-td .id-p{
+.user-cards .card .sec-name-td{
+    min-width: 80px;
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+.user-cards .card .name-td, .sec-name-td .id-p{
     font-size: 12px;
     color: #8a8a8a;
 }
@@ -159,10 +183,48 @@
     transition: 1s, transform 1s;
 }
 
-.user-cards .card .capacity{
-    width: 20%;
+.user-cards .card .district{
+    min-width: 80px;
+    width: 31%;
     font-size: 14px;
     transition: 1s, transform 1s;
+}
+
+@media screen and (max-width: 650px){
+    .user-cards .card .district{
+        width: 34%;
+    }
+}
+
+.user-cards .card .capacity{
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+.user-cards .card .province{
+    width: 39%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+@media screen and (max-width: 450px){
+    .user-card-title .sec-name{
+        width: 43%;
+    }
+
+    .user-cards .card .district{
+        width: 50%;
+        text-align: center;
+    }
+
+    .user-card-title .province{
+        display: none;
+    }
+
+    .user-cards .card .province{
+        display: none;
+    }
 }
 
 .user-cards .card .status-td{
