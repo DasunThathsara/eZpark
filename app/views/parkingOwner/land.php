@@ -72,7 +72,7 @@
                                         <div class="top-row">
                                             <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                         </div>
-                                        <div class="bottom-row"><?php echo $data['land_count'] ?></div>
+                                        <div class="bottom-row"><?php echo $data['capacity'] ?></div>
                                     </div>
                                 </div>
                                 <div class="right-col">Parking<br />Capacity</div>

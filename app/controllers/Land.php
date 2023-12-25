@@ -8,6 +8,7 @@ class Land extends Controller {
         // Only parkingOwner are allowed to access parkingOwner pages
         $this->middleware->checkAccess(['parkingOwner']);
         $this->landModel = $this->model('LandModel');
+        $this->securityModel = $this->model('SecurityModel');
     }
 
     public function index(){
@@ -520,5 +521,22 @@ class Land extends Controller {
 
             $this->view('parkingOwner/prices', $data, $prices);
         }
+    }
+
+    // ------------------------------------ Securities -------------------------------------
+    // Search securities
+    public function securitySearch($landID){
+        $data = $this->securityModel->viewAvailableSecurities();
+
+        $other_data['id'] = $landID;
+        $other_data['district'] = $this->landModel->getLandDistrict($landID);
+        $other_data['province'] = $this->landModel->getLandProvince($landID);
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/securities/add', $data, $other_data);
     }
 }

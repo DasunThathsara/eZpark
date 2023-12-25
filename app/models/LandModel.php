@@ -59,6 +59,36 @@ class LandModel{
         return $row->name;
     }
 
+    // Get land district
+    public function getLandDistrict($land_ID){
+        $this->db->query('SELECT district FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->district;
+    }
+
+    // Get land province
+    public function getLandProvince($land_ID){
+        $this->db->query('SELECT province FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->province;
+    }
+
+    // Get capacity of the land
+    public function getCapacity($land_ID){
+        $this->db->query('SELECT car, bike, threeWheel FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->car + $row->bike + $row->threeWheel;
+    }
+
     // Set land availability
     public function changeAvailability($land_ID): bool{
         // Prepare statement

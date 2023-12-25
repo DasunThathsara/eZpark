@@ -14,7 +14,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <h1>Securities</h1>
 
             <br><br>
-            <a class="add-btn" href="<?php echo URLROOT ?>/security/securitySearch/<?php echo $data['id'] ?> ?>" style="font-weight: 1000; font-size: 20px">+</a>
+            <a class="add-btn" href="<?php echo URLROOT ?>/land/securitySearch/<?php echo $data['id'] ?>" style="font-weight: 1000; font-size: 20px">+</a>
 
             <?php if (sizeof($other_data) == 1) {?>
                 <div class="emptyVehicle">You have no any securities</div>

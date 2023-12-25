@@ -32,8 +32,8 @@ class SecurityModel{
     }
 
     // View all securities
-    public function viewAllSecurities (){
-        $this->db->query('SELECT * FROM user u JOIN security s ON u.id = s.id;');
+    public function viewAvailableSecurities (){
+        $this->db->query('SELECT * FROM user u JOIN security s ON u.id = s.id WHERE landID = 0;');
 
         $row = $this->db->resultSet();
 
