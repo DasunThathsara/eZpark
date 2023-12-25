@@ -13,7 +13,7 @@ class Security extends Controller {
             'title' => 'Home page'
         ];
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->securityModel->getLandRequestCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
