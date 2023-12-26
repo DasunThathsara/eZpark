@@ -58,11 +58,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <td class="province" data-header></td>
 
                                             <td class="options">
-                                                <form action="<?php echo URLROOT ?>/land/sendRequest" method="POST" class="price-form">
+                                                <form action="" method="POST" class="request-form" id="request-form">
                                                     <input type="text" name="landID" id="landID" hidden value="" />
                                                     <input type="text" name="securityID" id="securityID" hidden value="" />
                                                     <button type="submit" class="price">
-                                                        <img src="<?php echo URLROOT ?>/images/sec-add.svg" alt="">
+                                                        <img id="dynamicImage" src="" alt="">
                                                     </button>
                                                 </form>
                                             </td>
@@ -99,6 +99,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     let securities = [];
     var backendData = <?php echo json_encode($data); ?>;
+    var pendingSecurityData = <?php echo json_encode($other_data['pending_securities']); ?>;
 
     securities = backendData.map(security => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
@@ -118,10 +119,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         }
 
         // Set id and name to go to the price page
-        const priceForm = card.querySelector('.price-form');
-        if (priceForm) {
-            const landID = priceForm.querySelector('#landID');
-            const securityID = priceForm.querySelector('#securityID');
+        const requestForm = card.querySelector('.request-form');
+        if (requestForm) {
+            const landID = requestForm.querySelector('#landID');
+            const securityID = requestForm.querySelector('#securityID');
 
             if (landID && securityID) {
                 securityID.value = security.id;
@@ -129,6 +130,16 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             } else {
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }
+        }
+
+
+        if (pendingSecurityData.includes(security.id)){
+            requestForm.setAttribute("action", '<?php echo URLROOT ?>/land/cancelRequest');
+            document.getElementById("dynamicImage").src = '<?php echo URLROOT ?>/images/pending.svg';
+        }
+        else{
+            requestForm.setAttribute("action", '<?php echo URLROOT ?>/land/sendRequest');
+            document.getElementById("dynamicImage").src = '<?php echo URLROOT ?>/images/sec-add.svg';
         }
 
         return { id: security.id, name: security.name, district: security.preferredDistrictToWork, province: security.preferredProvinceToWork, element: card };
