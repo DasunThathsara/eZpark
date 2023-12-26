@@ -61,7 +61,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <form action="" method="POST" class="request-form" id="request-form">
                                                     <input type="text" name="landID" id="landID" hidden value="" />
                                                     <input type="text" name="securityID" id="securityID" hidden value="" />
-                                                    <button type="submit" class="price">
+                                                    <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="" alt="">
                                                     </button>
                                                 </form>
@@ -79,9 +79,36 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 
 <script>
-    function confirmSubmit() {
-        return confirm("Are you sure you want to delete this security?");
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const requestForm = document.getElementById("request-form");
+
+        if (requestForm) {
+            const submitButton = requestForm.querySelector("button[type='submit']");
+
+            if (submitButton) {
+                submitButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent the form from submitting
+
+                    // Use SweetAlert for confirmation
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to submit this.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, submit it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            requestForm.submit();
+                        }
+                    });
+                });
+            }
+        }
+    });
+
+
 
     // ------------------------------- Search Bar -------------------------------
     const userCardTemplate = document.querySelector(".data-user-template");
