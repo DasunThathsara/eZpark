@@ -33,16 +33,34 @@ class SecurityModel{
 
     // View all securities
     public function viewAvailableSecurities (){
-        $this->db->query('SELECT * FROM user u JOIN security s ON u.id = s.id WHERE landID = 0;');
+//        $this->db->query('SELECT * FROM security_land_request slr LEFT JOIN security s ON slr.sid = s.id WHERE s.landID = 0;');
+//        $this->db->query('SELECT * FROM security_land_request slr JOIN security s ON slr.sid = s.id WHERE s.landID = 0;');
+        $this->db->query('SELECT u.name,s.* FROM user u JOIN security s ON u.id = s.id WHERE s.landID = 0;');
+//        $this->db->query('SELECT u.name, s.*, COALESCE(slr.lid, 0) AS lid FROM user u JOIN security s ON u.id = s.id LEFT JOIN security_land_request slr ON s.id = slr.sid WHERE s.landID = 0;');
 
         $row = $this->db->resultSet();
-
+//        die(print_r($row));
         return $row;
     }
 
     // Send request for security
     public function sendRequest($landID, $securityID){
         $this->db->query('INSERT INTO  security_land_request (lid, sid) VALUES (:landID, :securityID);');
+
+        // Bind values
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':securityID', $securityID);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Cancel request for security
+    public function cancelRequest($landID, $securityID){
+        $this->db->query('DELETE FROM security_land_request WHERE lid = :landID AND sid = :securityID;');
 
         // Bind values
         $this->db->bind(':landID', $landID);
@@ -65,5 +83,17 @@ class SecurityModel{
 
         $row = $this->db->single();
         return $row->{'COUNT(*)'};
+    }
+
+    // Get security pending list
+    public function getSecurityPendingList($LandID){
+        // Prepare statement
+        $this->db->query('SELECT * FROM security_land_request WHERE lid = :lid');
+
+        // Bind values
+        $this->db->bind(':lid', $LandID);
+
+        $row = $this->db->resultSet();
+        return $row;
     }
 }
