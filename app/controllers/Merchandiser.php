@@ -78,6 +78,20 @@ class Merchandiser extends Controller {
         $this->view('merchandiser/capacity', $lands, $other_data);
     }
 
+        // -------------------------------------- Report ---------------------------------------
+        public function viewReport(){
+            $data = [
+                'title' => 'Home page'
+            ];
+    
+            $other_data['notification_count'] = 0;
+    
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+    
+            $this->view('merchandiser/report', $data, $other_data);
+        }
+
     public function setPriceForm(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Submitted form data
