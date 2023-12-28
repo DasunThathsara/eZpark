@@ -6,7 +6,7 @@ class Land extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access parkingOwner pages
-        $this->middleware->checkAccess(['parkingOwner']);
+        $this->middleware->checkAccess(['parkingOwner', 'merchandiser']);
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
     }
