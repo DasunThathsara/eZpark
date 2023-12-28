@@ -591,7 +591,7 @@ class Land extends Controller {
     }
 
     // View security
-    public function viewSecurity($security_ID = null){
+    public function viewSecurity($land_ID = null, $security_ID = null){
         if (sizeof($_GET) > 1){
             $data = [
                 'id' => trim($_GET['id'])
@@ -601,10 +601,18 @@ class Land extends Controller {
         }
         else{
             $data = [
-                'id' => $security_ID
+                'id' => $security_ID,
+                'lid' => $land_ID
             ];
 
             $security = $this->securityModel->viewSecurityProfile($data);
+
+            $pendingSec = $this->securityModel->getSecurityPendingList($land_ID);
+
+            $security['pending_securities'] = array();
+            foreach ($pendingSec as $sec){
+                $security['pending_securities'][] = $sec->sid;
+            }
 
             $security['notification_count'] = 0;
 
