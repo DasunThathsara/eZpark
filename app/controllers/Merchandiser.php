@@ -25,10 +25,44 @@ class Merchandiser extends Controller {
         $this->view('merchandiser/index', $data, $lands);
     }
 
+        // --------------------------------------- Lands ---------------------------------------
+    // View all lands
     public function lands(){
-        $lands = $this->merchandiserModel->viewlands();
+        $lands = $this->landModel->viewLands();
 
-        $this->view('merchandiser/lands', $lands);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('merchandiser/lands', $lands, $other_data);
+    }
+
+    // Go to specific land
+    public function gotoLand($land_ID = null){
+        $data = [
+            'id' => $land_ID,
+            'name' => $this->landModel->getLandName($land_ID),
+        ];
+
+        $lands = $this->landModel->viewLands();
+
+        $lands['notification_count'] = 0;
+
+        if ($lands['notification_count'] < 10)
+            $lands['notification_count'] = '0'.$lands['notification_count'];
+
+        $data = [
+            'id' => $land_ID,
+            'name' => $this->landModel->getLandName($land_ID),
+            // 'package_count' => $this->merchandiserModel->getPackageCount($data),
+            'land_count' => $this->landModel->getLandCount($data),
+            'security_count' => $this->securityModel->getSecurityCount($land_ID),
+            'availability' => $this->landModel->getAvailability($land_ID),
+            'capacity' => $this->landModel->getCapacity($land_ID),
+        ];
+
+        $this->view('merchandiser/land', $data, $lands);
     }
 
     public function setPriceForm(){
