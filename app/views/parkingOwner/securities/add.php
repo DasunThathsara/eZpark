@@ -140,7 +140,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
         // Set the parking view link
         if (tileLink) {
-            tileLink.href = `<?php echo URLROOT?>/land/viewSecurity/${security.id}`;
+            tileLink.href = `<?php echo URLROOT?>/land/viewSecurity/${<?php print_r($other_data['id'])?>}/${security.id}`;
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
