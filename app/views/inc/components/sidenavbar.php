@@ -89,7 +89,7 @@
                     <?php } ?>
                 </a>
 
-                <a href="<?php echo URLROOT ?>/parkingOwner/viewSecurity">
+                <a href="<?php echo URLROOT ?>/merchandiser/viewSecurity">
                     <?php if ($section == 'security'){?>
                         <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/security-officer.svg" alt="">Security</div>
                     <?php }
