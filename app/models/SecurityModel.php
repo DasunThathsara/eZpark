@@ -108,4 +108,16 @@ class SecurityModel{
         $row = $this->db->resultSet();
         return $row;
     }
+
+    // View land requests
+    public function viewLandRequest(){
+        $this->db->query('SELECT * FROM security_land_request WHERE sid = :sid;');
+
+        // Bind values
+        $this->db->bind(':sid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
 }
