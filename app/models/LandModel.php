@@ -21,7 +21,7 @@ class LandModel{
     public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, QR) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :QR)');
+        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -35,7 +35,67 @@ class LandModel{
         $this->db->bind(':uid', $_SESSION['user_id']);
         $this->db->bind(':status', 0);
         $this->db->bind(':availability', 0);
-        $this->db->bind(':QR', $data['qrcode']);
+//        $this->db->bind(':QR', $data['qrcode']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':district', $data['district']);
+        $this->db->bind(':province', $data['province']);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Get land name
+    public function getLandName($land_ID){
+        $this->db->query('SELECT name FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->name;
+    }
+
+    // Get land district
+    public function getLandDistrict($land_ID){
+        $this->db->query('SELECT district FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->district;
+    }
+
+    // Get land province
+    public function getLandProvince($land_ID){
+        $this->db->query('SELECT province FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->province;
+    }
+
+    // Get capacity of the land
+    public function getCapacity($land_ID){
+        $this->db->query('SELECT car, bike, threeWheel FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->car + $row->bike + $row->threeWheel;
+    }
+
+    // Set land availability
+    public function changeAvailability($land_ID): bool{
+        // Prepare statement
+        $this->db->query('UPDATE land SET availability = CASE WHEN availability = 1 THEN 0 WHEN availability = 0 THEN 1 ELSE availability END WHERE id = :id;');
+
+        // Bind values
+        $this->db->bind(':id', $land_ID);
 
         // Execute
         if ($this->db->execute()){
@@ -64,6 +124,16 @@ class LandModel{
         else {
             return false;
         }
+    }
+
+    // Get availability
+    public function getAvailability($land_ID){
+        $this->db->query('SELECT availability FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+
+        return $row->availability;
     }
 
     // Set three wheel price
@@ -167,10 +237,20 @@ class LandModel{
         }
     }
 
-    // View all lands
+    // View all lands of current user
     public function viewLands(){
         $this->db->query('SELECT * FROM land WHERE uid = :uid and status = :status');
         $this->db->bind(':uid', $_SESSION['user_id']);
+        $this->db->bind(':status', 1);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // View all lands
+    public function viewAllLands(){
+        $this->db->query('SELECT * FROM land WHERE status = :status');
         $this->db->bind(':status', 1);
 
         $row = $this->db->resultSet();
@@ -435,6 +515,20 @@ class LandModel{
         $row = $this->db->resultSet();
 
         return $row;
+    }
+
+    // Get total capacity
+    public function getTotalCapacity(){
+        $this->db->query('SELECT car + bike + threeWheel AS totCap FROM land WHERE uid = :uid');
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        $total_capacity = 0;
+        foreach ($row as $item){
+            $total_capacity += $item->totCap;
+        }
+        return $total_capacity;
     }
 
     public function updateCapacity($data): bool

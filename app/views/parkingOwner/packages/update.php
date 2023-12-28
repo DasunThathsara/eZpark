@@ -18,7 +18,6 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     <form action="<?php echo URLROOT ?>/Package/packageUpdate" method="post">
         <input type="text" name="id" id="id" required hidden value="<?php echo $data['id'] ?>" />
-        <input type="text" name="name" id="name" required hidden value="<?php echo $data['name'] ?>" />
         <input type="text" name="old_vehicle_type" id="old_vehicle_type" required hidden value="<?php echo $data['vehicle_type'] ?>" />
         <input type="text" name="old_package_type" id="old_package_type" required hidden value="<?php echo $data['package_type'] ?>" />
 

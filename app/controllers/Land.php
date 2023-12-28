@@ -1,10 +1,14 @@
 <?php
+
+require_once APPROOT.'/libraries/phpqrcode/qrlib.php';
+
 class Land extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access parkingOwner pages
         $this->middleware->checkAccess(['parkingOwner']);
         $this->landModel = $this->model('LandModel');
+        $this->securityModel = $this->model('SecurityModel');
     }
 
     public function index(){
@@ -13,6 +17,14 @@ class Land extends Controller {
     }
 
     // ------------------------------ Lands ------------------------------
+    public function changeAvailability($land_ID = null){
+        if ($this->landModel->changeAvailability($land_ID)){
+            redirect('parkingOwner/gotoLand/'.$land_ID);
+        } else {
+            die('Something went wrong');
+        }
+    }
+
     public function setPriceForm(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
@@ -46,6 +58,11 @@ class Land extends Controller {
                 $data['err'] = 'Invalid data type for three wheels';
             }
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
@@ -56,7 +73,7 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
-                $this->view('parkingOwner/lands/setPrice', $data);
+                $this->view('parkingOwner/lands/setPrice', $data, $other_data);
             }
 
         } else {
@@ -70,13 +87,23 @@ class Land extends Controller {
 
             ];
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Load view
-            $this->view('parkingOwner/lands/create', $data);
+            $this->view('parkingOwner/lands/create', $data, $other_data);
         }
     }
 
     public function setPrice($data){
-        $this->view('parkingOwner/lands/setPrice', $data);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands/setPrice', $data, $other_data);
     }
     
     public function secAvailSet(){
@@ -103,6 +130,11 @@ class Land extends Controller {
                 $data['err'] = 'Please enter secAvail';
             }
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Validation is completed and no error found
             if (empty($data['err'])){
                 // Register land
@@ -113,7 +145,7 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
-                $this->view('parkingOwner/lands', $data);
+                $this->view('parkingOwner/lands', $data, $other_data);
             }
 
         } else {
@@ -125,13 +157,23 @@ class Land extends Controller {
                 'threeWheel' => ''
             ];
 
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             // Load view
-            $this->view('parkingOwner/lands/create', $data);
+            $this->view('parkingOwner/lands/create', $data, $other_data);
         }
     }
     
     public function aboutSecurityOfficer($data){
-        $this->view('parkingOwner/lands/aboutSecurityOfficer', $data);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands/aboutSecurityOfficer', $data, $other_data);
     }
 
     public function deedUpload($file){
@@ -184,6 +226,9 @@ class Land extends Controller {
                 'bike' => trim($_POST['bike']),
                 'threeWheel' => trim($_POST['threeWheel']),
                 'contactNo' => trim($_POST['contactNo']),
+                'address' => trim($_POST['address']),
+                'district' => trim($_POST['district']),
+                'province' => '',
                 'err' => ''
             ];
 
@@ -237,10 +282,46 @@ class Land extends Controller {
                 $data['err'] = 'Please upload deed';
             }
 
-//            die(print_r($data));
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+
+            // Validate address
+            if (empty($data['address']) and $data['err'] == ''){
+                $data['err'] = 'Please enter address';
+            }
+
+            // Validate district
+            if (empty($data['district']) and $data['err'] == ''){
+                $data['err'] = 'Please select district';
+            }
+
+            $province = ['Northern' => ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu', 'Vavuniya'], 'North Western' => ['Kurunegala', 'Puttalam'], 'Western' => ['Colombo', 'Gampaha', 'Kalutara'], 'North Central' => ['Anuradhapura', 'Polonnaruwa'], 'Central' => ['Kandy', 'Matale', 'Nuwara Eliya'], 'Sabaragamuwa' => ['Kegalle', 'Ratnapura'], 'Southern' => ['Galle', 'Matara', 'Hambantota'], 'Uva' => ['Badulla', 'Monaragala'], 'Eastern' => ['Ampara', 'Batticaloa', 'Trincomalee']];
+            $flag = 0;
+            foreach ($province as $key => $value){
+                if (in_array($data['district'], $value)){
+                    $data['province'] = $key;
+                    $flag = 1;
+                    break;
+                }
+            }
+
+            if ($flag == 0){
+                $data['err'] = 'Invalid District';
+            }
 
             // Validation is completed and no error found*/
             if (empty($data['err'])){
+                // Generate QR code
+//                $path = PUBLICROOT.'/QRs/';
+//                $img_name = 'QR-'.time().'.'.uniqid();
+//                $qrcode = $path.$img_name.'.png';
+//                QRcode :: png("dasun thaths", $qrcode, 'H', 4, 4);
+//
+//                $data['qrcode'] = $img_name.'.png';
+
                 // Register land
                 if ($this->landModel->registerLand($data)){
                     $this->aboutSecurityOfficer($data);
@@ -250,7 +331,7 @@ class Land extends Controller {
             } else {
                 // Load view with errors
 //                die(print_r($data));
-                $this->view('parkingOwner/lands/create', $data);
+                $this->view('parkingOwner/lands/create', $data, $other_data);
             }
 
         } else {
@@ -264,12 +345,19 @@ class Land extends Controller {
                 'bike' => '',
                 'threeWheel' => '',
                 'contactNo' => '',
+                'address' => '',
+                'district' => '',
                 'err' => ''
             ];
-//            die(print_r($data));
+
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
 
             // Load view
-            $this->view('parkingOwner/lands/create', $data);
+            $this->view('parkingOwner/lands/create', $data, $other_data);
         }
     }
 
@@ -406,15 +494,19 @@ class Land extends Controller {
 
     // Success property register page
     public function successPropertyRegister($data){
-        $this->view('parkingOwner/lands/successPropertyRegister', $data);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands/successPropertyRegister', $data, $other_data);
     }
 
     // ------------------------------ Price ------------------------------
     // View all lands
-    public function prices($land_ID = null, $land_name = null){
+    public function prices($land_ID = null){
         if (sizeof($_GET) > 1){
             $data = [
-                'name' => trim($_GET['name']),
                 'id' => trim($_GET['id'])
             ];
     
@@ -422,13 +514,112 @@ class Land extends Controller {
         }
         else{
             $data = [
-                'name' => $land_name,
                 'id' => $land_ID
             ];
 
             $prices = $this->landModel->viewPrice($data);
 
+            $prices['notification_count'] = 0;
+
+            if ($prices['notification_count'] < 10)
+                $prices['notification_count'] = '0'.$prices['notification_count'];
+
             $this->view('parkingOwner/prices', $data, $prices);
+        }
+    }
+
+    // ------------------------------------ Securities -------------------------------------
+    // Search securities
+    public function securitySearch($landID){
+        $data = $this->securityModel->viewAvailableSecurities();
+
+        $other_data['id'] = $landID;
+        $other_data['district'] = $this->landModel->getLandDistrict($landID);
+        $other_data['province'] = $this->landModel->getLandProvince($landID);
+
+        $pendingSec = $this->securityModel->getSecurityPendingList($landID);
+
+        $other_data['pending_securities'] = array();
+        foreach ($pendingSec as $sec){
+            $other_data['pending_securities'][] = $sec->sid;
+        }
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/securities/add', $data, $other_data);
+    }
+
+    // Send request for security
+    public function sendRequest(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $landID = trim($_POST['landID']);
+            $securityID = trim($_POST['securityID']);
+
+            // Send request
+            if ($this->securityModel->sendRequest($landID, $securityID)){
+                redirect('land/securitySearch/'.$landID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+    // Cancel request for security
+    public function cancelRequest(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $landID = trim($_POST['landID']);
+            $securityID = trim($_POST['securityID']);
+
+            // Send request
+            if ($this->securityModel->cancelRequest($landID, $securityID)){
+                redirect('land/securitySearch/'.$landID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+    // View security
+    public function viewSecurity($land_ID = null, $security_ID = null){
+        if (sizeof($_GET) > 1){
+            $data = [
+                'id' => trim($_GET['id'])
+            ];
+
+            redirect('land/viewSecurity/'.$data['id']);
+        }
+        else{
+            $data = [
+                'id' => $security_ID,
+                'lid' => $land_ID
+            ];
+
+            $security = $this->securityModel->viewSecurityProfile($data);
+
+            $pendingSec = $this->securityModel->getSecurityPendingList($land_ID);
+
+            $security['pending_securities'] = array();
+            foreach ($pendingSec as $sec){
+                $security['pending_securities'][] = $sec->sid;
+            }
+
+            $security['notification_count'] = 0;
+
+            if ($security['notification_count'] < 10)
+                $security['notification_count'] = '0'.$security['notification_count'];
+
+            $this->view('parkingOwner/securities/viewProfile', $data, $security);
         }
     }
 }

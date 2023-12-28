@@ -29,7 +29,7 @@
     padding: 4px;
     position: absolute;
     background-color: red;
-    border-radius: 50%;
+    border-radius: 50px;
     right: 70px;
     top: 10px;
     z-index: 10;
@@ -41,6 +41,23 @@
     float: left;
     transition: 0.5s;
     margin-left: 1vw;
+}
+
+.topnav .items .logo{
+    float: left;
+    transition: 0.5s;
+    margin-left: 1vw;
+}
+
+@media screen and (max-width: 410px){
+    .topnav .items .logo{
+        max-width: 10px;
+    }
+
+    .topnav .items .item{
+        padding: 14px 6px;
+        font-size: 17px;
+    }
 }
 
 .topnav .items .logo:hover{

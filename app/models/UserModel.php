@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
+// Load Composer's autoloader
 require APPROOT.'/libraries/vendor/autoload.php';
 class UserModel{
     private $db;
@@ -88,6 +88,7 @@ class UserModel{
         }
     }
 
+    // Update user status
     public function updateStatus($id):bool
     {
         $this->db->query('UPDATE user SET status = 1 WHERE id = :id');
@@ -101,6 +102,7 @@ class UserModel{
         }
     }
 
+    // Resend OTP
     public function resendOTP($data): bool
     {
         $name = $data['name'];
@@ -175,8 +177,9 @@ class UserModel{
         $row = $this->db->single();
         $id = $row->id;
 
-        // Prepare statement
+        $result = true;
 
+        // Prepare statement
         if ($data['user_type'] == 'merchandiser'){
             $this->db->query('INSERT INTO parkingowner (id) VALUES (:id)');
             $this->db->bind(':id', $id);
@@ -187,11 +190,22 @@ class UserModel{
             $this->db->bind(':website', $data['website']);
             $this->db->bind(':merchandiserName', $data['merchantName']);
             $this->db->bind(':merchantType', $data['merchantType']);
+
+            $result = $this->db->execute();
+        }
+        else if ($data['user_type'] == 'security'){
+            $this->db->query('INSERT INTO security (id, NIC, experience, address, preferredDistrictToWork) VALUES (:id, :NIC, :experience, :address, :preferredDistrictToWork)');
+            $this->db->bind(':id', $id);
+            $this->db->bind(':NIC', $data['NIC']);
+            $this->db->bind(':experience', $data['experience']);
+            $this->db->bind(':address', $data['address']);
+            $this->db->bind(':preferredDistrictToWork', $data['city']);
+
+            $result = $this->db->execute();
         }
 
-
         // Execute
-        if ($this->db->execute()){
+        if ($result){
             return true;
         }
         else {
@@ -199,7 +213,7 @@ class UserModel{
         }
     }
 
-    // Find user
+    // Find verified user by email
     public function findUserByEmailV($email, $state): bool
     {
         $this->db->query('SELECT * FROM user WHERE email = :email AND status = :status');
@@ -216,11 +230,12 @@ class UserModel{
         }
     }
 
+    // Find verified user by username
     public function findUserByUsernameV($username, $state): bool
     {
         $this->db->query('SELECT * FROM user WHERE username = :username AND status = :status');
         $this->db->bind(':username', $username);
-        $this->db->bind(':status', $state);
+        $this->db->bind(':status', 1);
 
         $row = $this->db->single();
 
@@ -232,6 +247,7 @@ class UserModel{
         }
     }
 
+    // Find user by email
     public function findUserByEmail($email): bool
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -247,6 +263,7 @@ class UserModel{
         }
     }
 
+    // Find user by username
     public function findUserByUsername($username): bool
     {
         $this->db->query('SELECT * FROM user WHERE username = :username');
@@ -262,6 +279,7 @@ class UserModel{
         }
     }
 
+    // Find user count by username
     public function getUserByUsername($username){
         $this->db->query('SELECT * FROM user WHERE username = :username');
         $this->db->bind(':username', $username);
@@ -372,6 +390,15 @@ WHERE (banCount = 1 OR banCount = 2)
         }
     }
 
+    // Get admin count
+    public function getAdminCount(){
+        $this->db->query('SELECT COUNT(*) AS adminCount FROM user WHERE userType = "admin"');
+
+        $row = $this->db->single();
+
+        return $row->adminCount;
+    }
+
     // View all admins
     public function viewAdmins(){
         $this->db->query('SELECT * FROM user WHERE userType = "admin"');
@@ -441,6 +468,27 @@ WHERE (banCount = 1 OR banCount = 2)
         $this->db->query('UPDATE user SET status = 2, banCount = banCount + 1, banTime = :banTime WHERE id = :id');
         $this->db->bind(':id', $admin_id);
         $this->db->bind(':banTime', date("Y-m-d H:i:s"));
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Update admin
+    public function updateAdmin($data): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE user SET username = :username, name = :name, password = :password WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':username', $data['username']);
+        $this->db->bind(':password', $data['password']);
 
         // Execute
         if ($this->db->execute()){

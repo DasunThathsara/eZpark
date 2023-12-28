@@ -41,7 +41,7 @@
                                 </div>
                             </th>
                         </tr>
-                        <?php for ($i = 0; $i < sizeof($other_data); $i++) {
+                        <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {
                             if($other_data[$i]->hourPrice == 0 or $data['vehicle_type'] != $other_data[$i]->vehicleType){
                                 continue;
                             }?>
@@ -51,7 +51,6 @@
                                         <div class="content">
                                             <form action="<?php echo URLROOT ?>/landprice/priceUpdate" style="display:flex; width: 100%" method="POST">
                                                 <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
-                                                <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
                                                 <div class="left" style="padding-top: 20px;">
                                                     <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />
                                                     <?php echo $other_data[$i]->vehicleType ?>

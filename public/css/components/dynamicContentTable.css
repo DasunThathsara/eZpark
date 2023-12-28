@@ -1,6 +1,143 @@
+/* ----------------------------------- Title Options ----------------------------------- */
+.title-options{
+    display: flex;
+    font-size: 14px;
+    color: #969696;
+    width: 225px;
+    justify-content: space-between;
+}
+
+.option-break{
+    transform: translateY(-10px);
+    z-index: -1;
+    color: rgba(0, 0, 0, 0.18);
+}
+
+.title-options .option-item{
+    cursor: pointer;
+    transition: 0.5s;
+    border-bottom: 2px solid rgba(85, 0, 255, 0);
+    padding-bottom: 10px;
+}
+
+.title-options .option-item:hover{
+    border-bottom: 2px solid #630072;
+    color: #630072;
+}
+
+.title-options .option-item-active{
+    border-bottom: 2px solid #630072;
+    color: #630072;
+}
+
+/* ---------------------------------- Land Search Bar ---------------------------------- */
+.search-area{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-5px);
+}
+
+.search-area .data-search{
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 5px 10px 15px;
+    width: 85%;
+    transition: 0.5s;
+    height: 50px;
+}
+
+.search-area .data-search:focus{
+    width: 250px;
+}
+
+.search-area .filter-area{
+    align-items: center;
+    display: flex;
+}
+
+.search-area .filter-area .filter-btn{
+    width: 25px;
+    height: 25px;
+    box-shadow: 0 0 3px 0.1px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.search-area .filter-area .filter-btn:hover{
+    cursor: pointer;
+    box-shadow: 0 0 3px 0.1px rgba(0, 0, 0, 0.3);
+}
+
+
 /* ---------------------------------- Dynamic Content Table ---------------------------------- */
 .hide{
     display: none;
+}
+
+.card-set-container{
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    height: 50vh;
+    overflow-x: scroll;
+    transform: translateY(-30px);
+}
+
+.user-card-title{
+    display: flex;
+    border: 1px solid #e1e1e1;
+    transform: translateY(10px);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgb(239, 239, 239);
+    z-index: 10;
+}
+
+.user-card-title .name{
+    padding-left: 10px;
+    width: 26%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .sec-name{
+    padding-left: 10px;
+    width: 26%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .location{
+    width: 24%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .district{
+    width: 28%;
+    transition: 1s, transform 1s;
+}
+
+.user-card-title .capacity{
+    width: 21%;
+    transition: 1s, transform 1s;
+    padding-left: 5px;
+}
+
+.user-card-title .province{
+    width: 21%;
+    transition: 1s, transform 1s;
+    padding-left: 5px;
+}
+
+.ser-card-title .status{
+    background-color: rgba(1,255,1,0.15);
+    padding: 1px 5px;
+    border-radius: 10px;
+    color: #006b00
 }
 
 .user-cards{
@@ -9,25 +146,219 @@
 }
 
 .user-cards .card{
-    padding: 5px 10px 5px 10px;
-    margin-top: 10px;
     transition: 0.5s;
-    margin-right: 20px;
-    border-radius: 10px;
     background-color: white;
-    box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e1e1e1;
+    /*box-shadow: 0 0 8px 0.1px rgba(0, 0, 0, 0.1);*/
+    padding: 0 10px;
 }
 
 .user-cards .card:hover{
-    scale: 1.02;
+    background-color: rgba(176, 176, 176, 0.11);
+}
+
+.user-cards .card .name-td{
+    min-width: 80px;
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+.user-cards .card .sec-name-td{
+    min-width: 80px;
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+.user-cards .card .name-td, .sec-name-td .id-p{
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+.user-cards .card .location{
+    min-width: 80px;
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+.user-cards .card .district{
+    min-width: 80px;
+    width: 31%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+@media screen and (max-width: 650px){
+    .user-cards .card .district{
+        width: 34%;
+    }
+}
+
+.user-cards .card .capacity{
+    width: 30%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+.user-cards .card .province{
+    width: 39%;
+    font-size: 14px;
+    transition: 1s, transform 1s;
+}
+
+@media screen and (max-width: 450px){
+    .user-card-title .sec-name{
+        width: 43%;
+    }
+
+    .user-cards .card .district{
+        width: 50%;
+        text-align: center;
+    }
+
+    .user-card-title .province{
+        display: none;
+    }
+
+    .user-cards .card .province{
+        display: none;
+    }
+}
+
+.user-cards .card .status-td{
+    width: 20%;
+    font-size: 14px;
+}
+
+.user-cards .card .status-td .status{
+    padding: 1px 5px;
+    border-radius: 10px;
+}
+
+.status-available{
+    color: #006b00;
+    background-color: rgba(1,255,1,0.15);
+}
+
+.status-unavailable{
+    color: #6b0000;
+    background-color: rgba(255, 51, 51, 0.34);
+}
+
+@media screen and (max-width: 1140px){
+    .user-card-title .name{
+        width: 25%;
+    }
+
+    .user-card-title .location{
+        width: 23%;
+    }
+
+    .user-card-title .capacity{
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 690px){
+    .user-card-title .name{
+        width: 31%;
+    }
+
+    .user-card-title .location{
+        width: 33%;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-cards .card .name-td{
+        width: 35%;
+    }
+
+    .user-cards .card .location{
+        width: 35%;
+    }
+    .user-cards .card .capacity{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 660px){
+    .user-card-title .name{
+        width: 42%;
+    }
+
+    .user-card-title .location{
+        display: none;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-cards .card .name-td{
+        width: 45%;
+    }
+
+    .user-cards .card .location{
+        display: none;
+    }
+
+    .user-cards .card .capacity{
+        display: none;
+    }
+
+    .user-cards .card .status-td{
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 426px){
+    .user-card-title .name{
+        width: 38%;
+    }
+
+    .user-card-title .location{
+        display: none;
+    }
+
+    .user-card-title .capacity{
+        display: none;
+    }
+
+    .user-card-title .status{
+        display: none;
+    }
+
+    .user-cards .card .name-td{
+        width: 80%;
+    }
+
+    .user-cards .card .location{
+        display: none;
+    }
+
+    .user-cards .card .capacity{
+        display: none;
+    }
+
+    .user-cards .card .status-td{
+        display: none;
+    }
 }
 
 .user-cards .card .options{
     display: flex;
+    margin-top: 13px;
+    transition: 1s, transform 1s;
 }
 
 .user-cards .card .options .price{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     margin-top: 12px;
 }
@@ -43,7 +374,7 @@
 }
 
 .user-cards .card .options .delete{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     margin-top: 12px;
 }
@@ -59,7 +390,7 @@
 }
 
 .user-cards .card .options .edit{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     margin-top: 12px;
 }

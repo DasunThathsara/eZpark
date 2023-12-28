@@ -10,6 +10,7 @@
 .landing-container .row{
     display: flex;
     margin-top: 180px;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col{
@@ -42,11 +43,13 @@
 .landing-container .row .col .left-col h1{
     font-size: 90px;
     font-weight: 500;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col .left-col p{
     color: rgba(0,0,0,0.29);
     width: 40vw;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col .right-col .black-circle-1{
@@ -57,6 +60,7 @@
     position: absolute;
     right: 100px;
     top: 130px;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col .right-col .yellow-circle-1{
@@ -68,6 +72,7 @@
     position: absolute;
     right: 70px;
     top: 120px;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col .right-col .yellow-circle-2{
@@ -79,6 +84,7 @@
     position: absolute;
     right: 550px;
     top: 280px;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .yellow-circle-3{
@@ -90,6 +96,7 @@
     width: 12rem;
     height: 6rem;
     border-radius: 10rem 10rem 0 0;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .yellow-circle-4{
@@ -101,6 +108,7 @@
     position: absolute;
     left: 35vw;
     top: 220px;
+    transition: 0.5s, transform 0.5s;
 }
 
 
@@ -113,6 +121,7 @@
     width: 10rem;
     height: 5rem;
     border-radius: 0 0 10rem 10rem;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col .right-col .phone{
@@ -120,14 +129,16 @@
     position: absolute;
     right: 150px;
     top: 150px;
-    z-index: 1
+    z-index: 1;
+    transition: 0.5s, transform 0.5s;
 }
 
 .landing-container .row .col .right-col .car{
     width: 500px;
     position: absolute;
     right: 250px;
-    top: 400px
+    top: 400px;
+    transition: 0.5s, transform 0.5s;
 }
 
 @media screen and (max-width: 1379px){
@@ -437,25 +448,24 @@
 @media screen and (max-width: 660px){
     .landing-container .row .col .left-col{
         padding-left: 20px;
-        text-align: center;
     }
 
     .landing-container .row .col .left-col h1{
-        font-size: 45px;
+        font-size: 42px;
         font-weight: 500;
     }
 
     .landing-container .row .col .left-col p{
         margin-top: 50px;
         color: rgba(0,0,0,0.29);
-        width: 40vw;
+        width: 38vw;
     }
 
     .landing-container .row .col .right-col .black-circle-1{
         background-color: #1c1c1c;
         border-radius: 50%;
-        height: 300px;
-        width: 300px;
+        height: 230px;
+        width: 230px;
         position: absolute;
         right: 30px;
         top: 200px;
@@ -464,22 +474,22 @@
     .landing-container .row .col .right-col .yellow-circle-1{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,156,19));
         border-radius: 50%;
-        height: 120px;
-        width: 120px;
+        height: 90px;
+        width: 90px;
         z-index: 1;
         position: absolute;
-        right: 30px;
+        right: 20px;
         top: 200px;
     }
 
     .landing-container .row .col .right-col .yellow-circle-2{
         background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
         border-radius: 50%;
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         z-index: 1;
         position: absolute;
-        right: 290px;
+        right: 240px;
         top: 270px;
     }
 
@@ -495,17 +505,58 @@
     }
 
     .landing-container .row .col .right-col .phone{
-        width: 200px;
+        width: 150px;
         position: absolute;
         right: 60px;
-        top: 220px;
+        top: 230px;
         z-index: 1
     }
 
     .landing-container .row .col .right-col .car{
-        width: 320px;
+        width: 250px;
         position: absolute;
         right: 100px;
-        top: 350px
+        top: 330px
+    }
+}
+
+@media screen and (max-width: 590px){
+    .landing-container .row{
+        display: grid;
+        justify-content: center;
+        margin-top: 180px;
+        transition: 0.5s, transform 0.5s;
+    }
+
+    .landing-container .row .col .left-col{
+        padding-left: 20px;
+    }
+
+    .landing-container .row .col .left-col h1{
+        font-size: 50px;
+        font-weight: 500;
+    }
+
+    .landing-container .row .col .left-col p{
+        margin-top: 50px;
+        color: rgba(0,0,0,0.29);
+        width: 70vw;
+    }
+
+    .landing-container .row .col .right-col{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 390px){
+    .landing-container .yellow-circle-5{
+        background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
+        z-index: -1;
+        position: absolute;
+        right: 5vw;
+        top: 0;
+        width: 8rem;
+        height: 4rem;
+        border-radius: 0 0 10rem 10rem;
     }
 }

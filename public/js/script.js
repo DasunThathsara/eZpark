@@ -110,7 +110,7 @@ function handleOutsideClick(event) {
 // Side card close button
 function closeRightCard(){
     var screenWidth = window.innerWidth;
-    var element1, element2, element3, element4;
+    var element1, element2, element3, element4, element5;
 
     if (screenWidth <= 720){
         element1 = document.querySelector('.side-cards');
@@ -118,6 +118,7 @@ function closeRightCard(){
 
         element2 = document.querySelector('.open-side-cards-btn');
         element2.classList.toggle("open-side-cards-btn-hide");
+        console.log('hari 1');
     }
     else {
         element1 = document.querySelector('.side-cards');

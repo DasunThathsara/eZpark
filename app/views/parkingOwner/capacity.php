@@ -11,7 +11,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Lands</h1>
+            <h1>Capacity of the Lands</h1>
 
             <br><br>
             <a class="add-btn" href="<?php echo URLROOT ?>/land/landRegister" style="font-weight: 1000; font-size: 20px">+</a>
@@ -30,7 +30,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <a href="#" class="tile">
                             <table>
                                 <tr>
-                                    <td class="header" data-header></td>
+                                    <td class="header" style="width: 50%" data-header></td>
+                                    <td class="capacity" data-header></td>
                                     <td class="options">
                                         <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
                                             <input type="text" name="id" id="id" hidden value="" />
@@ -76,6 +77,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
         card.querySelector(".header").textContent = land.name;
+        card.querySelector(".capacity").textContent = land.car + land.bike + land.threeWheel;
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
 

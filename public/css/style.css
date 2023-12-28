@@ -14,10 +14,71 @@
 
 /* ----------------- General Styles ---------------- */
 body{
-    background-color: #f8f8f8;
+    /*background-color: #f8f8f8;*/
+    overflow-x: hidden;
 }
+
 *{
     font-family: 'Trebuchet MS', sans-serif;
+}
+
+select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(138,138,138,0.35);
+    color: #8a8a8a;
+    background-color: white;
+}
+
+textarea{
+    background-color: white;
+    border: 1px solid rgba(138,138,138,0.37);
+    border-radius: 10px;
+    color: #8a8a8a;
+    padding: 10px;
+    max-width: 100%;
+    width: 95%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    height: 100px;
+    resize: none;
+}
+
+/* --- Selection styles --- */
+::selection {
+    background-color: rgba(252, 204, 4, 0.34);
+    color: black;
+}
+
+::-moz-selection {
+    background-color: rgba(252, 204, 4, 0.34);
+    color: black;
+}
+
+/* --- Scroll bar styles --- */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(255,167,41);
+    border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #fccc04;
 }
 
 a{
@@ -49,6 +110,24 @@ a{
     }
 }
 
+.page-container .section .container .content-body{
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.12);
+    margin-right: 15px;
+}
+
+.page-container .section .container .title{
+    color: #ffc32d;
+    transform: translateY(15px);
+}
+
+.page-container .section .container .subtitle{
+    color: rgba(0, 0, 0, 0.34);
+    font-size: 10px;
+}
+
 .container .error-img{
     width: 50px
 }
@@ -68,7 +147,7 @@ a{
 }
 
 /* ------------------------------- SVG Styles ------------------------------- */
-.svg .svg-1{
+.svg-1{
     width: 700px;
     position: absolute;
     top: -250px;
@@ -76,13 +155,12 @@ a{
     z-index: -1;
 }
 
-.svg .svg-2{
+.svg-2{
     width: 300px;
     position: absolute;
     bottom: 0;
     right: 0;
     z-index: -1;
-    overflow: hidden;
 }
 
 /* --------------------- Loading Page -------------------- */
@@ -177,29 +255,6 @@ a{
     background-color: #fdc63e;
 }
 
-
-/* ---------------------------------- Land Search Bar ---------------------------------- */
-.data-search{
-    position: absolute;
-    right: 35px;
-    top: 150px;
-    border-radius: 20px;
-    outline: none;
-    border: 0px solid rgba(0, 0, 0, 0.247);
-    padding: 10px 5px 10px 15px;
-    width: 150px;
-    transition: 0.5s;
-    box-shadow: 0 0 4px 0.1px rgba(0, 0, 0, 0.2);
-}
-
-.data-search:hover{
-    width: 250px;
-}
-
-.data-search:focus{
-    width: 250px;
-}
-
 /* ---------------------------------- Profile Styles ---------------------------------- */
 .page-container .section .container .form-container .profile-container{
     width: 100%;
@@ -267,23 +322,210 @@ a{
 }
 
 
+/* ---------------------------------- Parking view styles ---------------------------------- */
+.page-container .section .container .cover-img{
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 1px solid black;
+    height: 300px;
+    overflow: clip;
+    transform: translateY(50px);
+}
+
+.page-container .section .container .cover-photo{
+    width: 100%;
+    height: 300%;
+    transform: translateY(-250px);
+    border-radius: 20px;
+}
+
+.page-container .section .container .details{
+    transform: translateY(50px);
+}
+
+/* -------------------------- Report Page -------------------------- */
+.page-container .section .container .report-container{
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 20px;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-img{
+    margin-left: 5%;
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-img img{
+    width: 300px;
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-img .text-heading{
+    text-align: center;
+    font-size: 18px;
+    color: #626262;
+}
+
+.page-container .section .container .report-container .report-img .gen-area{
+    text-align: center;
+}
+
+.page-container .section .container .report-container .report-img .gen-area .gen-btn, .view-btn, .download-btn{
+    padding: 10px;
+    background-color: #fdc63e;
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    transition: 0.3s;
+}
+
+.page-container .section .container .report-container .report-img .gen-area .gen-btn, .view-btn, .download-btn:hover{
+    cursor: pointer;
+    background-color: #ffb700;
+}
+
+.page-container .section .container .report-container .report-des{
+    padding-left: 5%;
+    padding-right: 5%;
+    margin: 10px;
+    /*background-color: green;*/
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .report-container .report-des .report-ins{
+    transform: translateX(-30px);
+    color: #626262;
+}
+
+.page-container .section .container .report-container .report-des .report-ins ul li{
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1560px){
+    .page-container .section .container .report-container .report-img{
+        margin-left: 1%;
+        padding: 20px;
+        width: 50%;
+        text-align: center;
+    }
+
+    .page-container .section .container .report-container .report-des{
+        padding-left: 1%;
+        padding-right: 1%;
+        margin: 10px;
+    }
+}
+
+@media screen and (max-width: 970px){
+    .page-container .section .container .report-container .report-img{
+        margin-left: 1%;
+        padding: 20px 10px;
+        width: 50%;
+        text-align: center;
+    }
+
+    .page-container .section .container .report-container .report-des{
+        padding-right: 1%;
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 680px){
+    .page-container .section .container .report-container .report-img{
+        margin-left: 1%;
+        padding: 20px 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-container .section .container .report-container .report-des{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .page-container .section .container .report-container .report-img img{
+        width: 250px;
+    }
+}
 
 
+/* -------------------------------- Toggle button styles -------------------------------- */
+.toggle-title{
+    transform: translate(10px, 70px);
+}
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+    scale: 0.9;
+    transform: translate(120px, 50px);
+}
 
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-.overlay-container{
-    display: none;
-    position: fixed;
+.slider {
+    position: absolute;
+    cursor: pointer;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.25);
-    z-index: 10;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-.overlay-container-active{
-    display: block;
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
+input:checked + .slider {
+    background-color: #fccc04;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

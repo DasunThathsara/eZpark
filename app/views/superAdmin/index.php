@@ -39,7 +39,7 @@
 
             <div class="cards">
                 <!-- Card 1 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/admin/viewRegistrationRequests">
+                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/viewRegistrationRequests">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
@@ -56,7 +56,7 @@
                 </a>
 
                 <!-- Card 2 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/parkingCapacity">
+                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/parkingCapacity">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
@@ -85,6 +85,23 @@
                                 </div>
                             </div>
                             <div class="right-col">Total Income</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/viewAdmins">
+                    <div class="card">
+                        <div class="row">
+                            <div class="left-col">
+                                <div class="sub-row">
+                                    <div class="top-row">
+                                        <img src="<?php echo URLROOT ?>/images/admin.svg" alt="">
+                                    </div>
+                                    <div class="bottom-row"><?php echo $other_data['admin_count'] ?></div>
+                                </div>
+                            </div>
+                            <div class="right-col">Admins</div>
                         </div>
                     </div>
                 </a>

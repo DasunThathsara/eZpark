@@ -4,20 +4,38 @@ class Security extends Controller {
         $this->middleware = new AuthMiddleware();
         // Only security personnel are allowed to access security pages
         $this->middleware->checkAccess(['security']);
+        $this->landModel = $this->model('LandModel');
+        $this->securityModel = $this->model('SecurityModel');
     }
 
     public function index(){
         $data = [
             'title' => 'Home page'
         ];
-        $this->view('security/index', $data);
+
+        $other_data['notification_count'] = $this->securityModel->getLandRequestCount();
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('security/index', $data, $other_data);
     }
 
-    public function about(){
-        $users = $this->pagesModel->getUser();
+    // Add security
+    public function securitySearch($landID = null){
         $data = [
-            'users' => $users
+            'id' => $landID
         ];
-        $this->view('about', $data);
+
+        $other_data = $this->securityModel->viewAllSecurities();
+
+        die(print_r($other_data));
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('security/securityRegister', $data, $other_data);
     }
 }

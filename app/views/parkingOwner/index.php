@@ -13,15 +13,17 @@
         <div class="container">
             <h1>Dashboard</h1>
 
+            <!-- Dropdown Menu -->
             <div class="dropdown">
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
-                    <?php for ($i = 0; $i < sizeof($other_data); $i++) {?>
-                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>/<?php echo $other_data[$i]->name ?>"><?php echo $other_data[$i]->name ?></a>
+                    <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
+                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
                     <?php } ?>
                 </div>
             </div>
 
+            <!-- Card Set -->
             <div class="cards">
                 <!-- Card 1 -->
                 <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/lands">
@@ -35,7 +37,7 @@
                                     <div class="bottom-row"><?php echo $data['land_count'] ?></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Lands</div>
+                            <div style="transform: translateY(10px)" class="right-col">Total Lands</div>
                         </div>
                     </div>
                 </a>
@@ -49,10 +51,10 @@
                                     <div class="top-row">
                                         <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                     </div>
-                                    <div class="bottom-row">20</div>
+                                    <div class="bottom-row"><?php echo $data['total_capacity']?></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Capacity</div>
+                            <div style="transform: translateY(10px)" class="right-col">Total Capacity</div>
                         </div>
                     </div>
                 </a>
@@ -64,12 +66,15 @@
                             <div class="left-col">
                                 <div class="sub-row">
                                     <div class="top-row">
-                                        <img src="<?php echo URLROOT ?>/images/dollar.svg" alt="">
+                                        <img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/dollar.svg" alt="">
                                     </div>
                                     <div class="bottom-row"></div>
                                 </div>
                             </div>
-                            <div class="right-col">Total Income</div>
+                            <div style="transform: translateY(-20px)" class="right-col">
+                                <p style="font-size: 15px">Monthly Income</p>
+                                <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                            </div>
                         </div>
                     </div>
                 </a>
