@@ -65,6 +65,19 @@ class Merchandiser extends Controller {
         $this->view('merchandiser/land', $data, $lands);
     }
 
+        // --------------------------------- Parking Capacity ----------------------------------
+    // View all packages
+    public function parkingCapacity($parking_ID = null, $parking_name = null){
+        $lands = $this->landModel->viewLands();
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('merchandiser/capacity', $lands, $other_data);
+    }
+
     public function setPriceForm(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Submitted form data
