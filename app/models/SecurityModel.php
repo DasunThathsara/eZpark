@@ -31,6 +31,18 @@ class SecurityModel{
         return $row;
     }
 
+    // View security profile
+    public function viewSecurityProfile($data){
+        $this->db->query('SELECT u.*, s.* FROM user u JOIN security s ON u.id = s.id WHERE u.id = :id;');
+
+        // Bind values
+        $this->db->bind(':id', $data['id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
     // View all securities
     public function viewAvailableSecurities (){
 //        $this->db->query('SELECT * FROM security_land_request slr LEFT JOIN security s ON slr.sid = s.id WHERE s.landID = 0;');
