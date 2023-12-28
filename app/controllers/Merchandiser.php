@@ -5,6 +5,8 @@ class Merchandiser extends Controller {
         // Only merchandiser personnel are allowed to access merchandiser pages
         $this->middleware->checkAccess(['merchandiser']);
         $this->merchandiserModel = $this->model('MerchandiserModel');
+        $this->landModel = $this->model('LandModel');
+        $this->securityModel = $this->model('SecurityModel');
     }
 
     public function index(){
