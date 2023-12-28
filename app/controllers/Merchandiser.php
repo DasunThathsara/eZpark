@@ -92,6 +92,23 @@ class Merchandiser extends Controller {
             $this->view('merchandiser/report', $data, $other_data);
         }
 
+            // ------------------------------------ Securities -------------------------------------
+    // View all securities
+    public function securities($landID){
+        $data = [
+            'id' => $landID
+        ];
+
+        $other_data = $this->securityModel->viewSecurities($landID);
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('merchandiser/securities', $data, $other_data);
+    }
+
     public function setPriceForm(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Submitted form data
