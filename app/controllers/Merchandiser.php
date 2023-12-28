@@ -10,10 +10,19 @@ class Merchandiser extends Controller {
     }
 
     public function index(){
+        $lands = $this->landModel->viewLands();
+
         $data = [
-            'title' => 'Home page'
+            'land_count' => $this->landModel->getLandCount(),
+            'total_capacity' => $this->landModel->getTotalCapacity()
         ];
-        $this->view('merchandiser/index', $data);
+
+        $lands['notification_count'] = 0;
+
+        if ($lands['notification_count'] < 10)
+            $lands['notification_count'] = '0'.$lands['notification_count'];
+
+        $this->view('merchandiser/index', $data, $lands);
     }
 
     public function lands(){
