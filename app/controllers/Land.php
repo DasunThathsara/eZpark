@@ -315,12 +315,12 @@ class Land extends Controller {
             // Validation is completed and no error found*/
             if (empty($data['err'])){
                 // Generate QR code
-                $path = PUBLICROOT.'/QRs/';
-                $img_name = 'QR-'.time().'.'.uniqid();
-                $qrcode = $path.$img_name.'.png';
-                QRcode :: png("dasun thaths", $qrcode, 'H', 4, 4);
-
-                $data['qrcode'] = $img_name.'.png';
+//                $path = PUBLICROOT.'/QRs/';
+//                $img_name = 'QR-'.time().'.'.uniqid();
+//                $qrcode = $path.$img_name.'.png';
+//                QRcode :: png("dasun thaths", $qrcode, 'H', 4, 4);
+//
+//                $data['qrcode'] = $img_name.'.png';
 
                 // Register land
                 if ($this->landModel->registerLand($data)){
@@ -494,7 +494,12 @@ class Land extends Controller {
 
     // Success property register page
     public function successPropertyRegister($data){
-        $this->view('parkingOwner/lands/successPropertyRegister', $data);
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/lands/successPropertyRegister', $data, $other_data);
     }
 
     // ------------------------------ Price ------------------------------
@@ -566,7 +571,6 @@ class Land extends Controller {
         }
     }
 
-
     // Cancel request for security
     public function cancelRequest(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -583,6 +587,31 @@ class Land extends Controller {
             } else {
                 die('Something went wrong');
             }
+        }
+    }
+
+    // View security
+    public function viewSecurity($security_ID = null){
+        if (sizeof($_GET) > 1){
+            $data = [
+                'id' => trim($_GET['id'])
+            ];
+
+            redirect('land/viewSecurity/'.$data['id']);
+        }
+        else{
+            $data = [
+                'id' => $security_ID
+            ];
+
+            $security = $this->securityModel->viewSecurityProfile($data);
+
+            $security['notification_count'] = 0;
+
+            if ($security['notification_count'] < 10)
+                $security['notification_count'] = '0'.$security['notification_count'];
+
+            $this->view('parkingOwner/securities/viewProfile', $data, $security);
         }
     }
 }
