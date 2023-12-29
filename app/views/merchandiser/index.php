@@ -18,7 +18,7 @@
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
                     <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
-                        <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
+                        <a href="<?php echo URLROOT ?>/merchandiser/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
                     <?php } ?>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <!-- Card Set -->
             <div class="cards">
                 <!-- Card 1 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/lands">
+                <a class="card-link" href="<?php echo URLROOT ?>/merchandiser/lands">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
@@ -43,7 +43,7 @@
                 </a>
 
                 <!-- Card 2 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/parkingCapacity">
+                <a class="card-link" href="<?php echo URLROOT ?>/merchandiser/parkingCapacity">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">

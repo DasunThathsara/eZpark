@@ -38,4 +38,18 @@ class Security extends Controller {
 
         $this->view('security/securityRegister', $data, $other_data);
     }
+
+    // View land request
+    public function viewRequests(){
+        $data = $this->securityModel->viewLandRequest();
+
+        die(print_r($data));
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('security/landRequest', $data, $other_data);
+    }
 }

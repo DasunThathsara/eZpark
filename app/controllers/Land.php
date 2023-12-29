@@ -6,7 +6,7 @@ class Land extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access parkingOwner pages
-        $this->middleware->checkAccess(['parkingOwner']);
+        $this->middleware->checkAccess(['parkingOwner', 'merchandiser']);
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
     }
@@ -19,7 +19,7 @@ class Land extends Controller {
     // ------------------------------ Lands ------------------------------
     public function changeAvailability($land_ID = null){
         if ($this->landModel->changeAvailability($land_ID)){
-            redirect('parkingOwner/gotoLand/'.$land_ID);
+            redirect($_SESSION['userType'].'/gotoLand/'.$land_ID);
         } else {
             die('Something went wrong');
         }
@@ -139,7 +139,21 @@ class Land extends Controller {
             if (empty($data['err'])){
                 // Register land
                 if ($this->landModel->updateSecurityOfficerAvail($data)){
-                    $this->setPrice($data);
+                    if($_SESSION['userType'] == 'parkingOwner'){
+                        $this->setPrice($data);
+                    }
+                    else {
+
+                        $data = [
+                            'name' => trim($_POST['name']),
+                            'car' => 0,
+                            'bike' => 0,
+                            'threeWheel' => 0,
+                            'err' => ''
+                        ];
+
+                        $this->successPropertyRegister($data); 
+                    }
                 } else {
                     die('Something went wrong');
                 }
