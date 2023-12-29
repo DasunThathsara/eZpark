@@ -53,15 +53,10 @@ class Package extends Controller
                 $data['err'] = 'Please enter price';
             } 
            
-            // Validate vehicle type
-            if (empty($data['vehicle_type'])) {
-                $data['err'] = 'Please select vehicle type';
-            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
-                $data['err'] = 'Invalid vehicle type';
-            }
-
-            if ($this->parkingOwnerModel->findPackage($data['id'], $data['package_type'], $data['vehicle_type'])){
-                $data['err'] = 'Package cannot be duplicate';
+            if (empty($data['packageType'])) {
+                $data['err'] = 'Please select package type';
+            } else if ($data['packageType'] != 'car' and $data['packageType'] != 'bike' and $data['packageType'] != '3wheel') {
+                $data['err'] = 'Invalid package type';
             }
 
             // Validation is completed and no error found
@@ -105,10 +100,7 @@ class Package extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
-                'package_type' => trim($_POST['package_type']),
-                'vehicle_type' => trim($_POST['vehicle_type'])
+                'pid' => trim($_POST['pid'])
             ];
 
             // Delete the package
@@ -167,20 +159,17 @@ class Package extends Controller
             $data = [
                 'id' => trim($_POST['id']),
                 'name' => trim($_POST['name']),
-                'vehicle_type' => trim($_POST['vehicle_type']),
-                'old_vehicle_type' => trim($_POST['old_vehicle_type']),
-                'package_price' => trim($_POST['package_price']),
-                'package_type' => trim($_POST['package_type']),
-                'old_package_type' => trim($_POST['old_package_type']),
+                'price' => trim($_POST['price']),
+                'packageType' => trim($_POST['package_type']),
                 'err' => ''
             ];
 
             // Validate data
-            // Validate package type
-            if (empty($data['package_type'])) {
-                $data['err'] = 'Please select package type';
-            } else if ($data['package_type'] != 'weekly' and $data['package_type'] != 'monthly') {
-                $data['err'] = 'Invalid package type';
+            // Validate email
+            if (empty($data['name'])) {
+                $data['err'] = 'Please select package name';
+            } else if ($data['name'] != 'weekly' and $data['name'] != 'monthly') {
+                $data['err'] = 'Invalid package name';
             }
 
             // Validate package price
@@ -188,21 +177,11 @@ class Package extends Controller
                 $data['err'] = 'Please enter price';
             } 
            
-            // Validate vehicle type
-            if (empty($data['vehicle_type'])) {
-                $data['err'] = 'Please select vehicle type';
-            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
-                $data['err'] = 'Invalid vehicle type';
+            if (empty($data['packageType'])) {
+                $data['err'] = 'Please select package type';
+            } else if ($data['packageType'] != 'car' and $data['packageType'] != 'bike' and $data['packageType'] != '3wheel') {
+                $data['err'] = 'Invalid package type';
             }
-
-            if($data['old_vehicle_type'] != $data['vehicle_type'] or $data['old_package_type'] != $data['package_type']){
-                if ($this->parkingOwnerModel->findPackage($data['id'], $data['package_type'], $data['vehicle_type'])){
-                    $data['err'] = 'Package cannot be duplicate';
-                }
-            }
-            
-            
-
             // Validation is completed and no error found
             if (empty($data['err'])) {
                 // Register package
