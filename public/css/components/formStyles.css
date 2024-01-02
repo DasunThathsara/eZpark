@@ -99,8 +99,12 @@
 
 .form-container .other-options a{
     /*color: #fdc63e;*/
-    color: #E29C00;
+    color: #E29C00;   /*newly added*/
     text-decoration: none;
+}
+
+.form-container .other-options a:hover{
+    scale: 1.5;
 }
 
 .form-container h1{
@@ -122,8 +126,9 @@ input[type=text], input[type=password], input[type=email], input[type=number]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0 20px 0;
-    border: 1px solid #ffffff;
-    border-bottom: 1px solid #ccc;
+    /*border: 1px solid #ffffff;*/
+    border: 1px solid #E29C00;
+    /*border-bottom: 1px solid #ccc;*/
     box-sizing: border-box;
     outline: none;
     transition: ease-in 0.3s;
@@ -174,7 +179,8 @@ input[placeholder]{
 }
 
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
-    border-bottom: 1px solid #9a9a9a;
+    /*border-bottom: 1px solid #9a9a9a;*/
+    border-bottom: 1px solid #E29C00;
 }
 
 .input-box-err{
@@ -183,7 +189,8 @@ input[type=text]:hover, input[type=password]:hover, input[type=email], input[typ
 
 input[type=submit] {
     width: 100%;
-    background-color: #fcd426;
+    background-color: #E29C00;
+    /*background-color: #fdc63e;*/
     color: #000000;
     padding: 12px 20px;
     margin: 8px 0 0 0;
