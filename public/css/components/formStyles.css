@@ -24,8 +24,11 @@
 .form-container .type-select{
     text-align: center;
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /*padding-top: 10px;
+    padding-bottom: 10px;*/
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
 }
 
 .form-container .type-select a{
@@ -103,7 +106,7 @@
     text-align: center;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));*/
     background: #E29C00;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;   /*change of border radius*/
     padding-top: 20px;
     padding-bottom: 20px;
     /*color: #000000;*/
