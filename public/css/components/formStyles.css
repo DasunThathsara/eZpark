@@ -4,6 +4,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 15vh;
+    margin-bottom: 15vh;    /*newly added*/
     width: 60%;
     /*max-width: 500px;*/
     max-width: 850px;
@@ -49,7 +50,10 @@
 
 .form-container .type-select .type-select-btn:hover{
     scale: 1.05;
-    background: linear-gradient(to right, rgb(248,215,90), rgb(255, 188, 19));
+    /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 188, 19));*/
+    background: #E29C00;
+    color: #ffffff;
+    border: 1px solid #ffffff;
 }
 
 .form-container.reveal{
