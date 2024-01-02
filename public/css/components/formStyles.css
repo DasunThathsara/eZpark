@@ -124,7 +124,7 @@
 
 input[type=text], input[type=password], input[type=email], input[type=number]{
     width: 100%;
-    padding: 6px 20px;
+    padding: 10px 20px;
     margin: 8px 0 20px 0;
     /*border: 1px solid #ffffff;*/
     border: 1px solid #E29C00;  /*newly added*/
@@ -132,7 +132,7 @@ input[type=text], input[type=password], input[type=email], input[type=number]{
     box-sizing: border-box;
     outline: none;
     transition: ease-in 0.3s;
-    border-radius: 5px;
+    border-radius: 5px;     /*newly added*/
 }
 
 input[type=date]{
@@ -194,7 +194,9 @@ input[type=submit] {
     width: 100%;
     background-color: #E29C00;
     /*background-color: #fdc63e;*/
-    color: #000000;
+    /*color: #000000;*/
+    color: #ffffff;   /*newly added*/
+    font-weight: bold;
     padding: 12px 20px;
     margin: 8px 0 0 0;
     border: none;
