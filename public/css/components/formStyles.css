@@ -42,6 +42,7 @@
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
     background-color: white;
+    border: 1px solid #E29C00;
 }
 
 .form-container .type-select .type-select-btn:hover{
