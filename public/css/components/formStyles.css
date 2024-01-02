@@ -127,7 +127,7 @@ input[type=text], input[type=password], input[type=email], input[type=number]{
     padding: 12px 20px;
     margin: 8px 0 20px 0;
     /*border: 1px solid #ffffff;*/
-    border: 1px solid #E29C00;
+    border: 1px solid #E29C00;  /*newly added*/
     /*border-bottom: 1px solid #ccc;*/
     box-sizing: border-box;
     outline: none;
@@ -150,7 +150,9 @@ input[type=date]{
 }
 
 input[placeholder]{
-    color: rgba(0, 0, 0, 0.47);
+    /*color: rgba(0, 0, 0, 0.47);*/
+    color: #E29C00;   /*newly added*/
+    opacity: 0.5;   /*newly added*/
 }
 
 .form-container .file-upload-container{
@@ -180,7 +182,7 @@ input[placeholder]{
 
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
     /*border-bottom: 1px solid #9a9a9a;*/
-    border-bottom: 1px solid #E29C00;
+    border-bottom: 1px solid #E29C00;   /*newly added*/
 }
 
 .input-box-err{
