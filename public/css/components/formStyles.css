@@ -9,7 +9,7 @@
     /*max-width: 500px;*/
     max-width: 850px;
     box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #ffffff;
     opacity: 0;
     transform: translateY(50px);
@@ -51,9 +51,9 @@
 .form-container .type-select .type-select-btn:hover{
     scale: 1.05;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 188, 19));*/
-    background: #E29C00;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+    background: #E29C00;    /*newly added*/
+    color: #ffffff;        /*newly added*/
+    border: 1px solid #ffffff;      /*newly added*/
 }
 
 .form-container.reveal{
@@ -103,7 +103,7 @@
     text-align: center;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));*/
     background: #E29C00;
-    border-radius: 20px 20px 0 0;
+    border-radius: 10px 10px 0 0;
     padding-top: 20px;
     padding-bottom: 20px;
     /*color: #000000;*/
