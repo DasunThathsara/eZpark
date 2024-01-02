@@ -44,7 +44,8 @@
     margin-right: 10%;
     margin-bottom: 20px;
     border-radius: 10px;
-    padding: 30px 0 30px 0;
+    /*padding: 30px 0 30px 0;*/
+    padding: 25px 0 25px 0; 
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
     background-color: white;
@@ -87,7 +88,7 @@
         width: 90%;
     }
 }
-
+/*newly added*/
 .form-container form .form-check{
     color:#545050
 }
@@ -129,7 +130,7 @@
 input[type=text], input[type=password], input[type=email], input[type=number]{
     width: 100%;
     padding: 10px 20px;
-    margin: 8px 0 20px 0;
+    margin: 8px 0 10px 0;
     /*border: 1px solid #ffffff;*/
     border: 1px solid #E29C00;  /*newly added*/
     /*border-bottom: 1px solid #ccc;*/

@@ -1,5 +1,5 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-<div class="form-container" style="margin-top: 10vh">
+<div class="form-container" style="margin-top: 5vh"><!--change margin-top to 5vh-->
     <h1>User Type Selection</h1>
     <?php if (!empty($data['err'])){?>
     <div class="error-msg">
