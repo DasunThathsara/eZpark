@@ -88,6 +88,10 @@
     }
 }
 
+.form-container form .form-check{
+    color:#545050
+}
+
 .form-container .other-options{
     text-align: center;
     padding: 0px 30px 15px 30px;
@@ -196,7 +200,7 @@ input[type=submit] {
     /*background-color: #fdc63e;*/
     /*color: #000000;*/
     color: #ffffff;   /*newly added*/
-    font-weight: bold;
+    font-weight: bold;  /*newly added*/
     padding: 12px 20px;
     margin: 8px 0 0 0;
     border: none;
