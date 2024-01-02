@@ -5,7 +5,8 @@
     margin-right: auto;
     margin-top: 15vh;
     width: 60%;
-    max-width: 500px;
+    /*max-width: 500px;*/
+    max-width: 850px;
     box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     background-color: #ffffff;
@@ -16,7 +17,7 @@
 
 .form-container .form-input-title{
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.47);
+    color: #000000;
 }
 
 .form-container .type-select{
@@ -95,11 +96,12 @@
 
 .form-container h1{
     text-align: center;
-    background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));
+    /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));*/
+    background: #E29C00;
     border-radius: 20px 20px 0 0;
     padding-top: 20px;
     padding-bottom: 20px;
-    color: #000000;
+    color: #ffffff;
 }
 
 .form-container form{
