@@ -154,23 +154,23 @@ body{
 }
 
 .login-form-container .login-form-input{
-    width: 527.368px;
-    height: 74.742px;
+    width: 427.368px;
+    height: 54.742px;
     display: flex;
     flex-shrink: 0;
     border-radius: 4px;
-    border: 3px solid #FFF;   
+    border: 3px solid #ffffff;   
 }
 
 .login-form-container input[type='submit']{
-    width: 527.368px;
-    height: 74.742px;
+    width: 427.368px;
+    height: 54.742px;
     border-radius: 4px;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
     border: none;
     font-family: Montserrat,sans-serif;
-    font-size: 36px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 20px; /* 55.556% */
