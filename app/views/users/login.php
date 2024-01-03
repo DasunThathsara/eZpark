@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 <div class="background-of-login">    <!--newly added-->
-<div class="form-container">
+<div class="form-container-login">  <!--change class from form-container to container login-->
     <h3 class="subheading">WELCOME TO</h3>  <!--newly added-->
     <h1 class="heading">eZpark</h1> <!--newly added-->
     <?php if (!empty($data['err'])) { ?>

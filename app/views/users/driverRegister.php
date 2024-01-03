@@ -1,7 +1,7 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
 <div class="form-container" style="margin-top: 5vh;">   <!--change margin-top to 5vh-->
-    <h1>Register</h1>
+    <h1 class="reg">Register</h1>   <!--newly added-->
     <?php if (!empty($data['err'])){?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>

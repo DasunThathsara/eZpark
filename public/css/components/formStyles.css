@@ -115,7 +115,7 @@ body{
     scale: 1.5;
 }
 
-.form-container .subheading{    /*newly added subheading*/
+.form-container-login .subheading{    /*newly added subheading*/
     color: #FFF;
     text-align: center;
     font-family: Montserrat;
@@ -130,8 +130,9 @@ body{
     background: #E29C00;
 }
 
-.form-container .heading{   /*newly added heading*/
+.form-container-login .heading{   /*newly added heading*/
     color: #FFF;
+    text-align: center;
     font-family: Inria Sans;
     font-size: 128px;
     font-style: normal;
@@ -139,7 +140,7 @@ body{
     line-height: 20px; /* 15.625% */
 }
 
-.form-container h1{
+.form-container h1 .reg{
     text-align: center;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));*/
     background: #E29C00;
