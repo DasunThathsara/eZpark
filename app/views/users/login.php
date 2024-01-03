@@ -32,7 +32,7 @@
     </form>
 
     <div class="login-other-options">
-        <p>If you don't have an account? <a href="<?php echo URLROOT ?>/users/register">Register</a></p>
+        <p>Don't have an account? <a href="<?php echo URLROOT ?>/users/register">Register</a></p>
     </div>
 </div>
     
