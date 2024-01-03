@@ -1,7 +1,7 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
-
-<div class="form-container">  
+<div class="align">
+<div class="login-form-container">  <!--changed the class name-->
     <h1>eZpark</h1> 
     <?php if (!empty($data['err'])) { ?>
         <div class="error-msg">
@@ -10,14 +10,14 @@
     <?php } ?>
     <form action="<?php echo URLROOT ?>/users/login" method="post">
         <!-- Email -->
-        <input type="text" name="email" id="email" required value="<?php echo $data['email'] ?>" placeholder="Email" />
+        <input class="login-form-input" type="text" name="email" id="email" required value="<?php echo $data['email'] ?>" placeholder="Email" />
 
         <!-- Password -->
-        <input type="password" name="password" id="password" required placeholder="Password" />
+        <input class="login-form-input" type="password" name="password" id="password" required placeholder="Password" />    <!--added the classes-->
 
         <br><br><br>
         <!-- Remember Me Checkbox -->
-        <div class="form-check">
+        <div class="login-form-check">
             <input type="checkbox" name="remember_me" id="remember_me">
             <label for="remember_me">Remember Me</label>
         </div>
@@ -25,10 +25,12 @@
         <br><br>
 
         <!-- Submit -->
-        <input type="submit" value="Submit"> 
+        <div class="login-submit-button">
+            <input type="submit" value="Submit"> 
+        </div>
     </form>
 
-    <div class="other-options">
+    <div class="login-other-options">
         <p>If you don't have an account? <a href="<?php echo URLROOT ?>/users/register">Register</a></p>
     </div>
 </div>

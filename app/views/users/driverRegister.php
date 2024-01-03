@@ -40,7 +40,7 @@
     </form>
 
     <div class="other-options">
-        <p>If you already have an account? <a href="<?php echo URLROOT ?>/users/login">Login</a></p>
+        <p>If you already have an account? <a href="<?php echo URLROOT ?>/users/login">Login</a></p>    
     </div>
 </div>
 
