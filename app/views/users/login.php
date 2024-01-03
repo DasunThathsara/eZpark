@@ -27,7 +27,7 @@
 
         <!-- Submit -->
         <div class="login-submit-button">
-            <input type="submit" value="Submit"> 
+            <input type="submit" value="Login"> 
         </div>
     </form>
 
