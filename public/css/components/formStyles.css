@@ -117,6 +117,10 @@ body{
 
 /*l0gin page design*/
 
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 .login-form-container{
     width: 100%;
     height: 100%;
@@ -131,7 +135,7 @@ body{
 .login-form-container h3{
     color: #FFF;
     text-align: center;
-    font-family: Montserrat;
+    font-family: Montserrat,sans-serif;
     font-size: 36px;
     font-style: normal;
     font-weight: 400;
@@ -141,7 +145,7 @@ body{
 
 .login-form-container h1{
     color: #FFF;
-    font-family: Inria Sans;
+    font-family: Inria Sans,sans-serif;
     text-align: center;
     font-size: 128px;
     font-style: normal;
@@ -155,9 +159,24 @@ body{
     display: flex;
     flex-shrink: 0;
     border-radius: 4px;
-    border: 3px solid #FFF;
-    
-    
+    border: 3px solid #FFF;   
+}
+
+.login-form-container input[type='submit']{
+    width: 527.368px;
+    height: 74.742px;
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+    border: none;
+    font-family: Montserrat,sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 55.556% */
+    text-transform: uppercase;
+    color: #E29C00;
+    margin-top: 20px;
 }
 
 
