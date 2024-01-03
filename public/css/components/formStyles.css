@@ -276,7 +276,7 @@ body{
 
 input[type=text], input[type=password], input[type=email], input[type=number]{
     width: 100%;
-    padding: 5px 20px;  /*newly added*/
+    padding: 10px 30px;  /*newly added*/
     margin: 8px 0 10px 0;   /*newly added*/
     /*border: 1px solid #ffffff;*/
     border: 1px solid #E29C00;  /*newly added*/
