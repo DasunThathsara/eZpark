@@ -141,6 +141,7 @@ body{
     font-weight: 400;
     line-height: 20px; /* 55.556% */
     text-transform: uppercase;
+    padding-top: 50px;
 }
 
 .login-form-container h1{
@@ -151,6 +152,7 @@ body{
     font-style: normal;
     font-weight: 700;
     line-height: 20px; /* 15.625% */
+    margin-top: 30px;
 }
 
 .login-form-container .login-form-input{
@@ -160,6 +162,17 @@ body{
     flex-shrink: 0;
     border-radius: 4px;
     border: 3px solid #ffffff;   
+}
+
+.login-form-container .login-form-check{
+    color: #FFF;
+    font-family: Montserrat,sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 55.556% */
+    text-transform: uppercase;
+    margin-top: -50px;
 }
 
 .login-form-container input[type='submit']{
@@ -176,7 +189,13 @@ body{
     line-height: 20px; /* 55.556% */
     text-transform: uppercase;
     color: #E29C00;
-    margin-top: 20px;
+    margin-top: -20px;
+}
+
+.login-form-container input[type='submit']:hover{
+    background: #000000;
+    color: #FFF;
+    cursor: pointer;
 }
 
 
