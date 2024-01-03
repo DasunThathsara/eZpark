@@ -1,8 +1,8 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-<div class="background-of-login">    <!--newly added-->
-<div class="form-container-login">  <!--change class from form-container to container login-->
-    <h3 class="subheading">WELCOME TO</h3>  <!--newly added-->
-    <h1 class="heading">eZpark</h1> <!--newly added-->
+
+
+<div class="form-container">  
+    <h1>eZpark</h1> 
     <?php if (!empty($data['err'])) { ?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>
@@ -25,14 +25,14 @@
         <br><br>
 
         <!-- Submit -->
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit"> 
     </form>
 
     <div class="other-options">
         <p>If you don't have an account? <a href="<?php echo URLROOT ?>/users/register">Register</a></p>
     </div>
 </div>
-<div>
+    
 
 <!--?xml version="1.0" standalone="no"?-->
 <!--<div class="svg">
@@ -40,8 +40,8 @@
     <img class="svg-2" src="<?php echo URLROOT ?>/images/svg-7.png" alt="">
 </div>-->
 
-<script>
+<!--<script>
     document.body.style.backgroundColor = 'white';
-</script>
+</script>-->
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
