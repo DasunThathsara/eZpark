@@ -185,7 +185,7 @@ body{
     font-family: Montserrat,sans-serif;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 20px; /* 55.556% */
     text-transform: uppercase;
     color: #E29C00;
@@ -198,7 +198,16 @@ body{
     cursor: pointer;
 }
 
-
+.login-form-container .login-other-options{
+    color: #FFF;
+    font-family: Montserrat,sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 55.556% */
+    
+    margin-top: 10px;
+}
 
 
 
