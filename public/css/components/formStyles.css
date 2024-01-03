@@ -32,6 +32,7 @@ body{
     padding-top: 5px;   /*newly added*/
     padding-bottom: 5px;
     
+    
 }
 
 .form-container .type-select a{
@@ -66,6 +67,7 @@ body{
 .form-container.reveal{
     opacity: 1;
     transform: translateY(0px);
+    
 }
 
 .form-container form{
@@ -115,7 +117,7 @@ body{
     scale: 1.5;
 }
 
-/*l0gin page design*/
+/*login page design*/
 
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap');
 
@@ -188,7 +190,7 @@ body{
     font-style: normal;
     font-weight: 600;
     line-height: 20px; /* 55.556% */
-    text-transform: uppercase;
+    
     color: #E29C00;
     margin-top: -20px;
 }
@@ -200,7 +202,7 @@ body{
 }
 
 .login-form-container .login-other-options{
-    color: #FFF;
+    color: #ffe3d7;
     font-family: Montserrat,sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -210,9 +212,9 @@ body{
 }
 
 .login-form-container .login-other-options a{
-    color: #000000;
+    color: #554632;
     font-family: Montserrat,sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 20px; /* 55.556% */
