@@ -1,4 +1,5 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
+<div class="background-of-login">    <!--newly added-->
 <div class="form-container">
     <h3 class="subheading">WELCOME TO</h3>  <!--newly added-->
     <h1 class="heading">eZpark</h1> <!--newly added-->
@@ -31,6 +32,7 @@
         <p>If you don't have an account? <a href="<?php echo URLROOT ?>/users/register">Register</a></p>
     </div>
 </div>
+<div>
 
 <!--?xml version="1.0" standalone="no"?-->
 <!--<div class="svg">

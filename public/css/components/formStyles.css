@@ -126,7 +126,11 @@ body{
 
 }
 
-.form-container .heading{
+.background-of-login{   /*newly added*/
+    background: #E29C00;
+}
+
+.form-container .heading{   /*newly added heading*/
     color: #FFF;
     font-family: Inria Sans;
     font-size: 128px;
