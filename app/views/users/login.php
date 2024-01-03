@@ -2,6 +2,7 @@
 
 
 <div class="login-form-container">  <!--changed the class name-->
+<h3>welcome to</h3> 
     <h1>eZpark</h1> 
     <?php if (!empty($data['err'])) { ?>
         <div class="error-msg">
@@ -42,8 +43,8 @@
     <img class="svg-2" src="<?php echo URLROOT ?>/images/svg-7.png" alt="">
 </div>-->
 
-<!--<script>
-    document.body.style.backgroundColor = 'white';
-</script>-->
+<script>
+    document.body.style.backgroundColor = '#E29C00';
+</script>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
