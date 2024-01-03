@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
-<div class="align">
+
 <div class="login-form-container">  <!--changed the class name-->
     <h1>eZpark</h1> 
     <?php if (!empty($data['err'])) { ?>
