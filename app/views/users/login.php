@@ -1,7 +1,7 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 <div class="form-container">
-    <h3>WELCOME TO</h3>
-    <h1>eZpark</h1>
+    <h3 class="subheading">WELCOME TO</h3>  <!--newly added-->
+    <h1 class="heading">eZpark</h1> <!--newly added-->
     <?php if (!empty($data['err'])) { ?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>

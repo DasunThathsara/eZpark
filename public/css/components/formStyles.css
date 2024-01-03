@@ -115,6 +115,8 @@ body{
     scale: 1.5;
 }
 
+.form-container .subheading
+
 .form-container h1{
     text-align: center;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));*/
