@@ -115,7 +115,25 @@ body{
     scale: 1.5;
 }
 
-.form-container .subheading
+.form-container .subheading{    /*newly added subheading*/
+    color: #FFF;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 55.556% */
+
+}
+
+.form-container .heading{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 128px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 15.625% */
+}
 
 .form-container h1{
     text-align: center;
