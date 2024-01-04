@@ -146,7 +146,45 @@
     line-height: 20px; /* 55.556% */
     text-transform: uppercase;
     padding-top: 80px;
+    display: inline-block;
+    animation: shake 10s ease infinite;
 }
+
+@keyframes wordAnimation {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes typewriter {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(10px);
+    }
+  }
 
 .login-form-container h1{
     color: #FFF;
@@ -157,6 +195,9 @@
     font-weight: 700;
     line-height: 20px; /* 15.625% */
     margin-top: 40px;
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(8, 6, 3, 0.5); /* Add a subtle text shadow */
+    letter-spacing: 2px;
     
 }
 
