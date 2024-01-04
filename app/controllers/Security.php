@@ -52,4 +52,14 @@ class Security extends Controller {
 
         $this->view('security/landRequest', $data, $other_data);
     }
+
+    public function acceptLandRequest(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->securityModel->acceptLandRequest($_POST['id']);
+
+            redirect('security/landRequest');
+        }
+    }
 }
