@@ -12,7 +12,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
             <h1 class="title">Add a New Land</h1>
-            <p class="subtitle">Fill up the information correctly for your new land</p>
+            <p class="subtitle">Fill up the information correctly to add a new land</p>
 
             <div class="form-container land-register-form">
                 <br>
