@@ -352,10 +352,16 @@ input[placeholder]{
     opacity: 0.5;   /*newly added*/
 }
 
+
+
 .form-container .district{
     border: 1px solid #E29C00;
     display: flex;
     margin-right: 10px;
+}
+
+.form-container .contact-no{
+    width: 50%;
 }
 
 .form-container .file-upload-container{
@@ -383,7 +389,7 @@ input[placeholder]{
     color: rgba(0, 0, 0, 0.38);
 }
 
-.form-container .slots-title{
+.form-container .slots-container .slots-title{
     margin-top: 10px;
     font-size: 12px;
 }
@@ -394,6 +400,12 @@ input[placeholder]{
     gap: 10px;
     margin-top: 10px;
 }
+
+.form-container .slots-container .slots input[type=number]{
+    width: 30%;
+}
+
+
 
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
     /*border-bottom: 1px solid #9a9a9a;*/

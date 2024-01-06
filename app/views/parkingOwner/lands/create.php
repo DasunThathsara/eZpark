@@ -47,6 +47,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <br><br>
 
+                    
                     <!-- District -->
                     <div class="form-input-title">District:</div>
                     <select name="district" id="district" class="district" required>
@@ -78,6 +79,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <option value="Vavuniya" <?php if ($data['district'] == 'Vavuniya') echo 'selected' ?>>Vavuniya</option>
                     </select>
 
+                     <!-- contactNo -->
+                     <div class="form-input-title">Contact Number:</div>
+                    <input class="contact-no" type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />
+                
+
                     <br><br>
 
                     <!-- Deed -->
@@ -87,6 +93,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <input type="file" name="deed" id="deed" hidden />
                         <div class="description">*Upload deed in PDF format</div>
                     </div>
+
+                    <!-- <br><br> -->
 
                     <!-- <br><br> -->
 
@@ -114,6 +122,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <!-- <br><br> -->
 
+                    <br><br>
+
                     <!--Number of available slots-->
                     <div class="form-input-title">Number of available parking slots:</div>
                     <div class="slots-container">
@@ -130,6 +140,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             <input type="number" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
                         </div>
                     </div>  
+
+                    <br><br>
 
                     <!-- Submit -->
                     <input type="submit" value="Next">
