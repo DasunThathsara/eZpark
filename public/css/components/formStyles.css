@@ -354,7 +354,10 @@ input[placeholder]{
 
 .form-container .district{
     border: 1px solid #E29C00;
+}
 
+.form-container .contact-no{
+    width: 60%;
 }
 
 .form-container .file-upload-container{

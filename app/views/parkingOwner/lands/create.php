@@ -78,6 +78,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <option value="Vavuniya" <?php if ($data['district'] == 'Vavuniya') echo 'selected' ?>>Vavuniya</option>
                     </select>
 
+                    <!-- contactNo -->
+                    <div class="form-input-title">Contact Number:</div>
+                    <input class="contact-no" type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />
+
                     <br><br>
 
                     <!-- Deed -->
