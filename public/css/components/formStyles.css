@@ -383,6 +383,18 @@ input[placeholder]{
     color: rgba(0, 0, 0, 0.38);
 }
 
+.form-container .slots-title{
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.form-container .slots-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
     /*border-bottom: 1px solid #9a9a9a;*/
     border-bottom: 1px solid #E29C00;   /*newly added*/
