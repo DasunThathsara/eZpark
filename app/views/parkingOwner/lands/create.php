@@ -12,7 +12,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
             <h1 class="title">Add a New Land</h1>
-            <p class="subtitle">Fill up the information correctly to add a new land</p>
+            <p class="subtitle">Fill up the below informations correctly to add a new land</p>
 
             <div class="form-container land-register-form">
                 <br>
@@ -49,7 +49,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <!-- District -->
                     <div class="form-input-title">District:</div>
-                    <select name="district" id="district" required>
+                    <select name="district" id="district" class="district" required>
                         <option value="" disabled selected>Select District</option>
                         <option value="Ampara" <?php if ($data['district'] == 'Ampara') echo 'selected' ?>>Ampara</option>
                         <option value="Anuradhapura" <?php if ($data['district'] == 'Anuradhapura') echo 'selected' ?>>Anuradhapura</option>

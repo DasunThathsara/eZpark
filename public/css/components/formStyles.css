@@ -352,6 +352,11 @@ input[placeholder]{
     opacity: 0.5;   /*newly added*/
 }
 
+.form-container .district{
+    border: 1px solid #E29C00;
+
+}
+
 .form-container .file-upload-container{
     display: flex;
     padding-top: 10px;
