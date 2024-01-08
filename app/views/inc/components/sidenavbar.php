@@ -12,7 +12,7 @@
                 <?php } ?>
             </a>
 
-            <!------------------------------------------ Driver ------------------------------------------>
+            <!--------------------------------------------- Driver --------------------------------------------->
             <?php if ($_SESSION['user_type'] == 'driver'){ ?>
                 <a href="<?php echo URLROOT ?>/driver/booking">
                     <?php if ($section == 'booking'){?>
@@ -100,7 +100,7 @@
 
             <?php } ?>
 
-            <!-----------------------------Parking owner--------------------------->
+            <!------------------------------------------ Parking owner ----------------------------------------->
             <?php if ($_SESSION['user_type'] == 'parkingOwner'){ ?>
                 <a href="<?php echo URLROOT ?>/parkingOwner/lands">
                     <?php if ($section == 'lands'){?>
@@ -121,7 +121,7 @@
                 </a>
             <?php } ?>      
 
-            <!------------------------------------------ Security ------------------------------------------>
+            <!-------------------------------------------- Security -------------------------------------------->
             <?php if ($_SESSION['user_type'] == 'security'){ ?>
                 <a href="<?php echo URLROOT ?>/security/viewRequests">
                     <?php if ($section == 'security'){?>
