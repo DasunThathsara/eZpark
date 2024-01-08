@@ -9,6 +9,7 @@ class Land extends Controller {
         $this->middleware->checkAccess(['parkingOwner', 'merchandiser']);
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
+        $this->userModel = $this->model('UserModel');
     }
 
     public function index(){
@@ -577,7 +578,7 @@ class Land extends Controller {
             $securityID = trim($_POST['securityID']);
 
             // Send request
-            if ($this->securityModel->sendRequest($landID, $securityID)){
+            if ($this->securityModel->sendRequest($landID, $securityID) && $this->userModel->addNotification('Land request from '.$this->landModel->getLandName($landID), 'securityRequest', $landID, $securityID)){
                 redirect('land/securitySearch/'.$landID);
             } else {
                 die('Something went wrong');
@@ -596,7 +597,7 @@ class Land extends Controller {
             $securityID = trim($_POST['securityID']);
 
             // Send request
-            if ($this->securityModel->cancelRequest($landID, $securityID)){
+            if ($this->securityModel->cancelRequest($landID, $securityID) && $this->userModel->removeNotification('securityRequest', $landID, $securityID)){
                 redirect('land/securitySearch/'.$landID);
             } else {
                 die('Something went wrong');
