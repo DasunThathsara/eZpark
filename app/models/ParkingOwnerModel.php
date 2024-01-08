@@ -68,11 +68,10 @@ class ParkingOwnerModel{
 
         // Execute
         if ($this->db->execute()){
-            print_r("check 4");
             return true;
         }
         else {
-            print_r("check 5");
+
             return false;
         }
     }

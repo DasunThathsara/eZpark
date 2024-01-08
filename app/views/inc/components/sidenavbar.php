@@ -73,12 +73,31 @@
             <?php if ($_SESSION['user_type'] == 'merchandiser'){ ?>
                 <a href="<?php echo URLROOT ?>/merchandiser/lands">
                     <?php if ($section == 'lands'){?>
-                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
                     <?php }
                     else{ ?>
-                        <div class="item"><img src="<?php echo URLROOT ?>/images/parking.png" alt="">Parkings</div>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/parking.png" alt="">Lands</div>
                     <?php } ?>
                 </a>
+
+                <a href="<?php echo URLROOT ?>/merchandiser/viewReport">
+                    <?php if ($section == 'reports'){?>
+                        <div class="item selected"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/merchandiser/viewSecurity">
+                    <?php if ($section == 'security'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/security-officer.svg" alt="">Security</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/security-officer.svg" alt="">Security</div>
+                    <?php } ?>
+                </a>
+
             <?php } ?>
 
             <!------------------------------------------ Parking owner ----------------------------------------->
@@ -100,7 +119,7 @@
                         <div class="item"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
                     <?php } ?>
                 </a>
-            <?php } ?>
+            <?php } ?>      
 
             <!-------------------------------------------- Security -------------------------------------------->
             <?php if ($_SESSION['user_type'] == 'security'){ ?>
