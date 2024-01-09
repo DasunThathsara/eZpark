@@ -4,7 +4,7 @@
     <div class="container">
         <div class="items">
             <?php if (empty($_SESSION['user_id'])){ ?>
-                <a class="item" style="margin-top: 20px" href="<?php echo URLROOT ?>/users/login">Login</a>
+                <a class="item" style="margin-top: 20px" href="<?php echo URLROOT ?>/users/login">Login</a>     
                 <a class="item" style="margin-top: 20px" href="<?php echo URLROOT ?>/users/register">Register</a>
                 <a class="item logo" onclick="navToggle()"><img style="width: 150px" src="<?php echo URLROOT ?>/images/logo.png" alt=""></i></a>
             <?php } ?>

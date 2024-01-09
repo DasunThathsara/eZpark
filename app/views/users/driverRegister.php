@@ -1,6 +1,7 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-<div class="form-container" style="margin-top: 10vh;">
-    <h1>Sign up</h1>
+
+<div class="form-container" style="margin-top: 5vh;">   <!--change margin-top to 5vh-->
+    <h1>Register</h1>   
     <?php if (!empty($data['err'])){?>
         <div class="error-msg">
             <span class="form-invalid"><?php echo $data["err"] ?></span>
@@ -39,15 +40,15 @@
     </form>
 
     <div class="other-options">
-        <p>If you already have an account? <a href="<?php echo URLROOT ?>/users/login">Login</a></p>
+        <p>If you already have an account? <a href="<?php echo URLROOT ?>/users/login">Login</a></p>    
     </div>
 </div>
 
 <!--?xml version="1.0" standalone="no"?-->
-<div class="svg">
+<!--<div class="svg">
     <img class="svg-1" src="<?php echo URLROOT ?>/images/svg-1.png" alt="">
     <img class="svg-2" src="<?php echo URLROOT ?>/images/svg-7.png" alt="">
-</div>
+</div>-->
 
 <script>
     document.body.style.backgroundColor = 'white';
