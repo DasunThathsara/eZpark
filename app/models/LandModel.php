@@ -333,6 +333,17 @@ class LandModel{
         return $row->{'COUNT(*)'};
     }
 
+    // Get land ID by UID and name
+    public function getLandID($name){
+        $this->db->query('SELECT id FROM land WHERE name = :name and uid = :uid');
+        $this->db->bind(':name', $name);
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row->id;
+    }
+
     public function getUnVerifyLandCount(){
         // Prepare statement
         $this->db->query('SELECT COUNT(*) FROM land  WHERE status = :status');

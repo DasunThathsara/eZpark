@@ -501,7 +501,11 @@ WHERE (banCount = 1 OR banCount = 2)
 
     // Get notification count
     public function getNotificationCount(){
-        $this->db->query('SELECT COUNT(*) AS notificationCount FROM notification WHERE receiverId = :receiverId AND status = 0');
+        if ($_SESSION['user_type'] == 'admin')
+            $this->db->query('SELECT COUNT(*) AS notificationCount FROM notification WHERE (receiverId = :receiverId OR receiverId = 0) AND status = 0');
+        else
+            $this->db->query('SELECT COUNT(*) AS notificationCount FROM notification WHERE receiverId = :receiverId AND status = 0');
+
         $this->db->bind(':receiverId', $_SESSION['user_id']);
 
         $row = $this->db->single();
@@ -511,7 +515,10 @@ WHERE (banCount = 1 OR banCount = 2)
 
     // View notifications
     public function viewNotifications(){
-        $this->db->query('SELECT * FROM notification WHERE receiverId = :receiverId ORDER BY notificationTime DESC');
+        if ($_SESSION['user_type'] == 'admin')
+            $this->db->query('SELECT * FROM notification WHERE receiverId = 0 OR receiverId = :receiverId ORDER BY notificationTime DESC');
+        else
+            $this->db->query('SELECT * FROM notification WHERE receiverId = :receiverId ORDER BY notificationTime DESC');
         $this->db->bind(':receiverId', $_SESSION['user_id']);
 
         $results = $this->db->resultSet();
