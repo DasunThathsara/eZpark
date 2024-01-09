@@ -1,5 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
+<img id="login-image" src="<?php echo URLROOT ?>/images/login-page-wall.jpg"" alt="" srcset="">
 
 <div class="login-form-container">  <!--changed the class name-->
 <h3>welcome to</h3> 
@@ -44,7 +45,7 @@
 </div>-->
 
 <script>
-    document.body.style.backgroundColor = '#E29C00';
+    document.body.style.backgroundColor = 'rgb(5 5 5)';
 </script>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
