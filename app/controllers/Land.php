@@ -338,7 +338,7 @@ class Land extends Controller {
 //                $data['qrcode'] = $img_name.'.png';
 
                 // Register land
-                if ($this->landModel->registerLand($data)){
+                if ($this->landModel->registerLand($data) && $this->userModel->addNotification('Land registration request from '.$_SESSION['user_name'], 'landRegistration', $this->landModel->getLandID($data['name']), 0)){
                     $this->aboutSecurityOfficer($data);
                 } else {
                     die('Something went wrong');

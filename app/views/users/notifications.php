@@ -48,14 +48,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                 <a href="" class="tile">
                                     <table>
                                         <tr>
-                                            <td class="name-td" data-header>
-                                                <p class="name"></p>
-                                                <p class="id-p">notification ID: <span class="id"></span></p>
+                                            <td class="name-td" data-header style="width: 100%">
+                                                <p class="name" style="color: black; font-size: 14px"></p>
+                                                <p class="id-p"><span class="id"></span></p>
                                             </td>
-                                            <td class="location" data-header></td>
-                                            <td class="capacity" data-header></td>
-                                            <td class="status-td" data-header><span class="status"></span></td>
-
                                             <td class="options">
                                                 <form action="<?php echo URLROOT ?>/users/removeNotification" method="post" class="delete-form" id="delete-form">
                                                     <input type="text" name="id" id="id" hidden value="" />
@@ -127,7 +123,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
         card.querySelector(".name").textContent = notification.notification;
-        card.querySelector(".location").textContent = notification.notificationTime;
+        card.querySelector(".id").textContent = notification.notificationTime;
 
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
@@ -136,6 +132,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         if (tileLink) {
             if (notification.notificationType == 'securityRequest') {
                 tileLink.href = `<?php print_r(URLROOT)?>/security/viewnotificationRequest/${notification.senderID}/${notification.receiverID}`;
+            }
+            else if (notification.notificationType == 'landRegistration') {
+                tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}`;
             }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
