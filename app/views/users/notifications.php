@@ -53,6 +53,13 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <p class="id-p"><span class="id"></span></p>
                                             </td>
                                             <td class="options">
+                                                <form action="<?php echo URLROOT ?>/users/markAsReadNotification" method="post" class="markAsRead-form" id="delete-form">
+                                                    <input type="text" name="id" id="id" hidden value="" />
+                                                    <button type="submit" class="delete" onclick="confirmSubmit()">
+                                                        <img src="<?php echo URLROOT ?>/images/check.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;&nbsp;
                                                 <form action="<?php echo URLROOT ?>/users/removeNotification" method="post" class="delete-form" id="delete-form">
                                                     <input type="text" name="id" id="id" hidden value="" />
                                                     <button type="submit" class="delete" onclick="confirmSubmit()">
@@ -119,6 +126,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     let notifications = [];
     var backendData = <?php echo json_encode($other_data['list']); ?>;
 
+    console.log(backendData);
     notifications = backendData.map(notification => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
@@ -159,16 +167,28 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 tileLink.href = `<?php print_r(URLROOT)?>/security/viewnotificationRequest/${notification.senderID}/${notification.receiverID}`;
             }
             else if (notification.notificationType == 'landRegistration') {
-                tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}`;
+                tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}/${notification.id}`;
             }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
 
-        // Set values to go to the update page
+        // Set values to delete notification
         const deleteForm = card.querySelector('.delete-form');
         if (deleteForm) {
             const idInput = deleteForm.querySelector('#id');
+
+            if (idInput) {
+                idInput.value = notification.id;
+            } else {
+                console.error("One or more form inputs not found in the cloned card:", card);
+            }
+        }
+
+        // Set values to change the status as read
+        const markAsReadForm = card.querySelector('.markAsRead-form');
+        if (markAsReadForm) {
+            const idInput = markAsReadForm.querySelector('#id');
 
             if (idInput) {
                 idInput.value = notification.id;

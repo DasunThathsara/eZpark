@@ -585,4 +585,22 @@ WHERE (banCount = 1 OR banCount = 2)
             return false;
         }
     }
+
+    // Change notification status
+    public function markAsRead($id): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE notification SET status = 1 WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

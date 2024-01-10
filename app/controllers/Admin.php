@@ -6,6 +6,7 @@ class Admin extends Controller {
         $this->middleware->checkAccess(['admin']);
         $this->adminModel = $this->model('AdminModel');
         $this->landModel = $this->model('LandModel');
+        $this->userModel = $this->model('UserModel');
     }
 
     public function index(){
@@ -33,7 +34,9 @@ class Admin extends Controller {
         $this->view('admin/requests', $data, $other_data);
     }
 
-    public function viewRegistrationRequestedLand($land_id = null){
+    public function viewRegistrationRequestedLand($land_id = null, $notification_id = null){
+        if ($notification_id != null)
+            $this->userModel->markAsRead($notification_id);
         $data = $this->landModel->viewLand($land_id);
 
         $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();

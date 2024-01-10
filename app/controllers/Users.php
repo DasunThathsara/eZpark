@@ -1015,4 +1015,20 @@ class Users extends Controller{
             }
         }
     }
+
+    // Mark as read notification
+    public function markAsReadNotification() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $id = trim($_POST['id']);
+            if ($this->userModel->markAsRead($id)) {
+                redirect('users/notifications');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
 }
