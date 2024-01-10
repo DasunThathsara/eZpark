@@ -123,6 +123,31 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
         card.querySelector(".name").textContent = notification.notification;
+
+        const currentTime = new Date();
+
+        const specifiedTimeString = notification.notificationTime;
+        const specifiedTime = new Date(specifiedTimeString.replace(/-/g, '/'));
+
+        const timeDifference = currentTime - specifiedTime;
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        if (days > 0) {
+            notification.notificationTime = days + " days ago";
+        } else if (hours > 0) {
+            notification.notificationTime = hours + " hours ago";
+        } else if (minutes > 0) {
+            notification.notificationTime = minutes + " minutes ago";
+        } else if (seconds > 0) {
+            notification.notificationTime = seconds + " seconds ago";
+        } else {
+            notification.notificationTime = "Just now";
+        }
+
         card.querySelector(".id").textContent = notification.notificationTime;
 
         document.querySelector(".user-cards").appendChild(card);
