@@ -56,14 +56,12 @@ class Security extends Controller {
     public function viewLand($landID = null){
         $data = $this->landModel->viewLand($landID);
 
-        die(print_r($data));
-
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('security/viewRequests', $data, $other_data);
+        $this->view('security/viewRequestedLand', $data, $other_data);
     }
 
     public function acceptLandRequest(){
