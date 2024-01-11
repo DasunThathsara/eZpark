@@ -111,7 +111,11 @@ class SecurityModel{
 
     // View land requests
     public function viewLandRequest(){
-        $this->db->query('SELECT * FROM security_land_request WHERE sid = :sid;');
+        $this->db->query('SELECT slr.lid, slr.sid, l.name, l.district, l.province
+        FROM security_land_request AS slr
+        JOIN land AS l ON slr.lid = l.id
+        WHERE slr.sid = :sid;
+        ');
 
         // Bind values
         $this->db->bind(':sid', $_SESSION['user_id']);
