@@ -60,9 +60,17 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <td class="options">
                                                 <form action="" method="POST" class="request-form" id="request-form">
                                                     <input type="text" name="landID" id="landID" hidden value="" />
-                                                    <input type="text" name="securityID" id="securityID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
-                                                        <img id="dynamicImage" src="" alt="">
+                                                        <img id="dynamicImage" src="<?php echo URLROOT ?>/images/check.svg" alt="">
+                                                    </button>
+                                                </form>
+                                                
+                                                &nbsp;&nbsp;
+
+                                                <form action="" method="POST" class="request-form" id="request-form">
+                                                    <input type="text" name="landID" id="landID" hidden value="" />
+                                                    <button type="submit" class="price" onclick="confirmSubmit()">
+                                                        <img id="dynamicImage" src="<?php echo URLROOT ?>/images/xmark-solid.svg" alt="">
                                                     </button>
                                                 </form>
                                             </td>
@@ -76,7 +84,6 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             </div>
         </div>
     </section>
-    <?php print_r($data) ?>
 </main>
 
 <script>
@@ -140,7 +147,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
         // Set the parking view link
         if (tileLink) {
-            tileLink.href = `<?php echo URLROOT?>/land/viewSecurity/${security.lid}/${security.sid}`;
+            tileLink.href = `<?php echo URLROOT?>/security/viewLand/${security.lid}`;
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
