@@ -983,4 +983,52 @@ class Users extends Controller{
             $this->view('users/viewProfile', $data);
         }
     }
+
+    // View notifications
+    public function notifications() {
+        $data = [
+            'title' => 'Notifications',
+            'notifications' => 0
+        ];
+
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $this->view('users/notifications', $data, $notifications);
+    }
+
+    // Remove notification
+    public function removeNotification() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $id = trim($_POST['id']);
+            if ($this->userModel->removeNotificationByID($id)) {
+                redirect('users/notifications');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+    // Mark as read notification
+    public function markAsReadNotification() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $id = trim($_POST['id']);
+            if ($this->userModel->markAsRead($id)) {
+                redirect('users/notifications');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
 }

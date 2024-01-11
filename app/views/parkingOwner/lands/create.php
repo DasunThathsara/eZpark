@@ -11,8 +11,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1 class="title">Add New Land</h1>
-            <p class="subtitle">Fill up the information correctly for your new land</p>
+            <h1 class="title">Add a New Land</h1>
+            <p class="subtitle">Fill up the below informations correctly to add a new land</p>
 
             <div class="form-container land-register-form">
                 <br>
@@ -47,9 +47,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <br><br>
 
+                    
                     <!-- District -->
                     <div class="form-input-title">District:</div>
-                    <select name="district" id="district" required>
+                    <select name="district" id="district" class="district" required>
                         <option value="" disabled selected>Select District</option>
                         <option value="Ampara" <?php if ($data['district'] == 'Ampara') echo 'selected' ?>>Ampara</option>
                         <option value="Anuradhapura" <?php if ($data['district'] == 'Anuradhapura') echo 'selected' ?>>Anuradhapura</option>
@@ -78,6 +79,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <option value="Vavuniya" <?php if ($data['district'] == 'Vavuniya') echo 'selected' ?>>Vavuniya</option>
                     </select>
 
+                     <!-- contactNo -->
+                     <div class="form-input-title">Contact Number:</div>
+                    <input class="contact-no" type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />
+                
+
                     <br><br>
 
                     <!-- Deed -->
@@ -88,29 +94,52 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <div class="description">*Upload deed in PDF format</div>
                     </div>
 
-                    <br><br>
+                    <!-- <br><br> -->
+
+                    <!-- <br><br> -->
 
                     <!-- Car -->
-                    <div class="form-input-title">Number of available car parking slots:</div>
-                    <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" />
+                    <!-- <div class="form-input-title">Number of available car parking slots:</div> -->
+                    <!-- <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" /> -->
 
-                    <br><br>
+                    <!-- <br><br> -->
 
                     <!-- Bike -->
-                    <div class="form-input-title">Number of available bike parking slots:</div>
-                    <input type="text" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
+                    <!-- <div class="form-input-title">Number of available bike parking slots:</div> -->
+                    <!-- <input type="text" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" /> -->
 
-                    <br><br>
+                    <!-- <br><br> -->
 
                     <!-- Three Wheel -->
-                    <div class="form-input-title">Number of available threewheel parking slots:</div>
-                    <input type="text" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
+                    <!-- <div class="form-input-title">Number of available threewheel parking slots:</div> -->
+                    <!-- <input type="text" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" /> -->
+
+                    <!-- <br><br> -->
+
+                    <!-- contactNo -->
+                    <!-- <div class="form-input-title">Contact Number:</div> -->
+                    <!-- <input type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" /> -->
+
+                    <!-- <br><br> -->
 
                     <br><br>
 
-                    <!-- contactNo -->
-                    <div class="form-input-title">Contact Number:</div>
-                    <input type="text" name="contactNo" id="contactNo" required value="<?php echo $data['contactNo'] ?>" />
+                    <!--Number of available slots-->
+                    <div class="form-input-title">Number of available parking slots:</div>
+                    <div class="slots-container">
+                        <div class="slots">
+                            <div class="slots-title">Car</div>
+                            <input type="number" name="car" id="car" required value="<?php echo $data['car'] ?>" />
+                        </div>
+                        <div class="slots">
+                            <div class="slots-title">Bike</div>
+                            <input type="number" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
+                        </div>
+                        <div class="slots">
+                            <div class="slots-title">Three Wheel</div>
+                            <input type="number" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
+                        </div>
+                    </div>  
 
                     <br><br>
 

@@ -498,4 +498,109 @@ WHERE (banCount = 1 OR banCount = 2)
             return false;
         }
     }
+
+    // Get notification count
+    public function getNotificationCount(){
+        if ($_SESSION['user_type'] == 'admin')
+            $this->db->query('SELECT COUNT(*) AS notificationCount FROM notification WHERE (receiverId = :receiverId OR receiverId = 0) AND status = 0');
+        else
+            $this->db->query('SELECT COUNT(*) AS notificationCount FROM notification WHERE receiverId = :receiverId AND status = 0');
+
+        $this->db->bind(':receiverId', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row->notificationCount;
+    }
+
+    // View notifications
+    public function viewNotifications(){
+        if ($_SESSION['user_type'] == 'admin')
+            $this->db->query('SELECT * FROM notification WHERE receiverId = 0 OR receiverId = :receiverId ORDER BY notificationTime DESC');
+        else
+            $this->db->query('SELECT * FROM notification WHERE receiverId = :receiverId ORDER BY notificationTime DESC');
+        $this->db->bind(':receiverId', $_SESSION['user_id']);
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    // Add notification
+    public function addNotification($notification, $type, $sender, $receiver): bool
+    {
+        // Prepare statement
+        $this->db->query('INSERT INTO notification (receiverId, senderId, notificationType, notification, status) VALUES (:receiverId, :senderId, :notificationType, :notification, :status)');
+
+        // Bind values
+        $this->db->bind(':receiverId', $receiver);
+        $this->db->bind(':senderId', $sender);
+        $this->db->bind(':notificationType', $type);
+        $this->db->bind(':notification', $notification);
+        $this->db->bind(':status', 0);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Remove notification
+    public function removeNotification($type, $sender, $receiver): bool
+    {
+        // Prepare statement
+        $this->db->query('DELETE FROM notification WHERE senderId = :senderId AND receiverId = :receiverId AND notificationType = :notificationType');
+
+        // Bind values
+        $this->db->bind(':senderId', $sender);
+        $this->db->bind(':receiverId', $receiver);
+        $this->db->bind(':notificationType', $type);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Remove notification by ID
+    public function removeNotificationByID($id): bool
+    {
+        // Prepare statement
+        $this->db->query('DELETE FROM notification WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Change notification status
+    public function markAsRead($id): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE notification SET status = 1 WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
