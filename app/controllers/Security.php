@@ -44,13 +44,33 @@ class Security extends Controller {
     public function viewRequests(){
         $data = $this->securityModel->viewLandRequest();
 
-        die(print_r($data));
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('security/viewRequests', $data, $other_data);
+    }
+
+    // View requested land details 
+    public function viewLand($landID = null){
+        $data = $this->landModel->viewLand($landID);
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('security/landRequest', $data, $other_data);
+        $this->view('security/viewRequestedLand', $data, $other_data);
+    }
+
+    public function acceptLandRequest(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->securityModel->acceptLandRequest($_POST['id']);
+
+            redirect('security/landRequest');
+        }
     }
 }
