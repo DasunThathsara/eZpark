@@ -44,6 +44,7 @@ class DriverModel{
         }
     }
 
+    // View vehicles
     public function viewVehicles(){
         $this->db->query('SELECT * FROM vehicle WHERE id = :id');
         $this->db->bind(':id', $_SESSION['user_id']);
@@ -53,6 +54,7 @@ class DriverModel{
         return $row;
     }
 
+    // Remove vehicle
     public function removeVehicle($data): bool
     {
         // Prepare statement
@@ -74,6 +76,7 @@ class DriverModel{
         }
     }
 
+    // Update vehicle details
     public function updateVehicle($data): bool
     {
         // Prepare statement
@@ -94,4 +97,7 @@ class DriverModel{
             return false;
         }
     }
+
+    // ------------------------- Parking Functionalities -------------------------
+    // Change parking status
 }

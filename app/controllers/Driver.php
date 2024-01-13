@@ -114,6 +114,27 @@ class Driver extends Controller {
         $this->view('driver/viewParking', $lands, $other_data);
     }
 
+    // Start and stop timer
+    public function startAndStopTimer($land_ID = null){
+        $data = [
+            'id' => $land_ID
+        ];
+
+        // Check parking status of the driver
+        $parking_status = $this->driverModel->checkParkingStatus($data['id']);
+        
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0' . $other_data['notification_count'];
+
+        $lands = $this->landModel->viewLand($land_ID);
+
+        $this->view('driver/viewParking', $lands, $other_data);
+    }
+
+
     // ------------------------ Scan QR Code ------------------------
     public function scanQRCode(){
         $vehicles = $this->driverModel->viewVehicles();
