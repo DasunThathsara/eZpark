@@ -44,13 +44,13 @@
 
                 <a href="<?php echo URLROOT ?>/parkingowner/report">
                     <div class="type-select-btn">
-                        Type 03
+                        Type 04
                     </div>
                 </a>
 
                 <a href="<?php echo URLROOT ?>/parkingowner/report">
                     <div class="type-select-btn">
-                        Type 04
+                        Type 05
                     </div>
                 </a>
             </div>
