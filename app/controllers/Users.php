@@ -96,7 +96,6 @@ class Users extends Controller{
                 // Load view with errors
                 $this->view('users/parkingOwnerRegister', $data);
             }
-
         } else {
             // Initial form data
             $data = [

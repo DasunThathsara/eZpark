@@ -163,8 +163,8 @@ class SuperAdmin extends Controller {
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 // Register user
-                if ($this->user) {
-                    $this->userModel->addAdmin($data);
+                if ($this->userModel->register($data)) {
+//                    $this->userModel->addAdmin($data);
                     redirect('superAdmin/viewAdmins');
                 } else {
                     die('Something went wrong');
