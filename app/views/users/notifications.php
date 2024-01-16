@@ -164,7 +164,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         // Set the parking view link
         if (tileLink) {
             if (notification.notificationType == 'securityRequest') {
-                tileLink.href = `<?php print_r(URLROOT)?>/security/viewnotificationRequest/${notification.senderID}/${notification.receiverID}`;
+                tileLink.href = `<?php print_r(URLROOT)?>/security/viewLand/${notification.senderID}/${notification.receiverID}`;
             }
             else if (notification.notificationType == 'landRegistration') {
                 tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}/${notification.id}`;
