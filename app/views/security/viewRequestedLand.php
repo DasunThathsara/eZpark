@@ -27,14 +27,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <p>Three wheel: <?php echo $data->threeWheel?></p>
 
                 <div class="options" style="display: flex; margin-top: 20px">
-                    <form action="<?php echo URLROOT ?>/admin/verifyLand" method="post" class="update-form">
+                    <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="post" class="update-form">
                         <input type="text" name="id" id="id" hidden value="<?php echo $data->id?>" />
                         <button type="submit" style="border: none; background-color: rgb(255,255,255) onclick=" return confirmSubmit();">
                             <img src="<?php echo URLROOT ?>/images/tick.svg" style="width: 18px" alt="">
                         </button>
                     </form>
                     &nbsp;
-                    <form action="<?php echo URLROOT ?>/admin/unverifyLand" method="post" class="delete-form">
+                    <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="post" class="delete-form">
                         <input type="text" name="id" id="id" hidden value="<?php echo $data->id?>" />
                         <button type="submit" style="border: none; background-color: rgb(255,255,255) onclick=" return confirmSubmit();">
                             <img src="<?php echo URLROOT ?>/images/circle-xmark-regular.svg" style="width: 18px;" alt="">
