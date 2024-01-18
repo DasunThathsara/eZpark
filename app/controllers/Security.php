@@ -55,7 +55,7 @@ class Security extends Controller {
     // View requested land details 
     public function viewLand($landID = null){
         $data = $this->landModel->viewLand($landID);
-        die(print_r($data));
+        $data->assignedLand = $this->securityModel->getAssignedLandID();
 
         $other_data['notification_count'] = 0;
 
@@ -72,7 +72,7 @@ class Security extends Controller {
 
             $this->securityModel->acceptLandRequest($_POST['id']);
 
-            redirect('security/landRequest');
+            redirect('security/viewLand/'.$_POST['id'].'/'.$_SESSION['user_id']);
         }
     }
 
