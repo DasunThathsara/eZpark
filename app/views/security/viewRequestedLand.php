@@ -43,7 +43,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         </form>
                     </div>
                 <?php } else{?>
-                    <a href="" style="background-color:orange; border-radius: 10px; padding: 10px">Go to dashboard</a>
+                    <a href="<?php echo URLROOT?>/security/index" style="background-color:orange; border-radius: 10px; padding: 10px">Go to dashboard</a>
                 <?php }?>
             </div>
         </div>
