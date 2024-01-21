@@ -81,7 +81,7 @@ class Security extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $this->securityModel->acceptLandRequest($_POST['id']);
+            $this->securityModel->declineLandRequest($_POST['id']);
 
             redirect('security/landRequest');
         }
