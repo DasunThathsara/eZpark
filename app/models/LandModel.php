@@ -597,4 +597,14 @@ class LandModel{
             return false;
         }
     }
+
+    // Get landowner id by land id
+    public function getLandownerID($landID){
+        $this->db->query('SELECT uid FROM land WHERE id = :id');
+        $this->db->bind(':id', $landID);
+
+        $row = $this->db->single();
+
+        return $row->uid;
+    }
 }

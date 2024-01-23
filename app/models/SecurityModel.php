@@ -147,15 +147,26 @@ class SecurityModel{
     // Decline land request
     public function declineLandRequest($id): bool
     {
-        // Prepare statement
+        // Prepare statement for delete land request
         $this->db->query('DELETE FROM security_land_request WHERE lid = :lid AND sid = :sid');
 
         // Bind values
         $this->db->bind(':lid', $id);
         $this->db->bind(':sid', $_SESSION['user_id']);
 
+        $result1 = $this->db->execute();
+
+        // Prepare statement for delete notification
+        $this->db->query('DELETE FROM notification WHERE senderID = :senderID AND receiverID = :receiverID');
+
+        // Bind values
+        $this->db->bind(':senderID', $id);
+        $this->db->bind(':receiverID', $_SESSION['user_id']);
+
+        $result2 = $this->db->execute();
+
         // Execute
-        if ($this->db->execute()){
+        if ($result1 && $result2){
             return true;
         }
         else {
