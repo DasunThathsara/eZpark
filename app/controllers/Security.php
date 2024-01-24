@@ -76,6 +76,8 @@ class Security extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $this->securityModel->acceptLandRequest($_POST['id']);
+
+            // Send notification to the landowner
             $this->userModel->addNotification('Your request was accepted by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
 
             redirect('security/viewLand/'.$_POST['id'].'/'.$_SESSION['user_id']);
@@ -88,6 +90,8 @@ class Security extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $this->securityModel->declineLandRequest($_POST['id']);
+
+            // Send notification to the landowner
             $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
 
             redirect('security/landRequest');
