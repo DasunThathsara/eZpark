@@ -63,12 +63,12 @@ class Security extends Controller {
         $data = $this->landModel->viewLand($landID);
         $data->assignedLand = $this->securityModel->getAssignedLandID();
 
-        $other_data['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('security/viewRequestedLand', $data, $other_data);
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+        $this->view('security/viewRequestedLand', $data, $notifications);
     }
 
     // Accept land request
