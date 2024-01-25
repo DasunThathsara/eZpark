@@ -44,12 +44,13 @@ class Security extends Controller {
     public function viewRequests(){
         $data = $this->securityModel->viewLandRequest();
 
-        $other_data['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $this->view('security/viewRequests', $data, $other_data);
+        $this->view('security/viewRequests', $data, $notifications);
     }
 
     // View requested land details 
