@@ -68,6 +68,7 @@ class Security extends Controller {
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
         $this->view('security/viewRequestedLand', $data, $notifications);
     }
 

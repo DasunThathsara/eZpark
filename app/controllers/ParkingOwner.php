@@ -7,6 +7,7 @@ class ParkingOwner extends Controller {
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
+        $this->userModel = $this->model('UserModel');
     }
 
     public function index(){
@@ -17,12 +18,13 @@ class ParkingOwner extends Controller {
             'total_capacity' => $this->landModel->getTotalCapacity()
         ];
 
-        $lands['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($lands['notification_count'] < 10)
-            $lands['notification_count'] = '0'.$lands['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $this->view('parkingOwner/index', $data, $lands);
+        $this->view('parkingOwner/index', $data, $notifications);
     }
 
     // --------------------------------------- Lands ---------------------------------------
