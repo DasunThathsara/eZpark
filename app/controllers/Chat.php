@@ -14,6 +14,14 @@ class Chat extends Controller {
         $this->view('chat/index', $data);
     }
 
+    public function viewfile(){
+        $data = [
+            'title' => 'Home page'
+        ];
+        $this->view('chat/file', $data);
+    }
+
+   
 
 //     public function viewChat(){
 //         $data = [
