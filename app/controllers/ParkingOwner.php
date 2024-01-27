@@ -32,12 +32,13 @@ class ParkingOwner extends Controller {
     public function lands(){
         $lands = $this->landModel->viewLands();
 
-        $other_data['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $this->view('parkingOwner/lands', $lands, $other_data);
+        $this->view('parkingOwner/lands', $lands, $notifications);
     }
 
     // Go to specific land
