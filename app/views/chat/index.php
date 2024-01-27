@@ -1,93 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="300"> -->
-    <title>Ezpark Chat</title>
-
-    
-</head>
-
-<style type ="text/css">
-
-    @font-face{
-        font-family:headFont;
-        src:url(public/font/Summer-Vibes-OTF.otf);
-    }
-
-    #wrapper{
-
-        max-width:900px;
-        min-width:500px;
-        display:flex;
-        margin:auto;
-        color:white;
-        
-    }
-
-    #left_pannel{
-
-        min-height:400px;
-        background-color:#27344d;
-        flex:1;
-
-
-    }
-
-    #right_pannel{
-
-        min-height:500px;
-        background-color:#27344d;
-        flex:4;
-    }
-
-    #header{
-
-        background-color: #475a6c;
-        height:70px;
-        font-size:40px;
-        text-align:center;
-        font-family:headFont;
-
-    }
-
-    #inner_left_pannel{
-
-        background-color:#2b323a;
-        flex:1;
-        min-height:430px;
-
-    }
-
-    #inner_right_pannel{
-
-        background-color: #dde8ee;
-        flex:2;
-        min-height:430px;
-
-    }
-
-</style>
-
-<body>
+<?php require APPROOT.'/views/inc/header.php'; ?>
 
     <div id ="wrapper">
-
-        <div id="left_pannel">
-
-        </div>
 
         <div id="right_pannel">
             <div id="header">Ezpark Chat</div>
             <div id="container" style="display: flex;">
-                <div id="inner_left_pannel"></div>
-                <div id="inner_right_pannel"></div>
+
+               
+                <div id="inner_left_pannel">
+
+                    
+                    <!-- <div id="inner_inner_left" >
+                        
+                        <label id="label_chat" for="redio_chat">Chat<img src="<?php echo URLROOT ?>/images/chat.png"></label>
+                        <label id="label_contacts" for="redio_contacts">Contacts<img src="<?php echo URLROOT ?>/images/contacts.png"></label>
+                        <label id="label_settings" for="redio_settings">Settings<img src="<?php echo URLROOT ?>/images/settings.png"></label>
+                    
+                    </div> -->
+                </div>
+
+                <!-- <input type = "radio" id="redio_chat" name="myradio" style="display:none;">
+                <input type = "radio" id="redio_contacts" name="myradio" style="display:none;">
+                <input type = "radio" id="redio_settings" name="myradio" style="display:none;"> -->
+
+                <div id="inner_right_pannel">
+
+                    <div class="chat-container">
+
+                        <div class="chat-header">
+                            <h2>Contact Name</h2>
+                            <p id="online-status">Online</p>
+                        </div>
+
+                        <ul class="chat-messages" id="chat-messages">
+                            <!-- Messages will be appended here -->
+                        </ul>
+                        <div class="chat-input">
+                            <input type="text" id="message-input" placeholder="Type a message...">
+                            <button id="send-button">Send</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 
 
-</body>
-</html>
+
+<script type="text/javascript">
+
+    
+
+    document.getElementById("send-button").addEventListener("click", function() {
+        var messageInput = document.getElementById("message-input");
+        var message = messageInput.value.trim();
+        
+        if (message !== "") {
+            sendMessage(message);
+            messageInput.value = "";
+        }
+    });
+
+    document.getElementById("message-input").addEventListener("keydown", function(event) {
+        var messageInput = document.getElementById("message-input");
+        var message = messageInput.value.trim();
+        
+        if (event.keyCode === 13) {
+            if (message !== "") {
+            sendMessage(message);
+            messageInput.value = "";
+        } 
+        }
+    });
+
+    function sendMessage(message) {
+        var chatMessages = document.getElementById("chat-messages");
+        var li = document.createElement("li");
+        li.classList.add("message");
+        li.classList.add("sender");
+        var p = document.createElement("p");
+        p.textContent = message;
+        li.appendChild(p);
+        chatMessages.appendChild(li);
+
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+
+</script>
+
+
+    <?php require APPROOT.'/views/inc/footer.php'; ?>
