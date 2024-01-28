@@ -55,6 +55,7 @@ class Security extends Controller {
     // View requested land details 
     public function viewLand($landID = null){
         $data = $this->landModel->viewLand($landID);
+        $data->assignedLand = $this->securityModel->getAssignedLandID();
 
         $other_data['notification_count'] = 0;
 
@@ -64,11 +65,23 @@ class Security extends Controller {
         $this->view('security/viewRequestedLand', $data, $other_data);
     }
 
+    // Accept land request
     public function acceptLandRequest(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $this->securityModel->acceptLandRequest($_POST['id']);
+
+            redirect('security/viewLand/'.$_POST['id'].'/'.$_SESSION['user_id']);
+        }
+    }
+
+    // Decline land request
+    public function declineLandRequest(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->securityModel->declineLandRequest($_POST['id']);
 
             redirect('security/landRequest');
         }
