@@ -44,25 +44,32 @@ class Security extends Controller {
     public function viewRequests(){
         $data = $this->securityModel->viewLandRequest();
 
-        $other_data['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $this->view('security/viewRequests', $data, $other_data);
+        $this->view('security/viewRequests', $data, $notifications);
     }
 
     // View requested land details 
-    public function viewLand($landID = null){
+    public function viewLand($landID = null, $notificationID = null){
+        // Mark notification as read
+        if ($notificationID != null)
+            $this->userModel->markAsRead($notificationID);
+
+        // Get land details
         $data = $this->landModel->viewLand($landID);
         $data->assignedLand = $this->securityModel->getAssignedLandID();
 
-        $other_data['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $this->view('security/viewRequestedLand', $data, $other_data);
+        $this->view('security/viewRequestedLand', $data, $notifications);
     }
 
     // Accept land request
@@ -71,6 +78,9 @@ class Security extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $this->securityModel->acceptLandRequest($_POST['id']);
+
+            // Send notification to the landowner
+            $this->userModel->addNotification('Your request was accepted by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
 
             redirect('security/viewLand/'.$_POST['id'].'/'.$_SESSION['user_id']);
         }
@@ -82,6 +92,9 @@ class Security extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $this->securityModel->declineLandRequest($_POST['id']);
+
+            // Send notification to the landowner
+            $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
 
             redirect('security/landRequest');
         }
