@@ -48,12 +48,13 @@ class ParkingOwner extends Controller {
             'name' => $this->landModel->getLandName($land_ID),
         ];
 
-        $lands = $this->landModel->viewLands();
+        $notifications = $this->landModel->viewLands();
 
-        $lands['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($lands['notification_count'] < 10)
-            $lands['notification_count'] = '0'.$lands['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
         $data = [
             'id' => $land_ID,
@@ -65,7 +66,7 @@ class ParkingOwner extends Controller {
             'capacity' => $this->landModel->getCapacity($land_ID),
         ];
 
-        $this->view('parkingOwner/land', $data, $lands);
+        $this->view('parkingOwner/land', $data, $notifications);
     }
 
     // -------------------------------------- Packages -------------------------------------
