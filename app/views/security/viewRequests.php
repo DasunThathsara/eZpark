@@ -58,7 +58,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <td class="province" data-header></td>
 
                                             <td class="options">
-                                                <form action="" method="POST" class="request-form" id="request-form">
+                                                <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="request-form" id="request-form">
                                                     <input type="text" name="landID" id="landID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/check.svg" alt="">
@@ -67,7 +67,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 
                                                 &nbsp;&nbsp;
 
-                                                <form action="" method="POST" class="request-form" id="request-form">
+                                                <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="POST" class="request-form" id="request-form">
                                                     <input type="text" name="landID" id="landID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/xmark-solid.svg" alt="">
