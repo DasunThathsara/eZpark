@@ -208,4 +208,19 @@
 }
 
 
+.contacts {
+    width: 200px; /* Adjust as needed */
+    background-color: #f2f2f2;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
 
+.contact {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
+
+.contact:hover {
+    background-color: #e0e0e0;
+}

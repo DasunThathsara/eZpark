@@ -24,13 +24,14 @@
                 <input type = "radio" id="redio_settings" name="myradio" style="display:none;"> -->
 
                 <div id="inner_right_pannel">
+                    <div class="chat-header">
+                        <h2>Contact Name</h2>
+                        <p id="online-status">Online</p>
+                    </div>
 
                     <div class="chat-container">
 
-                        <div class="chat-header">
-                            <h2>Contact Name</h2>
-                            <p id="online-status">Online</p>
-                        </div>
+                        
 
                         <ul class="chat-messages" id="chat-messages">
                             <!-- Messages will be appended here -->
