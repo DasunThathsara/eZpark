@@ -615,26 +615,43 @@ class Land extends Controller {
             redirect('land/viewSecurity/'.$data['id']);
         }
         else{
-            $data = [
-                'id' => $security_ID,
-                'lid' => $land_ID
-            ];
+            if($security_ID == null){
+                $data = [
+                    'lid' => 0,
+                    'id' => $land_ID
+                ];
 
-            $security = $this->securityModel->viewSecurityProfile($data);
+                $security = $this->securityModel->viewSecurityProfile($data);
 
-            $pendingSec = $this->securityModel->getSecurityPendingList($land_ID);
+                $security['notification_count'] = 0;
 
-            $security['pending_securities'] = array();
-            foreach ($pendingSec as $sec){
-                $security['pending_securities'][] = $sec->sid;
+                if ($security['notification_count'] < 10)
+                    $security['notification_count'] = '0'.$security['notification_count'];
+
+                $this->view('parkingOwner/securities/viewProfile', $data, $security);
             }
+            else{
+                $data = [
+                    'id' => $security_ID,
+                    'lid' => $land_ID
+                ];
 
-            $security['notification_count'] = 0;
+                $security = $this->securityModel->viewSecurityProfile($data);
 
-            if ($security['notification_count'] < 10)
-                $security['notification_count'] = '0'.$security['notification_count'];
+                $pendingSec = $this->securityModel->getSecurityPendingList($land_ID);
 
-            $this->view('parkingOwner/securities/viewProfile', $data, $security);
+                $security['pending_securities'] = array();
+                foreach ($pendingSec as $sec){
+                    $security['pending_securities'][] = $sec->sid;
+                }
+
+                $security['notification_count'] = 0;
+
+                if ($security['notification_count'] < 10)
+                    $security['notification_count'] = '0'.$security['notification_count'];
+
+                $this->view('parkingOwner/securities/viewProfile', $data, $security);
+            }
         }
     }
 }

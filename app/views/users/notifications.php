@@ -169,6 +169,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             else if (notification.notificationType == 'landRegistration') {
                 tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}/${notification.id}`;
             }
+            else if (notification.notificationType == 'securityRequestResult') {
+                tileLink.href = `<?php print_r(URLROOT)?>/land/viewSecurity/${notification.senderID}`;
+            }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }

@@ -1,6 +1,7 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 <!--  TOP NAVIGATION  -->
 <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
+
 <!--  SIDE NAVIGATION  -->
 <?php
     $section = 'profile';
@@ -69,8 +70,10 @@
 
                     <br><br>
 
-                    <!-- Submit -->
-                    <input type="submit" value="" id="submit-btn">
+                    <?php if ($data['lid'] != 0){?>
+                        <!-- Submit -->
+                        <input type="submit" value="" id="submit-btn">
+                    <?php }?>
                 </form>
             </div>
         </div>
