@@ -5,6 +5,8 @@ class Users extends Controller{
         $this->landModel = $this->model('LandModel');
     }
 
+
+    // User registration form
     public function register(){
         $data = [
             'title' => 'Register'
@@ -12,6 +14,8 @@ class Users extends Controller{
         $this->view('users/register', $data);
     }
 
+
+    // Parking owner registration form
     public function parkingOwnerRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
@@ -96,7 +100,6 @@ class Users extends Controller{
                 // Load view with errors
                 $this->view('users/parkingOwnerRegister', $data);
             }
-
         } else {
             // Initial form data
             $data = [
@@ -115,6 +118,8 @@ class Users extends Controller{
         }
     }
 
+
+    // Driver registration form
     public function driverRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
@@ -218,6 +223,8 @@ class Users extends Controller{
         }
     }
 
+
+    // PMerchandiser registration form
     public function merchandiserRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
@@ -327,6 +334,8 @@ class Users extends Controller{
         }
     }
 
+
+    // Security registration form
     public function securityRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data
@@ -476,6 +485,8 @@ class Users extends Controller{
         }
     }
 
+
+    // Admin registration form
     public function adminRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Submitted form data

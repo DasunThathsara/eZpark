@@ -6,6 +6,8 @@
 <?php
 $section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
+
+print_r(session_id());
 ?>
 
 <main class="page-container">

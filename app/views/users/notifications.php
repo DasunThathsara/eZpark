@@ -164,7 +164,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         // Set the parking view link
         if (tileLink) {
             if (notification.notificationType == 'securityRequest') {
-                tileLink.href = `<?php print_r(URLROOT)?>/security/viewnotificationRequest/${notification.senderID}/${notification.receiverID}`;
+                tileLink.href = `<?php print_r(URLROOT)?>/security/viewLand/${notification.senderID}/${notification.id}`;
             }
             else if (notification.notificationType == 'landRegistration') {
                 tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}/${notification.id}`;
@@ -201,6 +201,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     });
 
     // ------------------------------- Filter -------------------------------
+
     const allnotifications = document.querySelector(".all-notifications");
     const availablenotifications = document.querySelector(".available-notifications");
     const unavailablenotifications = document.querySelector(".unavailable-notifications");

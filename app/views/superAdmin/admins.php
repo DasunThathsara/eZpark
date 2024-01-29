@@ -1,11 +1,14 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 <!--  TOP NAVIGATION  -->
-<?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
+<?php //require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
 <!--  SIDE NAVIGATION  -->
 <?php
 $section = 'lands';
-require APPROOT.'/views/inc/components/sidenavbar.php';
+//require APPROOT.'/views/inc/components/sidenavbar.php';
+
+//print_r(session_id());
+session_destroy();
 ?>
 
 <main class="page-container">

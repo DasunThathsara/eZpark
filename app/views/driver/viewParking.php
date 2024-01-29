@@ -22,7 +22,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <p>Car: <?php echo $data->car?></p>
                 <p>Bike: <?php echo $data->bike?></p>
                 <p>Three wheel: <?php echo $data->threeWheel?></p>
-                <a href="<?php echo URLROOT?>/deeds/<?php echo $data->deed ?>" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Directions</a>
+<!--                <a href="--><?php //echo URLROOT?><!--/deeds/--><?php //echo $data->deed ?><!--" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Directions</a>-->
+                <a href="<?php echo URLROOT?>/driver/startAndStopTimer/<?php echo $data->id?>" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Enter Parking</a>
             </div>
         </div>
     </section>
