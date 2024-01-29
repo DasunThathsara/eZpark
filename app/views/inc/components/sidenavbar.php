@@ -119,6 +119,15 @@
                         <div class="item"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">Reports</div>
                     <?php } ?>
                 </a>
+
+                <a href="<?php echo URLROOT ?>/chat/viewchat">
+                    <?php if ($section == 'chat'){?>
+                        <div class="item selected"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">chat</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(4px)" src="<?php echo URLROOT ?>/images/deed.svg" alt="">chat</div>
+                    <?php } ?>
+                </a>
             <?php } ?>      
 
             <!-------------------------------------------- Security -------------------------------------------->
