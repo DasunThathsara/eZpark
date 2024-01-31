@@ -5,10 +5,7 @@
 <!--  SIDE NAVIGATION  -->
 <?php
 $section = 'lands';
-//require APPROOT.'/views/inc/components/sidenavbar.php';
-
-//print_r(session_id());
-session_destroy();
+require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
 <main class="page-container">
