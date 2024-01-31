@@ -401,7 +401,7 @@ WHERE (banCount = 1 OR banCount = 2)
 
     // View all admins
     public function viewAdmins(){
-        $this->db->query('SELECT * FROM user WHERE userType = "admin"');
+        $this->db->query('SELECT * FROM user WHERE userType = "admin" AND status != 10');
 
         $results = $this->db->resultSet();
 
@@ -420,7 +420,7 @@ WHERE (banCount = 1 OR banCount = 2)
 
     // Remove admin
     public function removeAdmin($admin_id){
-        $this->db->query('DELETE FROM user WHERE id = :id');
+        $this->db->query('UPDATE user SET status = 10 WHERE id = :id');
         $this->db->bind(':id', $admin_id);
 
         // Execute
