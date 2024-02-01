@@ -59,7 +59,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                                             <td class="options">
                                                 <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="request-form" id="request-form">
-                                                    <input type="text" name="landID" id="landID" hidden value="" />
+                                                    <input type="text" name="landID" class="id" id="landID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/check.svg" alt="">
                                                     </button>
@@ -67,9 +67,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 
                                                 &nbsp;&nbsp;
 
-                                                <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="POST" class="request-form" id="request-form">
-                                                    <input type="text" name="landID" id="landID" hidden value="" />
-                                                    <button type="submit" class="price" onclick="confirmSubmit()">
+                                                <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="POST" class="decline-form">
+                                                    <input type="text" name="id" class="id" id="id" hidden value="" />
+                                                    <button type="submit" class="delete" onclick="return confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/xmark-solid.svg" alt="">
                                                     </button>
                                                 </form>
@@ -87,34 +87,38 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const requestForm = document.getElementById("request-form");
+    function confirmSubmit() {
+        return confirm("Are you sure you want to delete this land?");
+    }
 
-        if (requestForm) {
-            const submitButton = requestForm.querySelector("button[type='submit']");
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const requestForm = document.getElementById("decline-form");
 
-            if (submitButton) {
-                submitButton.addEventListener("click", function (event) {
-                    event.preventDefault(); // Prevent the form from submitting
+    //     if (requestForm) {
+    //         const submitButton = requestForm.querySelector("button[type='submit']");
 
-                    // Use SweetAlert for confirmation
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: 'You are about to submit this.',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, submit it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            requestForm.submit();
-                        }
-                    });
-                });
-            }
-        }
-    });
+    //         if (submitButton) {
+    //             submitButton.addEventListener("click", function (event) {
+    //                 event.preventDefault(); // Prevent the form from submitting
+
+    //                 // Use SweetAlert for confirmation
+    //                 Swal.fire({
+    //                     title: 'Are you sure?',
+    //                     text: 'You are about to submit this.',
+    //                     icon: 'warning',
+    //                     showCancelButton: true,
+    //                     confirmButtonColor: '#3085d6',
+    //                     cancelButtonColor: '#d33',
+    //                     confirmButtonText: 'Yes, submit it!'
+    //                 }).then((result) => {
+    //                     if (result.isConfirmed) {
+    //                         requestForm.submit();
+    //                     }
+    //                 });
+    //             });
+    //         }
+    //     }
+    // });
 
 
 
@@ -134,7 +138,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     let securities = [];
     var backendData = <?php echo json_encode($data); ?>;
-    console.log(backendData)
+    // console.log(backendData)
     securities = backendData.map(security => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         card.querySelector(".name").textContent = security.name;
@@ -152,15 +156,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
 
-        // Set id and name to go to the price page
-        const requestForm = card.querySelector('.request-form');
-        if (requestForm) {
-            const landID = requestForm.querySelector('#landID');
-            const securityID = requestForm.querySelector('#securityID');
+        // Set id and name to go to the delete the land from security
+        const declineForm = card.querySelector('.decline-form');
+        if (declineForm) {
+            const landID = declineForm.querySelector('#landID');
 
-            if (landID && securityID) {
-                securityID.value = security.sid;
+            if (landID) {
                 landID.value = security.lid;
+                // console.log(landID.value);
             } else {
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }

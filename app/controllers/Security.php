@@ -90,12 +90,12 @@ class Security extends Controller {
     public function declineLandRequest(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $this->securityModel->declineLandRequest($_POST['id']);
+            // die(print_r($_POST['id']));
+            $this->securityModel->declineLandRequest($_SESSION['user_id']);
 
             // Send notification to the landowner
-            $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
-
+            $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandownerID($_POST['id']) );
+            // Example: Assuming receiverID should not be NULL
             redirect('security/viewRequests');
         }
     }

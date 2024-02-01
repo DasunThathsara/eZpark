@@ -121,6 +121,7 @@ class SecurityModel{
         $this->db->bind(':sid', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
+        // die(print_r($row));
 
         return $row;
     }
@@ -153,8 +154,9 @@ class SecurityModel{
         // Bind values
         $this->db->bind(':lid', $id);
         $this->db->bind(':sid', $_SESSION['user_id']);
-
+       
         $result1 = $this->db->execute();
+        // die(print_r($result1));  
 
         // Prepare statement for delete notification
         $this->db->query('DELETE FROM notification WHERE senderID = :senderID AND receiverID = :receiverID');
@@ -164,6 +166,12 @@ class SecurityModel{
         $this->db->bind(':receiverID', $_SESSION['user_id']);
 
         $result2 = $this->db->execute();
+        // die(print_r($_SESSION['user_id']));
+
+        // $this->db->query('DELETE FROM notification WHERE notification.id = :notification.id');
+
+        // $this->db->bind(':notification.id', $nid);
+        // die(print_r($nid));
 
         // Execute
         if ($result1 && $result2){
