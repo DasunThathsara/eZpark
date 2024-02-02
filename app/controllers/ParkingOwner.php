@@ -133,16 +133,4 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/securities', $data, $other_data);
     }
 
-    // // View land request
-    // public function viewReplyFromSecurity(){
-    //     $data = $this->landModel->viewLandRequest();
-    
-    //     $notifications['list'] = $this->userModel->viewNotifications();
-    //     $notifications['notification_count'] = $this->userModel->getNotificationCount();
-    
-    //     if ($notifications['notification_count'] < 10)
-    //         $notifications['notification_count'] = '0'.$notifications['notification_count'];
-    
-    //     $this->view('security/viewRequests', $data, $notifications);
-    // }
 }

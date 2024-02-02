@@ -18,7 +18,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
             <div class="content-body">
                 <?php if (sizeof($data) == 0) {?>
-                    <div class="emptysecurity">You have no any registered securities</div>
+                    <div class="emptysecurity">You have no any request lands</div>
                 <?php }
                 else {?>
                     <div class="title-options" style="width: 250px;">
@@ -58,8 +58,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <td class="province" data-header></td>
 
                                             <td class="options">
-                                                <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="request-form" id="request-form">
-                                                    <input type="text" name="landID" class="id" id="landID" hidden value="" />
+                                                <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="accept-form" id="accept-form">
+                                                    <input type="text" name="id" class="id" id="id" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/check.svg" alt="">
                                                     </button>
@@ -67,9 +67,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 
                                                 &nbsp;&nbsp;
 
-                                                <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="POST" class="decline-form">
-                                                    <input type="text" name="id" class="id" id="id" hidden value="" />
-                                                    <button type="submit" class="delete" onclick="return confirmSubmit()">
+                                                <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="POST" class="decline-form" id="decline-form">
+                                                    <input type="text" name="id" class="id" id="landID" hidden value="" />
+                                                    <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/xmark-solid.svg" alt="">
                                                     </button>
                                                 </form>
@@ -87,38 +87,34 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 
 <script>
-    function confirmSubmit() {
-        return confirm("Are you sure you want to delete this land?");
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const requestForm = document.getElementById("request-form");
 
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     const requestForm = document.getElementById("decline-form");
+        if (requestForm) {
+            const submitButton = requestForm.querySelector("button[type='submit']");
 
-    //     if (requestForm) {
-    //         const submitButton = requestForm.querySelector("button[type='submit']");
+            if (submitButton) {
+                submitButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent the form from submitting
 
-    //         if (submitButton) {
-    //             submitButton.addEventListener("click", function (event) {
-    //                 event.preventDefault(); // Prevent the form from submitting
-
-    //                 // Use SweetAlert for confirmation
-    //                 Swal.fire({
-    //                     title: 'Are you sure?',
-    //                     text: 'You are about to submit this.',
-    //                     icon: 'warning',
-    //                     showCancelButton: true,
-    //                     confirmButtonColor: '#3085d6',
-    //                     cancelButtonColor: '#d33',
-    //                     confirmButtonText: 'Yes, submit it!'
-    //                 }).then((result) => {
-    //                     if (result.isConfirmed) {
-    //                         requestForm.submit();
-    //                     }
-    //                 });
-    //             });
-    //         }
-    //     }
-    // });
+                    // Use SweetAlert for confirmation
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to submit this.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, submit it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            requestForm.submit();
+                        }
+                    });
+                });
+            }
+        }
+    });
 
 
 
@@ -156,10 +152,23 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
 
-        // Set id and name to go to the delete the land from security
+        // Set id to delete land request
         const declineForm = card.querySelector('.decline-form');
         if (declineForm) {
             const landID = declineForm.querySelector('#landID');
+
+            if (landID) {
+                landID.value = security.lid;
+                // console.log(landID.value);
+            } else {
+                console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
+            }
+        }
+
+        // Set id to accept land request
+        const acceptForm = card.querySelector('.accept-form');
+        if (acceptForm) {
+            const landID = acceptForm.querySelector('#landID');
 
             if (landID) {
                 landID.value = security.lid;

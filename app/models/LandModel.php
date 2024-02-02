@@ -600,11 +600,11 @@ class LandModel{
 
     // Get landowner id by land id
     public function getLandownerID($landID){
-        $this->db->query('SELECT id FROM land WHERE id = :id');
+        $this->db->query('SELECT uid FROM land WHERE id = :id');
         $this->db->bind(':id', $landID);
-        // die(print_r($row));
+
         $row = $this->db->single();
 
-        return $landID;
+        return $row->uid;
     }
 }
