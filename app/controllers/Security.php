@@ -99,7 +99,7 @@ class Security extends Controller {
             // Send notification to the landowner
             $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
 
-            redirect('security/index');
+            redirect('security/viewRequests');
         }
     }
 }
