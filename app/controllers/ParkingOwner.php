@@ -24,6 +24,8 @@ class ParkingOwner extends Controller {
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
+        $notifications['lands'] = $lands;
+
         $this->view('parkingOwner/index', $data, $notifications);
     }
 
@@ -48,7 +50,7 @@ class ParkingOwner extends Controller {
             'name' => $this->landModel->getLandName($land_ID),
         ];
 
-        $notifications = $this->landModel->viewLands();
+        $notifications['lands'] = $this->landModel->viewLands();
 
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();

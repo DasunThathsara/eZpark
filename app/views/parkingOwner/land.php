@@ -8,7 +8,6 @@
     $section = 'dashboard';
     require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
-
     <main class="page-container">
         <section class="section" id="main">
             <div class="container">
@@ -20,12 +19,12 @@
                     <div class="dropdown-content">
                     <?php $parking_index = 0?>
                     <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
-                        <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {
-                            if($data['id'] == $other_data[$i]->id){
+                        <?php for ($i = 0; $i < sizeof($other_data['lands']) - 1; $i++) {
+                            if($data['id'] == $other_data['lands'][$i]->id){
                                 $parking_index = $i;
                                 continue;
                             }?>     
-                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
+                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data['lands'][$i]->id ?>"><?php echo $other_data['lands'][$i]->name ?></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -47,7 +46,7 @@
                 <!-- Card Set -->
                 <div class="cards">
                     <!-- Card 1 -->
-                    <a class="card-link" href="<?php echo URLROOT ?>/deeds/<?php echo $other_data[$parking_index]->deed?>">
+                    <a class="card-link" href="<?php echo URLROOT ?>/deeds/<?php echo $other_data['lands'][$parking_index]->deed?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
