@@ -1,9 +1,19 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;  
+
+//Load Composer's autoloader
+require APPROOT.'/libraries/vendor/autoload.php';
+
+
 class SecurityModel{
     private $db;
 
     public function __construct(){
         $this->db = new Database();
+        $this->mail = new PHPMailer(true);
     }
 
     // Get security count of the land
@@ -173,6 +183,31 @@ class SecurityModel{
         else {
             return false;
         }
+    }
+
+    public function sendEmail($email, $name, $subject, $message){
+        $this->mail->isSMTP();                             //Send using SMTP
+        $this->mail->Host = 'smtp.gmail.com';              //Set the SMTP server to send through
+        $this->mail->SMTPAuth = true;                      //Enable SMTP authentication
+        $this->mail->Username = 'ezpark.help@gmail.com';   //SMTP username
+        $this->mail->Password = 'pcop yjvy adrx mlcl';     //SMTP password
+        $this->mail->Port = 587;                           //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+
+        //Recipients
+        $this->mail->setFrom('ezpark.help@gmail.com', $subject);
+        $this->mail->addAddress($email, $name);            //Add a recipient
+
+        //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');        //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
+
+        //Content
+        $this->mail->isHTML(true);                     //Set email format to HTML
+        $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $this->mail->Body = $message;
+        $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $this->mail->send();
     }
 
     // Get assigned land id
