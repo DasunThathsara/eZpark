@@ -48,6 +48,7 @@
     width: 85%;
     transition: 0.5s;
     height: 50px;
+    color: #6b6b6b;
 }
 
 .search-area .data-search:focus{
@@ -174,6 +175,12 @@
 .user-cards .card .name-td, .sec-name-td .id-p{
     font-size: 12px;
     color: #8a8a8a;
+}
+
+.user-cards .card .email{
+    width: 10px;
+    transition: 1s, transform 1s;
+    background-color: yellow;
 }
 
 .user-cards .card .location{
