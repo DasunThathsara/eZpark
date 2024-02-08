@@ -14,7 +14,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <h1>Registration Requests</h1>
 
             <br><br>
-            <?php if (sizeof($data) == 1) {?>
+            <?php if (sizeof($data) == 0) {?>
                 <div class="emptyVehicle">You have no any registered vehicles</div>
             <?php }
             else {?>
@@ -34,7 +34,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             </th>
                         </tr>
 
-                        <?php for ($i = 0; $i < sizeof($data) - 1; $i++)  {
+                        <?php for ($i = 0; $i < sizeof($data); $i++)  {
                         if ($data[$i]->admin != 0) {
                             continue;
                         }?>
@@ -94,7 +94,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             </th>
                         </tr>
 
-                        <?php for ($i = 0; $i < sizeof($data) - 1; $i++) {
+                        <?php for ($i = 0; $i < sizeof($data); $i++) {
                             if ($data[$i]->admin == $_SESSION['user_id']) {?>
                                 <tr>
                                     <td>
