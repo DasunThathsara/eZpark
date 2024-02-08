@@ -137,7 +137,7 @@ class SecurityModel{
     }
 
     // Accept land request
-    public function acceptLandRequest($id): bool
+    public function acceptLandRequest($id , $ownerId = null): bool
     {
         // Prepare statement
         $this->db->query('UPDATE security SET landID = :landID WHERE id = :id');
@@ -148,6 +148,35 @@ class SecurityModel{
 
         // Execute
         if ($this->db->execute()){
+
+             // Get email and name
+            $this->db->query('SELECT name, email FROM user WHERE id = :id');
+
+            // Bind values
+            $this->db->bind(':id', $ownerId);
+            $data = $this->db->single();
+
+        //    die(print_r($ownerId));
+
+            $name = $data->name;
+            $email = $data->email;
+
+            // die(print_r($data));
+
+            $message = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear '.$name.',<br><br>
+        
+                The request that you sent for security by ('.$_SESSION['user_name'].') has been accepted.<br>
+                Security ID : '.$_SESSION['user_id'].'.<br>
+                <br>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+
+            $this->sendEmail($email, $name, 'Your land accepted.', $message);
+
             return true;
         }
         else {
@@ -179,7 +208,7 @@ class SecurityModel{
         // Execute
         if ($result1 && $result2){
 
-                        // Get email and name
+            // Get email and name
             $this->db->query('SELECT name, email FROM user WHERE id = :uid');
 
             // Bind values
@@ -206,7 +235,6 @@ class SecurityModel{
         </div>';
 
             $this->sendEmail($email, $name, 'Your land declined.', $message);
-
 
             return true;
         }

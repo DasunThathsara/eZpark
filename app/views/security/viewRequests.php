@@ -19,7 +19,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <div class="content-body">
                 <?php if (sizeof($data) == 0) {?>
                     <div class="emptysecurity">You have no any request lands</div>
-                <?php }
+                <?php }  
                 else {?>
                     <div class="title-options" style="width: 250px;">
                         <div class="all-securities option-item option-item-active">All</div>
@@ -59,7 +59,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                                             <td class="options">
                                                 <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="accept-form" id="accept-form">
-                                                    <input type="text" name="id" class="id" id="id" hidden value="" />
+                                                    <input type="text" name="id" class="id" id="landID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/check.svg" alt="">
                                                     </button>
