@@ -156,7 +156,7 @@ class SecurityModel{
     }
 
     // Decline land request
-    public function declineLandRequest($id): bool
+    public function declineLandRequest($id , $ownerId = null): bool
     {
         // Prepare statement for delete land request
         $this->db->query('DELETE FROM security_land_request WHERE lid = :lid AND sid = :sid');
@@ -178,6 +178,36 @@ class SecurityModel{
 
         // Execute
         if ($result1 && $result2){
+
+                        // Get email and name
+            $this->db->query('SELECT name, email FROM user WHERE id = :uid');
+
+            // Bind values
+            $this->db->bind(':uid', $ownerId);
+            $data = $this->db->single();
+
+        //    die(print_r($ownerId));
+
+            $name = $data->name;
+            $email = $data->email;
+
+            // die(print_r($data));
+
+            $message = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear '.$name.',<br><br>
+        
+                The request that you sent for security by ('.$_SESSION['user_name'].') has been declined.<br>
+                Security ID : '.$_SESSION['user_id'].'.<br>
+                <br>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+
+            $this->sendEmail($email, $name, 'Your land declined.', $message);
+
+
             return true;
         }
         else {
