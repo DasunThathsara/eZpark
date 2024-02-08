@@ -346,7 +346,7 @@ class LandModel{
 
     public function getUnVerifyLandCount(){
         // Prepare statement
-        $this->db->query('SELECT COUNT(*) FROM land  WHERE status = :status');
+        $this->db->query('SELECT COUNT(*) FROM land  WHERE status = :status AND admin = 0');
 
         // Bind values
         $this->db->bind(':status', 0);
@@ -606,5 +606,24 @@ class LandModel{
         $row = $this->db->single();
 
         return $row->uid;
+    }
+
+    // Assign land verification to admin
+    public function assignMySelf($landID, $adminID): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE land SET admin = :admin WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':admin', $adminID);
+        $this->db->bind(':id', $landID);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

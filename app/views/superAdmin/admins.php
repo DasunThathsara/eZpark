@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 <!--  TOP NAVIGATION  -->
-<?php //require APPROOT.'/views/inc/components/topnavbar.php'; ?>
+<?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
 <!--  SIDE NAVIGATION  -->
 <?php
@@ -21,55 +21,75 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="emptyLand">There are no any admins</div>
             <?php }
             else {?>
-                <!-- Search bar -->
-                <input type="search" class="data-search" placeholder="Search.." style="top: 135px;">
+                <!-- Titles of the table -->
+                <div class="title-options">
+                    <div class="all-lands option-item option-item-active">All Lands</div>
+                    <div class="available-lands option-item">Available</div>
+                    <div class="unavailable-lands option-item">Unavailable</div>
+                </div>
 
-                <!-- Card set -->
-                <div class="user-cards" style="margin-top: 0;"></div>
-                <template class="data-user-template">
-                    <div class="card">
-                        <div class="identifier">
-                            <a href="" class="tile">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div style="display: flex; width: 50%">
-                                                <div>
-                                                    <p class="name" style="width: 90px;" data-header></p>
-                                                </div>
-                                                <div>
-                                                    <p class="email" data-header></p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="options">
-                                            <form action="<?php echo URLROOT ?>/superAdmin/updateAdmin" method="get" class="edit-form">
-                                                <input type="text" name="id" id="id" hidden value="" />
-                                                <button type="submit" class="delete">
-                                                    <img src="<?php echo URLROOT ?>/images/edit-solid.svg" style="width: 15px; margin-top: 4px" alt="" class="delete-ico">
-                                                </button>
-                                            </form>
-                                            &nbsp;
-                                            <form action="<?php echo URLROOT ?>/superAdmin/removeAdmin" method="post" class="delete-form">
-                                                <input type="text" name="id" id="id" hidden value="" />
-                                                <button type="submit" class="delete" onclick="return confirmDelete();">
-                                                    <img src="<?php echo URLROOT ?>/images/trash-solid.svg" style="width: 15px; margin-top: 4px" alt="" class="delete-ico">
-                                                </button>
-                                            </form>
-                                            &nbsp;
-                                            <form action="<?php echo URLROOT ?>/superAdmin/banAdmin" method="post" class="ban-form">
-                                                <input type="text" name="id" id="id" hidden value="" />
-                                                <button type="submit" class="delete" onclick="return confirmBan();">
-                                                    <img src="<?php echo URLROOT ?>/images/ban.svg" style="width: 18px; margin-top: 4px" alt="" class="ban-ico">
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </a>
-                        </div>
+                <hr class="option-break" />
+
+                <!-- Search area -->
+                <div class="search-area">
+                    <!-- Search bar -->
+                    <input type="search" class="data-search" placeholder="Search land...">
+                    <div class="filter-area">
+                        <img class="filter-btn" src="<?php echo URLROOT?>/images/filter-ico.png" alt="">
                     </div>
-                </template>
+                </div>
+
+                <div class="user-card-title">
+                    <div class="name">Name</div>
+                    <div class="location">Email</div>
+                    <div class="status">Status</div>
+                </div>
+
+                <div class="card-set-container">
+                    <!-- Card set -->
+                    <div class="user-cards"></div>
+                    <template class="data-user-template">
+                        <div class="card">
+                            <div class="identifier">
+                                <a href="" class="tile">
+                                    <table>
+                                        <tr style="background-color: green">
+                                            <td class="name-td" style="width: 200px; background-color: red" data-header>
+                                                <p class="name"></p>
+                                                <p class="id-p">Land ID: <span class="id"></span></p>
+                                            </td>
+                                            <td class="email" data-header></td>
+                                            <td class="status-td" data-header><span class="status">Available</span></td>
+
+                                            <td class="options">
+                                                <form action="<?php echo URLROOT ?>/superAdmin/updateAdmin" method="get" class="edit-form">
+                                                    <input type="text" name="id" id="id" hidden value="" />
+                                                    <button type="submit" class="delete">
+                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" style="width: 15px; margin-top: 4px" alt="" class="delete-ico">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/superAdmin/removeAdmin" method="post" class="delete-form">
+                                                    <input type="text" name="id" id="id" hidden value="" />
+                                                    <button type="submit" class="delete" onclick="return confirmDelete();">
+                                                        <img src="<?php echo URLROOT ?>/images/trash-solid.svg" style="width: 15px; margin-top: 4px" alt="" class="delete-ico">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/superAdmin/banAdmin" method="post" class="ban-form">
+                                                    <input type="text" name="id" id="id" hidden value="" />
+                                                    <button type="submit" class="delete" onclick="return confirmBan();">
+                                                        <img src="<?php echo URLROOT ?>/images/ban.svg" style="width: 18px; margin-top: 4px" alt="" class="ban-ico">
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
             <?php } ?>
         </div>
     </section>
@@ -105,6 +125,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
         card.querySelector(".name").textContent = admin.name;
+        card.querySelector(".id").textContent = admin.id;
         card.querySelector(".email").textContent = admin.email;
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
