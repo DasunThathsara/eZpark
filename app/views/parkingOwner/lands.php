@@ -22,12 +22,15 @@
                     <div class="emptyLand">You have no any registered lands</div>
                 <?php }
                 else {?>
+                    <!-- Titles of the table -->
                     <div class="title-options">
                         <div class="all-lands option-item option-item-active">All Lands</div>
                         <div class="available-lands option-item">Available</div>
                         <div class="unavailable-lands option-item">Unavailable</div>
                     </div>
+
                     <hr class="option-break" />
+
                     <!-- Search area -->
                     <div class="search-area">
                         <!-- Search bar -->

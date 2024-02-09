@@ -66,4 +66,26 @@ class Admin extends Controller {
             redirect('admin/viewRegistrationRequests');
         }
     }
+
+    // Assign land verification to admin
+    public function assignLandVerification(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->landModel->assignLandVerification($_POST['id'], $_SESSION['user_id']);
+
+            redirect('admin/requests');
+        }
+    }
+
+    // Assign registration requests to admin
+    public function assignMySelf(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->landModel->assignMySelf($_POST['id'], $_SESSION['user_id']);
+
+            redirect('admin/viewRegistrationRequests');
+        }
+    }
 }
