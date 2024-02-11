@@ -29,17 +29,37 @@ class SecurityModel{
         return $row->{'COUNT(*)'};
     }
 
-    // View securities of the land
-    public function viewSecurities($id){
-        $this->db->query('SELECT * FROM security WHERE id = :id;');
+    // // View securities of the land
+    // public function viewSecurities($id){
+    //     $this->db->query('SELECT * FROM security WHERE id = :id;');
+
+    //     // Bind values
+    //     $this->db->bind(':id', $id);
+
+    //     die(print_r($id));
+    //     $row = $this->db->resultSet();
+
+    //     return $row;
+    // }
+
+     // View securities of the land
+    public function viewSecurities($landID){
+        $this->db->query('
+            SELECT u.id AS security_id, u.name AS security_name, u.contactNo AS sec_contact
+            FROM user u
+            JOIN security s ON u.id = s.id
+            WHERE s.landID = :landID
+        ');
 
         // Bind values
-        $this->db->bind(':id', $id);
+        $this->db->bind(':landID', $landID);
+        // $this->db->bind(':id',$secID);
 
         $row = $this->db->resultSet();
-
+        // die(print_r($row));
         return $row;
     }
+   
 
     // View security profile
     public function viewSecurityProfile($data){
@@ -278,5 +298,17 @@ class SecurityModel{
 
         $row = $this->db->single();
         return $row->landID;
+    }
+
+     // Get assigned land id
+     public function securityRemove(){
+        // // Prepare statement
+        // $this->db->query('SELECT landID FROM security WHERE id = :id');
+
+        // // Bind values
+        // $this->db->bind(':id', $_SESSION['user_id']);
+
+        // $row = $this->db->single();
+        // return $row->landID;
     }
 }

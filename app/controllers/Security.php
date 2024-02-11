@@ -30,7 +30,7 @@ class Security extends Controller {
 
         $other_data = $this->securityModel->viewAllSecurities();
 
-        die(print_r($other_data));
+        // die(print_r($other_data));
 
         $other_data['notification_count'] = 0;
 
@@ -102,6 +102,21 @@ class Security extends Controller {
             $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
 
             redirect('security/viewRequests');
+        }
+    }
+
+    // remove assinged security
+    public function securityRemove(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        //     $this->securityModel->declineLandRequest($_POST['id'], $this->landModel->getLandOwnerID($_POST['id']));
+        //     // die(print_r($this->landModel->getLandOwnerID($_POST['id'])));
+
+        //     // Send notification to the landowner
+        //     $this->userModel->addNotification('Your request was declined by '.$_SESSION['user_name'], 'securityRequestResult', $_SESSION['user_id'], $this->landModel->getLandOwnerID($_POST['id']));
+
+        //     redirect('security/viewRequests');
         }
     }
 }
