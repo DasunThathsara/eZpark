@@ -88,4 +88,15 @@ class Admin extends Controller {
             redirect('admin/viewRegistrationRequests');
         }
     }
+
+    // Unassigned registration requests to admin
+    public function unassignedMySelf(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->landModel->unassignedMySelf($_POST['id'], $_SESSION['user_id']);
+
+            redirect('admin/viewRegistrationRequests');
+        }
+    }
 }
