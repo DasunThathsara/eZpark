@@ -626,4 +626,22 @@ class LandModel{
             return false;
         }
     }
+
+    // Unassigned land verification to admin
+    public function unassignedMySelf($landID, $adminID): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE land SET admin = 0 WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $landID);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
