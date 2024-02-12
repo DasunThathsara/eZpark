@@ -1,5 +1,5 @@
 <?php
-class Report extends Controller {
+class Chat extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access driver pages
