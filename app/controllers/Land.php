@@ -140,7 +140,7 @@ class Land extends Controller {
             if (empty($data['err'])){
                 // Register land
                 if ($this->landModel->updateSecurityOfficerAvail($data)){
-                    if($_SESSION['userType'] == 'parkingOwner'){
+                    if($_SESSION['user_type'] == 'parkingOwner'){
                         $this->setPrice($data);
                     }
                     else {
@@ -225,6 +225,41 @@ class Land extends Controller {
         }
     }
 
+    // Image upload
+    public function imageUpload($file){
+        $data = [
+            'image' => '',
+            'err' => ''
+        ];
+
+        $file_name = $_FILES[$file]['name'];
+        $file_size = $_FILES[$file]['size'];
+        $tmp_name = $_FILES[$file]['tmp_name'];
+        $error = $_FILES[$file]['error'];
+
+        if ($error === 0){
+            $file_ex = pathinfo($file_name, PATHINFO_EXTENSION);
+            $file_ex_lc = strtolower($file_ex);
+
+            $allowed_exs = array("jpg", "JPEG", "png");
+
+            if (in_array($file_ex_lc, $allowed_exs)){
+                // Move into ParkingPhotos folder
+                $new_file_name = uniqid("ParkingPhoto-", true).'.'.$file_ex_lc;
+                $file_upload_path = PUBLICROOT.'/ParkingPhotos/'.$new_file_name;
+                move_uploaded_file($tmp_name, $file_upload_path);
+
+                $data['image'] = $new_file_name;
+                return $data;
+            }
+
+            else{
+                $data['err'] = "You can't upload files of this type";
+                return $data;
+            }
+        }
+    }
+
     // Register Land
     public function landRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -244,6 +279,10 @@ class Land extends Controller {
                 'address' => trim($_POST['address']),
                 'district' => trim($_POST['district']),
                 'province' => '',
+                'cover' => '',
+                'image1' => '',
+                'image2' => '',
+                'image3' => '',
                 'err' => ''
             ];
 
@@ -284,6 +323,7 @@ class Land extends Controller {
                 $data['err'] = 'Invalid contact number format';
             }
 
+            // Deed upload validation
             if (empty($data['err']) and !empty($_FILES['deed']['name'])){
                 $deed = $this->deedUpload('deed');
                 $data['deed'] = $deed['deed'];
@@ -295,6 +335,20 @@ class Land extends Controller {
 
             if (empty($data['deed']) and empty($data['err'])){
                 $data['err'] = 'Please upload deed';
+            }
+
+            // Cover photo upload validation
+            if (empty($data['err']) and !empty($_FILES['cover']['name'])){
+                $cover = $this->imageUpload('cover');
+                $data['cover'] = $cover['image'];
+                if(empty($cover['err']))
+                    $data['err'] = '';
+                else
+                    $data['err'] = $cover['err'];
+            }
+
+            if (empty($data['cover']) and empty($data['err'])){
+                $data['err'] = 'Please upload cover photo';
             }
 
             $other_data['notification_count'] = 0;
@@ -362,6 +416,10 @@ class Land extends Controller {
                 'contactNo' => '',
                 'address' => '',
                 'district' => '',
+                'cover' => '',
+                'image1' => '',
+                'image2' => '',
+                'image3' => '',
                 'err' => ''
             ];
 

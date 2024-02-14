@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'securities';
+$section = 'parkingRequest';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -18,8 +18,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
             <div class="content-body">
                 <?php if (sizeof($data) == 0) {?>
-                    <div class="emptysecurity">You have no any registered securities</div>
-                <?php }
+                    <div class="emptysecurity">You have no any request lands</div>
+                <?php }  
                 else {?>
                     <div class="title-options" style="width: 250px;">
                         <div class="all-securities option-item option-item-active">All</div>
@@ -58,8 +58,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <td class="province" data-header></td>
 
                                             <td class="options">
-                                                <form action="" method="POST" class="request-form" id="request-form">
-                                                    <input type="text" name="landID" id="landID" hidden value="" />
+                                                <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="accept-form" id="accept-form">
+                                                    <input type="text" name="id" class="id" id="landID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/check.svg" alt="">
                                                     </button>
@@ -67,8 +67,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 
                                                 &nbsp;&nbsp;
 
-                                                <form action="" method="POST" class="request-form" id="request-form">
-                                                    <input type="text" name="landID" id="landID" hidden value="" />
+                                                <form action="<?php echo URLROOT ?>/security/declineLandRequest" method="POST" class="decline-form" id="decline-form">
+                                                    <input type="text" name="id" class="id" id="landID" hidden value="" />
                                                     <button type="submit" class="price" onclick="confirmSubmit()">
                                                         <img id="dynamicImage" src="<?php echo URLROOT ?>/images/xmark-solid.svg" alt="">
                                                     </button>
@@ -88,10 +88,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const requestForm = document.getElementById("request-form");
+        const declineForm = document.getElementById("decline-form");
 
-        if (requestForm) {
-            const submitButton = requestForm.querySelector("button[type='submit']");
+        if (declineForm) {
+            const submitButton = declineForm.querySelector("button[type='submit']");
 
             if (submitButton) {
                 submitButton.addEventListener("click", function (event) {
@@ -100,7 +100,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     // Use SweetAlert for confirmation
                     Swal.fire({
                         title: 'Are you sure?',
-                        text: 'You are about to submit this.',
+                        text: 'You are about to decline this land.',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -108,7 +108,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         confirmButtonText: 'Yes, submit it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            requestForm.submit();
+                            declineForm.submit();
                         }
                     });
                 });
@@ -116,6 +116,34 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         }
     });
 
+    document.addEventListener("DOMContentLoaded", function () {
+        const acceptForm = document.getElementById("accept-form");
+
+        if (acceptForm) {
+            const submitButton = acceptForm.querySelector("button[type='submit']");
+
+            if (submitButton) {
+                submitButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent the form from submitting
+
+                    // Use SweetAlert for confirmation
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to accept this land.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, submit it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            acceptForm.submit();
+                        }
+                    });
+                });
+            }
+        }
+    });
 
 
     // ------------------------------- Search Bar -------------------------------
@@ -134,7 +162,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     let securities = [];
     var backendData = <?php echo json_encode($data); ?>;
-    console.log(backendData)
+    // console.log(backendData)
     securities = backendData.map(security => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         card.querySelector(".name").textContent = security.name;
@@ -152,15 +180,27 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
 
-        // Set id and name to go to the price page
-        const requestForm = card.querySelector('.request-form');
-        if (requestForm) {
-            const landID = requestForm.querySelector('#landID');
-            const securityID = requestForm.querySelector('#securityID');
+        // Set id to delete land request
+        const declineForm = card.querySelector('.decline-form');
+        if (declineForm) {
+            const landID = declineForm.querySelector('#landID');
 
-            if (landID && securityID) {
-                securityID.value = security.sid;
+            if (landID) {
                 landID.value = security.lid;
+                // console.log(landID.value);
+            } else {
+                console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
+            }
+        }
+
+        // Set id to accept land request
+        const acceptForm = card.querySelector('.accept-form');
+        if (acceptForm) {
+            const landID = acceptForm.querySelector('#landID');
+
+            if (landID) {
+                landID.value = security.lid;
+                // console.log(landID.value);
             } else {
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }

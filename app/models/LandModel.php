@@ -21,7 +21,7 @@ class LandModel{
     public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province)');
+        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province, cover) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province, :cover)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -39,6 +39,7 @@ class LandModel{
         $this->db->bind(':address', $data['address']);
         $this->db->bind(':district', $data['district']);
         $this->db->bind(':province', $data['province']);
+        $this->db->bind(':cover', $data['cover']);
 
         // Execute
         if ($this->db->execute()){
@@ -616,6 +617,24 @@ class LandModel{
 
         // Bind values
         $this->db->bind(':admin', $adminID);
+        $this->db->bind(':id', $landID);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Unassigned land verification to admin
+    public function unassignedMySelf($landID, $adminID): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE land SET admin = 0 WHERE id = :id');
+
+        // Bind values
         $this->db->bind(':id', $landID);
 
         // Execute
