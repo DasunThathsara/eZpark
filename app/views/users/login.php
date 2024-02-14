@@ -1,6 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
-<img id="login-image" src="<?php echo URLROOT ?>/images/login-page-wall.jpg"" alt="" srcset="">
+<img id="login-image" src="<?php echo URLROOT ?>/images/login-page-wall.jpg" alt="" srcset="">
 
 <div class="login-form-container">  <!--changed the class name-->
 <h3>welcome to</h3> 

@@ -41,6 +41,7 @@
             </section>
 
         </div>
+        <!-- <?php var_dump($data) ?> -->
 
         <script src = "<?php echo URLROOT ?>/js/chat.js"></script>
         
