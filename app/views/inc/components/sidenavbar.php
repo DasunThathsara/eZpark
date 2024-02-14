@@ -124,7 +124,7 @@
             <!-------------------------------------------- Security -------------------------------------------->
             <?php if ($_SESSION['user_type'] == 'security'){ ?>
                 <a href="<?php echo URLROOT ?>/security/viewRequests">
-                    <?php if ($section == 'security'){?>
+                    <?php if ($section == 'parkingRequest'){?>
                         <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/parking.svg" alt="">Parking Requests</div>
                     <?php }
                     else{ ?>

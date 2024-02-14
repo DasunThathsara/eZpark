@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'securities';
+$section = 'parkingRequest';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 

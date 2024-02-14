@@ -49,8 +49,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <?php echo $security->sec_contact; ?>
                                             </div>
                                             <div class="right" style="width: calc(50% - 30px);">
-                                                <form action="<?php echo URLROOT ?>/security/securityRemove" method="post">
-                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                <form action="<?php echo URLROOT ?>/security/securityRemove/<?php echo $security->security_id; ?>" method="post">
+                                                    <input type="text" name="sec_id" id="sec_id" hidden value="<?php echo $security->security_id; ?>" />
                                                     <button type="submit" class="delete" onclick="return confirmSubmit();">
                                                         <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
                                                     </button>
@@ -70,7 +70,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
 <script>
     function confirmSubmit() {
-        return confirm("Are you sure you want to delete this vehicle?");
+        return confirm("Are you sure you want to delete this security?");
     }
 </script>
 
