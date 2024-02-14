@@ -235,7 +235,7 @@ class UserModel{
     {
         $this->db->query('SELECT * FROM user WHERE username = :username AND status = :status');
         $this->db->bind(':username', $username);
-        $this->db->bind(':status', 1);
+        $this->db->bind(':status', $state);
 
         $row = $this->db->single();
 
