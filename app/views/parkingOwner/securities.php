@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <br><br>
             <a class="add-btn" href="<?php echo URLROOT ?>/land/securitySearch/<?php echo $data['id'] ?>" style="font-weight: 1000; font-size: 20px">+</a>
 
-            <?php if (sizeof($other_data) == 1) {?>
+            <?php if (sizeof($data['securityDetails']) == 0) {?>
                 <div class="emptyVehicle">You have no any securities</div>
             <?php }
             else {?>
@@ -28,22 +28,29 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <div class="left" style="width:31%">
                                         Name
                                     </div>
+
+                                    <div class="left" style="width:31%">
+                                        Contact Number
+                                    </div>
+
                                 </div>
                             </th>
                         </tr>
 
-                        <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {?>
+                        <?php foreach ($data['securityDetails'] as $security) {?>
                             <tr>
                                 <td>
                                     <a class="tile" href="">
                                         <div class="content">
                                             <div class="left" style="width:50%;">
-                                                <?php echo $other_data[$i]->name ?>
+                                                <?php echo $security->security_name; ?>
+                                            </div>
+                                            <div class="left" style="width:50%;">
+                                                <?php echo $security->sec_contact; ?>
                                             </div>
                                             <div class="right" style="width: calc(50% - 30px);">
-                                                <form action="<?php echo URLROOT ?>/security/securityRemove" method="post">
-                                                    <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->id ?>" />
-                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                <form action="<?php echo URLROOT ?>/security/securityRemove/<?php echo $security->security_id; ?>" method="post">
+                                                    <input type="text" name="sec_id" id="sec_id" hidden value="<?php echo $security->security_id; ?>" />
                                                     <button type="submit" class="delete" onclick="return confirmSubmit();">
                                                         <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
                                                     </button>
@@ -63,7 +70,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
 <script>
     function confirmSubmit() {
-        return confirm("Are you sure you want to delete this vehicle?");
+        return confirm("Are you sure you want to delete this security?");
     }
 </script>
 
