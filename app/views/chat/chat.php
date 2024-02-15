@@ -6,7 +6,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-    $section = 'reports';
+    $section = 'chats';
     require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -27,7 +27,7 @@
                             <!-- <p><?php echo $row['status'] ?></p> -->
                         </div>
                     </div>
-                    <a href="php/logout.php?logout_id=<?php echo $row['unique_id']?>" class="logout">Logout</a>
+                    
                 </header>
                 <div class="search">
                     <span class="text">Select an user to strat chat</span>
@@ -41,7 +41,7 @@
             </section>
 
         </div>
-        <!-- <?php var_dump($data) ?> -->
+        <?php var_dump($data) ?>
 
         <script src = "<?php echo URLROOT ?>/js/chat.js"></script>
         
