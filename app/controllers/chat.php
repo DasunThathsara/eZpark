@@ -11,8 +11,16 @@ class Chat extends Controller {
     public function viewChat(){
         $data = [
             'title' => 'Home page',
-            'request_count' => $this->UserModel->ViewUsers(),
+            'data' => $this->UserModel->viewUsersById(),
         ];
         $this->view('chat/chat', $data);
     }
+
+    // public function viewMsg(){
+    //     $data = [
+    //         'title' => 'Home page',
+    //         'data' => $this->UserModel->viewUsersById(),
+    //     ];
+    //     $this->view('chat/msg', $data);
+    // }
 }
