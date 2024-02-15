@@ -117,19 +117,33 @@ class ParkingOwner extends Controller {
     }
 
     // ------------------------------------ Securities -------------------------------------
-    // View all securities
+    // View assign security to parking owner
     public function securities($landID){
+
+         // Ensure $landID is valid (you may want to add further validation)
+         if (!is_numeric($landID)) {
+            // Handle invalid input, for example, redirect to an error page
+            redirect('error');
+            return;
+        }
+
         $data = [
             'id' => $landID
         ];
 
-        $other_data = $this->securityModel->viewSecurities($landID);
+        // die(print_r($securityDetails));
+        // Call the SecurityModel to get security details
+        $securityDetails = $this->securityModel->viewSecurities($landID);
+        // You can include more data if needed
+        $data['securityDetails'] = $securityDetails;
 
-        $other_data['notification_count'] = 0;
+         // Example: Fetch other data needed for the view
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
         $this->view('parkingOwner/securities', $data, $other_data);
     }
+    
 }
