@@ -617,56 +617,56 @@ WHERE (banCount = 1 OR banCount = 2)
         return $results;
 
     }
-        // new function
-        public function viewUsersById(){
-        
-        
+
+    public function viewUsersById() {
         $outgoing_id = $_SESSION['user_id'];
-        $sql = mysqli_query($conn , "SELECT * FROM user WHERE NOT id = {$outgoing_id}");
+        $this->db->query('SELECT * FROM user');
+        $this->db->execute();
         $output = "";
+    
+        $results = $this->db->resultSet();
+    $output = ""; // Initialize $output variable
 
-        if(mysqli_num_rows($sql) == 1){
-            $output .= "No users are available to chat";
-        }else if(mysqli_num_rows($sql) > 0){
-            // include "data.php";
+    if (count($results) == 0) {
+        $output .= "No users are available to chat";
+    } else {
+        foreach ($results as $row) {
+            // Fetch chat message for each user
+            $sql2 = "SELECT * FROM chat WHERE (incoming_msg_id = :id OR outgoing_msg_id = :id) AND (outgoing_msg_id = :outgoing_id OR incoming_msg_id = :outgoing_id) ORDER BY msg_id DESC LIMIT 1";
+            $this->db->query($sql2);
+            $this->db->bind(':id', $row->id);
+            $this->db->bind(':outgoing_id', $outgoing_id);
+            $query2 = $this->db->single();
 
-            while($row = mysqli_fetch_assoc($sql)){
 
-                $sql2 = "SELECT * FROM chat WHERE (incoming_msg_id = {$row['id']}
-                        OR outgoing_msg_id = {$row['id']}) AND (outgoing_msg_id = {$outgoing_id}
-                        OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1";
-        
-                $query2 = mysqli_query($conn, $sql2);
-                $row2 = mysqli_fetch_assoc($query2);
-                if(mysqli_num_rows($query2)>0){
-                    $result = $row2['msg'];
-                }else{
-                    $result = "No msg available";
-                }
-        
-                (strlen($result)>28) ? $msg = substr($result,0 ,28).'...' : $msg = $result;
-        
-                $you = ""; // Initialize $you to an empty string
-                if (isset($outgoing_id) && isset($row2['outgoing_msg_id']) && $outgoing_id == $row2['outgoing_msg_id']) {
-                    $you = "You: ";
-                }
-        
-                //check online or offline
-                // ($row['status'] == "Offline now") ? $offline = "offline" : $offline = "";
-        
-        
-                $output .= '<a href="chat.php?user_id='.$row['id'].'">
-                            <div class="content">
-                            // <!-- <img src="php/images/'.$row['img'].'" alt=""> -->
-                            <div class="details">
-                            <span>'. $row['username'] .'</span>
-                            <p>'. $you . $msg .'</p>
-                            </div>
-                            </div>
-                            // <div class="status-dot Online"><i class="fas fa-circle"></i></div>
-                            </a>';
+            // Process chat message
+            if ($query2) {
+                $result = $query2->msg;
+            } else {
+                $result = "No msg available";
             }
+
+            $msg = (strlen($result) > 28) ? substr($result, 0, 28) . '...' : $result;
+            $you = ($query2 && $outgoing_id == $query2->outgoing_msg_id) ? "You: " : "";
+
+
+            // Generate output for each user
+            $output .= '<a href="chat.php?user_id=' . $row->id . '">
+                            <div class="content">
+                                
+                                <div class="details">
+                                    <span>' . $row->username . '</span>
+                                    <p>' . $you . $msg . '</p>
+                                </div>
+                            </div>
+                        </a>';
         }
-        return $output;
+    }
+
+    // Output all generated content
+    var_dump("out", $output);
+    return $output;
+
+            }
+            
         }
-}
