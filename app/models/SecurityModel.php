@@ -309,7 +309,13 @@ class SecurityModel{
         // die(print_r($sec_id));
 
         // Execute
-        return $this->db->execute();
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     //      // View assigned land to security

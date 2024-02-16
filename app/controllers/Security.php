@@ -14,27 +14,45 @@ class Security extends Controller {
 
         $land_ID = $this->securityModel->getAssignedLandID();
 
-        $data = [
-            'id' => $land_ID,
-        ];
+        if (empty($land_ID)){
+            $notifications['notification_count'] = $this->userModel->getNotificationCount();
+    
+            if ($notifications['notification_count'] < 10)
+                $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $notifications['lands'] = $this->landModel->viewLands();
 
-        $notifications['list'] = $this->userModel->viewNotifications();
-        $notifications['notification_count'] = $this->userModel->getNotificationCount();
-
-        if ($notifications['notification_count'] < 10)
-            $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
-        $data = [
-            'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
-            'package_count' => $this->parkingOwnerModel->getPackageCount($data),
-            'land_count' => $this->landModel->getLandCount($data),
-            'availability' => $this->landModel->getAvailability($land_ID),
-            'capacity' => $this->landModel->getCapacity($land_ID),
-        ];
-
+            $data = [
+                'id' => 0,
+                'name' => 0,
+                'package_count' => 0,
+                'land_count' => 0,
+                'availability' => 0,
+                'capacity' => 0
+            ];
+        }
+        else{
+            $data = [
+                'id' => $land_ID,
+            ];
+    
+            $notifications['lands'] = $this->landModel->viewLands();
+    
+            $notifications['list'] = $this->userModel->viewNotifications();
+            $notifications['notification_count'] = $this->userModel->getNotificationCount();
+    
+            if ($notifications['notification_count'] < 10)
+                $notifications['notification_count'] = '0'.$notifications['notification_count'];
+    
+            $data = [
+                'id' => $land_ID,
+                'name' => $this->landModel->getLandName($land_ID),
+                'package_count' => $this->parkingOwnerModel->getPackageCount($data),
+                'land_count' => $this->landModel->getLandCount($data),
+                'availability' => $this->landModel->getAvailability($land_ID),
+                'capacity' => $this->landModel->getCapacity($land_ID)
+            ];
+        }
+        
         // die(print_r($data));
         $this->view('security/index', $data, $notifications);
     }
@@ -122,40 +140,4 @@ class Security extends Controller {
         }
     }
 
-    // remove assinged security
-    public function securityRemove($sec_id){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $this->securityModel->securityRemove($sec_id);
-
-            // die(print_r($sec_id));
-
-            // Send notification to the landowner
-            // $this->userModel->addNotification('You unassigned from the land was declined by '.$_SESSION['user_name'], 'parkingownerUnassignFromLand', $this->landModel->getLandOwnerID($_POST['id']), $this->landModel->getLandOwnerID($_POST['id']));
-
-            redirect('parkingOwner/securities');
-        }
-    }
-
-    //     // View assigned land to security
-    // public function index1($securityID){
-
-    //     $data = [
-    //         'id' => $securityID
-    //     ];
-
-    //     // Call the SecurityModel to get assigned land details
-    //     $landDetails = $this->securityModel->viewAssignedLand($securityID);
-    //     // You can include more data if needed
-    //     $data['landDetails'] = $landDetails;
-
-    //      // Example: Fetch other data needed for the view
-    //     $other_data['notification_count'] = $this->userModel->getNotificationCount();
-
-    //     if ($other_data['notification_count'] < 10)
-    //         $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-    //     $this->view('security/index', $data, $other_data);
-    // }
 }
