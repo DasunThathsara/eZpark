@@ -99,5 +99,14 @@ class DriverModel{
     }
 
     // ------------------------- Parking Functionalities -------------------------
-    // Change parking status
+    // Check parking status
+    public function checkParkingStatus($landID){
+        $this->db->query('SELECT * FROM driver_land WHERE landID = :landID and driverID = :driverID');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row->status;
+    }
 }

@@ -217,7 +217,6 @@ class Land extends Controller {
                 $data['deed'] = $new_file_name;
                 return $data;
             }
-
             else{
                 $data['err'] = "You can't upload files of this type";
                 return $data;
