@@ -23,7 +23,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             else {?>
                 <!-- Titles of the table -->
                 <div class="title-options">
-                    <div class="all-lands option-item option-item-active">All Lands</div>
+                    <div class="all-lands option-item option-item-active">All Admins</div>
                     <div class="available-lands option-item">Available</div>
                     <div class="unavailable-lands option-item">Unavailable</div>
                 </div>
@@ -56,7 +56,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                         <tr style="background-color: green">
                                             <td class="name-td" style="width: 200px; background-color: red" data-header>
                                                 <p class="name"></p>
-                                                <p class="id-p">Land ID: <span class="id"></span></p>
+                                                <p class="id-p">Admin ID: <span class="id"></span></p>
                                             </td>
                                             <td class="email" data-header></td>
                                             <td class="status-td" data-header><span class="status">Available</span></td>
