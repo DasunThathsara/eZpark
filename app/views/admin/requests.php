@@ -20,8 +20,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="emptyVehicle">You have no any registration requests</div>
             <?php }
             else {?>
-                <h1 id="ttitle">Unassigned</h1>
-                <div class="table-container">
+                
+                <div class="table-container" id="tcontainer">
+                    <h1 id="ttitle">Unassigned</h1>
                     <table class="requesttable" >
                         <tr>
                             <th >
@@ -78,10 +79,10 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             </tr>
                         <?php } ?>
                     </table>
-                </div>
+                
 
-                <h1 id="ttitle">Assigned</h1>
-                <div class="table-container">
+                    <h1 id="ttitle">Assigned</h1>
+                
                     <table class="requesttable">
                         <tr>
                             <th>
