@@ -20,7 +20,7 @@
 }
 
 .requesttable {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     
 }
@@ -41,11 +41,11 @@
 
 /* Style for the "Unassigned" and "Assigned" headings */
 #ttitle {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 24px;
     color: #615f5f;
     text-align: left;
-    margin-left: 50px;
+    margin-left: 40px;
 }
 
 #bttn{
@@ -55,4 +55,13 @@
     cursor: pointer;
 }
 
+#tcontainer{
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.12);
+    
+    margin-bottom: 15px;
+    
+    }
 
