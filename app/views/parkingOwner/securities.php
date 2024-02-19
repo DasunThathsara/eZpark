@@ -49,8 +49,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <?php echo $security->sec_contact; ?>
                                             </div>
                                             <div class="right" style="width: calc(50% - 30px);">
-                                                <form action="<?php echo URLROOT ?>/security/securityRemove/<?php echo $security->security_id; ?>" method="post">
-                                                    <input type="text" name="sec_id" id="sec_id" hidden value="<?php echo $security->security_id; ?>" />
+                                                <form action="<?php echo URLROOT ?>/parkingOwner/securityRemove" method="post">
+                                                    <input type="text" name="sec_id" id="sec_id" value="<?php echo $security->security_id; ?>" hidden />
+                                                    <input type="text" name="land_id" id="land_id" value="<?php echo $data['id']; ?>" hidden />
                                                     <button type="submit" class="delete" onclick="return confirmSubmit();">
                                                         <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
                                                     </button>

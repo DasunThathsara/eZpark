@@ -144,7 +144,30 @@
             </a>
 
 
-            <div class="logout"><a href="<?php echo URLROOT ?>/users/logout">Logout</a></div>
+            <div class="logout"><a id="logout" href="<?php echo URLROOT ?>/users/logout" onclick="confirmLogout(event)">Logout</a></div>
+
         </div>
     </div>
 </div>
+
+<script>
+    function confirmLogout(event) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        // Use SweetAlert for confirmation
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to logout.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the logout URL
+                window.location.href = event.target.href;
+            }
+        });
+    }
+</script>

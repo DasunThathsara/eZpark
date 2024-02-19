@@ -31,6 +31,12 @@
                             <tr>
                                 <td class="name" data-header></td>
                                 <td class="city" data-des></td>
+                                <td>
+                                    <form action="<?php echo URLROOT?>/driver/enterExitParking" method="post" class="enter_exit_to_parking" id="enter_exit_to_parking">
+                                        <input type="hidden" id="id" name="id" value="">
+                                        <input type="submit" value="View Prices" class="btn btn-primary" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">
+                                    </form>
+                                </td>
                             </tr>
                         </table>
                     </a>
@@ -72,20 +78,18 @@
 
         // Set the parking view link
         if (tileLink) {
-            tileLink.href = `gotoLand/${land.id}/${land.name}`;
+            tileLink.href = `gotoLand/${land.id}`;
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
 
         // Set id and name to go to the price page
-        const priceForm = card.querySelector('.price-form');
-        if (priceForm) {
-            const idInput = priceForm.querySelector('#id');
-            const nameInput = priceForm.querySelector('#name');
+        const enter_exit_to_parking = card.querySelector('.enter_exit_to_parking');
+        if (enter_exit_to_parking) {
+            const idInput = enter_exit_to_parking.querySelector('#id');
 
-            if (idInput && nameInput) {
+            if (idInput) {
                 idInput.value = land.id;
-                nameInput.value = land.name;
             } else {
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }
@@ -101,21 +105,6 @@
                 nameInput.value = land.name; // Set the value dynamically
             } else {
                 console.error("Form input with id 'name' not found in the cloned card:", card);
-            }
-        }
-
-
-        // Set values to go to the update page
-        const updateForm = card.querySelector('.update-form');
-        if (updateForm) {
-            const idInput = updateForm.querySelector('#id');
-            const nameInput = updateForm.querySelector('#name');
-
-            if (nameInput && idInput) {
-                nameInput.value = land.name;
-                idInput.value = land.id;
-            } else {
-                console.error("One or more form inputs not found in the cloned card:", card);
             }
         }
 

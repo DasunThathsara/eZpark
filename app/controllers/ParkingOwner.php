@@ -116,6 +116,20 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/report', $data, $other_data);
     }
 
+    // -------------------------------------- generate Report ---------------------------------------
+    public function viewGenerateReport(){
+        $data = [
+            'title' => 'Home page'
+        ];
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('parkingOwner/generatereport', $data, $other_data);
+    }
+
     // ------------------------------------ Securities -------------------------------------
     // View assign security to parking owner
     public function securities($landID){
@@ -146,4 +160,20 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/securities', $data, $other_data);
     }
     
+        // remove assinged security
+    public function securityRemove(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $land_ID = $_POST['land_id'];
+            $sec_id = $_POST['sec_id'];
+
+            $this->securityModel->securityRemove($sec_id);
+
+            // Send notification to the landowner
+            // $this->userModel->addNotification('You unassigned from the land was declined by '.$_SESSION['user_name'], 'parkingownerUnassignFromLand', $this->landModel->getLandOwnerID($_POST['id']), $this->landModel->getLandOwnerID($_POST['id']));
+
+            redirect('parkingOwner/securities/'.$land_ID);
+        }
+    }
 }

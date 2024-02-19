@@ -1,0 +1,67 @@
+#requestheader{
+    color:#ffc32d;
+    transform: translateY(15px)
+}
+
+
+
+#theader{
+    display:flex;
+}
+
+#content{
+    padding-right: 0%;
+}
+
+/* Style for the table headers */
+.table-container {
+    margin-top: 20px;
+    
+}
+
+.requesttable {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+
+.requesttable th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: 60px;
+    
+    
+}
+
+.requesttable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Style for the "Unassigned" and "Assigned" headings */
+#ttitle {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #615f5f;
+    text-align: left;
+    margin-left: 40px;
+}
+
+#bttn{
+    background-color: #fcd426;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#tcontainer{
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.12);
+    
+    margin-bottom: 15px;
+    
+    }
+
