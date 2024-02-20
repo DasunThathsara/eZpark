@@ -35,7 +35,7 @@ searchBar.onkeyup = ()=>{
 setInterval(()=>{
     // Start Ajax
     let xhr = new XMLHttpRequest(); // Creating XML object
-    xhr.open("GET", "php/users.php", true);
+    xhr.open("GET", "http://localhost/eZpark/chat/loadUsers", true);
     xhr.onload = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
