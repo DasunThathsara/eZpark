@@ -176,4 +176,19 @@ class ParkingOwner extends Controller {
             redirect('parkingOwner/securities/'.$land_ID);
         }
     }
+
+    public function landAccessControl($sec_id = null){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // die(print_r($land_ID));
+
+            if ($this->parkingOwnerModel->landAccessControl($sec_id)){
+                $land_ID = $_GET['land_id'];
+                redirect($_SESSION['userType'].'/securities/'.$land_ID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    } 
 }

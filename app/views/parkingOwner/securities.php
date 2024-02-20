@@ -33,6 +33,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                         Contact Number
                                     </div>
 
+                                    <div class="left" style="width:31%">
+                                        Access For Security
+                                    </div>
                                 </div>
                             </th>
                         </tr>
@@ -40,7 +43,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <?php foreach ($data['securityDetails'] as $security) {?>
                             <tr>
                                 <td>
-                                    <a class="tile" href="">
+                                    <a class="tile" href="<?php echo URLROOT?>/land/viewSecurity/<?php echo $security->security_id?>">
                                         <div class="content">
                                             <div class="left" style="width:50%;">
                                                 <?php echo $security->security_name; ?>
@@ -48,6 +51,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <div class="left" style="width:50%;">
                                                 <?php echo $security->sec_contact; ?>
                                             </div>
+
+                                            <div>
+                                                <!-- Toggle Button -->
+                                               
+                                                <label class="switch">
+                                                    <input type="checkbox" class="toggleButton" data-security-id="<?php echo $security->security_id;?>" <?php echo $security->landAccess == 1 ? 'checked' : ''; ?>>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>    
                                             <div class="right" style="width: calc(50% - 30px);">
                                                 <form action="<?php echo URLROOT ?>/parkingOwner/securityRemove" method="post">
                                                     <input type="text" name="sec_id" id="sec_id" value="<?php echo $security->security_id; ?>" hidden />
@@ -74,5 +86,48 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         return confirm("Are you sure you want to delete this security?");
     }
 </script>
+
+<!-- <script>
+        $(document).ready(function () {
+            $('#toggleButton').change(function () {
+                var isChecked = $(this).prop('checked');
+                console.log("Checkbox is checked: " + isChecked);
+
+                $.ajax({
+                    url: '<?php echo URLROOT?>/parkingOwner/landAccessControl/<?php echo $security->security_id?>',
+                    method: 'GET',
+                    data: { isChecked: isChecked },
+                    success: function (response) {
+                        console.log("AJAX success:", response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error:", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script> -->
+
+    <script>
+    $(document).ready(function () {
+        $('.toggleButton').change(function () {
+            var isChecked = $(this).prop('checked');
+            var securityId = $(this).data('security-id');
+
+            $.ajax({
+                url: '<?php echo URLROOT?>/parkingOwner/landAccessControl/' + securityId,
+                method: 'GET',
+                data: { isChecked: isChecked },
+                success: function (response) {
+                    console.log("AJAX success:", response);
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error:", xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

@@ -154,4 +154,23 @@ class ParkingOwnerModel{
             return false;
         }
     }
+
+
+    // ------------------------- Assigned Security Functionalities -------------------------
+    public function landAccessControl($sec_id): bool{
+        // Prepare statement
+        $this->db->query('UPDATE security SET landAccess = CASE WHEN landAccess = 1 THEN 0 WHEN landAccess = 0 THEN 1 ELSE landAccess END WHERE id = :id;');
+        // die(print_r($sec_id));
+        // Bind values
+        $this->db->bind(':id', $sec_id);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
