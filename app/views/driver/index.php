@@ -34,7 +34,7 @@
                                 <td>
                                     <form action="<?php echo URLROOT?>/driver/enterExitParking" method="post" class="enter_exit_to_parking" id="enter_exit_to_parking">
                                         <input type="hidden" id="id" name="id" value="">
-                                        <input type="submit" value="View Prices" class="btn btn-primary" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">
+                                        <input type="submit" value="Enter" class="btn btn-primary" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">
                                     </form>
                                 </td>
                             </tr>
