@@ -54,17 +54,16 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                                             <div>
                                                 <!-- Toggle Button -->
-                                               
-                                                <label class="switch">
+                                                <label class="switch" id="switch">
                                                     <input type="checkbox" class="toggleButton" data-security-id="<?php echo $security->security_id;?>" <?php echo $security->landAccess == 1 ? 'checked' : ''; ?>>
                                                     <span class="slider round"></span>
                                                 </label>
                                             </div>    
                                             <div class="right" style="width: calc(50% - 30px);">
-                                                <form action="<?php echo URLROOT ?>/parkingOwner/securityRemove" method="post">
+                                                <form action="<?php echo URLROOT ?>/parkingOwner/securityRemove" method="post" class="delete-form" id="delete-form">
                                                     <input type="text" name="sec_id" id="sec_id" value="<?php echo $security->security_id; ?>" hidden />
                                                     <input type="text" name="land_id" id="land_id" value="<?php echo $data['id']; ?>" hidden />
-                                                    <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                    <button type="submit" class="delete" onclick="confirmSubmit();">
                                                         <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
                                                     </button>
                                                 </form>
@@ -82,51 +81,76 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 
 <script>
-    function confirmSubmit() {
-        return confirm("Are you sure you want to delete this security?");
-    }
-</script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteform = document.getElementById("delete-form");
 
-<!-- <script>
-        $(document).ready(function () {
-            $('#toggleButton').change(function () {
-                var isChecked = $(this).prop('checked');
-                console.log("Checkbox is checked: " + isChecked);
+        if (deleteform) {
+            const submitButton = deleteform.querySelector("button[type='submit']");
 
-                $.ajax({
-                    url: '<?php echo URLROOT?>/parkingOwner/landAccessControl/<?php echo $security->security_id?>',
-                    method: 'GET',
-                    data: { isChecked: isChecked },
-                    success: function (response) {
-                        console.log("AJAX success:", response);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("AJAX error:", xhr.responseText);
+            if (submitButton) {
+                submitButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent the form from submitting
+
+                    // Use SweetAlert for confirmation
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to delete this security.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            deleteform.submit();
+                        }
+                    });
+                });
+            }
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.querySelector(".toggleButton");
+
+        if (toggleButton) {
+            toggleButton.addEventListener("change", function () {
+                const isChecked = this.checked;
+                const securityId = this.getAttribute("data-security-id");
+
+                // Use SweetAlert for confirmation
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You are about to change security access.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, proceed!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the AJAX request to update security access
+                        $.ajax({
+                            url: '<?php echo URLROOT?>/parkingOwner/landAccessControl/' + securityId,
+                            method: 'GET',
+                            data: { isChecked: isChecked },
+                            success: function (response) {
+                                console.log("AJAX success:", response);
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX error:", xhr.responseText);
+                            }
+                        });
+                    } else {
+                        // Revert the checkbox state if the user cancels
+                        toggleButton.checked = !isChecked;
                     }
                 });
             });
-        });
-    </script> -->
-
-    <script>
-    $(document).ready(function () {
-        $('.toggleButton').change(function () {
-            var isChecked = $(this).prop('checked');
-            var securityId = $(this).data('security-id');
-
-            $.ajax({
-                url: '<?php echo URLROOT?>/parkingOwner/landAccessControl/' + securityId,
-                method: 'GET',
-                data: { isChecked: isChecked },
-                success: function (response) {
-                    console.log("AJAX success:", response);
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX error:", xhr.responseText);
-                }
-            });
-        });
+        }
     });
+    
 </script>
 
 
