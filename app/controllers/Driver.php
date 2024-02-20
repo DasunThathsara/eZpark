@@ -126,16 +126,13 @@ class Driver extends Controller {
             $data = [
                 'id' => $_POST['id']
             ];
-
             
         }
-        $data = [
-            'id' => $land_ID
-        ];
-
-        // Check parking status of the driver
-        $parking_status = $this->driverModel->checkParkingStatus($data['id']);
-        
+        else{
+            $data = [
+                'id' => $land_ID
+            ];
+        }
 
         $other_data['notification_count'] = 0;
 
@@ -144,7 +141,31 @@ class Driver extends Controller {
 
         $lands = $this->landModel->viewLand($land_ID);
 
-        $this->view('driver/viewParking', $lands, $other_data);
+        // Check parking status of the driver
+        $parking_status = $this->driverModel->checkParkingStatus($data['id']);
+
+        if($parking_status){
+            // If the driver is already parked, then exit the parking
+            $this->driverModel->exitParking($data);
+            redirect('driver/index/'.$land_ID);
+        }
+        else{
+            // If the driver is not parked, then select the vehicle type
+            $this->view('driver/enterExitParking/vehicleTypeSelection', $data, $other_data);
+        }
+    }
+
+    // Enter parking
+    public function enterParking(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $land_ID = $_POST['id'];
+            $vehicle_type = $_POST['vehicle_type'];
+
+            $this->driverModel->enterParking($land_ID, $vehicle_type);
+            redirect('driver/index/'.$land_ID);
+        }
     }
 
 
@@ -158,19 +179,6 @@ class Driver extends Controller {
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
         $this->view('driver/scanQRCode', $vehicles, $other_data);
-    }
-
-    
-    // ------------------------ Enter Parking ------------------------
-    public function enterParking(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/enterParking', $vehicles, $other_data);
     }
     
     // ------------------------ Start Time ------------------------
