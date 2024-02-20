@@ -625,48 +625,45 @@ WHERE (banCount = 1 OR banCount = 2)
         $output = "";
     
         $results = $this->db->resultSet();
-    $output = ""; // Initialize $output variable
+        $output = ""; // Initialize $output variable
 
-    if (count($results) == 0) {
-        $output .= "No users are available to chat";
-    } else {
-        foreach ($results as $row) {
-            // Fetch chat message for each user
-            $sql2 = "SELECT * FROM chat WHERE (incoming_msg_id = :id OR outgoing_msg_id = :id) AND (outgoing_msg_id = :outgoing_id OR incoming_msg_id = :outgoing_id) ORDER BY msg_id DESC LIMIT 1";
-            $this->db->query($sql2);
-            $this->db->bind(':id', $row->id);
-            $this->db->bind(':outgoing_id', $outgoing_id);
-            $query2 = $this->db->single();
-
-
-            // Process chat message
-            if ($query2) {
-                $result = $query2->msg;
-            } else {
-                $result = "No msg available";
-            }
-
-            $msg = (strlen($result) > 28) ? substr($result, 0, 28) . '...' : $result;
-            $you = ($query2 && $outgoing_id == $query2->outgoing_msg_id) ? "You: " : "";
+        if (count($results) == 0) {
+            $output .= "No users are available to chat";
+        } else {
+            foreach ($results as $row) {
+                // Fetch chat message for each user
+                $sql2 = "SELECT * FROM chat WHERE (incoming_msg_id = :id OR outgoing_msg_id = :id) AND (outgoing_msg_id = :outgoing_id OR incoming_msg_id = :outgoing_id) ORDER BY msg_id DESC LIMIT 1";
+                $this->db->query($sql2);
+                $this->db->bind(':id', $row->id);
+                $this->db->bind(':outgoing_id', $outgoing_id);
+                $query2 = $this->db->single();
 
 
-            // Generate output for each user
-            $output .= '<a href="chat.php?user_id=' . $row->id . '">
-                            <div class="content">
-                                
-                                <div class="details">
-                                    <span>' . $row->username . '</span>
-                                    <p>' . $you . $msg . '</p>
+                // Process chat message
+                if ($query2) {
+                    $result = $query2->msg;
+                } else {
+                    $result = "No msg available";
+                }
+
+                $msg = (strlen($result) > 28) ? substr($result, 0, 28) . '...' : $result;
+                $you = ($query2 && $outgoing_id == $query2->outgoing_msg_id) ? "You: " : "";
+
+
+                // Generate output for each user
+                $output .= '<a href="chat.php?user_id=' . $row->id . '">
+                                <div class="content">
+                                    
+                                    <div class="details">
+                                        <span>' . $row->username . '</span>
+                                        <p>' . $you . $msg . '</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>';
-        }
-    }
-
-    // Output all generated content
-    var_dump("out", $output);
-    return $output;
-
+                            </a>';
             }
-            
         }
+        return $output;
+
+    }
+            
+}
