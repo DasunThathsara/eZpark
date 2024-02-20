@@ -13,8 +13,8 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1 class="title">Reports</h1>
-            <p class="subtitle">Generate a report for your land</p>
+            <h1 class="title">Chats</h1>
+            
 
             <div class="wrapper">
             <section class="users">
@@ -41,7 +41,7 @@
             </section>
 
         </div>
-        <?php var_dump($data) ?>
+        <!-- <?php var_dump($data) ?> -->
 
         <script src = "<?php echo URLROOT ?>/js/chat.js"></script>
         
