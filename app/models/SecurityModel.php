@@ -298,24 +298,4 @@ class SecurityModel{
         return $row->landID;
     }
 
-     // Get assigned land id
-     public function securityRemove($sec_id){
-        // Prepare statement
-        $this->db->query('UPDATE security SET landID = 0, landAccess = 0 WHERE id = :sec_id');
-
-        // Bind values
-        $this->db->bind(':sec_id', $sec_id);
-
-        // die(print_r($sec_id));
-
-        // Execute
-        // Execute
-        if ($this->db->execute()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
 }

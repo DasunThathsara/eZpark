@@ -52,9 +52,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <?php echo $security->sec_contact; ?>
                                             </div>
 
-                                            <div>
+                                            <div class="toggle">
                                                 <!-- Toggle Button -->
-                                                <label class="switch" id="switch">
+                                                <label class="switchAccess" id="switch">
                                                     <input type="checkbox" class="toggleButton" data-security-id="<?php echo $security->security_id;?>" <?php echo $security->landAccess == 1 ? 'checked' : ''; ?>>
                                                     <span class="slider round"></span>
                                                 </label>
