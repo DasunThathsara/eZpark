@@ -5,12 +5,21 @@ class Report extends Controller {
         // Only parkingOwner are allowed to access driver pages
         $this->middleware->checkAccess(['parkingOwner']);
         $this->parkingOwnerModel = $this->model('parkingOwnerModel');
+        // $this->landModel = $this->model('LandModel');
     }
 
-    public function viewReport(){
-        $data = [
-            'title' => 'Home page'
-        ];
-        $this->view('parkingOwner/report', $data);
+    public function viewReport($land_ID = null){
+
+        $landId =  $_POST['landID'];
+
+        $arr['landid'] = $landId;
+
+        $data = $this->parkingOwnerModel->viewReport($arr);
+
+        echo json_encode($data);
+
+        // die(print_r($data));
+        // $this->view('parkingOwner/report', $data);
     }
+    
 }
