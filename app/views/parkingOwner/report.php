@@ -1,12 +1,12 @@
-<?php require APPROOT.'/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php'; ?>
 
 <!--  TOP NAVIGATION  -->
-<?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
+<?php require APPROOT . '/views/inc/components/topnavbar.php'; ?>
 
 <!--  SIDE NAVIGATION  -->
 <?php
-    $section = 'reports';
-    require APPROOT.'/views/inc/components/sidenavbar.php';
+$section = 'reports';
+require APPROOT . '/views/inc/components/sidenavbar.php';
 ?>
 
 <main class="page-container">
@@ -26,9 +26,31 @@
 
                     <div class="gen-area">
                         <p class="text-warning" id="message"></p>
+                        <!-- <button class="gen-btn" id="gen" onclick="generatePDF()"><a class="gen-btn" href="<?php echo URLROOT ?>/report/viewReport/2"></a>Generate Report</button> -->
                         <button class="gen-btn" id="gen" onclick="generatePDF()">Generate Report</button>
+                        <div class="dropdown">
+                            <button class="dropbtn">Select Parking</button>
+                            <div class="dropdown-content">
+                                <?php
+                                
+                                foreach ($data['lands'] as $key => $value) {
+                                    ?>
+
+
+                                    <p onclick="selectPark(<?= $value->id ?>)">
+                                        
+                                        <?= $value->name ?> -
+                                        <?= $value->id ?>
+                                    </p>
+
+                                    <?php
+                                } ?>
+
+                            </div>
+                        </div>
                         <button class="view-btn" id="view" onclick="viewPDF()" style="display: none;">View</button>
-                        <button class="download-btn" id="down" onclick="downloadBlob()" style="display: none;">Download</button>
+                        <button class="download-btn" id="down" onclick="downloadBlob()"
+                            style="display: none;">Download</button>
                     </div>
                 </div>
 
@@ -51,10 +73,16 @@
 </main>
 
 <script src="https://unpkg.com/jspdf-invoice-template@latest/dist/index.js" type="text/javascript"></script>
+
 <script>
     //pdf generate code
     //Generate pdf
     var pdfObject; //outputType: jsPDFInvoiceTemplate.OutputType.Blob,
+
+    
+    landId = null;
+    genarateData = null;
+
 
     var props = {
         outputType: jsPDFInvoiceTemplate.OutputType.Blob,
@@ -129,15 +157,20 @@
                 { title: "Unit" },
                 { title: "Total" }
             ],
-            table: Array.from(Array(10), (item, index) => ([
+            table: 
+            Array.from(
+                genarateData.length, (item, index) => ([
+
                 index + 1,
-                "There are many variations ",
+                `${genarateData[index]?.driverID || " "} `,
                 "Lorem Ipsum is simply dummy text dummy text ",
                 200.5,
                 4.5,
                 "m2",
                 400.5
+
             ])),
+            
             additionalRows: [{
                 col1: 'Total:',
                 col2: '145,250.50',
@@ -146,22 +179,22 @@
                     fontSize: 14 //optional, default 12
                 }
             },
-                {
-                    col1: 'VAT:',
-                    col2: '20',
-                    col3: '%',
-                    style: {
-                        fontSize: 10 //optional, default 12
-                    }
-                },
-                {
-                    col1: 'SubTotal:',
-                    col2: '116,199.90',
-                    col3: 'ALL',
-                    style: {
-                        fontSize: 10 //optional, default 12
-                    }
-                }],
+            {
+                col1: 'VAT:',
+                col2: '20',
+                col3: '%',
+                style: {
+                    fontSize: 10 //optional, default 12
+                }
+            },
+            {
+                col1: 'SubTotal:',
+                col2: '116,199.90',
+                col3: 'ALL',
+                style: {
+                    fontSize: 10 //optional, default 12
+                }
+            }],
             invDescLabel: "Invoice Note",
             invDesc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
         },
@@ -172,8 +205,37 @@
         pageLabel: "Page ",
     };
 
+
+    function selectPark(chooseId) {
+
+        landId  = chooseId;
+        // return landId;
+        // console.log(chooseId);
+    }
+
+    
     /* generate pdf */
+    
     function generatePDF() {
+
+        $.ajax({
+            url: '<?php echo URLROOT ?>/report/viewReport',
+            method: 'POST',
+            data: { landID: landId },
+            success: function (response) {
+                res =JSON.parse(response);
+
+                genarateData =res;
+                console.log("genarateData:", genarateData);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error:", xhr.responseText);
+            }
+        });
+
+
+        const selectId = document.getElementsByClassName("dropdown-content");
+
         pdfObject = jsPDFInvoiceTemplate.default(props);
         console.log("Object generated: ", pdfObject);
         document.getElementById('message').textContent = 'Your report is generated!';
@@ -205,4 +267,6 @@
         link.click();
     }
 </script>
-<?php require APPROOT.'/views/inc/footer.php'; ?>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
+<?php require APPROOT . '/views/inc/footer.php'; ?>
