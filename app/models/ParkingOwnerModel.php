@@ -154,4 +154,18 @@ class ParkingOwnerModel{
             return false;
         }
     }
+
+    // ------------------------- Report Functionalities -------------------------
+    // View report
+    public function viewReport($data){
+        $this->db->query('SELECT * FROM driver_land WHERE landID = :landid');
+        $this->db->bind(':landid', $data['landid']);
+        
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    
+
 }
