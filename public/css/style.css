@@ -469,6 +469,16 @@ a{
     transform: translate(10px, 70px);
 }
 
+.toggle .switchAccess {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+    transform: translate(0px, 10px);
+    
+    
+}
+
 .switch {
     position: relative;
     display: inline-block;

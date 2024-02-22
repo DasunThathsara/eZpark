@@ -14,6 +14,7 @@ class Security extends Controller {
 
         $land_ID = $this->securityModel->getAssignedLandID();
 
+
         if (empty($land_ID)){
             $notifications['notification_count'] = $this->userModel->getNotificationCount();
     
@@ -27,7 +28,8 @@ class Security extends Controller {
                 'package_count' => 0,
                 'land_count' => 0,
                 'availability' => 0,
-                'capacity' => 0
+                'capacity' => 0,
+                'landAccess' => 0
             ];
         }
         else{
@@ -49,10 +51,20 @@ class Security extends Controller {
                 'package_count' => $this->parkingOwnerModel->getPackageCount($data),
                 'land_count' => $this->landModel->getLandCount($data),
                 'availability' => $this->landModel->getAvailability($land_ID),
-                'capacity' => $this->landModel->getCapacity($land_ID)
+                'capacity' => $this->landModel->getCapacity($land_ID),
+                // 'landAccess' => $this->securityModel->viewSecurities($land_ID)
             ];
         }
         
+        $securityData = $this->securityModel->viewSecurities($land_ID);
+
+            if (!empty($securityData)) {
+                $data['landAccess'] = $securityData[0]->landAccess;
+            } else {
+                $data['landAccess'] = 0;
+            }
+
+
         // die(print_r($data));
         $this->view('security/index', $data, $notifications);
     }
