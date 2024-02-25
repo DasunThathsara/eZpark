@@ -166,43 +166,58 @@
 
             <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
 
-            <div class="side-cards">
+            <div id="side-cards-container" class="side-cards">
                 <div class="close-btn" onclick="closeRightCard()">X</div>
                 <h2>Recent Transaction</h2>
-
                 <p><span>&#9632;</span>Today</p>
-
-                <?php foreach ($data['today_transactions'] as $transaction){ ?>
+                <?php foreach ($data['today_transactions'] as $transaction): ?>
                     <div class="side-card">
                         <div class="date-time">
                             <?php
-                                $dateTime = new DateTime($transaction->transactionTime);
-                                $time = $dateTime->format('H:i:s');
-                                echo $time;
+                            $dateTime = new DateTime($transaction->transactionTime);
+                            $time = $dateTime->format('H:i:s');
+                            echo $time;
                             ?>
                         </div>
                         <div class="vehicle-type">
-                            <?php
-                            if($transaction->vehicleType == 'bike'){ ?>
+                            <?php if($transaction->vehicleType == 'bike'): ?>
                                 <img style="width: 30px;" src="<?php echo URLROOT ?>/images/motor-sports.png" alt="">
-                            <?php } else if($transaction->vehicleType == 'car'){ ?>
+                            <?php elseif($transaction->vehicleType == 'car'): ?>
                                 <img style="width: 30px;" src="<?php echo URLROOT ?>/images/car-c.png" alt="">
-                            <?php } else if($transaction->vehicleType == 'threeWheel'){ ?>
+                            <?php elseif($transaction->vehicleType == 'threeWheel'): ?>
                                 <img style="width: 30px;" src="<?php echo URLROOT ?>/images/tuk-tuk.png" alt="">
-                            <?php }
-                            ?>
+                            <?php endif; ?>
                         </div>
                         <div class="vehicle"><?php echo $transaction->vehicleNumber?></div>
-                        <?php if($transaction->status == 1) {?>
+                        <?php if($transaction->status == 1): ?>
                             <div class="transaction-type in">In</div>
-                        <?php } else {?>
+                        <?php else: ?>
                             <div class="transaction-type out">Out</div>
-                        <?php }?>
+                        <?php endif; ?>
                     </div>
-                <?php }?>
+                <?php endforeach; ?>
             </div>
         </section>
     </main>
+
+    <script>
+        function refreshSideCard() {
+            // Fetch updated content via AJAX
+            fetch('<?php echo URLROOT?>/ParkingOwner/gotoLand/<?php echo $data["id"]?>')
+                .then(response => response.text())
+                .then(data => {
+                    // Replace only the content inside the side-cards container
+                    document.getElementById('side-cards-container').innerHTML =
+                        document.createRange().createContextualFragment(data).querySelector('.side-cards').innerHTML;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Refresh every 1 second
+        setInterval(refreshSideCard, 1000);
+    </script>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
@@ -251,29 +266,33 @@
                 }
             }
         });
-    </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#toggleButton').change(function () {
-                var isChecked = $(this).prop('checked');
+
+        // ---------------------------------------------- Toggle button ----------------------------------------------
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('toggleButton').addEventListener('change', function () {
+                var isChecked = this.checked;
                 console.log("Checkbox is checked: " + isChecked);
 
-                $.ajax({
-                    url: '<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>',
+                fetch('<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>?isChecked=' + isChecked, {
                     method: 'GET',
-                    data: { isChecked: isChecked },
-                    success: function (response) {
-                        console.log("AJAX success:", response);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("AJAX error:", xhr.responseText);
-                    }
-                });
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log("Fetch success:", data);
+                    })
+                    .catch(error => {
+                        console.error("Fetch error:", error);
+                    });
             });
         });
     </script>
+
 
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
