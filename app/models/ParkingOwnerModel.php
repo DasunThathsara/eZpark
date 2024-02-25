@@ -15,7 +15,6 @@ class ParkingOwnerModel{
         $this->mail = new PHPMailer(true);
     }
 
-
     // ------------------------- package Functionalities -------------------------
     // Register package
     public function registerPackage($data): bool

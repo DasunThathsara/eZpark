@@ -163,6 +163,7 @@
     padding-bottom: 10px;
     color: #8c8c8c;
     text-align: center;
+    /*background-color: #fdc63e;*/
 }
 
 .page-container .section .side-cards .side-card .parking{
@@ -170,6 +171,22 @@
     padding-top: 10px;
     padding-bottom: 10px;
     /*background-color: green;*/
+}
+
+.page-container .section .side-cards .side-card .vehicle-type{
+    width: 15%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    transform: translateX(-15px);
+    /*background-color: green;*/
+}
+
+.page-container .section .side-cards .side-card .vehicle{
+    width: 22%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*background-color: red;*/
 }
 
 .page-container .section .side-cards .side-card .transaction-type{

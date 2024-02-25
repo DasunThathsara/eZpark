@@ -147,7 +147,7 @@ class Driver extends Controller {
         if($parking_status){
             // If the driver is already parked, then exit the parking
             $this->driverModel->exitParking($data);
-            redirect('driver/index/'.$land_ID);
+            redirect('driver/index');
         }
         else{
             // If the driver is not parked, then select the vehicle type
@@ -164,7 +164,7 @@ class Driver extends Controller {
             $vehicle_type = $_POST['vehicle_type'];
 
             $this->driverModel->enterParking($land_ID, $vehicle_type);
-            redirect('driver/index/'.$land_ID);
+            redirect('driver/index');
         }
     }
 

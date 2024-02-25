@@ -645,4 +645,26 @@ class LandModel{
             return false;
         }
     }
+
+    // Get today transactions
+    public function getTodayTransactions($landID){
+        $this->db->query('SELECT lt.*, v.vehicleNumber FROM land_transaction lt JOIN vehicle v ON lt.driverID = v.id AND lt.vehicleType = v.vehicleType WHERE lt.landID = :landID AND lt.transactionTime >= :transactionTime ORDER BY lt.transactionTime DESC LIMIT 8');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':transactionTime', date('Y-m-d'));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Get yesterday transactions
+    public function getYesterdayTransactions($landID){
+        $this->db->query('SELECT * FROM driver_land WHERE landID = :landID AND transactionTime = :transactionTime');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':transactionTime', date('Y-m-d', strtotime("-1 days")));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
 }

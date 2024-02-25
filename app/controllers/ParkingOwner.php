@@ -47,7 +47,7 @@ class ParkingOwner extends Controller {
     public function gotoLand($land_ID = null){
         $data = [
             'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
+            'name' => $this->landModel->getLandName($land_ID)
         ];
 
         $notifications['lands'] = $this->landModel->viewLands();
@@ -66,6 +66,7 @@ class ParkingOwner extends Controller {
             'security_count' => $this->securityModel->getSecurityCount($land_ID),
             'availability' => $this->landModel->getAvailability($land_ID),
             'capacity' => $this->landModel->getCapacity($land_ID),
+            'today_transactions' => $this->landModel->getTodayTransactions($land_ID)
         ];
 
         $this->view('parkingOwner/land', $data, $notifications);
@@ -105,7 +106,8 @@ class ParkingOwner extends Controller {
     // -------------------------------------- Report ---------------------------------------
     public function viewReport(){
         $data = [
-            'title' => 'Home page'
+            'title' => 'Home page',
+            'lands' => $this->landModel->viewLands()
         ];
 
         $other_data['notification_count'] = 0;

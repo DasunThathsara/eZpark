@@ -52,6 +52,15 @@
 
 <script src="https://unpkg.com/jspdf-invoice-template@latest/dist/index.js" type="text/javascript"></script>
 <script>
+    let lands = [];
+    var backendData = <?php echo json_encode($data['lands']); ?>;
+
+    lands = backendData.map(land => {
+        return { id: land.id, name: land.name, car: land.car, bike: land.bike, threeWheel: land.threeWheel, city: land.city};
+    });
+
+    console.log(lands)
+
     //pdf generate code
     //Generate pdf
     var pdfObject; //outputType: jsPDFInvoiceTemplate.OutputType.Blob,
@@ -113,30 +122,30 @@
                     }
                 },
                 {
-                    title: "Title",
+                    title: "Name",
                     style: {
                         width: 30
                     }
                 },
                 {
-                    title: "Description",
+                    title: "City",
                     style: {
                         width: 80
                     }
                 },
-                { title: "Price" },
-                { title: "Quantity" },
-                { title: "Unit" },
+                { title: "Car" },
+                { title: "Bike" },
+                { title: "3 Wheel" },
                 { title: "Total" }
             ],
-            table: Array.from(Array(10), (item, index) => ([
+            table: Array.from(Array(lands.length), (item, index) => ([
                 index + 1,
-                "There are many variations ",
-                "Lorem Ipsum is simply dummy text dummy text ",
-                200.5,
-                4.5,
-                "m2",
-                400.5
+                lands[index]['name'],
+                lands[index]['city'],
+                lands[index]['car'],
+                lands[index]['bike'],
+                lands[index]['threeWheel'],
+                lands[index]['car'] + lands[index]['bike'] + lands[index]['threeWheel']
             ])),
             additionalRows: [{
                 col1: 'Total:',

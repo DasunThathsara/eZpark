@@ -172,55 +172,34 @@
 
                 <p><span>&#9632;</span>Today</p>
 
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Nolimit</div>
-                    <div class="transaction-type in">In</div>
-                </div>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Keels</div>
-                    <div class="transaction-type out">Out</div>
-                </div>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Nolimit</div>
-                    <div class="transaction-type in">In</div>
-                </div>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Keels</div>
-                    <div class="transaction-type out">Out</div>
-                </div>
-
-                <p><span>&#9632;</span>Yesterday</p>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Nolimit</div>
-                    <div class="transaction-type in">In</div>
-                </div>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Keels</div>
-                    <div class="transaction-type out">Out</div>
-                </div>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Nolimit</div>
-                    <div class="transaction-type in">In</div>
-                </div>
-
-                <div class="side-card">
-                    <div class="date-time">2023.11.22</div>
-                    <div class="parking">Keels</div>
-                    <div class="transaction-type out">Out</div>
-                </div>
+                <?php foreach ($data['today_transactions'] as $transaction){ ?>
+                    <div class="side-card">
+                        <div class="date-time">
+                            <?php
+                                $dateTime = new DateTime($transaction->transactionTime);
+                                $time = $dateTime->format('H:i:s');
+                                echo $time;
+                            ?>
+                        </div>
+                        <div class="vehicle-type">
+                            <?php
+                            if($transaction->vehicleType == 'bike'){ ?>
+                                <img style="width: 30px;" src="<?php echo URLROOT ?>/images/motor-sports.png" alt="">
+                            <?php } else if($transaction->vehicleType == 'car'){ ?>
+                                <img style="width: 30px;" src="<?php echo URLROOT ?>/images/car-c.png" alt="">
+                            <?php } else if($transaction->vehicleType == 'threeWheel'){ ?>
+                                <img style="width: 30px;" src="<?php echo URLROOT ?>/images/tuk-tuk.png" alt="">
+                            <?php }
+                            ?>
+                        </div>
+                        <div class="vehicle"><?php echo $transaction->vehicleNumber?></div>
+                        <?php if($transaction->status == 1) {?>
+                            <div class="transaction-type in">In</div>
+                        <?php } else {?>
+                            <div class="transaction-type out">Out</div>
+                        <?php }?>
+                    </div>
+                <?php }?>
             </div>
         </section>
     </main>
