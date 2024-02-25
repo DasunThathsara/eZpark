@@ -657,14 +657,14 @@ class LandModel{
         return $row;
     }
 
-    // Get yesterday transactions
-    public function getYesterdayTransactions($landID){
-        $this->db->query('SELECT * FROM driver_land WHERE landID = :landID AND transactionTime = :transactionTime');
+    // Get total income of the parking for current month
+    public function getTotalIncome($landID){
+        $this->db->query('SELECT SUM(cost) AS totalIncome FROM driver_land WHERE landID = :landID AND endTime >= :endTime');
         $this->db->bind(':landID', $landID);
-        $this->db->bind(':transactionTime', date('Y-m-d', strtotime("-1 days")));
+        $this->db->bind(':endTime', date('Y-m-01'));
 
-        $row = $this->db->resultSet();
+        $row = $this->db->single();
 
-        return $row;
+        return $row->totalIncome;
     }
 }

@@ -142,9 +142,9 @@
                                         <div class="bottom-row"></div>
                                     </div>
                                 </div>
-                                <div style="transform: translateY(-20px)" class="right-col">
+                                <div style="transform: translateY(-20px)" class="right-col" id="monthly-income">
                                     <p style="font-size: 15px">Monthly Income</p>
-                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. <?php echo $data['total_income']?></h3>
                                 </div>
                             </div>
                         </div>
@@ -201,6 +201,7 @@
     </main>
 
     <script>
+        // --------------------------------------- Real time update transaction box ---------------------------------------
         function refreshSideCard() {
             // Fetch updated content via AJAX
             fetch('<?php echo URLROOT?>/ParkingOwner/gotoLand/<?php echo $data["id"]?>')
@@ -215,12 +216,30 @@
 
         // Refresh every 1 second
         setInterval(refreshSideCard, 1000);
-    </script>
+
+
+        function refreshMonthlyIncome() {
+            // Fetch updated content via AJAX
+            fetch('<?php echo URLROOT?>/ParkingOwner/gotoLand/<?php echo $data["id"]?>') // Update URL to your controller method
+                .then(response => response.text())
+                .then(data => {
+                    // Extract the monthly income value from the returned data
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const updatedIncome = doc.getElementById('monthly-income').querySelector('h3').textContent;
+
+                    // Update the value inside the h3 tag
+                    document.getElementById('monthly-income').querySelector('h3').textContent = updatedIncome;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Refresh every 1 second
+        setInterval(refreshMonthlyIncome, 1000);
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script>
+        // ---------------------------------------------- Chart.js ----------------------------------------------
         const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
         const yValues = [7,8,8,9,9,9,10,11,14,14,15];
 
@@ -248,6 +267,8 @@
             }
         });
 
+
+
         // Create a new chart with a different id for the second canvas
         new Chart("lineChart2", {
             type: "bar",
@@ -266,6 +287,7 @@
                 }
             }
         });
+
 
 
         // ---------------------------------------------- Toggle button ----------------------------------------------
@@ -292,7 +314,5 @@
             });
         });
     </script>
-
-
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
