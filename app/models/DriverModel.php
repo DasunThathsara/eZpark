@@ -11,12 +11,13 @@ class DriverModel{
     public function registerVehicle($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO vehicle (name, vehicleType, id) VALUES (:name, :vehicleType, :id)');
+        $this->db->query('INSERT INTO vehicle (name, vehicleType, id, vehicleNumber) VALUES (:name, :vehicleType, :id, :vehicleNumber)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':vehicleType', $data['vehicle_type']);
         $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':vehicleNumber', $data['vehicle_number']);
 
         // Execute
         if ($this->db->execute()){
@@ -33,6 +34,22 @@ class DriverModel{
         $this->db->query('SELECT * FROM vehicle WHERE name = :name and id = :id');
         $this->db->bind(':name', $name);
         $this->db->bind(':id', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Find vehicle
+    public function findVehicleByNumber($number): bool
+    {
+        $this->db->query('SELECT * FROM vehicle WHERE vehicleNumber = :vehicleNumber');
+        $this->db->bind(':vehicleNumber', $number);
 
         $row = $this->db->single();
 
@@ -99,6 +116,27 @@ class DriverModel{
     }
 
     // ------------------------- Parking Functionalities -------------------------
+    // Get landowner id by land id
+    public function getLandownerID($landID){
+        $this->db->query('SELECT uid FROM land WHERE id = :id');
+        $this->db->bind(':id', $landID);
+
+        $row = $this->db->single();
+
+        return $row->uid;
+    }
+
+    // Get vehicleType using landID driverID and status
+    public function getVehicleType($landID){
+        $this->db->query('SELECT vehicleType FROM driver_land WHERE landID = :landID and driverID = :driverID and status = 1');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row->vehicleType;
+    }
+
     // Check parking status
     public function checkParkingStatus($landID){
         $this->db->query('SELECT * FROM driver_land WHERE landID = :landID and driverID = :driverID and status = 1');
@@ -115,14 +153,32 @@ class DriverModel{
 
     // Enter parking
     public function enterParking($land_ID, $vehicle_type){
-        $this->db->query('INSERT INTO driver_land (landID, driverID, status, vehicleType, startTime) VALUES (:landID, :driverID, :status, :vehivleType, :startTime)');
+        // Update driver_land table
+        $this->db->query('INSERT INTO driver_land (landID, driverID, status, vehicleType, startTime) VALUES (:landID, :driverID, :status, :vehicleType, :startTime)');
         $this->db->bind(':landID', $land_ID);
         $this->db->bind(':driverID', $_SESSION['user_id']);
         $this->db->bind(':status', 1);
-        $this->db->bind(':vehivleType', $vehicle_type);
-        $this->db->bind(':startTime', date("Y-m-d H:i:s"));
+        $this->db->bind(':vehicleType', $vehicle_type);
 
-        if ($this->db->execute()){
+        // End time
+        $startTime = date("Y-m-d H:i:s");
+        $this->db->bind(':startTime', $startTime);
+
+        $result1 = $this->db->execute();
+
+        // Update land_transaction table
+        $ownerID = $this->getLandOwnerID($land_ID);
+        $this->db->query('INSERT INTO land_transaction (ownerID, landID, driverID, status, vehicleType, transactionTime) VALUES (:ownerID, :landID, :driverID, :status, :vehicleType, :transactionTime)');
+        $this->db->bind(':ownerID', $ownerID);
+        $this->db->bind(':landID', $land_ID);
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+        $this->db->bind(':status', 1);
+        $this->db->bind(':vehicleType', $vehicle_type);
+        $this->db->bind(':transactionTime', $startTime);
+
+        $result2 = $this->db->execute();
+
+        if ($result1 && $result2){
             return true;
         }
         else {
@@ -135,9 +191,27 @@ class DriverModel{
         $this->db->query('UPDATE driver_land SET endTime = :endTime WHERE landID = :landID and driverID = :driverID');
         $this->db->bind(':landID', $data['id']);
         $this->db->bind(':driverID', $_SESSION['user_id']);
-        $this->db->bind(':endTime', date("Y-m-d H:i:s"));
 
-        if ($this->db->execute() && $this->updateCost($data)){
+        // End time
+        $startTime = date("Y-m-d H:i:s");
+        $this->db->bind(':endTime', $startTime);
+
+        $result1 = $this->db->execute();
+
+        // Update land_transaction table
+        $ownerID = $this->getLandOwnerID($data['id']);
+        $vehicleType = $this->getVehicleType($data['id']);
+        $this->db->query('INSERT INTO land_transaction (ownerID, landID, driverID, status, vehicleType, transactionTime) VALUES (:ownerID, :landID, :driverID, :status, :vehicleType, :transactionTime)');
+        $this->db->bind(':ownerID', $ownerID);
+        $this->db->bind(':landID', $data['id']);
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+        $this->db->bind(':status', 0);
+        $this->db->bind(':vehicleType', $vehicleType);
+        $this->db->bind(':transactionTime', $startTime);
+
+        $result2 = $this->db->execute();
+
+        if ($result1 && $result2 && $this->updateCost($data)){
             return true;
         }
         else {

@@ -6,7 +6,6 @@ class ParkingOwnerModel{
         $this->db = new Database();
     }
 
-
     // ------------------------- package Functionalities -------------------------
     // Register package
     public function registerPackage($data): bool
