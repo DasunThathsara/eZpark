@@ -66,7 +66,8 @@ class ParkingOwner extends Controller {
             'security_count' => $this->securityModel->getSecurityCount($land_ID),
             'availability' => $this->landModel->getAvailability($land_ID),
             'capacity' => $this->landModel->getCapacity($land_ID),
-            'today_transactions' => $this->landModel->getTodayTransactions($land_ID)
+            'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
+            'total_income' => $this->landModel->getTotalIncome($land_ID)
         ];
 
         $this->view('parkingOwner/land', $data, $notifications);
