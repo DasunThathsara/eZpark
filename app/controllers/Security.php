@@ -49,7 +49,9 @@ class Security extends Controller {
                 'package_count' => $this->parkingOwnerModel->getPackageCount($data),
                 'land_count' => $this->landModel->getLandCount($data),
                 'availability' => $this->landModel->getAvailability($land_ID),
-                'capacity' => $this->landModel->getCapacity($land_ID)
+                'capacity' => $this->landModel->getCapacity($land_ID),
+                'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
+                'total_income' => $this->landModel->getTotalParkingIncome($land_ID)
             ];
         }
         

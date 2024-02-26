@@ -100,9 +100,9 @@
                                             <div class="bottom-row"></div>
                                         </div>
                                     </div>
-                                    <div style="transform: translateY(-20px)" class="right-col">
+                                    <div style="transform: translateY(-20px)" class="right-col" id="monthly-income">
                                         <p style="font-size: 15px">Monthly Income</p>
-                                        <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                                        <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. <?php echo $data['total_income']?></h3>
                                     </div>
                                 </div>
                             </div>
@@ -124,61 +124,36 @@
 
                 <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
 
-                <div class="side-cards">
+                <div id="side-cards-container" class="side-cards">
                     <div class="close-btn" onclick="closeRightCard()">X</div>
                     <h2>Recent Transaction</h2>
-
                     <p><span>&#9632;</span>Today</p>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Nolimit</div>
-                        <div class="transaction-type in">In</div>
-                    </div>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Keels</div>
-                        <div class="transaction-type out">Out</div>
-                    </div>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Nolimit</div>
-                        <div class="transaction-type in">In</div>
-                    </div>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Keels</div>
-                        <div class="transaction-type out">Out</div>
-                    </div>
-
-                    <p><span>&#9632;</span>Yesterday</p>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Nolimit</div>
-                        <div class="transaction-type in">In</div>
-                    </div>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Keels</div>
-                        <div class="transaction-type out">Out</div>
-                    </div>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Nolimit</div>
-                        <div class="transaction-type in">In</div>
-                    </div>
-
-                    <div class="side-card">
-                        <div class="date-time">2023.11.22</div>
-                        <div class="parking">Keels</div>
-                        <div class="transaction-type out">Out</div>
-                    </div>
+                    <?php foreach ($data['today_transactions'] as $transaction): ?>
+                        <div class="side-card">
+                            <div class="date-time">
+                                <?php
+                                $dateTime = new DateTime($transaction->transactionTime);
+                                $time = $dateTime->format('H:i:s');
+                                echo $time;
+                                ?>
+                            </div>
+                            <div class="vehicle-type">
+                                <?php if($transaction->vehicleType == 'bike'): ?>
+                                    <img style="width: 30px;" src="<?php echo URLROOT ?>/images/motor-sports.png" alt="">
+                                <?php elseif($transaction->vehicleType == 'car'): ?>
+                                    <img style="width: 30px;" src="<?php echo URLROOT ?>/images/car-c.png" alt="">
+                                <?php elseif($transaction->vehicleType == 'threeWheel'): ?>
+                                    <img style="width: 30px;" src="<?php echo URLROOT ?>/images/tuk-tuk.png" alt="">
+                                <?php endif; ?>
+                            </div>
+                            <div class="vehicle"><?php echo $transaction->vehicleNumber?></div>
+                            <?php if($transaction->status == 1): ?>
+                                <div class="transaction-type in">In</div>
+                            <?php else: ?>
+                                <div class="transaction-type out">Out</div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             <?php } ?>
         </div>    
@@ -186,76 +161,121 @@
     </main>
 
     <?php if ($data['id'] != 0) {?>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-        <script>
-            const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-            const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+    <script>
+        // --------------------------------------- Real time update transaction box ---------------------------------------
+        function refreshSideCard() {
+            // Fetch updated content via AJAX
+            fetch('<?php echo URLROOT?>/Security/index')
+                .then(response => response.text())
+                .then(data => {
+                    // Replace only the content inside the side-cards container
+                    document.getElementById('side-cards-container').innerHTML =
+                        document.createRange().createContextualFragment(data).querySelector('.side-cards').innerHTML;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
 
-            var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
-            var yValues2 = [55, 49, 44, 24, 15];
-            var barColors = ["red", "green","blue","orange","brown"];
+        // Refresh every 1 second
+        setInterval(refreshSideCard, 1000);
 
-            new Chart("lineChart1", {
-                type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        fill: false,
-                        lineTension: 0,
-                        backgroundColor: "rgb(0,0,0)",
-                        borderColor: "rgb(252,212,38)",
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    scales: {
-                        yAxes: [{ticks: {min: 6, max:16}}],
-                    }
+
+        // --------------------------------------- Real time update income card ---------------------------------------
+        function refreshMonthlyIncome() {
+            // Fetch updated content via AJAX
+            fetch('<?php echo URLROOT?>/Security') // Update URL to your controller method
+                .then(response => response.text())
+                .then(data => {
+                    // Extract the monthly income value from the returned data
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const updatedIncome = doc.getElementById('monthly-income').querySelector('h3').textContent;
+
+                    // Update the value inside the h3 tag
+                    document.getElementById('monthly-income').querySelector('h3').textContent = updatedIncome;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Refresh every 1 second
+        setInterval(refreshMonthlyIncome, 1000);
+
+
+
+        // ---------------------------------------------- Chart.js ----------------------------------------------
+        const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+        const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+        var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
+        var yValues2 = [55, 49, 44, 24, 15];
+        var barColors = ["red", "green","blue","orange","brown"];
+
+        new Chart("lineChart1", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(0,0,0)",
+                    borderColor: "rgb(252,212,38)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                scales: {
+                    yAxes: [{ticks: {min: 6, max:16}}],
                 }
-            });
+            }
+        });
 
-            // Create a new chart with a different id for the second canvas
-            new Chart("lineChart2", {
-                type: "bar",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    title: {
-                        display: true,
-                        text: "Vehicle Count"
-                    }
+
+
+        // Create a new chart with a different id for the second canvas
+        new Chart("lineChart2", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Vehicle Count"
                 }
-            });
-        </script>
+            }
+        });
 
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#toggleButton').change(function () {
-                    var isChecked = $(this).prop('checked');
-                    console.log("Checkbox is checked: " + isChecked);
 
-                    $.ajax({
-                        url: '<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>',
-                        method: 'GET',
-                        data: { isChecked: isChecked },
-                        success: function (response) {
-                            console.log("AJAX success:", response);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("AJAX error:", xhr.responseText);
+
+        // ---------------------------------------------- Toggle button ----------------------------------------------
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('toggleButton').addEventListener('change', function () {
+                var isChecked = this.checked;
+                console.log("Checkbox is checked: " + isChecked);
+
+                fetch('<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>?isChecked=' + isChecked, {
+                    method: 'GET',
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
                         }
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log("Fetch success:", data);
+                    })
+                    .catch(error => {
+                        console.error("Fetch error:", error);
                     });
-                });
             });
-        </script>
+        });
+    </script>
     <?php } ?>
 
     
