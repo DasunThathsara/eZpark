@@ -218,6 +218,7 @@
         setInterval(refreshSideCard, 1000);
 
 
+        // --------------------------------------- Real time update income card ---------------------------------------
         function refreshMonthlyIncome() {
             // Fetch updated content via AJAX
             fetch('<?php echo URLROOT?>/ParkingOwner/gotoLand/<?php echo $data["id"]?>') // Update URL to your controller method
