@@ -658,9 +658,31 @@ class LandModel{
     }
 
     // Get total income of the parking for current month
-    public function getTotalIncome($landID){
+    public function getTotalParkingIncome($landID){
         $this->db->query('SELECT SUM(cost) AS totalIncome FROM driver_land WHERE landID = :landID AND endTime >= :endTime');
         $this->db->bind(':landID', $landID);
+        $this->db->bind(':endTime', date('Y-m-01'));
+
+        $row = $this->db->single();
+
+        return $row->totalIncome;
+    }
+
+    // Get total today transactions
+    public function getTodayTotalTransactions(){
+        $this->db->query('SELECT lt.*, l.name FROM land_transaction lt JOIN land l ON lt.ownerID = l.uid AND lt.landID = l.id WHERE lt.ownerID = :ownerID AND lt.transactionTime >= :transactionTime ORDER BY lt.transactionTime DESC LIMIT 8');
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+        $this->db->bind(':transactionTime', date('Y-m-d'));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Get total income of owner's all parking
+    public function getTotalIncome(){
+        $this->db->query('SELECT SUM(dl.cost) AS totalIncome FROM driver_land dl JOIN land l ON dl.landID = l.id WHERE l.uid = :uid AND dl.endTime >= :endTime');
+        $this->db->bind(':uid', $_SESSION['user_id']);
         $this->db->bind(':endTime', date('Y-m-01'));
 
         $row = $this->db->single();
