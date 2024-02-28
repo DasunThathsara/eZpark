@@ -689,4 +689,16 @@ class LandModel{
 
         return $row->totalIncome;
     }
+
+    // Get income distribution of the land
+    public function getIncomeDistribution($landID){
+        $this->db->query('SELECT * FROM income WHERE landID = :landID AND year = :year AND ownerID = :ownerID');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':year', date('Y'));
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
 }

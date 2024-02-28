@@ -242,7 +242,7 @@
 
         // ---------------------------------------------- Chart.js ----------------------------------------------
         const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-        const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+        const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
 
         var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
         var yValues2 = [55, 49, 44, 24, 15];
