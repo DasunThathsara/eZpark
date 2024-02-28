@@ -116,6 +116,67 @@ class DriverModel{
     }
 
     // ------------------------- Parking Functionalities -------------------------
+    // Update income table
+    public function updateIncome($landID, $charge, $ownerID){
+        // first check whether the record is already exist. If it was exist, update the record. If not, insert a new record
+        $this->db->query('SELECT * FROM income WHERE landID = :landID AND ownerID = :ownerID AND year = :year');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':ownerID', $ownerID);
+        $this->db->bind(':year', date("Y"));
+
+        $row = $this->db->single();
+
+        $months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+        if ($this->db->rowCount() > 0){
+            // update the record
+            $this->db->query('UPDATE income SET January = January + :January, February = February + :February, March = March + :March, April = April + :April, May = May + :May, June = June + :June, July = July + :July, August = August + :August, September = September + :September, October = October + :October, November = November + :November, December = December + :December WHERE landID = :landID and ownerID = :ownerID and year = :year');
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':ownerID', $ownerID);
+            $this->db->bind(':year', date("Y"));
+
+            // update each month with considering current month
+            for ($i = 1; $i <= 12; $i++){
+                if ($i == date("m")){
+                    $this->db->bind(':'.$months[$i - 1], $charge);
+                }
+                else {
+                    $this->db->bind(':'.$months[$i - 1], 0);
+                }
+            }
+
+            if ($this->db->execute()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            // insert a new record
+            $this->db->query('INSERT INTO income (ownerID, landID, year, January, February, March, April, May, June, July, August, September, October, November, December) VALUES (:ownerID, :landID, :year, :January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December)');
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':ownerID', $ownerID);
+            $this->db->bind(':year', date("Y"));
+
+            // update each month with considering current month
+            for ($i = 1; $i <= 12; $i++){
+                if ($i == date("m")){
+                    $this->db->bind(':'.$months[$i - 1], $charge);
+                }
+                else {
+                    $this->db->bind(':'.$months[$i - 1], 0);
+                }
+            }
+
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     // Get landowner id by land id
     public function getLandownerID($landID){
         $this->db->query('SELECT uid FROM land WHERE id = :id');
@@ -211,7 +272,7 @@ class DriverModel{
 
         $result2 = $this->db->execute();
 
-        if ($result1 && $result2 && $this->updateCost($data)){
+        if ($result1 && $result2 && $this->updateCost($data, $ownerID)){
             return true;
         }
         else {
@@ -220,7 +281,7 @@ class DriverModel{
     }
 
     // Update cost
-    public function updateCost($data){
+    public function updateCost($data, $ownerID){
         // get the start time, end time and type of the vehicle
         $this->db->query('SELECT * FROM driver_land WHERE landID = :landID AND driverID = :driverID AND status = 1');
         $this->db->bind(':landID', $data['id']);
@@ -274,7 +335,7 @@ class DriverModel{
         $this->db->bind(':driverID', $_SESSION['user_id']);
         $this->db->bind(':cost', $cost);
 
-        if ($this->db->execute()){
+        if ($this->db->execute() && $this->updateIncome($data['id'], $cost, $ownerID)){
             return true;
         }
         else {

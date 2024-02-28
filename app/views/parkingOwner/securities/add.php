@@ -154,6 +154,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             if (landID && securityID) {
                 securityID.value = security.id;
                 landID.value = <?php print_r($other_data['id']) ?>;
+
             } else {
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }
