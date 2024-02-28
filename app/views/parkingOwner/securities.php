@@ -55,7 +55,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <div class="toggle">
                                                 <!-- Toggle Button -->
                                                 <label class="switchAccess" id="switch">
-                                                    <input type="checkbox" class="toggleButton" data-security-id="<?php echo $security->security_id;?>" <?php echo $security->landAccess == 1 ? 'checked' : ''; ?>>
+                                                    <input type="checkbox" hidden class="toggleButton" data-security-id="<?php echo $security->security_id;?>" <?php echo $security->landAccess == 1 ? 'checked' : ''; ?>>
                                                     <span class="slider round"></span>
                                                 </label>
                                             </div>    
@@ -80,12 +80,13 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     </section>
 </main>
 
-<script>
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        const deleteform = document.getElementById("delete-form");
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-        if (deleteform) {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteForms = document.querySelectorAll(".delete-form");
+
+        deleteForms.forEach(function (deleteform) {
             const submitButton = deleteform.querySelector("button[type='submit']");
 
             if (submitButton) {
@@ -108,13 +109,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     });
                 });
             }
-        }
+        });
     });
+</script>
 
+<script>
     document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.querySelector(".toggleButton");
+        const toggleButtons = document.querySelectorAll(".toggleButton");
 
-        if (toggleButton) {
+        toggleButtons.forEach(function (toggleButton) {
             toggleButton.addEventListener("change", function () {
                 const isChecked = this.checked;
                 const securityId = this.getAttribute("data-security-id");
@@ -148,7 +151,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     }
                 });
             });
-        }
+        });
     });
     
 </script>

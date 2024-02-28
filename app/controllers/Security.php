@@ -57,7 +57,7 @@ class Security extends Controller {
             ];
         }
         
-        $securityData = $this->securityModel->viewSecurities($land_ID);
+        $securityData = $this->securityModel->viewSecurityOfTheLand($land_ID);
 
             if (!empty($securityData)) {
                 $data['landAccess'] = $securityData[0]->landAccess;
