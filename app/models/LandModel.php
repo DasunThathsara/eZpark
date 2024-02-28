@@ -701,4 +701,16 @@ class LandModel{
 
         return $row;
     }
+
+    // Get vehicle distribution of the land
+    public function getVehicleDistribution($landID){
+        $this->db->query('SELECT * FROM vehicle_flow WHERE landID = :landID AND year = :year AND ownerID = :ownerID');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':year', date('Y'));
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
 }
