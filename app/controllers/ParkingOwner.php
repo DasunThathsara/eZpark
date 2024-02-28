@@ -107,9 +107,10 @@ class ParkingOwner extends Controller {
     }
 
     // -------------------------------------- Report ---------------------------------------
-    public function viewReport(){
+    public function viewReport($land_ID = null){
         $data = [
             'title' => 'Home page',
+            'landID' => $land_ID,
             'lands' => $this->landModel->viewLands()
         ];
 
@@ -118,22 +119,26 @@ class ParkingOwner extends Controller {
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
+            // echo "<pre>";
+            // die(print_r($data));
+            // echo "</pre>";
+
         $this->view('parkingOwner/report', $data, $other_data);
     }
 
     // -------------------------------------- generate Report ---------------------------------------
-    public function viewGenerateReport(){
-        $data = [
-            'title' => 'Home page'
-        ];
+    // public function viewGenerateReport(){
+    //     $data = [
+    //         'title' => 'Home page'
+    //     ];
 
-        $other_data['notification_count'] = 0;
+    //     $other_data['notification_count'] = 0;
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+    //     if ($other_data['notification_count'] < 10)
+    //         $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('parkingOwner/generatereport', $data, $other_data);
-    }
+    //     $this->view('parkingOwner/generatereport', $data, $other_data);
+    // }
 
     // ------------------------------------ Securities -------------------------------------
     // View assign security to parking owner
@@ -181,7 +186,7 @@ class ParkingOwner extends Controller {
             redirect('parkingOwner/securities/'.$land_ID);
         }
     }
-
+  
     public function landAccessControl($sec_id = null){
         if ($_SERVER['REQUEST_METHOD'] == 'GET'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
