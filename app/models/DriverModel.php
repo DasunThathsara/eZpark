@@ -177,6 +177,67 @@ class DriverModel{
         }
     }
 
+    // Update vehicle flow table
+    public function updateVehicleCount($landID, $ownerID){
+        // first check whether the record is already exist. If it was exist, update the record. If not, insert a new record
+        $this->db->query('SELECT * FROM vehicle_flow WHERE landID = :landID AND ownerID = :ownerID AND year = :year');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':ownerID', $ownerID);
+        $this->db->bind(':year', date("Y"));
+
+        $row = $this->db->single();
+
+        $months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+        if ($this->db->rowCount() > 0){
+            // update the record
+            $this->db->query('UPDATE vehicle_flow SET January = January + :January, February = February + :February, March = March + :March, April = April + :April, May = May + :May, June = June + :June, July = July + :July, August = August + :August, September = September + :September, October = October + :October, November = November + :November, December = December + :December WHERE landID = :landID and ownerID = :ownerID and year = :year');
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':ownerID', $ownerID);
+            $this->db->bind(':year', date("Y"));
+
+            // update each month with considering current month
+            for ($i = 1; $i <= 12; $i++){
+                if ($i == date("m")){
+                    $this->db->bind(':'.$months[$i - 1], 1);
+                }
+                else {
+                    $this->db->bind(':'.$months[$i - 1], 0);
+                }
+            }
+
+            if ($this->db->execute()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            // insert a new record
+            $this->db->query('INSERT INTO vehicle_flow (ownerID, landID, year, January, February, March, April, May, June, July, August, September, October, November, December) VALUES (:ownerID, :landID, :year, :January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December)');
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':ownerID', $ownerID);
+            $this->db->bind(':year', date("Y"));
+
+            // update each month with considering current month
+            for ($i = 1; $i <= 12; $i++){
+                if ($i == date("m")){
+                    $this->db->bind(':'.$months[$i - 1], 1);
+                }
+                else {
+                    $this->db->bind(':'.$months[$i - 1], 0);
+                }
+            }
+
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     // Get landowner id by land id
     public function getLandownerID($landID){
         $this->db->query('SELECT uid FROM land WHERE id = :id');
@@ -335,7 +396,7 @@ class DriverModel{
         $this->db->bind(':driverID', $_SESSION['user_id']);
         $this->db->bind(':cost', $cost);
 
-        if ($this->db->execute() && $this->updateIncome($data['id'], $cost, $ownerID)){
+        if ($this->db->execute() && $this->updateIncome($data['id'], $cost, $ownerID) && $this->updateVehicleCount($data['id'], $ownerID)){
             return true;
         }
         else {
