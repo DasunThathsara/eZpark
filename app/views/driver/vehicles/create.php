@@ -21,6 +21,10 @@
         <div class="form-input-title">Name:</div>
         <input type="text" name="name" id="name" required value="" />
 
+        <!-- Number -->
+        <div class="form-input-title">Vehicle Number:</div>
+        <input type="text" name="vehicle_number" id="vehicle_number" required value="" />
+
         <br><br>
         <!-- Vehicle Type -->
         <div class="form-input-title">User Type:</div>
@@ -28,7 +32,7 @@
             <ul class="user-selection-list">
                 <li data-user-type="car">Car</li>
                 <li data-user-type="bike">Bike</li>
-                <li data-user-type="3wheel">3wheel</li>
+                <li data-user-type="threeWheel">3wheel</li>
             </ul>
         </div>
 
