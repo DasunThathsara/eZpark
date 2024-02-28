@@ -359,13 +359,17 @@ class LandModel{
 
     public function viewUnVerifyLands(){
         // Prepare statement
-        $this->db->query('SELECT * FROM land  WHERE status = :status');
+        $this->db->query('SELECT l.id AS id, l.name, l.city, l.status, l.admin AS adminID, u.name AS adminName 
+                        FROM land l 
+                        LEFT JOIN user u ON l.admin = u.id
+                        WHERE l.status = :status OR (l.status = :status AND u.id IS NULL)');
 
         // Bind values
         $this->db->bind(':status', 0);
-
+        $this->db->execute();
 
         $row = $this->db->resultSet();
+        // die(print_r($row));
         return $row;
     }
 

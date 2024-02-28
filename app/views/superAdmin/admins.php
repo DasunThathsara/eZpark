@@ -1,11 +1,12 @@
-<?php require APPROOT.'/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php';?>
+
 <!--  TOP NAVIGATION  -->
-<?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
+<?php require APPROOT . '/views/inc/components/topnavbar.php';?>
 
 <!--  SIDE NAVIGATION  -->
 <?php
 $section = 'lands';
-require APPROOT.'/views/inc/components/sidenavbar.php';
+require APPROOT . '/views/inc/components/sidenavbar.php';
 ?>
 
 <main class="page-container">
@@ -19,8 +20,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
             <?php if (sizeof($data) == 0) {?>
                 <div class="emptyLand">There are no any admins</div>
-            <?php }
-            else {?>
+            <?php } else {?>
                 <!-- Titles of the table -->
                 <div class="title-options">
                     <div class="all-lands option-item option-item-active">All Admins</div>
@@ -35,7 +35,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <!-- Search bar -->
                     <input type="search" class="data-search" placeholder="Search land...">
                     <div class="filter-area">
-                        <img class="filter-btn" src="<?php echo URLROOT?>/images/filter-ico.png" alt="">
+                        <img class="filter-btn" src="<?php echo URLROOT ?>/images/filter-ico.png" alt="">
                     </div>
                 </div>
 
@@ -59,7 +59,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <p class="id-p">Admin ID: <span class="id"></span></p>
                                             </td>
                                             <td class="email" data-header></td>
-                                            <td class="status-td" data-header><span class="status">Available</span></td>
+                                            <td >
+                                                <form action="<?php echo URLROOT ?>/SuperAdmin/adminAccessControl" method="post" class="status-form" id="status-form">
+                                                    <input type="text" name="adminId" id="adminId" hidden value="" />
+                                                    <button type="submit" class="price" onclick="confirmSubmit()">
+                                                        <p id="Active-Inactive" class="Active-Inactive"></p>
+                                                    </button>
+                                                </form>
+                                            </td>
 
                                             <td class="options">
                                                 <form action="<?php echo URLROOT ?>/superAdmin/updateAdmin" method="get" class="edit-form">
@@ -90,7 +97,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         </div>
                     </template>
                 </div>
-            <?php } ?>
+            <?php }?>
         </div>
     </section>
 </main>
@@ -120,17 +127,18 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     let admins = [];
     var backendData = <?php echo json_encode($data); ?>;
+    // console.log(backendData);
 
     admins = backendData.map(admin => {
-        const card = userCardTemplate.content.cloneNode(true).children[0];
+    const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
         card.querySelector(".name").textContent = admin.name;
         card.querySelector(".id").textContent = admin.id;
         card.querySelector(".email").textContent = admin.email;
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
-
         var cardElement = card.querySelector('.identifier');
+
 
         if (admin.banCount === 0) {
             cardElement.style.border = '2px solid white';
@@ -197,7 +205,29 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             }
         }
 
+        //
+        const statusForm = card.querySelector('.status-form');
+        if (statusForm) {
+            const adminId = statusForm.querySelector('#adminId');
+
+            if (adminId) {
+                adminId.value = admin.id;
+            } else {
+                console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
+            }
+        }
+
+
+        if (admin.status == 5){
+            card.querySelector(".Active-Inactive").textContent = 'Active';
+        }
+        else{
+            card.querySelector(".Active-Inactive").textContent = 'Inactive';
+        }
+
         return { id: admin.id, name: admin.name, city: admin.email, street: admin.username, element: card };
     });
+
 </script>
-<?php require APPROOT.'/views/inc/footer.php'; ?>
+
+<?php require APPROOT . '/views/inc/footer.php';?>

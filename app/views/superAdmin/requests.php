@@ -11,122 +11,159 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Requests</h1>
+            <h1 id="requestheader">Registration Requests</h1>
 
             <br><br>
             <?php if (sizeof($data) == 0) {?>
-                <div class="emptyLand">There are no any requests</div>
+                <div class="emptyVehicle">You have no any registration requests</div>
             <?php }
             else {?>
-                <!-- Search bar -->
-                <input type="search" class="data-search" placeholder="Search.." style="top: 50px;">
+                
+                <div class="table-container" id="tcontainer">
+                    <h1 id="ttitle">Unassigned</h1>
+                    <table class="requesttable" >
+                        <tr>
+                            <th >
+                                <div class="content" id="theader">
+                                    <div class="left" style="width:31%">
+                                        Parking Name
+                                    </div>
+                                    <div class="left" style="width:20%; padding-left:5px">
+                                        City
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
 
-                <!-- Card set -->
-                <div class="user-cards" style="margin-top: 0;"></div>
-                <template class="data-user-template">
-                    <div class="card">
-                        <a href="" class="tile">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div style="display: flex; width: 50%">
-                                            <div>
-                                                <p class="name" style="width: 150px;" data-header></p>
+                        <?php for ($i = 0; $i < sizeof($data); $i++)  {
+                        if ($data[$i]->adminID == 0) { ?>
+                            <tr>
+                                <td>
+                                    <a class="tile" href="<?php echo URLROOT?>/superAdmin/viewRegistrationRequestedLand/<?php echo $data[$i]->id ?>">
+                                        <div class="content" id="content">
+                                            <div class="left" style="width:30%">
+                                                <?php echo $data[$i]->name ?>
                                             </div>
-                                            <div>
-                                                <p class="city" data-header></p>
+                                            <div class="left" style="width:20%">
+                                                <?php echo $data[$i]->city ?>
+                                            </div>
+                                            <div class="right">
+                                                <form action="<?php echo URLROOT ?>/superAdmin/verifyLand" method="post" class="update-form">
+                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                    <button type="submit" class="edit" onclick="return confirmSubmit1();">
+                                                        <img src="<?php echo URLROOT ?>/images/tick.svg" style="width: 18px" alt="">
+                                                    </button>
+                                                </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/superAdmin/unverifyLand" method="post" class="delete-form">
+                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                    <button type="submit" class="delete" onclick="return confirmSubmit2();">
+                                                        <img src="<?php echo URLROOT ?>/images/circle-xmark-regular.svg" style="width: 18px;" alt="">
+                                                    </button>
+                                                <!-- </form>
+                                                &nbsp;
+                                                <form action="<?php echo URLROOT ?>/admin/assignMySelf" method="post" class="delete-form">
+                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                    <button type="submit" class="delete" id="bttn" onclick="return confirmSubmit3();">
+                                                        Assign myself
+                                                    </button>
+                                                </form> -->
                                             </div>
                                         </div>
-                                    </td>
-                                    <td class="options">                                        &nbsp;
-                                        <form action="<?php echo URLROOT ?>/superAdmin/verifyLand" method="post" class="update-form">
-                                            <input type="text" name="id" id="id" hidden value="" />
-                                            <button type="submit" class="edit" onclick="return confirmSubmit();">
-                                                <img src="<?php echo URLROOT ?>/images/tick.svg" style="width: 18px" alt="">
-                                            </button>
-                                        </form>
-                                        &nbsp;
-                                        <form action="<?php echo URLROOT ?>/superAdmin/unverifyLand" method="post" class="delete-form">
-                                            <input type="text" name="id" id="id" hidden value="" />
-                                            <button type="submit" class="delete" onclick="return confirmSubmit();">
-                                                <img src="<?php echo URLROOT ?>/images/circle-xmark-regular.svg" style="width: 18px;" alt="">
-                                            </button>
-                                        </form>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        <?php } ?>
+                    </table>
+                
+
+                    <h1 id="ttitle">Assigned  (From Admins)</h1>
+                
+                    <table class="requesttable">
+                        <tr>
+                            <th>
+                                <div class="content" id="theader">
+                                <div class="left" style="width:31%">
+                                        Admin Name
+                                    </div>
+                                    <div class="left" style="width:31%">
+                                        Parking Name
+                                    </div>
+                                    <div class="left" style="width:20%; padding-left:5px ">
+                                        City
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <?php for ($i = 0; $i < sizeof($data); $i++) {
+                            if ($data[$i]->adminID != 0) {?>
+                                <tr>
+                                    <td>
+                                        <a class="tile" href="<?php echo URLROOT?>/superAdmin/viewRegistrationRequestedLand/<?php echo $data[$i]->id ?>">
+                                            <div class="content" id="content" >
+                                                <div class="left" style="width:30%">
+                                                    <?php echo $data[$i]->adminName ?>
+                                                    <br>
+                                                    Admin ID:
+                                                    <?php echo $data[$i]->adminID ?>
+                                                </div>
+                                                <div class="left" style="width:30%">
+                                                    <?php echo $data[$i]->name ?>
+                                                </div>
+                                                <div class="left" style="width:20%">
+                                                    <?php echo $data[$i]->city ?>
+                                                </div>
+                                                <div class="right">
+                                                    <form action="<?php echo URLROOT ?>/superAdmin/verifyLand" method="post" class="update-form">
+                                                        <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                        <button type="submit" class="edit" onclick="return confirmSubmit1();">
+                                                            <img src="<?php echo URLROOT ?>/images/tick.svg" style="width: 18px" alt="">
+                                                        </button>
+                                                    </form>
+                                                    &nbsp;
+                                                    <form action="<?php echo URLROOT ?>/superAdmin/unverifyLand" method="post" class="delete-form">
+                                                        <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                        <button type="submit" class="delete" onclick="return confirmSubmit2();">
+                                                            <img src="<?php echo URLROOT ?>/images/circle-xmark-regular.svg" style="width: 18px;" alt="">
+                                                        </button>
+                                                    </form>
+                                                    &nbsp;
+                                                    <form action="<?php echo URLROOT ?>/superAdmin/unassignedAdminFromLand" method="post" class="delete-form">
+                                                        <input type="text" name="id" id="id" hidden value="<?php echo $data[$i]->id ?>" />
+                                                        <input type="text" name="admin" id="admin" hidden value="<?php echo $data[$i]->adminID ?>" />
+                                                        <button type="submit" class="delete" id="bttn" onclick="return confirmSubmit3();" >
+                                                            Unassigned <br>
+                                                            (from <?php echo $data[$i]->adminName?>)
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </td>
                                 </tr>
-                            </table>
-                        </a>
-                    </div>
-                </template>
+                            <?php }?>
+                        <?php } ?>
+                    </table>
+                </div>
             <?php } ?>
         </div>
     </section>
 </main>
 
 <script>
-    function confirmSubmit() {
+    function confirmSubmit1() {
+        return confirm("Are you sure you want to confirm this land?");
+    }
+
+    function confirmSubmit2() {
         return confirm("Are you sure you want to delete this land?");
     }
 
-    // ------------------------------- Search Bar -------------------------------
-    const userCardTemplate = document.querySelector(".data-user-template");
-    const searchInput = document.querySelector(".data-search");
+    function confirmSubmit3() {
+        return confirm("Are you sure you want to unasigned land from this admin?");
+    }
 
-    searchInput.addEventListener("input", (data) => {
-        const value = data.target.value.toLowerCase();
-        lands.forEach(land => {
-            const isVisible = land.name.toLowerCase().includes(value) || land.city.toLowerCase().includes(value) || land.street.toLowerCase().includes(value);
-            if (land.element) {
-                land.element.classList.toggle("hide", !isVisible);
-            }
-        });
-    });
-
-    let lands = [];
-    var backendData = <?php echo json_encode($data); ?>;
-
-    lands = backendData.map(land => {
-        const card = userCardTemplate.content.cloneNode(true).children[0];
-        console.log(card);
-        card.querySelector(".name").textContent = land.name;
-        card.querySelector(".city").textContent = land.city;
-        document.querySelector(".user-cards").appendChild(card);
-        const tileLink = card.querySelector('.tile');
-
-        // Set the parking view link
-        if (tileLink) {
-            tileLink.href = `viewRegistrationRequestedLand/${land.id}`;
-        } else {
-            console.error("Anchor element with class 'tile' not found in the cloned card:", card);
-        }
-
-
-        // Set id and name to delete the land
-        const deleteForm = card.querySelector('.delete-form');
-        if (deleteForm) {
-            const idInput = deleteForm.querySelector('#id');
-
-            if (idInput) {
-                idInput.value = land.id; // Set the value dynamically
-            } else {
-                console.error("Form input with id 'name' not found in the cloned card:", card);
-            }
-        }
-
-
-        // Set values to go to the update page
-        const updateForm = card.querySelector('.update-form');
-        if (updateForm) {
-            const idInput = updateForm.querySelector('#id');
-
-            if (idInput) {
-                idInput.value = land.id;
-            } else {
-                console.error("One or more form inputs not found in the cloned card:", card);
-            }
-        }
-
-        return { id: land.id, name: land.name, city: land.city, street: land.street, element: card };
-    });
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>

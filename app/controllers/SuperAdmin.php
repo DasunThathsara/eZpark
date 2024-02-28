@@ -5,6 +5,7 @@ class SuperAdmin extends Controller {
         // Only superadmin are allowed to access superadmin pages
         $this->middleware->checkAccess(['superAdmin']);
         $this->adminModel = $this->model('AdminModel');
+        $this->superAdminModel = $this->model('SuperAdminModel');
         $this->landModel = $this->model('LandModel');
         $this->userModel = $this->model('UserModel');
     }
@@ -28,12 +29,14 @@ class SuperAdmin extends Controller {
     public function viewRegistrationRequests(){
         $data = $this->landModel->viewUnVerifyLands();
 
+        // die(print_r($data));
+
         $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('superAdmin/requests', $data, $other_data);
+        $this->view('superAdmin/requests', $data, $other_data );
     }
 
     // View specific land
@@ -70,6 +73,17 @@ class SuperAdmin extends Controller {
         }
     }
 
+    // Unassigned registration requests to admin
+    public function unassignedAdminFromLand(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->landModel->unassignedMySelf($_POST['id'], $_POST['admin']);
+
+            redirect('superAdmin/viewRegistrationRequests');
+        }
+    }
+
     // View all the admins in the system
     public function viewAdmins(){
         $data = $this->userModel->viewAdmins();
@@ -78,6 +92,8 @@ class SuperAdmin extends Controller {
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        // die(print_r($data));
 
         $this->view('superAdmin/admins', $data, $other_data);
     }
@@ -90,6 +106,8 @@ class SuperAdmin extends Controller {
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        // die(print_r($data));
 
         $this->view('superAdmin/admins/view', $data, $other_data);
     }
@@ -310,4 +328,18 @@ class SuperAdmin extends Controller {
             $this->view('superAdmin/admins/update', $data, $other_data);
         }
     }
+
+    public function adminAccessControl(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // die(print_r($land_ID));
+
+            if ($this->superAdminModel->adminAccessControl($_POST['adminId'])){
+                redirect('superAdmin/viewAdmins/');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    } 
 }

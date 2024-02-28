@@ -710,7 +710,14 @@ class Users extends Controller{
             }
             else{
                 if ($this->userModel->findUserByEmailV($data['email'], 1) or $this->userModel->findUserByUsernameV($data['username'], 1)){
-                    // User found
+                    // nothin changed
+                }
+                // Check user is ban, active or not
+                else if($this->userModel->checkStatus($data['email']) == 2){
+                    $data['err'] = 'You have no access to login';
+                }
+                else if($this->userModel->checkStatus($data['email']) == 5) {
+                    $data['err'] = 'User was inactive'; 
                 }
                 else{
                     // User not found
@@ -744,10 +751,10 @@ class Users extends Controller{
                 }
             }
             else{
-                // Load view with errors
-                $this->view('users/login', $data);
+                 $this->view('users/login', $data);
+                }
             }
-        }
+        
         else{
             // Unban users according to the time
             $this->userModel->UnbanAccordingTime();
