@@ -46,12 +46,17 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <?php if ($package->name == 'weekly'){?>
                         <div class="package-price" style="margin-top: 5px;">Valid till: <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 week'))?></div>
                     <?php }?>
-                    <form action="<?php echo URLROOT?>/driver/subscribePackage" method="post">
-                        <input type="text" name="landID" id="landID" value="<?php echo $data->id?>" hidden required>
-                        <input type="text" name="vehicleType" id="vehicleType" value="<?php echo $package->packageType?>" hidden required>
-                        <input type="text" name="packageType" id="packageType" value="<?php echo $package->name?>" hidden required>
-                        <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px;" value="Subscribe">
-                    </form>
+
+                    <?php if (empty($package->status)){?>
+                        <form action="<?php echo URLROOT?>/driver/subscribePackage" method="post">
+                            <input type="text" name="landID" id="landID" value="<?php echo $data->id?>" hidden required>
+                            <input type="text" name="vehicleType" id="vehicleType" value="<?php echo $package->packageType?>" hidden required>
+                            <input type="text" name="packageType" id="packageType" value="<?php echo $package->name?>" hidden required>
+                            <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px;" value="Subscribe">
+                        </form>
+                    <?php } else {?>
+                        <button style="color: white; background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px; outline: none; border: none">Subscribed</button>
+                    <?php }?>
                 </div>
             <?php }?>
         </div>

@@ -112,8 +112,6 @@ class Driver extends Controller {
         redirect('driver/gotoLand/'.$data['landID']);
     }
 
-
-
     // ------------------------ Direction To Parking ------------------------
     public function directionToParking(){
         $vehicles = $this->driverModel->viewVehicles();
@@ -125,14 +123,13 @@ class Driver extends Controller {
     public function gotoLand($land_ID = null){
         $data['id'] = $land_ID;
         $land = $this->landModel->viewLand($land_ID);
-        $land->packages = $this->parkingOwnerModel->viewPackages($data);
+        $land->packages = $this->driverModel->viewPackages($data);
 
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
 
         $this->view('driver/viewParking', $land, $notifications);
     }
