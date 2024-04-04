@@ -403,4 +403,26 @@ class DriverModel{
             return false;
         }
     }
+
+    // Subscribe package
+    public function subscribePackage($data){
+        // Prepare statement
+        $this->db->query('INSERT INTO driver_package (landID, driverID, vehicleType, packageType, status, subscribeDate) VALUES (:landID, :driverID, :vehicleType, :packageType, :status, :subscribeDate)');
+
+        // Bind values
+        $this->db->bind(':landID', $data['landID']);
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+        $this->db->bind(':vehicleType', $data['vehicle-type']);
+        $this->db->bind(':packageType', $data['package-type']);
+        $this->db->bind(':status', 1);
+        $this->db->bind(':subscribeDate', date("Y-m-d"));
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

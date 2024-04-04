@@ -93,6 +93,27 @@ class Driver extends Controller {
         $this->view('driver/packages', $vehicles, $other_data);
     }
 
+    public function subscribePackage(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'landID' => trim($_POST['landID']),
+                'vehicle-type' => trim($_POST['vehicleType']),
+                'package-type' => trim($_POST['packageType'])
+            ];
+        }
+
+        // Subscribe to package
+        $this->driverModel->subscribePackage($data);
+
+        redirect('driver/gotoLand/'.$data['landID']);
+    }
+
+
+
     // ------------------------ Direction To Parking ------------------------
     public function directionToParking(){
         $vehicles = $this->driverModel->viewVehicles();
