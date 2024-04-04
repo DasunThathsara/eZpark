@@ -8,6 +8,7 @@ class Driver extends Controller {
         $this->landModel = $this->model('LandModel');
         $this->vehicleLandModel = $this->model('VehicleLandModel');
         $this->userModel = $this->model('UserModel');
+        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
     public function index(){
@@ -101,12 +102,9 @@ class Driver extends Controller {
 
     // Go to specific land
     public function gotoLand($land_ID = null){
-        $data = [
-            'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
-        ];
-
+        $data['id'] = $land_ID;
         $land = $this->landModel->viewLand($land_ID);
+        $land->packages = $this->parkingOwnerModel->viewPackages($data);
 
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
