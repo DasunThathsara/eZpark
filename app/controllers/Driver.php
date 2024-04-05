@@ -8,6 +8,7 @@ class Driver extends Controller {
         $this->landModel = $this->model('LandModel');
         $this->vehicleLandModel = $this->model('VehicleLandModel');
         $this->userModel = $this->model('UserModel');
+        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
     public function index(){
@@ -92,6 +93,25 @@ class Driver extends Controller {
         $this->view('driver/packages', $vehicles, $other_data);
     }
 
+    public function subscribePackage(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'landID' => trim($_POST['landID']),
+                'vehicle-type' => trim($_POST['vehicleType']),
+                'package-type' => trim($_POST['packageType'])
+            ];
+        }
+
+        // Subscribe to package
+        $this->driverModel->subscribePackage($data);
+
+        redirect('driver/gotoLand/'.$data['landID']);
+    }
+
     // ------------------------ Direction To Parking ------------------------
     public function directionToParking(){
         $vehicles = $this->driverModel->viewVehicles();
@@ -101,19 +121,15 @@ class Driver extends Controller {
 
     // Go to specific land
     public function gotoLand($land_ID = null){
-        $data = [
-            'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
-        ];
-
+        $data['id'] = $land_ID;
         $land = $this->landModel->viewLand($land_ID);
+        $land->packages = $this->driverModel->viewPackages($data);
 
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
 
         $this->view('driver/viewParking', $land, $notifications);
     }

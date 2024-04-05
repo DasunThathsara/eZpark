@@ -27,7 +27,6 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <!--                <a href="--><?php //echo URLROOT?><!--/deeds/--><?php //echo $data->deed ?><!--" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Directions</a>-->
                 <a href="<?php echo URLROOT?>/driver/startAndStopTimer/<?php echo $data->id?>" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Enter Parking</a>
             </div>
-
         </div>
 
         <div class="" style="position: absolute; top: 52px; right: 50px; padding: 10px 20px; box-shadow: 0 0 10px 0.1px rgba(0,0,0,0.16); border-radius: 10px;" onclick="closeRightCard()">View Transaction</div>
@@ -36,57 +35,30 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <div class="close-btn" onclick="closeRightCard()">X</div>
             <h2>Packages</h2>
 
-            <p><span>&#9632;</span>Today</p>
+            <?php foreach ($data->packages as $package){?>
+                <div class="package-card" style="background-color: #ffffff; border-radius: 10px; margin: 10px; padding: 10px; box-shadow: 0 0 10px 0.1px rgba(0,0,0,0.19);">
+                    <div class="package-type" style="font-size: 15px; font-weight: 1000"><?php echo $package->packageType?> - <?php echo $package->name?></div>
+                    <div class="package-price" style="margin-top: 5px;">Price: Rs. <?php echo $package->price?></div>
 
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
+                    <?php if ($package->name == 'monthly'){?>
+                        <div class="package-price" style="margin-top: 5px;">Valid till: <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month'))?></div>
+                    <?php }?>
+                    <?php if ($package->name == 'weekly'){?>
+                        <div class="package-price" style="margin-top: 5px;">Valid till: <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 week'))?></div>
+                    <?php }?>
 
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
-
-            <p><span>&#9632;</span>Yesterday</p>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Nolimit</div>
-                <div class="transaction-type in">In</div>
-            </div>
-
-            <div class="side-card">
-                <div class="date-time">2023.11.22</div>
-                <div class="parking">Keels</div>
-                <div class="transaction-type out">Out</div>
-            </div>
+                    <?php if (empty($package->status)){?>
+                        <form action="<?php echo URLROOT?>/driver/subscribePackage" method="post">
+                            <input type="text" name="landID" id="landID" value="<?php echo $data->id?>" hidden required>
+                            <input type="text" name="vehicleType" id="vehicleType" value="<?php echo $package->packageType?>" hidden required>
+                            <input type="text" name="packageType" id="packageType" value="<?php echo $package->name?>" hidden required>
+                            <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px;" value="Subscribe">
+                        </form>
+                    <?php } else {?>
+                        <button style="color: white; background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px; outline: none; border: none">Subscribed</button>
+                    <?php }?>
+                </div>
+            <?php }?>
         </div>
     </section>
 </main>
