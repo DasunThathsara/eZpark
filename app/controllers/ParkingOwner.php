@@ -15,7 +15,9 @@ class ParkingOwner extends Controller {
 
         $data = [
             'land_count' => $this->landModel->getLandCount(),
-            'total_capacity' => $this->landModel->getTotalCapacity()
+            'total_capacity' => $this->landModel->getTotalCapacity(),
+            'today_total_transactions' => $this->landModel->getTodayTotalTransactions(),
+            'total_income' => $this->landModel->getTotalIncome()
         ];
 
         $notifications['list'] = $this->userModel->viewNotifications();
@@ -47,7 +49,7 @@ class ParkingOwner extends Controller {
     public function gotoLand($land_ID = null){
         $data = [
             'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
+            'name' => $this->landModel->getLandName($land_ID)
         ];
 
         $notifications['lands'] = $this->landModel->viewLands();
@@ -66,6 +68,10 @@ class ParkingOwner extends Controller {
             'security_count' => $this->securityModel->getSecurityCount($land_ID),
             'availability' => $this->landModel->getAvailability($land_ID),
             'capacity' => $this->landModel->getCapacity($land_ID),
+            'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
+            'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
+            'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
+            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
         ];
 
         $this->view('parkingOwner/land', $data, $notifications);
@@ -103,32 +109,38 @@ class ParkingOwner extends Controller {
     }
 
     // -------------------------------------- Report ---------------------------------------
-    public function viewReport(){
+    public function viewReport($land_ID = null){
         $data = [
-            'title' => 'Home page'
+            'title' => 'Home page',
+            'landID' => $land_ID,
+            'lands' => $this->landModel->viewLands()
         ];
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            // echo "<pre>";
+            // die(print_r($data));
+            // echo "</pre>";
 
         $this->view('parkingOwner/report', $data, $other_data);
     }
 
     // -------------------------------------- generate Report ---------------------------------------
-    public function viewGenerateReport(){
-        $data = [
-            'title' => 'Home page'
-        ];
+    // public function viewGenerateReport(){
+    //     $data = [
+    //         'title' => 'Home page'
+    //     ];
 
-        $other_data['notification_count'] = 0;
+    //     $other_data['notification_count'] = 0;
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+    //     if ($other_data['notification_count'] < 10)
+    //         $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('parkingOwner/generatereport', $data, $other_data);
-    }
+    //     $this->view('parkingOwner/generatereport', $data, $other_data);
+    // }
 
     // ------------------------------------ Securities -------------------------------------
     // View assign security to parking owner
@@ -176,7 +188,7 @@ class ParkingOwner extends Controller {
             redirect('parkingOwner/securities/'.$land_ID);
         }
     }
-
+  
     public function landAccessControl($sec_id = null){
         if ($_SERVER['REQUEST_METHOD'] == 'GET'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
