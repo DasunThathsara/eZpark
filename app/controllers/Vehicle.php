@@ -20,11 +20,12 @@ class Vehicle extends Controller
             $data = [
                 'name' => trim($_POST['name']),
                 'vehicle_type' => trim($_POST['vehicle_type']),
+                'vehicle_number' => trim($_POST['vehicle_number']),
                 'err' => ''
             ];
 
             // Validate data
-            // Validate email
+            // Validate name
             if (empty($data['name'])) {
                 $data['err'] = 'Please enter name';
             } else {
@@ -34,10 +35,20 @@ class Vehicle extends Controller
                 }
             }
 
+            // Validate vehicle number
+            if (empty($data['vehicle_number'])) {
+                $data['err'] = 'Please enter vehicle number';
+            } else {
+                // Check vehicle_number
+                if ($this->driverModel->findVehicleByNumber($data['vehicle_number'])) {
+                    $data['err'] = 'Vehicle number cannot be duplicate';
+                }
+            }
+
             // Validate user type
             if (empty($data['vehicle_type'])) {
                 $data['err'] = 'Please select vehicle type';
-            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
+            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != 'threeWheel') {
                 $data['err'] = 'Invalid vehicle type';
             }
 

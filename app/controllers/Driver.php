@@ -8,6 +8,7 @@ class Driver extends Controller {
         $this->landModel = $this->model('LandModel');
         $this->vehicleLandModel = $this->model('VehicleLandModel');
         $this->userModel = $this->model('UserModel');
+        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
     public function index(){
@@ -44,28 +45,16 @@ class Driver extends Controller {
         $this->view('driver/booking', $vehicles, $other_data);
     }
 
-    // ------------------------ Search ------------------------
-    public function search(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/search', $vehicles, $other_data);
-    }
-
     // ------------------------ History ------------------------
     public function history(){
-        $vehicles = $this->driverModel->viewVehicles();
+        $history = $this->driverModel->viewHistory();
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/history', $vehicles, $other_data);
+        $this->view('driver/history', $history, $other_data);
     }
 
     // ------------------------ Rating ------------------------
@@ -82,14 +71,33 @@ class Driver extends Controller {
 
     // ------------------------ Packages ------------------------
     public function packages(){
-        $vehicles = $this->driverModel->viewVehicles();
+        $packages = $this->driverModel->viewSubscribedPackages();
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/packages', $vehicles, $other_data);
+        $this->view('driver/packages', $packages, $other_data);
+    }
+
+    public function subscribePackage(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'landID' => trim($_POST['landID']),
+                'vehicle-type' => trim($_POST['vehicleType']),
+                'package-type' => trim($_POST['packageType'])
+            ];
+        }
+
+        // Subscribe to package
+        $this->driverModel->subscribePackage($data);
+
+        redirect('driver/gotoLand/'.$data['landID']);
     }
 
     // ------------------------ Direction To Parking ------------------------
@@ -101,19 +109,15 @@ class Driver extends Controller {
 
     // Go to specific land
     public function gotoLand($land_ID = null){
-        $data = [
-            'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
-        ];
-
+        $data['id'] = $land_ID;
         $land = $this->landModel->viewLand($land_ID);
+        $land->packages = $this->driverModel->viewPackages($data);
 
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
 
         $this->view('driver/viewParking', $land, $notifications);
     }
@@ -147,7 +151,7 @@ class Driver extends Controller {
         if($parking_status){
             // If the driver is already parked, then exit the parking
             $this->driverModel->exitParking($data);
-            redirect('driver/index/'.$land_ID);
+            redirect('driver/index');
         }
         else{
             // If the driver is not parked, then select the vehicle type
@@ -164,7 +168,7 @@ class Driver extends Controller {
             $vehicle_type = $_POST['vehicle_type'];
 
             $this->driverModel->enterParking($land_ID, $vehicle_type);
-            redirect('driver/index/'.$land_ID);
+            redirect('driver/index');
         }
     }
 

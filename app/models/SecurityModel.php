@@ -29,10 +29,10 @@ class SecurityModel{
         return $row->{'COUNT(*)'};
     }
 
-     // View securities of the land
+    // View securities of the land
     public function viewSecurities($landID){
         $this->db->query('
-            SELECT u.id AS security_id, u.name AS security_name, u.contactNo AS sec_contact
+            SELECT u.id AS security_id, u.name AS security_name, u.contactNo AS sec_contact, landAccess
             FROM user u
             JOIN security s ON u.id = s.id
             WHERE s.landID = :landID
@@ -40,7 +40,24 @@ class SecurityModel{
 
         // Bind values
         $this->db->bind(':landID', $landID);
-        // $this->db->bind(':id',$secID);
+
+        $row = $this->db->resultSet();
+        // die(print_r($row));
+        return $row;
+    }
+
+    // View security details the land
+    public function viewSecurityOfTheLand($landID){
+        $this->db->query('
+            SELECT u.id AS security_id, u.name AS security_name, u.contactNo AS sec_contact, landAccess
+            FROM user u
+            LEFT JOIN security s ON u.id = s.id
+            WHERE s.landID = :landID AND s.id = :sid
+        ');
+
+        // Bind values
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':sid', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
         // die(print_r($row));
@@ -297,43 +314,5 @@ class SecurityModel{
         $row = $this->db->single();
         return $row->landID;
     }
-
-     // Get assigned land id
-     public function securityRemove($sec_id){
-        // Prepare statement
-        $this->db->query('UPDATE security SET landID = 0 WHERE id = :sec_id');
-
-        // Bind values
-        $this->db->bind(':sec_id', $sec_id);
-
-        // die(print_r($sec_id));
-
-        // Execute
-        // Execute
-        if ($this->db->execute()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    //      // View assigned land to security
-    // public function viewAssignedLand($securityID){
-    //     $this->db->query('
-    //         SELECT l.name , l.contactNo , l.district, l.province
-    //         FROM land l 
-    //         JOIN security s ON l.id = s.landID
-    //         WHERE s.id = :security_id
-    //     ');
-
-    //     // Bind values
-    //     $this->db->bind(':security_id', $_SESSION['user_id']);
-
-    //     $row = $this->db->resultSet();
-    //     return $row;
-
-    //     // die(print_r($row));
-    // }
 
 }

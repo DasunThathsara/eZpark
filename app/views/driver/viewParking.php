@@ -11,6 +11,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
+            <h1>Dashboard</h1>
+
             <div class="cover-img">
                 <img class="cover-photo" src="<?php echo URLROOT ?>/images/parking_bg1.jpg" alt="Phone">
             </div>
@@ -22,10 +24,43 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <p>Car: <?php echo $data->car?></p>
                 <p>Bike: <?php echo $data->bike?></p>
                 <p>Three wheel: <?php echo $data->threeWheel?></p>
-<!--                <a href="--><?php //echo URLROOT?><!--/deeds/--><?php //echo $data->deed ?><!--" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Directions</a>-->
+                <!--                <a href="--><?php //echo URLROOT?><!--/deeds/--><?php //echo $data->deed ?><!--" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Directions</a>-->
                 <a href="<?php echo URLROOT?>/driver/startAndStopTimer/<?php echo $data->id?>" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">Enter Parking</a>
             </div>
         </div>
+
+        <div class="" style="position: absolute; top: 52px; right: 50px; padding: 10px 20px; box-shadow: 0 0 10px 0.1px rgba(0,0,0,0.16); border-radius: 10px;" onclick="closeRightCard()">View Transaction</div>
+
+        <div class="side-cards">
+            <div class="close-btn" onclick="closeRightCard()">X</div>
+            <h2>Packages</h2>
+
+            <?php foreach ($data->packages as $package){?>
+                <div class="package-card" style="background-color: #ffffff; border-radius: 10px; margin: 10px; padding: 10px; box-shadow: 0 0 10px 0.1px rgba(0,0,0,0.19);">
+                    <div class="package-type" style="font-size: 15px; font-weight: 1000"><?php echo $package->packageType?> - <?php echo $package->name?></div>
+                    <div class="package-price" style="margin-top: 5px;">Price: Rs. <?php echo $package->price?></div>
+
+                    <?php if ($package->name == 'monthly'){?>
+                        <div class="package-price" style="margin-top: 5px;">Valid till: <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month'))?></div>
+                    <?php }?>
+                    <?php if ($package->name == 'weekly'){?>
+                        <div class="package-price" style="margin-top: 5px;">Valid till: <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 week'))?></div>
+                    <?php }?>
+
+                    <?php if (empty($package->status)){?>
+                        <form action="<?php echo URLROOT?>/driver/subscribePackage" method="post">
+                            <input type="text" name="landID" id="landID" value="<?php echo $data->id?>" hidden required>
+                            <input type="text" name="vehicleType" id="vehicleType" value="<?php echo $package->packageType?>" hidden required>
+                            <input type="text" name="packageType" id="packageType" value="<?php echo $package->name?>" hidden required>
+                            <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px;" value="Subscribe">
+                        </form>
+                    <?php } else {?>
+                        <button style="color: black; background-color: white; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px; outline: none; border: 1px solid #fccc04">Subscribed</button>
+                    <?php }?>
+                </div>
+            <?php }?>
+        </div>
     </section>
 </main>
+
 <?php require APPROOT.'/views/inc/footer.php'; ?>

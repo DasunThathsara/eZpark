@@ -359,13 +359,17 @@ class LandModel{
 
     public function viewUnVerifyLands(){
         // Prepare statement
-        $this->db->query('SELECT * FROM land  WHERE status = :status');
+        $this->db->query('SELECT l.id AS id, l.name, l.city, l.status, l.admin AS adminID, u.name AS adminName 
+                        FROM land l 
+                        LEFT JOIN user u ON l.admin = u.id
+                        WHERE l.status = :status OR (l.status = :status AND u.id IS NULL)');
 
         // Bind values
         $this->db->bind(':status', 0);
-
+        $this->db->execute();
 
         $row = $this->db->resultSet();
+        // die(print_r($row));
         return $row;
     }
 
@@ -644,5 +648,73 @@ class LandModel{
         else {
             return false;
         }
+    }
+
+    // Get today transactions
+    public function getTodayTransactions($landID){
+        $this->db->query('SELECT lt.*, v.vehicleNumber FROM land_transaction lt JOIN vehicle v ON lt.driverID = v.id AND lt.vehicleType = v.vehicleType WHERE lt.landID = :landID AND lt.transactionTime >= :transactionTime ORDER BY lt.transactionTime DESC LIMIT 8');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':transactionTime', date('Y-m-d'));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Get total income of the parking for current month
+    public function getTotalParkingIncome($landID){
+        $this->db->query('SELECT SUM(cost) AS totalIncome FROM driver_land WHERE landID = :landID AND endTime >= :endTime');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':endTime', date('Y-m-01'));
+
+        $row = $this->db->single();
+
+        return $row->totalIncome;
+    }
+
+    // Get total today transactions
+    public function getTodayTotalTransactions(){
+        $this->db->query('SELECT lt.*, l.name FROM land_transaction lt JOIN land l ON lt.ownerID = l.uid AND lt.landID = l.id WHERE lt.ownerID = :ownerID AND lt.transactionTime >= :transactionTime ORDER BY lt.transactionTime DESC LIMIT 8');
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+        $this->db->bind(':transactionTime', date('Y-m-d'));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Get total income of owner's all parking
+    public function getTotalIncome(){
+        $this->db->query('SELECT SUM(dl.cost) AS totalIncome FROM driver_land dl JOIN land l ON dl.landID = l.id WHERE l.uid = :uid AND dl.endTime >= :endTime');
+        $this->db->bind(':uid', $_SESSION['user_id']);
+        $this->db->bind(':endTime', date('Y-m-01'));
+
+        $row = $this->db->single();
+
+        return $row->totalIncome;
+    }
+
+    // Get income distribution of the land
+    public function getIncomeDistribution($landID){
+        $this->db->query('SELECT * FROM income WHERE landID = :landID AND year = :year AND ownerID = :ownerID');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':year', date('Y'));
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    // Get vehicle distribution of the land
+    public function getVehicleDistribution($landID){
+        $this->db->query('SELECT * FROM vehicle_flow WHERE landID = :landID AND year = :year AND ownerID = :ownerID');
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':year', date('Y'));
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row;
     }
 }

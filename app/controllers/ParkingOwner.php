@@ -15,7 +15,9 @@ class ParkingOwner extends Controller {
 
         $data = [
             'land_count' => $this->landModel->getLandCount(),
-            'total_capacity' => $this->landModel->getTotalCapacity()
+            'total_capacity' => $this->landModel->getTotalCapacity(),
+            'today_total_transactions' => $this->landModel->getTodayTotalTransactions(),
+            'total_income' => $this->landModel->getTotalIncome()
         ];
 
         $notifications['list'] = $this->userModel->viewNotifications();
@@ -47,7 +49,7 @@ class ParkingOwner extends Controller {
     public function gotoLand($land_ID = null){
         $data = [
             'id' => $land_ID,
-            'name' => $this->landModel->getLandName($land_ID),
+            'name' => $this->landModel->getLandName($land_ID)
         ];
 
         $notifications['lands'] = $this->landModel->viewLands();
@@ -66,6 +68,10 @@ class ParkingOwner extends Controller {
             'security_count' => $this->securityModel->getSecurityCount($land_ID),
             'availability' => $this->landModel->getAvailability($land_ID),
             'capacity' => $this->landModel->getCapacity($land_ID),
+            'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
+            'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
+            'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
+            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
         ];
 
         $this->view('parkingOwner/land', $data, $notifications);
@@ -159,7 +165,7 @@ class ParkingOwner extends Controller {
             $land_ID = $_POST['land_id'];
             $sec_id = $_POST['sec_id'];
 
-            $this->securityModel->securityRemove($sec_id);
+            $this->parkingOwnerModel->securityRemove($sec_id , $land_ID);
 
             // Send notification to the landowner
             // $this->userModel->addNotification('You unassigned from the land was declined by '.$_SESSION['user_name'], 'parkingownerUnassignFromLand', $this->landModel->getLandOwnerID($_POST['id']), $this->landModel->getLandOwnerID($_POST['id']));
@@ -167,7 +173,19 @@ class ParkingOwner extends Controller {
             redirect('parkingOwner/securities/'.$land_ID);
         }
     }
+  
+    public function landAccessControl($sec_id = null){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+            // die(print_r($land_ID));
 
-    
+            if ($this->parkingOwnerModel->landAccessControl($sec_id)){
+                $land_ID = $_GET['land_id'];
+                redirect($_SESSION['userType'].'/securities/'.$land_ID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    } 
 }

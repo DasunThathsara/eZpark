@@ -38,7 +38,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         </tr>
 
                         <?php for ($i = 0; $i < sizeof($data); $i++)  {
-                        if ($data[$i]->admin != 0) {
+                        if ($data[$i]->adminID != 0) {
                             continue;
                         }?>
                             <tr>
@@ -98,7 +98,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         </tr>
 
                         <?php for ($i = 0; $i < sizeof($data); $i++) {
-                            if ($data[$i]->admin == $_SESSION['user_id']) {?>
+                            if ($data[$i]->adminID == $_SESSION['user_id']) {?>
                                 <tr>
                                     <td>
                                         <a class="tile">

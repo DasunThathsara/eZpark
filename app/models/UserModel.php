@@ -316,11 +316,10 @@ class UserModel{
     // Unban according to the time
     public function UnbanAccordingTime(){
         $this->db->query('UPDATE user
-SET status = :status
-WHERE (banCount = 1 OR banCount = 2) 
-    AND (banCount = 1 AND DATE_ADD(banTime, INTERVAL 1 DAY) <= NOW()
-         OR banCount = 2 AND DATE_ADD(banTime, INTERVAL 7 DAY) <= NOW());');
-
+                        SET status = :status
+                        WHERE (banCount = 1 OR banCount = 2) 
+                        AND (banCount = 1 AND DATE_ADD(banTime, INTERVAL 1 DAY) <= NOW()
+                         OR banCount = 2 AND DATE_ADD(banTime, INTERVAL 3 DAY) <= NOW())');
         $this->db->bind(':status', 1);
 
         // Execute
@@ -401,9 +400,11 @@ WHERE (banCount = 1 OR banCount = 2)
 
     // View all admins
     public function viewAdmins(){
-        $this->db->query('SELECT * FROM user WHERE userType = "admin" AND status != 10');
+        $this->db->query('SELECT * FROM user WHERE userType = "admin" AND status != 10 AND status != 0');
 
         $results = $this->db->resultSet();
+
+        // die(print_r($results));
 
         return $results;
     }
@@ -602,5 +603,16 @@ WHERE (banCount = 1 OR banCount = 2)
         else {
             return false;
         }
+    }
+
+    public function checkStatus($username) {
+        $this->db->query('SELECT status FROM user WHERE username = :username OR  email = :email;');
+        $this->db->bind(':username', $username);
+        $this->db->bind(':email', $username);
+
+        $result = $this->db->single();
+
+        return $result->status;
+
     }
 }
