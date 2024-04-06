@@ -162,6 +162,7 @@ class ParkingOwnerModel{
         $this->db->bind(':landid', $data['landid']);
         
         $row = $this->db->resultSet();
+        
 
         return $row;
     }
