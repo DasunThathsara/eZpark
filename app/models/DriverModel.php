@@ -445,4 +445,14 @@ class DriverModel{
 
         return $row;
     }
+
+    // View parking history
+    public function viewHistory(){
+        $this->db->query('SELECT dl.*, l.name, l.city FROM driver_land dl JOIN land l ON l.id = dl.landID WHERE driverID = :driverID');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
 }
