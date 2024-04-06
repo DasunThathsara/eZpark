@@ -12,11 +12,9 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
             <h1>Packages</h1>
-
-            <br><br>
-            <a href="#" style="font-weight: 1000; font-size: 20px">+</a>
-
-            <div class="emptyVehicle">You have no any package</div>
+            <?php if (sizeof($data) == 0){?>
+                <div class="emptyVehicle">You have no any package</div>
+            <?php } ?>
         </div>
     </section>
 </main>

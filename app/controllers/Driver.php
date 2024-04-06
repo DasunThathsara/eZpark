@@ -83,14 +83,14 @@ class Driver extends Controller {
 
     // ------------------------ Packages ------------------------
     public function packages(){
-        $vehicles = $this->driverModel->viewVehicles();
+        $packages = $this->driverModel->viewSubscribedPackages();
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/packages', $vehicles, $other_data);
+        $this->view('driver/packages', $packages, $other_data);
     }
 
     public function subscribePackage(){
