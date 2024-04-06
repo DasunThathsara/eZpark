@@ -438,7 +438,7 @@ class DriverModel{
 
     // View subscribed packages
     public function viewSubscribedPackages(){
-        $this->db->query('SELECT * FROM driver_package WHERE driverID = :driverID');
+        $this->db->query('SELECT dp.*, l.name, l.city FROM driver_package dp JOIN land l ON l.id = dp.landID WHERE driverID = :driverID');
         $this->db->bind(':driverID', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
@@ -448,7 +448,7 @@ class DriverModel{
 
     // View parking history
     public function viewHistory(){
-        $this->db->query('SELECT dl.*, l.name, l.city FROM driver_land dl JOIN land l ON l.id = dl.landID WHERE driverID = :driverID');
+        $this->db->query('SELECT dl.*, l.name, l.city FROM driver_land dl JOIN land l ON l.id = dl.landID WHERE driverID = :driverID ORDER BY startTime DESC');
         $this->db->bind(':driverID', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
