@@ -45,28 +45,16 @@ class Driver extends Controller {
         $this->view('driver/booking', $vehicles, $other_data);
     }
 
-    // ------------------------ Search ------------------------
-    public function search(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/search', $vehicles, $other_data);
-    }
-
     // ------------------------ History ------------------------
     public function history(){
-        $vehicles = $this->driverModel->viewVehicles();
+        $history = $this->driverModel->viewHistory();
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/history', $vehicles, $other_data);
+        $this->view('driver/history', $history, $other_data);
     }
 
     // ------------------------ Rating ------------------------
