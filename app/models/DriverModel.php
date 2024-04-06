@@ -435,4 +435,14 @@ class DriverModel{
 
         return $row;
     }
+
+    // View subscribed packages
+    public function viewSubscribedPackages(){
+        $this->db->query('SELECT * FROM driver_package WHERE driverID = :driverID');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
 }

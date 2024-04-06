@@ -316,18 +316,10 @@ class UserModel{
     // Unban according to the time
     public function UnbanAccordingTime(){
         $this->db->query('UPDATE user
-<<<<<<< HEAD
-        SET status = :status
-        WHERE (banCount = 1 OR banCount = 2) 
-            AND (banCount = 1 AND DATE_ADD(banTime, INTERVAL 1 DAY) <= NOW()
-                 OR banCount = 2 AND DATE_ADD(banTime, INTERVAL 7 DAY) <= NOW());');
-=======
                         SET status = :status
                         WHERE (banCount = 1 OR banCount = 2) 
                         AND (banCount = 1 AND DATE_ADD(banTime, INTERVAL 1 DAY) <= NOW()
-                         OR banCount = 2 AND DATE_ADD(banTime, INTERVAL 7 DAY) <= NOW());');
->>>>>>> c7de1b9fbca367486c1e2404da51b40518c0fd7b
-
+                         OR banCount = 2 AND DATE_ADD(banTime, INTERVAL 3 DAY) <= NOW())');
         $this->db->bind(':status', 1);
 
         // Execute

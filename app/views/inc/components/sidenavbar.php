@@ -23,15 +23,6 @@
                     <?php } ?>
                 </a>
 
-                <a href="<?php echo URLROOT ?>/driver/search">
-                    <?php if ($section == 'search'){?>
-                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/search.svg" alt="">Search Parking</div>
-                    <?php }
-                    else{ ?>
-                        <div class="item"><img src="<?php echo URLROOT ?>/images/search.svg" alt="">Search Parking</div>
-                    <?php } ?>
-                </a>
-
                 <a href="<?php echo URLROOT ?>/driver/history">
                     <?php if ($section == 'history'){?>
                         <div class="item selected"><img src="<?php echo URLROOT ?>/images/history.svg" alt="">Parking History</div>

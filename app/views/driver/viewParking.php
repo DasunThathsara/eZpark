@@ -55,7 +55,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px;" value="Subscribe">
                         </form>
                     <?php } else {?>
-                        <button style="color: white; background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px; outline: none; border: none">Subscribed</button>
+                        <button style="color: black; background-color: white; border-radius: 10px; padding: 10px; width: 100px; position: absolute; margin-top: -60px; margin-left: 160px; outline: none; border: 1px solid #fccc04">Subscribed</button>
                     <?php }?>
                 </div>
             <?php }?>
