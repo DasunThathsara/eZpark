@@ -11,7 +11,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>History</h1>
+            <h1>Parking History</h1>
 
             <?php if(empty($data)){?>
                 <div class="emptyVehicle">Empty</div>
@@ -35,7 +35,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <div class="content" style="padding-bottom: 30px;">
                                         <div class="left" style="width:30%;">
                                             <div class="parking-name">
-                                                <?php echo $data[$i]->name ?>
+                                                <a href="<?php echo URLROOT?>/driver/gotoland/<?php echo $data[$i]->landID?>"><?php echo $data[$i]->name ?></a>
                                             </div>
                                             <div class="parking-location" style="color: #6b6b6b; font-size: 15px; transform: translateY(10px);">
                                                 <?php echo $data[$i]->city ?>
