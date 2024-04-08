@@ -129,15 +129,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <div class="slots-container">
                         <div class="slots">
                             <div class="slots-title">Car</div>
-                            <input type="number" name="car" id="car" required value="<?php echo $data['car'] ?>" />
+                            <input class="slot-value-field" type="number" name="car" id="car" required value="<?php echo $data['car'] ?>" />
                         </div>
                         <div class="slots">
                             <div class="slots-title">Bike</div>
-                            <input type="number" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
+                            <input class="slot-value-field" type="number" name="bike" id="bike" required value="<?php echo $data['bike'] ?>" />
                         </div>
                         <div class="slots">
                             <div class="slots-title">Three Wheel</div>
-                            <input type="number" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
+                            <input class="slot-value-field" type="number" name="threeWheel" id="threeWheel" required value="<?php echo $data['threeWheel'] ?>" />
                         </div>
                     </div>
 
