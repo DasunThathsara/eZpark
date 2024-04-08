@@ -372,10 +372,6 @@ input[placeholder]{
     margin-right: 10px;
 }
 
-.form-container .contact-no{
-    width: 50%;
-}
-
 .form-container .file-upload-container{
     display: flex;
     padding-top: 10px;
@@ -510,6 +506,51 @@ input[type=submit]:hover {
     width: 80vw;
     max-width: calc(80vw - 450px);
     margin-top: 50px;
+}
+
+#map {
+    height: 225px;
+    width: 100%;
+}
+
+.land-register-form .map{
+    display: none;
+    border-radius: 5px;
+}
+
+.land-register-form .map-active{
+    display: block;
+}
+
+.land-register-form .map-btn{
+    background-color: #e09b01;
+    color: white;
+    display: none;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.land-register-form .map-btn-active{
+    display: block;
+}
+
+.land-register-form .map-details{
+    display: block;
+}
+
+.land-register-form .map-details-hide{
+    display: none;
+}
+
+.land-register-form .map-trigger-btn{
+    cursor: pointer;
+    background-color: #e29c00;
+    padding: 12px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
 }
 
 .land-register-form-expand {

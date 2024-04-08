@@ -419,6 +419,8 @@ class Land extends Controller {
                 'image1' => '',
                 'image2' => '',
                 'image3' => '',
+                'longitude' => '',
+                'latitude' => '',
                 'err' => ''
             ];
 
