@@ -11,6 +11,9 @@
     // WEBSITE NAME
     define('SITENAME', 'eZpark');
 
+    // MAP API KEY
+    define('GMAP', 'AIzaSyArpgjSzY9vOf8b_s-yMmwUxPo0gBzkfx8');
+
     // Database Configuration
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
