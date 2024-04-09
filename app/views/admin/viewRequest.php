@@ -40,7 +40,36 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     </form>
                 </div>
             </div>
+            <div class="map-area" style="width: 50vw; position: absolute; right: 40px; bottom: 40px;">
+                <div id="map"></div>
+            </div>
         </div>
     </section>
 </main>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GMAP;?>"></script>
+<script>
+    function initMap() {
+        // Specify the latitude and longitude coordinates of the location
+        var latitude = <?php echo $data->latitude?>;
+        var longitude = <?php echo $data->longitude?>;
+
+        // Create a new map centered on the location
+        var location = { lat: latitude, lng: longitude };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: location,
+            zoom: 15
+        });
+
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: '<?php echo $data->name?>'
+        });
+    }
+
+    // Initialize the map when the page loads
+    initMap();
+</script>
+
 <?php require APPROOT.'/views/inc/footer.php'; ?>

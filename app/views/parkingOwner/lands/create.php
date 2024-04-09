@@ -89,17 +89,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                         <br>
                         <!-- latitude -->
-                        <div class="form-input-title">Latitude:</div>
-                        <input class="latitude" type="text" name="latitude" id="latitude" required value="<?php echo $data['latitude'] ?>" />
-
-                        <br><br>
+                        <input class="latitude" type="text" name="latitude" id="latitude" hidden value="<?php echo $data['latitude'] ?>" />
 
                         <!-- longitude -->
-                        <div class="form-input-title">Latitude:</div>
-                        <input class="longitude" type="text" name="longitude" id="longitude" required value="<?php echo $data['longitude'] ?>" />
+                        <input class="longitude" type="text" name="longitude" id="longitude" hidden value="<?php echo $data['longitude'] ?>" />
                     </div>
-
-                    <br><br>
 
                     <!-- contactNo -->
                     <div class="form-input-title">Contact Number:</div>
@@ -137,23 +131,23 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <br><br>
 
                     <!-- Upload 3 images about parking -->
-                    <div class="form-input-title">Upload 3 images about parking:</div>
-                    <div class="file-upload-container">
-                        <label class="file-upload" for="cover">Cover Photo</label>
-                        <input type="file" name="cover" id="cover" hidden required />
-                    </div>
-                    <div class="file-upload-container">
-                        <label class="file-upload" for="image1">Upload Image 1</label>
-                        <input type="file" name="image1" id="image1" hidden />
-                    </div>
-                    <div class="file-upload-container">
-                        <label class="file-upload" for="image2">Upload Image 2</label>
-                        <input type="file" name="image2" id="image2" hidden />
-                    </div>
-                    <div class="file-upload-container">
-                        <label class="file-upload" for="image3">Upload Image 3</label>
-                        <input type="file" name="image3" id="image3" hidden />
-                    </div>
+<!--                    <div class="form-input-title">Upload 3 images about parking:</div>-->
+<!--                    <div class="file-upload-container">-->
+<!--                        <label class="file-upload" for="cover">Cover Photo</label>-->
+<!--                        <input type="file" name="cover" id="cover" hidden required />-->
+<!--                    </div>-->
+<!--                    <div class="file-upload-container">-->
+<!--                        <label class="file-upload" for="image1">Upload Image 1</label>-->
+<!--                        <input type="file" name="image1" id="image1" hidden />-->
+<!--                    </div>-->
+<!--                    <div class="file-upload-container">-->
+<!--                        <label class="file-upload" for="image2">Upload Image 2</label>-->
+<!--                        <input type="file" name="image2" id="image2" hidden />-->
+<!--                    </div>-->
+<!--                    <div class="file-upload-container">-->
+<!--                        <label class="file-upload" for="image3">Upload Image 3</label>-->
+<!--                        <input type="file" name="image3" id="image3" hidden />-->
+<!--                    </div>-->
 
                     <br><br>
 

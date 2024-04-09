@@ -43,7 +43,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         }?>
                             <tr>
                                 <td>
-                                    <a class="tile">
+                                    <a class="tile" href="<?php echo URLROOT?>/admin/viewRegistrationRequestedLand/<?php echo $data[$i]->id?>">
                                         <div class="content" id="content">
                                             <div class="left" style="width:30%">
                                                 <?php echo $data[$i]->name ?>
@@ -101,7 +101,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             if ($data[$i]->adminID == $_SESSION['user_id']) {?>
                                 <tr>
                                     <td>
-                                        <a class="tile">
+                                        <a class="tile" href="<?php echo URLROOT?>/admin/viewRegistrationRequestedLand/<?php echo $data[$i]->id?>">
                                             <div class="content" id="content" >
                                                 <div class="left" style="width:30%">
                                                     <?php echo $data[$i]->name ?>
