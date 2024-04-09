@@ -144,8 +144,8 @@
             // Define multiple locations to be displayed on the map
             var locations = [
                 <?php foreach ($data as $land){
-                    echo "{ lat: $land->latitude, lng: $land->longitude, name: '$land->name', type: '$land->availability', url: 'gotoLand/$land->id' },\n";
-                }?>
+                echo "{ lat: $land->latitude, lng: $land->longitude, name: '$land->name', type: '$land->availability', car: '$land->car', bike: '$land->bike', threeWheel: '$land->threeWheel', url: 'gotoLand/$land->id' },\n";
+            }?>
             ];
 
             // Add markers for each location
@@ -159,7 +159,7 @@
                     markerIcon = '<?php echo URLROOT ?>/public/images/pin-y.png';
                 }
 
-                // Set parking marker size
+                // Create a marker for each location
                 var marker = new google.maps.Marker({
                     position: location,
                     map: map,
@@ -168,6 +168,21 @@
                         url: markerIcon,
                         scaledSize: iconSize
                     }
+                });
+
+                // Create an InfoWindow for each marker
+                var infoWindow = new google.maps.InfoWindow({
+                    content: '<div><b><center>' + location.name + '</center></b><br>Available slots<br>&#8226; Car: ' + location.car + '<br>&#8226; Bike: ' + location.bike + '<br>&#8226; Three Wheel: ' + location.threeWheel + '</div>'
+                });
+
+                // Show InfoWindow when marker is hovered over
+                marker.addListener('mouseover', function() {
+                    infoWindow.open(map, marker);
+                });
+
+                // Close InfoWindow when mouse leaves marker
+                marker.addListener('mouseout', function() {
+                    infoWindow.close();
                 });
 
                 // Set URL to the marker
