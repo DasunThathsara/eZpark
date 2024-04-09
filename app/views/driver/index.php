@@ -125,7 +125,7 @@
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: userLocation,
-                zoom: 14 // Adjust the zoom level as needed
+                zoom: 14
             });
 
             var iconSize = new google.maps.Size(40, 40);
@@ -144,9 +144,8 @@
             // Define multiple locations to be displayed on the map
             var locations = [
                 <?php foreach ($data as $land){
-                echo "{ lat: $land->latitude, lng: $land->longitude, name: '$land->name', type: '$land->availability' },\n";
-            }?>
-                // Add more locations as needed
+                    echo "{ lat: $land->latitude, lng: $land->longitude, name: '$land->name', type: '$land->availability', url: 'gotoLand/$land->id' },\n";
+                }?>
             ];
 
             // Add markers for each location
@@ -160,6 +159,7 @@
                     markerIcon = '<?php echo URLROOT ?>/public/images/pin-y.png';
                 }
 
+                // Set parking marker size
                 var marker = new google.maps.Marker({
                     position: location,
                     map: map,
@@ -170,10 +170,10 @@
                     }
                 });
 
-                // Add click event listener to the marker
+                // Set URL to the marker
                 marker.addListener('click', function() {
-                    // Navigate to another page
-                    window.location.href = '<?php echo URLROOT?>/driver/gotoLand/';
+                    var markerUrl = location.url;
+                    window.location.href = markerUrl;
                 });
             });
         });
