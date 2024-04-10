@@ -456,4 +456,14 @@ class DriverModel{
 
         return $row;
     }
+
+    // Get land coordinates
+    public function getCoordinates($landID){
+        $this->db->query('SELECT id, latitude, longitude, name, car, bike, threeWheel, availability FROM land WHERE id = :id');
+        $this->db->bind(':id', $landID);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
 }
