@@ -282,6 +282,8 @@ class Land extends Controller {
                 'image1' => '',
                 'image2' => '',
                 'image3' => '',
+                'longitude' => trim($_POST['longitude']),
+                'latitude' => trim($_POST['latitude']),
                 'err' => ''
             ];
 
@@ -289,7 +291,8 @@ class Land extends Controller {
             // Validate email
             if (empty($data['name'])){
                 $data['err'] = 'Please enter name';
-            } else {
+            }
+            else {
                 // Check name
                 if ($this->landModel->findLandByName($data['name'])){
                     $data['err'] = 'Name cannot be duplicate';
@@ -302,6 +305,10 @@ class Land extends Controller {
 
             if (empty($data['street'])){
                 $data['err'] = 'Please enter street';
+            }
+
+            if (empty($data['longitude']) OR empty($data['latitude'])){
+                $data['err'] = 'Pleas select your location';
             }
 
             if (!preg_match('/^(0|\d+)$/', $data['car'])){
@@ -346,9 +353,9 @@ class Land extends Controller {
                     $data['err'] = $cover['err'];
             }
 
-            if (empty($data['cover']) and empty($data['err'])){
-                $data['err'] = 'Please upload cover photo';
-            }
+//            if (empty($data['cover']) and empty($data['err'])){
+//                $data['err'] = 'Please upload cover photo';
+//            }
 
             $other_data['notification_count'] = 0;
 
@@ -419,6 +426,8 @@ class Land extends Controller {
                 'image1' => '',
                 'image2' => '',
                 'image3' => '',
+                'longitude' => '',
+                'latitude' => '',
                 'err' => ''
             ];
 

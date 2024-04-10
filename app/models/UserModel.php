@@ -193,6 +193,7 @@ class UserModel{
 
             $result = $this->db->execute();
         }
+
         else if ($data['user_type'] == 'security'){
             $this->db->query('INSERT INTO security (id, NIC, experience, address, preferredDistrictToWork) VALUES (:id, :NIC, :experience, :address, :preferredDistrictToWork)');
             $this->db->bind(':id', $id);
@@ -200,6 +201,13 @@ class UserModel{
             $this->db->bind(':experience', $data['experience']);
             $this->db->bind(':address', $data['address']);
             $this->db->bind(':preferredDistrictToWork', $data['city']);
+
+            $result = $this->db->execute();
+        }
+
+        else if ($data['user_type'] == 'driver'){
+            $this->db->query('INSERT INTO driver (id) VALUES (:id)');
+            $this->db->bind(':id', $id);
 
             $result = $this->db->execute();
         }

@@ -1,16 +1,5 @@
 /* ----------------- Driver Dashboard Styles ---------------- */
-.page-container .section .container .map{
-    margin-right: 20px;
-    margin-top: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.10);
-    height: 70vh;
-}
 
-.page-container .section .container .map:hover{
-    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.2);
-    transition: 0.5s;
-}
 
 .page-container .section .container .search{
     margin-right: 20px;
@@ -36,30 +25,10 @@
     scale: 1.03;
 }
 
-.page-container .section .container .map iframe{
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-}
-
-.page-container .section .container .map img{
-    width: 40px;
-    top: 348px;
-    left: 361px;
-    position: absolute;
-}
-
 @media screen and (max-width: 720px){
     .page-container .section .container{
         margin-left: 20px;
         transition: left 0.5s ease-in;
-    }
-
-    .page-container .section .container .map img{
-        width: 40px;
-        top: 348px;
-        left: 20px;
-        position: absolute;
     }
 }
 
