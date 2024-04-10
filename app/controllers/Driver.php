@@ -101,10 +101,27 @@ class Driver extends Controller {
     }
 
     // ------------------------ Direction To Parking ------------------------
-    public function directionToParking(){
-        $vehicles = $this->driverModel->viewVehicles();
+    public function directionToParking($landID = null){
+        // If the land ID is not found
+        if ($landID == null){
+            redirect('driver/directionToParking=error');
+        }
 
-        $this->view('driver/directionToParking', $vehicles);
+        $coordinates = $this->driverModel->getCoordinates($landID);
+
+        // If the coordinates are not found
+        if ($coordinates == null){
+            redirect('driver/directionToParking=error');
+        }
+
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+
+        $this->view('driver/directionToParking', $coordinates, $notifications);
     }
 
     // Go to specific land
@@ -174,67 +191,15 @@ class Driver extends Controller {
 
 
     // ------------------------ Scan QR Code ------------------------
-    public function scanQRCode(){
-        $vehicles = $this->driverModel->viewVehicles();
 
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/scanQRCode', $vehicles, $other_data);
-    }
-    
     // ------------------------ Start Time ------------------------
-    public function startTime(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/startTime', $vehicles, $other_data);
-    }
 
     // ------------------------ Scan QR Code To Exit ------------------------
-    public function scanQRCodeToExit(){
-        $vehicles = $this->driverModel->viewVehicles();
 
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/scanQRCodeToExit', $vehicles, $other_data);
-    }
-    
     // ------------------------ Parking Fee ------------------------
-    public function parkingFee(){
-        $vehicles = $this->driverModel->viewVehicles();
 
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/parkingFee', $vehicles, $other_data);
-    }
-
-    
     // ------------------------ Online Payment ------------------------
-    public function onlinePayment(){
-        $vehicles = $this->driverModel->viewVehicles();
 
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/onlinePayment', $vehicles, $other_data);
-    } 
-
-    
     // ------------------------ Payment Successful ------------------------
     public function paymentSuccessful(){
         $vehicles = $this->driverModel->viewVehicles();
