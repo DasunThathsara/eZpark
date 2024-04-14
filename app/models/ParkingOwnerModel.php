@@ -166,8 +166,10 @@ class ParkingOwnerModel{
     // ------------------------- Report Functionalities -------------------------
     // View report
     public function viewReport($data){
-        $this->db->query('SELECT * FROM driver_land WHERE landID = :landid');
+        $this->db->query('SELECT * FROM driver_land WHERE landID = :landid AND startTime >= :sdate AND endTime <= :edate' );
         $this->db->bind(':landid', $data['landid']);
+        $this->db->bind(':sdate', $data['sdate']);
+        $this->db->bind(':edate', $data['edate']);
         
         $row = $this->db->resultSet();
         
