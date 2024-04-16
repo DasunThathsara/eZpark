@@ -14,7 +14,8 @@ class Merchandiser extends Controller {
 
         $data = [
             'land_count' => $this->landModel->getLandCount(),
-            'total_capacity' => $this->landModel->getTotalCapacity()
+            'total_capacity' => $this->landModel->getTotalCapacity(),
+            'today_total_transactions' => $this->landModel->getTodayTotalTransactions()
         ];
 
         $lands['notification_count'] = 0;
@@ -60,6 +61,7 @@ class Merchandiser extends Controller {
             'security_count' => $this->securityModel->getSecurityCount($land_ID),
             'availability' => $this->landModel->getAvailability($land_ID),
             'capacity' => $this->landModel->getCapacity($land_ID),
+            'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
         ];
 
         $this->view('merchandiser/land', $data, $lands);
