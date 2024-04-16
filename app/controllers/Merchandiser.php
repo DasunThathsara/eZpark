@@ -7,6 +7,8 @@ class Merchandiser extends Controller {
         $this->merchandiserModel = $this->model('MerchandiserModel');
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
+        $this->userModel = $this->model('UserModel');
+
     }
 
     public function index(){
@@ -15,6 +17,8 @@ class Merchandiser extends Controller {
         $data = [
             'land_count' => $this->landModel->getLandCount(),
             'total_capacity' => $this->landModel->getTotalCapacity()
+            'today_total_transactions' => $this->landModel->getTodayTotalTransactions(),    // Add this line
+            'total_income' => $this->landModel->getTotalIncome()
         ];
 
         $lands['notification_count'] = 0;
@@ -60,6 +64,10 @@ class Merchandiser extends Controller {
             'security_count' => $this->securityModel->getSecurityCount($land_ID),
             'availability' => $this->landModel->getAvailability($land_ID),
             'capacity' => $this->landModel->getCapacity($land_ID),
+            'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
+            'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
+            'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
+            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
         ];
 
         $this->view('merchandiser/land', $data, $lands);
