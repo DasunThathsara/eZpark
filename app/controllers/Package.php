@@ -146,6 +146,7 @@ class Package extends Controller
             ];
 
             $this->view('parkingOwner/packages/update', $data, $other_data);
+            // die(print_r($data));
         }
     }
 
@@ -156,19 +157,32 @@ class Package extends Controller
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
-                'price' => trim($_POST['price']),
-                'packageType' => trim($_POST['package_type']),
-                'err' => ''
-            ];
+            // $data = [
+            //     'id' => trim($_POST['id']),
+            //     'name' => trim($_POST['vehicle_type']),
+            //     'old_name' => trim($_POST['old_vehicle_type']),
+            //     'price' => trim($_POST['package_price']),
+            //     'packageType' => trim($_POST['package_type']),
+            //     'Old_packageType' => trim($_POST['old_package_type']),
+            //     'err' => ''
+            // ];
 
+            $data = [
+                'id' => isset($_POST['id']) ? trim($_POST['id']) : '',
+                'vehicle_type' => isset($_POST['vehicle_type']) ? trim($_POST['vehicle_type']) : '',
+                'old_vehicle_type' => isset($_POST['old_vehicle_type']) ? trim($_POST['old_vehicle_type']) : '',
+                'package_price' => isset($_POST['package_price']) ? trim($_POST['package_price']) : '',
+                'package_type' => isset($_POST['package_type']) ? trim($_POST['package_type']) : '',
+                'old_package_type' => isset($_POST['old_package_type']) ? trim($_POST['old_package_type']) : '',
+                'err' => isset($data['err']) ? $data['err'] : '' // Ensure err is initialized or checked
+            ];
+            // die(print_r($data));
+            
             // Validate data
             // Validate email
-            if (empty($data['name'])) {
+            if (empty($data['package_type'])) {
                 $data['err'] = 'Please select package name';
-            } else if ($data['name'] != 'weekly' and $data['name'] != 'monthly') {
+            } else if ($data['package_type'] != 'weekly' and $data['package_type'] != 'monthly') {
                 $data['err'] = 'Invalid package name';
             }
 
@@ -177,16 +191,16 @@ class Package extends Controller
                 $data['err'] = 'Please enter price';
             } 
            
-            if (empty($data['packageType'])) {
+            if (empty($data['vehicle_type'])) {
                 $data['err'] = 'Please select package type';
-            } else if ($data['packageType'] != 'car' and $data['packageType'] != 'bike' and $data['packageType'] != '3wheel') {
+            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
                 $data['err'] = 'Invalid package type';
             }
             // Validation is completed and no error found
             if (empty($data['err'])) {
                 // Register package
                 if ($this->parkingOwnerModel->updatePackage($data)) {
-                    redirect('package/viewPackages/'.$data['id'].'/'.$data['name']);
+                    redirect('package/viewPackages/'.$data['id'].'/'.$data['package_type']);
                 } else {
                     die('Something went wrong');
                 }
