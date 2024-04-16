@@ -18,13 +18,16 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
 
             <div class="report-container">
                 <div class="report-img">
+                    <div>
                     <img src="<?php echo URLROOT ?>/images/report-pic.png" alt="logo">
-                    <p class="text-heading">Select Date Range</p>
-                    <input type="date" name="start_date" id="start_date" onchange="selectDate()" />
-                    -
-                    <input type="date" name="end_date" id="end_date" onchange="selectDate()" />
-
+                    </div>
+                    
                     <div class="gen-area">
+                        <p class="text-heading">Select Date Range</p>
+                        <input type="date" name="start_date" id="start_date" onchange="selectDate()" />
+                        -
+                        <input type="date" name="end_date" id="end_date" onchange="selectDate()" />
+
                         <p class="text-warning" id="message"></p>
                         <!-- <button class="gen-btn" id="gen" onclick="generatePDF()"><a class="gen-btn" href="<?php echo URLROOT ?>/report/viewReport/2"></a>Generate Report</button> -->
                         <button class="gen-btn" id="gen" onclick="generatePDF()">Generate Report</button>
@@ -64,8 +67,9 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             <li>Select the parking you want to get the Report</li>
                             <li>Select the preferred Date Range for the Report</li>
                             <li>Click “Generate Report”</li>
-                            <li>Report will be Automatically Downloaded</li>
+                            <li>Report will be Automatically Generated</li>
                             <li>Use Adobe PDF Viewer or any other suitable software to view the report</li>
+                            <li>Click “Download” to download the report</li>
                         </ul>
                     </div>
                 </div>
