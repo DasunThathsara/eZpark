@@ -128,6 +128,7 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/report', $data, $other_data);
     }
 
+    // ------------------------------------ Securities -------------------------------------
  
     public function securities($landID){
 
