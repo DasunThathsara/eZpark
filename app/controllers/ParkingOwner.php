@@ -128,22 +128,7 @@ class ParkingOwner extends Controller {
         $this->view('parkingOwner/report', $data, $other_data);
     }
 
-    // -------------------------------------- generate Report ---------------------------------------
-    // public function viewGenerateReport(){
-    //     $data = [
-    //         'title' => 'Home page'
-    //     ];
-
-    //     $other_data['notification_count'] = 0;
-
-    //     if ($other_data['notification_count'] < 10)
-    //         $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-    //     $this->view('parkingOwner/generatereport', $data, $other_data);
-    // }
-
-    // ------------------------------------ Securities -------------------------------------
-    // View assign security to parking owner
+ 
     public function securities($landID){
 
          // Ensure $landID is valid (you may want to add further validation)

@@ -8,11 +8,15 @@ class Report extends Controller {
         // $this->landModel = $this->model('LandModel');
     }
 
-    public function viewReport($land_ID = null){
+    public function viewReport($land_ID = null,$start_DATE = null , $end_DATE = null){
 
         $landId =  $_POST['landID'];
+        $sTime =  $_POST['startDate'];
+        $eTime =  $_POST['endDate'];
 
         $arr['landid'] = $landId;
+        $arr['sdate'] = $sTime;
+        $arr['edate'] = $eTime;
 
         $data = $this->parkingOwnerModel->viewReport($arr);
 
