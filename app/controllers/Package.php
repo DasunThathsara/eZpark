@@ -100,12 +100,15 @@ class Package extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'pid' => trim($_POST['pid'])
+                'id' => trim($_POST['id']),
+                'package_type' => trim($_POST['package_type']),
+                'vehicle_type' => trim($_POST['vehicle_type']),
             ];
 
+            // die(print_r($data));
             // Delete the package
             if ($this->parkingOwnerModel->removePackage($data)) {
-                redirect('parkingOwner/packages/'.$data['id'].'/'.$data['name']);
+                redirect('parkingOwner/packages/'.$data['id'].'/'.$data['package_type']);
             } else {
                 die('Something went wrong');
             }
@@ -115,7 +118,6 @@ class Package extends Controller
     public function packageUpdateForm($land_ID = null, $package_type = null, $vehicle_type = null){
         if (sizeof($_GET) > 1){
             $data = [
-                'name' => trim($_GET['name']),
                 'id' => trim($_GET['id']),
                 'package_type' => trim($_GET['package_type']),
                 'vehicle_type' => trim($_GET['vehicle_type'])
