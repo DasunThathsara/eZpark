@@ -16,7 +16,7 @@ class Merchandiser extends Controller {
 
         $data = [
             'land_count' => $this->landModel->getLandCount(),
-            'total_capacity' => $this->landModel->getTotalCapacity()
+            'total_capacity' => $this->landModel->getTotalCapacity(),
             'today_total_transactions' => $this->landModel->getTodayTotalTransactions(),    // Add this line
             'total_income' => $this->landModel->getTotalIncome()
         ];
