@@ -39,7 +39,7 @@ class Package extends Controller
                 'package_type' => trim($_POST['package_type']),
                 'err' => ''
             ];
-
+            // die(print_r($data));
             // Validate data
             // Validate package type
             if (empty($data['package_type'])) {
@@ -53,9 +53,9 @@ class Package extends Controller
                 $data['err'] = 'Please enter price';
             } 
            
-            if (empty($data['packageType'])) {
+            if (empty($data['vehicle_type'])) {
                 $data['err'] = 'Please select package type';
-            } else if ($data['packageType'] != 'car' and $data['packageType'] != 'bike' and $data['packageType'] != '3wheel') {
+            } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
                 $data['err'] = 'Invalid package type';
             }
 

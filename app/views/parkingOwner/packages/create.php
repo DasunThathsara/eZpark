@@ -50,8 +50,8 @@
 
     userSelectionList.addEventListener('click', function(event) {
         if (event.target.tagName === 'LI') {
-            // document.getElementById('name').value = event.target.getAttribute('data-user-type');
-            document.getElementById('package_type').value = event.target.getAttribute('data-user-type');
+            document.getElementById('name').value = event.target.getAttribute('data-user-type');
+            document.getElementById('vehicle_type').value = event.target.getAttribute('data-user-type');
         }
     });
 </script>
