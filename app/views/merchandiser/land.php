@@ -145,7 +145,7 @@
                                 </div>
                                 <div style="transform: translateY(-20px)" class="right-col">
                                     <p style="font-size: 15px">Monthly Income</p>
-                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. <?php echo $data['total_income']?></h3>
                                 </div>
                             </div>
                         </div>
