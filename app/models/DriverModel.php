@@ -428,10 +428,41 @@ class DriverModel{
 
     // View packages
     public function viewPackages($data){
-        $this->db->query('SELECT p.*, dp.status FROM package p LEFT JOIN driver_package dp ON p.pid = dp.landID AND p.name = dp.packageType AND p.packageType = dp.vehicleType WHERE pid = :pid');
+        $this->db->query('SELECT p.*, dp.status FROM package p LEFT JOIN driver_package dp ON p.pid = dp.landID AND p.name = dp.packageType AND dp.driverID = :driverID WHERE pid = :pid');
         $this->db->bind(':pid', $data['id']);
+        $this->db->bind(':driverID', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // View subscribed packages
+    public function viewSubscribedPackages(){
+        $this->db->query('SELECT dp.*, l.name, l.city FROM driver_package dp JOIN land l ON l.id = dp.landID WHERE driverID = :driverID');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // View parking history
+    public function viewHistory(){
+        $this->db->query('SELECT dl.*, l.name, l.city FROM driver_land dl JOIN land l ON l.id = dl.landID WHERE driverID = :driverID ORDER BY startTime DESC');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Get land coordinates
+    public function getCoordinates($landID){
+        $this->db->query('SELECT id, latitude, longitude, name, car, bike, threeWheel, availability FROM land WHERE id = :id');
+        $this->db->bind(':id', $landID);
+
+        $row = $this->db->single();
 
         return $row;
     }
