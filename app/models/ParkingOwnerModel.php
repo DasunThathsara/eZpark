@@ -19,7 +19,6 @@ class ParkingOwnerModel{
     // Register package
     public function registerPackage($data): bool
     {
-        // Prepare statement
         $this->db->query('INSERT INTO package (name, price, packageType, pid) VALUES (:name, :price, :packageType, :pid)');
 
         // Bind values
@@ -28,8 +27,28 @@ class ParkingOwnerModel{
         $this->db->bind(':packageType', $data['vehicle_type']);
         $this->db->bind(':pid', $data['id']);
 
-        // Execute
+            // Execute
         if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function checkPackage($data): bool
+    {
+        // Check if the package already exists
+        $this->db->query('SELECT COUNT(*) AS count FROM package WHERE name = :name AND packageType = :packageType AND pid = :pid');
+
+        // Bind values
+        $this->db->bind(':name', $data['package_type']);
+        $this->db->bind(':packageType', $data['vehicle_type']);
+        $this->db->bind(':pid', $data['id']);
+        $result = $this->db->single();
+
+        // If a package with the same key values already exists, return false
+        if ($result->count == 0){
             return true;
         }
         else {

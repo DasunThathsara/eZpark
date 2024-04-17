@@ -92,7 +92,7 @@ class LandCapacity extends Controller
 
             // Validate data
             // Validate package type
-            if (empty($data['capacity'])) {
+            if (empty($data['capacity']) && $data['capacity'] != 0) {
                 $data['err'] = 'Please enter capacity';
             } else if (!is_numeric($data['capacity'])) {
                 $data['err'] = 'Capacity should be a number';
