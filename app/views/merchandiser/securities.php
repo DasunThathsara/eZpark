@@ -28,6 +28,14 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <div class="left" style="width:31%">
                                         Name
                                     </div>
+
+                                    <div class="left" style="width:31%">
+                                        Contact Number
+                                    </div>
+
+                                    <div class="left" style="width:31%">
+                                        Access For Security
+                                    </div>
                                 </div>
                             </th>
                         </tr>
