@@ -235,20 +235,16 @@ class Package extends Controller
 
     public function packageUpdate()
     {
+        $other_data['notification_count'] = 0;
+            
+        if ($other_data['notification_count'] < 10) {
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Submitted form data
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            // $data = [
-            //     'id' => trim($_POST['id']),
-            //     'name' => trim($_POST['vehicle_type']),
-            //     'old_name' => trim($_POST['old_vehicle_type']),
-            //     'price' => trim($_POST['package_price']),
-            //     'packageType' => trim($_POST['package_type']),
-            //     'Old_packageType' => trim($_POST['old_package_type']),
-            //     'err' => ''
-            // ];
 
             $data = [
                 'id' => isset($_POST['id']) ? trim($_POST['id']) : '',
@@ -257,7 +253,7 @@ class Package extends Controller
                 'package_price' => isset($_POST['package_price']) ? trim($_POST['package_price']) : '',
                 'package_type' => isset($_POST['package_type']) ? trim($_POST['package_type']) : '',
                 'old_package_type' => isset($_POST['old_package_type']) ? trim($_POST['old_package_type']) : '',
-                'err' => isset($data['err']) ? $data['err'] : '' // Ensure err is initialized or checked
+                'err' => isset($data['err']) ? $data['err'] : ''
             ];
             // die(print_r($data));
             
@@ -279,6 +275,11 @@ class Package extends Controller
             } else if ($data['vehicle_type'] != 'car' and $data['vehicle_type'] != 'bike' and $data['vehicle_type'] != '3wheel') {
                 $data['err'] = 'Invalid package type';
             }
+
+            // Check if the package already exists
+            if (empty($data['err']) && !$this->parkingOwnerModel->checkPackage($data)) {
+                $data['err'] = 'Package already exists';
+            }
             // Validation is completed and no error found
             if (empty($data['err'])) {
                 // Register package
@@ -289,7 +290,7 @@ class Package extends Controller
                 }
             } else {
                 // Load view with errors
-                $this->view('parkingOwner/packages/update', $data);
+                $this->view('parkingOwner/packages/update', $data , $other_data);
             }
         }
     }
