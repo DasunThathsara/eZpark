@@ -23,34 +23,28 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     </div>
                     
                     <div class="gen-area">
-                        <p class="text-heading">Select Date Range</p>
-                        <input type="date" name="start_date" id="start_date" onchange="selectDate()" />
+                        <div class="form-input-title">Select Parking:</div>
+                        <select name="parking" id="district" required onchange="selectPark(this.value)">
+                            <option value="" disabled selected>Select Parking</option>
+                            <?php
+                            foreach ($data['lands'] as $parking) {
+                                ?>
+                                <option value="<?= $parking->id ?>"><?= $parking->name ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+
+                        <p class="form-input-title">Select Date Range:</p>
+                        <input type="date" name="start_date" id="start_date" onchange="selectDate()" style="color: #8a8a8a;"/>
                         -
-                        <input type="date" name="end_date" id="end_date" onchange="selectDate()" />
+                        <input type="date" name="end_date" id="end_date" onchange="selectDate()" style="color: #8a8a8a;"/>
 
                         <p class="text-warning" id="message"></p>
                         <!-- <button class="gen-btn" id="gen" onclick="generatePDF()"><a class="gen-btn" href="<?php echo URLROOT ?>/report/viewReport/2"></a>Generate Report</button> -->
                         <button class="gen-btn" id="gen" onclick="generatePDF()">Generate Report</button>
-                        <div class="dropdown">
-                            <button class="dropbtn">Select Parking</button>
-                            <div class="dropdown-content">
-                                <?php
-                                
-                                foreach ($data['lands'] as $key => $value) {
-                                    ?>
+                        
 
-
-                                    <p onclick="selectPark(<?= $value->id ?>)">
-                                        
-                                        <?= $value->name ?> 
-                                        <!-- - <?= $value->id ?> -->
-                                    </p>
-
-                                    <?php
-                                } ?>
-
-                            </div>
-                        </div>
                         
                         <button class="view-btn" id="view" onclick="viewPDF()" style="display: none;">View</button>
                         <button class="download-btn" id="down" onclick="downloadBlob()"
@@ -201,8 +195,8 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     invoice: {
                         label: "",
                         // num: 19,
-                        invDate: "Payment Date: 01/01/2021 18:12",
-                        invGenDate: "Invoice Date: 02/02/2021 10:17",
+                        invDate: "From Date:" + sDate,
+                        invGenDate: "To Date:" + eDate,
                         headerBorder: false,
                         tableBodyBorder: false,
                         header: [
@@ -213,7 +207,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
-                                fontWeight: 'bold' // Bold font weight for header cell
+                                fontWeight: 'bold'// Bold font weight for header cell
                             }
                             },
                             
@@ -238,7 +232,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "Start Time",
+                                title: "Arrival Time",
                                 style: {
                                 width: 40,
                                 height: 20,
@@ -248,7 +242,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "End Time",
+                                title: "Departure Time",
                                 style: {
                                 width: 40,
                                 height: 20,
@@ -258,7 +252,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "Total time",
+                                title: "Total time (h)",
                                 style: {
                                 width: 30,
                                 height: 20,
@@ -268,7 +262,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "Charge",
+                                title: "Charge(Rs.)",
                                 style: {
                                 width: 30,
                                 height: 20,
@@ -295,7 +289,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             genarateData[index]['startTime'],
                             genarateData[index]['endTime'],
                             // (genarateData[index]['status'] === 0) ? 'IN' : 'OUT' ,
-                            genarateData[index]['endTime'] - genarateData[index]['startTime'],
+                            ((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2),
                             genarateData[index]['cost'],
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
                           
@@ -303,40 +297,40 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                           
 
                             
-                        style: {
-                            margin: { top: 30 },
-                            tableWidth: 'auto',
-                            headerRowHeight: 30,
-                            bodyRowHeight: 20,
-                            fontSize: 10,
-                            cellPadding: 5,
-                            textAlign: 'center',
-                            backgroundColor:'red'
-                        },
+                        // style: {
+                        //     margin: { top: 30 },
+                        //     tableWidth: 'auto',
+                        //     headerRowHeight: 30,
+                        //     bodyRowHeight: 20,
+                        //     fontSize: 10,
+                        //     cellPadding: 5,
+                        //     textAlign: 'center',
+                        //     backgroundColor:'red'
+                        // },
                         
                         
                         additionalRows: [{
-                            col1: 'Total:',
+                            col1: 'Total :',
                             col2: total.toString()+'.00',
-                            col3: 'ALL',
+                            col3: ' ',
                             style: {
                                 fontSize: 14 //optional, default 12
                             }
                         },
                         {
-                            col1: 'VAT:',
-                            col2: '20',
-                            col3: '%',
+                            col1: 'VAT :',
+                            col2: '20 %',
+                            col3: ' ',
                             style: {
-                                fontSize: 10 //optional, default 12
+                                fontSize: 13 //optional, default 12
                             }
                         },
                         {
-                            col1: 'SubTotal:',
+                            col1: 'SubTotal :',
                             col2: (total * 0.8).toString()+'.00' ,
-                            col3: 'ALL',
+                            col3: ' ',
                             style: {
-                                fontSize: 10 //optional, default 12
+                                fontSize: 14 //optional, default 12
                             }
                         }],
                         // invDescLabel: "Invoice Note",
