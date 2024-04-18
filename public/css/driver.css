@@ -1,6 +1,4 @@
 /* ----------------- Driver Dashboard Styles ---------------- */
-
-
 .page-container .section .container .search{
     margin-right: 20px;
     margin-top: 30px;
@@ -29,6 +27,342 @@
     .page-container .section .container{
         margin-left: 20px;
         transition: left 0.5s ease-in;
+    }
+}
+
+/* ------------------- View Parking Styles ------------------- */
+.page-container .section .container .view-parking-container {
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-right: 20px;
+}
+
+.page-container .section .container .view-parking-container .parking-cover-container {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    height: 300px;
+    overflow: hidden;
+}
+
+.page-container .section .container .view-parking-container .parking-cover-container .parking-cover {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.page-container .section .container .view-parking-container .parking-details {
+    width: 100%;
+    margin: 20px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area {
+    display: flex;
+    width: calc(100% - 160px);
+    justify-content: space-between;
+    margin-top: 60px;
+    margin-left: 60px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-about {
+    display: grid;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-about .parking-name {
+    font-size: 38px;
+    font-weight: bold;
+    color: #fdc63e;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-about .parking-address {
+    color: #595959;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-about .parking-open-time {
+    color: #8d8d8d;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-directions {
+    display: grid;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-directions .parking-option {
+    background-color: #fccc04;
+    color: white;
+    border-radius: 10px;
+    padding: 0 10px;
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-container .section .container .view-parking-container .parking-details .main-area .parking-directions .parking-option .parking-option-icon {
+    width: 20px;
+    transform: translateY(1.5px);
+    padding-left: 5px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .slot-area {
+    margin-top: 60px;
+    margin-left: 60px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .slot-area .slot-cards {
+    display: flex;
+}
+
+.page-container .section .container .view-parking-container .parking-details .slot-area .slot-cards .slot-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 0 15px 0.1px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 5px 10px 0 10px;
+    width: 100px;
+    align-items: center;
+}
+
+.page-container .section .container .view-parking-container .parking-details .location-area {
+    display: flex;
+    background-color: #ffffff;
+    justify-content: space-between;
+    width: calc(100% - 160px);
+    margin-top: 70px;
+    border-radius: 20px;
+    border: 1px solid #dadada;
+    margin-left: 60px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .location-area .map-section {
+    background-color: #ffffff;
+    width: 70%;
+    border-radius: 20px 0 0 20px;
+    border-right: 1px solid #dadada;
+    transition: 0.5s;
+}
+
+.page-container .section .container .view-parking-container .parking-details .location-area .address-section {
+    padding: 50px;
+    text-align: left;
+    background-color: #ffffff;
+    width: 30%;
+    border-radius: 0 20px 20px 0;
+    transition: 0.5s;
+}
+
+.page-container .section .container .view-parking-container .parking-details .location-area .address {
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid #dadada;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .location-area .contact-no {
+    width: 100%;
+    height: 50%;
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area {
+    width: calc(100% - 160px);
+    margin-top: 70px;
+    border-radius: 20px;
+    margin-left: 60px;
+    padding-bottom: 40px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area .package-cards {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area .package-cards .package-card {
+    border-radius: 20px;
+    border: 1px solid #dadada;
+    width: 220px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area .package-cards .package-card .package-vehicle-type {
+    font-size: 19px;
+    color: #676767;
+    font-weight: 500;
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area .package-cards .package-card .package-type {
+    font-size: 14px;
+    color: #777777;
+    margin-top: 10px;
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area .package-cards .package-card .package-expire {
+    font-size: 13px;
+    color: #777777;
+    margin-top: 8px
+}
+
+.page-container .section .container .view-parking-container .parking-details .package-area .package-cards .package-card .package-option {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+@media screen and (max-width: 650px){
+    .page-container .section .container .view-parking-container .parking-details .main-area {
+        display: flex;
+        width: calc(100% - 80px);
+        justify-content: space-between;
+        margin-top: 60px;
+        margin-left: 20px;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .slot-area {
+        margin-top: 60px;
+        margin-left: 20px;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .location-area {
+        display: flex;
+        background-color: #ffffff;
+        justify-content: space-between;
+        width: calc(100% - 80px);
+        margin-top: 70px;
+        border-radius: 20px;
+        border: 1px solid #dadada;
+        margin-left: 20px;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .package-area {
+        width: calc(100% - 80px);
+        margin-top: 70px;
+        border-radius: 20px;
+        margin-left: 20px;
+        transition: 0.5s;
+    }
+}
+
+@media screen and (max-width: 565px){
+    .page-container .section .container .view-parking-container .parking-details .main-area {
+        display: flex;
+        width: calc(100% - 60px);
+        justify-content: space-between;
+        margin-top: 30px;
+        margin-left: 10px;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .main-area .parking-about {
+        display: grid;
+        width: 60%;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .main-area .parking-directions .parking-option {
+        background-color: #fccc04;
+        color: white;
+        border-radius: 10px;
+        padding: 0 10px;
+        display: flex;
+        margin-top: 5px;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .slot-area {
+        margin-top: 60px;
+        margin-left: 10px;
+        transition: 0.5s;
+        width: calc(100% - 60px);
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .location-area {
+        display: flex;
+        background-color: #ffffff;
+        justify-content: space-between;
+        width: calc(100% - 60px);
+        margin-top: 70px;
+        border-radius: 20px;
+        border: 1px solid #dadada;
+        margin-left: 10px;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .location-area .map-section {
+        background-color: #ffffff;
+        width: 85%;
+        border-radius: 20px 0 0 20px;
+        border-right: 1px solid #dadada;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .location-area .address-section {
+        padding: 20px;
+        text-align: left;
+        background-color: #ffffff;
+        width: 20%;
+        border-radius: 0 20px 20px 0;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .location-area .contact-no {
+        width: 100%;
+        height: 50%;
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
+        transform: translateY(-5px);
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .package-area {
+        width: calc(100% - 60px);
+        margin-top: 70px;
+        border-radius: 20px;
+        margin-left: 10px;
+        transition: 0.5s;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .page-container .section .container .view-parking-container .parking-details .main-area {
+        display: flex;
+        width: calc(100% - 60px);
+        justify-content: space-between;
+        margin-top: -50px;
+        margin-left: 10px;
+        transition: 0.5s;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .main-area .parking-about .parking-name {
+        font-size: 30px;
+        font-weight: bold;
+        color: #fdc63e;
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .main-area .parking-directions .second-option {
+        transform: translateY(-15px);
+    }
+
+    .page-container .section .container .view-parking-container .parking-details .main-area .parking-about {
+        display: grid;
+        width: 50%;
     }
 }
 
