@@ -59,7 +59,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     <div class="report-ins">
                         <ul>
                             <li>Select the parking you want to get the Report</li>
-                            <li>Select the preferred Date Range for the Report</li>
+                            <li>Select the preferred date range for the Report</li>
                             <li>Click “Generate Report”</li>
                             <li>Report will be Automatically Generated</li>
                             <li>Use Adobe PDF Viewer or any other suitable software to view the report</li>
