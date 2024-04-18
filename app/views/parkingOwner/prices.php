@@ -50,7 +50,7 @@
                                                 <?php echo $other_data[$i]->additionalHourPrice ?>
                                             </div>
                                             <div class="right">
-                                                <form action="<?php echo URLROOT ?>/landprice/priceUpdateForm" method="post">
+                                                <form action="<?php echo URLROOT ?>/landprice/priceUpdateForm" method="get">
                                                     <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
                                                     <input type="text" name="pid" id="pid" hidden value="<?php echo $other_data[$i]->pid ?>" />
                                                     <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->vehicleType ?>" />

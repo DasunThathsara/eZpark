@@ -70,13 +70,13 @@ class LandPrice extends Controller
         }
     }
     public function priceUpdateForm($land_ID = null, $package_type = null){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data = [
-                'id' => trim($_POST['id']),
-                'pid' => trim($_POST['pid']),
-                'vehicle_type' => trim($_POST['vehicle_type']),
-                'hour_price' => trim($_POST['hour_price']),
-                'additional_hour_price' => trim($_POST['additional_hour_price']),
+                'id' => trim($_GET['id']),
+                'pid' => trim($_GET['pid']),
+                'vehicle_type' => trim($_GET['vehicle_type']),
+                'hour_price' => trim($_GET['hour_price']),
+                'additional_hour_price' => trim($_GET['additional_hour_price']),
                 'err' => ''
             ];
 
