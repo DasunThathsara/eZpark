@@ -33,7 +33,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                 </div>
                             </a>
 
-                            <a class="parking-option" href="<?php echo URLROOT?>/driver/directionToParking/<?php echo $data->id?>">
+                            <a class="parking-option second-option" href="<?php echo URLROOT?>/driver/directionToParking/<?php echo $data->id?>">
                                 <div class="parking-option-text">Get Direction</div>
                                 <div class="parking-option-icon">
                                     <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/Navigation.png" alt="Parking">
@@ -68,7 +68,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <div class="location-area">
                         <div class="map-section">
-                            <div id="map" style="border-radius: 20px 0 0 20px"></div>
+                            <div id="map" style="border-radius: 20px 0 0 20px; height: 100%"></div>
                         </div>
                         <div class="address-section">
                             <div class="address">
@@ -106,7 +106,6 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <?php if ($package->name == 'weekly'){?>
                                         <div class="package-expire">Available till <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 week'))?></div>
                                     <?php }?>
-
 
                                     <div class="package-option">
                                         <div class="package-price">
