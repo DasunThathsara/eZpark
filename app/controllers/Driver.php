@@ -136,6 +136,8 @@ class Driver extends Controller {
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
+//        die(print_r($land->packages));
+
         $this->view('driver/viewParking', $land, $notifications);
     }
 
