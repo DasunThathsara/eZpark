@@ -689,6 +689,8 @@ class Land extends Controller {
 
                 $security = $this->securityModel->viewSecurityProfile($data);
 
+                // die(print_r($data));
+
                 $security['notification_count'] = 0;
 
                 if ($security['notification_count'] < 10)
