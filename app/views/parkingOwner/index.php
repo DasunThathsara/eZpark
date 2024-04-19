@@ -11,7 +11,7 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Dashboard</h1>
+            <h1>Parking Owner</h1>
 
             <!-- Dropdown Menu -->
             <div class="dropdown">
