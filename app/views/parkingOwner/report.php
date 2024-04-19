@@ -310,7 +310,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                         
                         
                         additionalRows: [{
-                            col1: 'Total :',
+                            col1: 'Net Fare :',
                             col2: total.toString()+'.00',
                             col3: ' ',
                             style: {
@@ -318,16 +318,16 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                         },
                         {
-                            col1: 'VAT :',
-                            col2: '20 %',
+                            col1: ' :',
+                            col2: '15 %',
                             col3: ' ',
                             style: {
                                 fontSize: 13 //optional, default 12
                             }
                         },
                         {
-                            col1: 'SubTotal :',
-                            col2: (total * 0.8).toString()+'.00' ,
+                            col1: 'Net Total :',
+                            col2: (total * 0.85).toString()+'.00' ,
                             col3: ' ',
                             style: {
                                 fontSize: 14 //optional, default 12
