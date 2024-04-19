@@ -67,9 +67,5 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     </section>
 </main>
-<script>
-    function confirmSubmit() {
-        return confirm("Are you sure you want to delete this land?");
-    }
-</script>
+
 <?php require APPROOT.'/views/inc/footer.php'; ?>
