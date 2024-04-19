@@ -27,8 +27,8 @@
     padding-bottom: 10px;*/
     padding-top: 5px;   /*newly added*/
     padding-bottom: 5px;
-    
-    
+
+
 }
 
 .form-container .type-select a{
@@ -45,7 +45,7 @@
     margin-bottom: 20px;
     border-radius: 10px;
     /*padding: 30px 0 30px 0;*/
-    padding: 35px 0 35px 0; 
+    padding: 35px 0 35px 0;
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
     background-color: white;
@@ -63,7 +63,7 @@
 .form-container.reveal{
     opacity: 1;
     transform: translateY(0px);
-    
+
 }
 
 .form-container form{
@@ -137,7 +137,7 @@
     top: 50%;
     left: 25%;
     transform: translateY(-50%);
-    
+
 }
 
 #login-image{
@@ -209,8 +209,8 @@
     line-height: 20px; /* 15.625% */
     margin-top: 40px;
     display: inline-block;
-    
-    
+
+
 }
 
 .login-form-container .login-form-input{
@@ -220,10 +220,10 @@
     flex-shrink: 0;
     border-radius: 40px;
     border: 3px solid #ffffff;
-    color: #000000; 
+    color: #000000;
     background-color: transparent;
     opacity: 0.9;
-    
+
 }
 
 .login-form-container .login-form-check{
@@ -248,7 +248,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 20px; /* 55.556% */
-    
+
     color: #000000;
     margin-top: -20px;
 }
@@ -284,38 +284,38 @@
 }
 
 
-/*.form-container-login .subheading{    /*newly added subheading*/ 
+/*.form-container-login .subheading{    /*newly added subheading*/
     /* color: #FFF; */
     /* text-align: center;
     font-family: Montserrat;
     font-size: 36px;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px; 
+    line-height: 20px;
 
-} 
+}
 
-/* .background-of-login{   
+/* .background-of-login{
     background: #E29C00;
     width: 100%;
     height: 100%;
 } */
 
-/* .form-container-login .heading{  
+/* .form-container-login .heading{
     color: #FFF;
     text-align: center;
     font-family: Inria Sans;
     font-size: 128px;
     font-style: normal;
     font-weight: 700;
-    line-height: 20px; 
+    line-height: 20px;
 } */
 
 /* .form-container-login .login-submit-button{
     border-radius: 4px;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
-}*/ 
+}*/
 
 .form-container h1{
     text-align: center;
