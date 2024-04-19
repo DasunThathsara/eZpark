@@ -16,7 +16,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <br><br>
             <a class="add-btn" href="<?php echo URLROOT ?>/land/securitySearch/<?php echo $data['id'] ?>" style="font-weight: 1000; font-size: 20px">+</a>
 
-            <?php if (sizeof($other_data) == 1) {?>
+            <?php if (sizeof($data['securityDetails']) == 0) {?>
                 <div class="emptyVehicle">You have no any securities</div>
             <?php }
             else {?>
@@ -42,7 +42,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
    
 
-<?php foreach ($data['securityDetails'] as $security) {?>
+                        <?php foreach ($data['securityDetails'] as $security) {?>    <!--change $data['securityDetails'] to $other_data-->
                             <tr>
                                 <td>
                                     <a class="tile" href="<?php echo URLROOT?>/land/viewSecurity/<?php echo $security->security_id?>">

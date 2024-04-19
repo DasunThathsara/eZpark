@@ -80,40 +80,6 @@
                         </div>
                     </a>
 
-                    <!-- Card 3
-                    <a class="card-link" href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>">
-                        <div class="card">
-                            <div class="row">
-                                <div class="left-col">
-                                    <div class="sub-row">
-                                        <div class="top-row">
-                                        <img style="transform: translateY(10px)" src="<?php echo URLROOT ?>/images/price.svg" alt="">
-                                        </div>
-                                        <div class="bottom-row"></div>
-                                    </div>
-                                </div>
-                                <div style="transform: translateY(7px)" class="right-col">Price Rate</div>
-                            </div>
-                        </div>
-                    </a> -->
-
-                    <!-- Card 4
-                    <a class="card-link" href="<?php echo URLROOT ?>/package/viewPackages/<?php echo $data['id'] ?>">
-                        <div class="card">
-                            <div class="row">
-                                <div class="left-col">
-                                    <div class="sub-row">
-                                        <div class="top-row">
-                                            <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
-                                        </div>
-                                        <div class="bottom-row"><?php echo $data['package_count'] ?></div>
-                                    </div>
-                                </div>
-                                <div class="right-col">Packages</div>
-                            </div>
-                        </div>
-                    </a> -->
-
                     <!-- Card 5 -->
                     <a class="card-link" href="<?php echo URLROOT ?>/merchandiser/securities/<?php echo $data['id'] ?>">
                         <div class="card">

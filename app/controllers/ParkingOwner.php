@@ -166,7 +166,7 @@ class ParkingOwner extends Controller {
             $land_ID = $_POST['land_id'];
             $sec_id = $_POST['sec_id'];
 
-            $this->ParkingOwnerModel->securityRemove($sec_id , $land_ID);
+            $this->parkingOwnerModel->securityRemove($sec_id , $land_ID);
 
             // Send notification to the landowner
             // $this->userModel->addNotification('You unassigned from the land was declined by '.$_SESSION['user_name'], 'parkingownerUnassignFromLand', $this->landModel->getLandOwnerID($_POST['id']), $this->landModel->getLandOwnerID($_POST['id']));
@@ -181,7 +181,7 @@ class ParkingOwner extends Controller {
 
             // die(print_r($land_ID));
 
-            if ($this->ParkingOwnerModel->landAccessControl($sec_id)){
+            if ($this->parkingOwnerModel->landAccessControl($sec_id)){
                 $land_ID = $_GET['land_id'];
                 redirect($_SESSION['userType'].'/securities/'.$land_ID);
             } else {
