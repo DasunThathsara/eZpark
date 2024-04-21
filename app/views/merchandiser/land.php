@@ -260,8 +260,8 @@
 
 
 
-    //<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script>
+    //<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    //changed here from script to space
     // ---------------------------------------------- Chart.js ----------------------------------------------
         const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
         const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
@@ -286,20 +286,21 @@
             },
             options: {
                 legend: {display: false},
-                scales: {
-                    yAxes: [{ticks: {min: 6, max:16}}],
-                }
+                title: {
+                    display: true,
+                    text: "Income Distribution"
+                }   //newly added
             }
         });
 
         // Create a new chart with a different id for the second canvas
         new Chart("lineChart2", {
             type: "bar",
-            data: {
-                labels: xValues,
+            data: { //added 2 after xValues and yValues
+                labels: xValues2,
                 datasets: [{
                     backgroundColor: barColors,
-                    data: yValues
+                    data: yValues2
                 }]
             },
             options: {
@@ -310,8 +311,8 @@
                 }
             }
         });
-    </script>
-
+    //removed the script closing tag
+</script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {

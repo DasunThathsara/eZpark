@@ -267,7 +267,7 @@
                 legend: {display: false},
                 title: {
                     display: true,
-                    text: "Vehicle Count"
+                    text: "Income Distribution"
                 }
             }
         });
