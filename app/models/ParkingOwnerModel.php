@@ -188,7 +188,7 @@ class ParkingOwnerModel{
         $this->db->query('SELECT * FROM driver_land WHERE landID = :landid AND startTime >= :sdate AND endTime <= :edate' );
         $this->db->bind(':landid', $data['landid']);
         $this->db->bind(':sdate', $data['sdate']);
-        $this->db->bind(':edate', $data['edate']);
+        $this->db->bind(':edate', date('Y-m-d', strtotime($data['edate'] . ' +1 day')));
         
         $row = $this->db->resultSet();
         

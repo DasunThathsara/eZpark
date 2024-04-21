@@ -74,7 +74,7 @@ class Merchandiser extends Controller {
     }
 
         // --------------------------------- Parking Capacity ----------------------------------
-    // View all packages
+    // View capacity
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
 
@@ -87,18 +87,24 @@ class Merchandiser extends Controller {
     }
 
         // -------------------------------------- Report ---------------------------------------
-        public function viewReport(){
-            $data = [
-                'title' => 'Home page'
-            ];
-    
-            $other_data['notification_count'] = 0;
-    
-            if ($other_data['notification_count'] < 10)
-                $other_data['notification_count'] = '0'.$other_data['notification_count'];
-    
-            $this->view('merchandiser/report', $data, $other_data);
-        }
+    public function viewReport($land_ID = null){
+        $data = [
+            'title' => 'Home page',
+            'landID' => $land_ID,
+            'lands' => $this->landModel->viewLands()
+        ];
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            // echo "<pre>";
+            // die(print_r($data));
+            // echo "</pre>";
+
+        $this->view('merchandiser/report', $data, $other_data);
+    }
 
             // ------------------------------------ Securities -------------------------------------
     // View all securities
