@@ -353,9 +353,51 @@ class Land extends Controller {
                     $data['err'] = $cover['err'];
             }
 
-//            if (empty($data['cover']) and empty($data['err'])){
-//                $data['err'] = 'Please upload cover photo';
-//            }
+            if (empty($data['cover']) and empty($data['err'])){
+                $data['err'] = 'Please upload cover photo';
+            }
+
+            // Parking photo 1 upload validation
+            if (empty($data['err']) and !empty($_FILES['photo1']['name'])){
+                $cover = $this->imageUpload('photo1');
+                $data['photo1'] = $cover['image'];
+                if(empty($cover['err']))
+                    $data['err'] = '';
+                else
+                    $data['err'] = $cover['err'];
+            }
+
+            if (empty($data['photo1']) and empty($data['err'])){
+                $data['err'] = 'Please upload parking photo 1';
+            }
+
+            // Parking photo 2 upload validation
+            if (empty($data['err']) and !empty($_FILES['photo2']['name'])){
+                $cover = $this->imageUpload('photo2');
+                $data['photo2'] = $cover['image'];
+                if(empty($cover['err']))
+                    $data['err'] = '';
+                else
+                    $data['err'] = $cover['err'];
+            }
+
+            if (empty($data['photo2']) and empty($data['err'])){
+                $data['err'] = 'Please upload parking photo 2';
+            }
+
+            // Parking photo 3 upload validation
+            if (empty($data['err']) and !empty($_FILES['photo3']['name'])){
+                $cover = $this->imageUpload('photo1');
+                $data['photo3'] = $cover['image'];
+                if(empty($cover['err']))
+                    $data['err'] = '';
+                else
+                    $data['err'] = $cover['err'];
+            }
+
+            if (empty($data['photo3']) and empty($data['err'])){
+                $data['err'] = 'Please upload parking photo 3';
+            }
 
             $other_data['notification_count'] = 0;
 

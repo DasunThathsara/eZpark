@@ -21,7 +21,7 @@ class LandModel{
     public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province, cover, latitude, longitude) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province, :cover, :latitude, :longitude)');
+        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province, cover, latitude, longitude, image1, image2, image3) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province, :cover, :latitude, :longitude, :image1, :image2, :image3)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -42,6 +42,9 @@ class LandModel{
         $this->db->bind(':cover', $data['cover']);
         $this->db->bind(':latitude', $data['latitude']);
         $this->db->bind(':longitude', $data['longitude']);
+        $this->db->bind(':image1', $data['photo1']);
+        $this->db->bind(':image2', $data['photo2']);
+        $this->db->bind(':image3', $data['photo3']);
 
         // Execute
         if ($this->db->execute()){
