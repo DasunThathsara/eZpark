@@ -5,7 +5,7 @@ class LandCapacity extends Controller
     {
         $this->middleware = new AuthMiddleware();
         // Only parkingOwners are allowed to access parkingOwner pages
-        $this->middleware->checkAccess(['parkingOwner']);
+        $this->middleware->checkAccess(['parkingOwner', 'merchandiser']);
         $this->landModel = $this->model('LandModel');
     }
 
@@ -24,6 +24,7 @@ class LandCapacity extends Controller
             $capacity['notification_count'] = '0'.$capacity['notification_count'];
 
         $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
+        
     }
 
     public function capacityUpdateForm($land_ID = null, $vehicle_type = null){
