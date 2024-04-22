@@ -11,7 +11,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Update Price</h1>
+            <h1>Update Capacity</h1>
 
             <?php if (!empty($data['err'])){?>
                 <div class="error-msg">
