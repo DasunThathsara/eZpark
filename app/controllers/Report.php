@@ -3,8 +3,6 @@ class Report extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access driver pages
-        //$this->middleware->checkAccess(['parkingOwner']);
-        // $this->middleware->checkAccess(['merchandiser']);
         $this->middleware->checkAccess(['parkingOwner', 'merchandiser']);
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
         $this->merchandiserModel = $this->model('MerchandiserModel');
