@@ -90,6 +90,35 @@
 
                     <br><br>
 
+                    <!-- Added the uploading photos function but it worked even bore this code added -->
+                    <!-- Photos -->
+                    <div class="form-input-title">Photos:</div>
+                    <div class="file-upload-container">
+                        <label class="file-upload" for="cover">Upload Cover Photo</label>
+                        <input type="file" name="cover" id="cover" hidden />
+                        <div class="description"></div>
+                    </div>
+
+                    <div class="file-upload-container">
+                        <label class="file-upload" for="photo1">Upload Photo 1</label>
+                        <input type="file" name="photo1" id="photo1" hidden />
+                        <div class="description"></div>
+                    </div>
+
+                    <div class="file-upload-container">
+                        <label class="file-upload" for="photo2">Upload Photo 2</label>
+                        <input type="file" name="photo2" id="photo2" hidden />
+                        <div class="description"></div>
+                    </div>
+
+                    <div class="file-upload-container">
+                        <label class="file-upload" for="photo3">Upload Photo 3</label>
+                        <input type="file" name="photo3" id="photo3" hidden />
+                        <div class="description"></div>
+                    </div>
+
+                    <br><br>
+
                     <!-- Car -->
                     <div class="form-input-title">Number of available car parking slots:</div>
                     <input type="text" name="car" id="car" required value="<?php echo $data['car'] ?>" />
