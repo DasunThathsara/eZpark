@@ -272,9 +272,27 @@ class Driver extends Controller {
             }
 
             // Check given time slot is already reserved
-            $reservations = $this->reservationModel->viewReservations($data['landID'], $data['startDate'], $data['vehicleNumber']);
+            $reservations = $this->reservationModel->viewReservations($data['landID'], $data['startDate'], $this->driverModel->getVehicleTypeByNumber($data['vehicleNumber']));
+//            die(print_r($reservations));
             foreach ($reservations as $reservation){
+//                $date = [strtotime($data['startDate'].' '.$data['startTime']), strtotime($reservation->startTime), strtotime($data['endDate'].' '.$data['endTime']), strtotime($reservation->expectedEndTime)];
+//                die(print_r($date));
                 if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
+                    $data['err'] = 'This time slot is already reserved';
+                    break;
+                }
+
+                else if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->expectedEndTime)){
+                    $data['err'] = 'This time slot is already reserved';
+                    break;
+                }
+
+                else if (strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
+                    $data['err'] = 'This time slot is already reserved';
+                    break;
+                }
+
+                if (strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->expectedEndTime)){
                     $data['err'] = 'This time slot is already reserved';
                     break;
                 }
