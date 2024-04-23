@@ -39,6 +39,13 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/Navigation.png" alt="Parking">
                                 </div>
                             </a>
+
+                            <a class="parking-option second-option" href="<?php echo URLROOT?>/driver/makeReservation/<?php echo $data->id?>">
+                                <div class="parking-option-text">Make Reservation</div>
+                                <div class="parking-option-icon">
+                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/booking.png" alt="Parking">
+                                </div>
+                            </a>
                         </div>
                     </div>
 
