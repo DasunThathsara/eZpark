@@ -19,11 +19,3 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
-
-    <!-- Loading screen -->
-    <div class="loader-wrapper">
-        <div class="logo-container">
-            <img src="<?php echo URLROOT ?>/images/logo.png" alt="">
-        </div>
-        <div class="loader"></div>
-    </div>
