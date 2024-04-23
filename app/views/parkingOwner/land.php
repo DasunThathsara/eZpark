@@ -292,30 +292,25 @@
                 }
             }
         });
+    </script>
 
-
-
-        // ---------------------------------------------- Toggle button ----------------------------------------------
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('toggleButton').addEventListener('change', function () {
-                var isChecked = this.checked;
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#toggleButton').change(function () {
+                var isChecked = $(this).prop('checked');
                 console.log("Checkbox is checked: " + isChecked);
-
-                fetch('<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>?isChecked=' + isChecked, {
+                $.ajax({
+                    url: '<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>',
                     method: 'GET',
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        console.log("Fetch success:", data);
-                    })
-                    .catch(error => {
-                        console.error("Fetch error:", error);
-                    });
+                    data: { isChecked: isChecked },
+                    success: function (response) {
+                        console.log("AJAX success:", response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error:", xhr.responseText);
+                    }
+                });
             });
         });
     </script>
