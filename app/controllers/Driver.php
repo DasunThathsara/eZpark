@@ -194,6 +194,18 @@ class Driver extends Controller {
 
 
     // ------------------------ Scan QR Code ------------------------
+    // Open QR scanner
+    public function scanQRCode(){
+        $data = [];
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('driver/scanQRCode', $data, $other_data);
+    }
+
 
     // ------------------------ Start Time ------------------------
 
