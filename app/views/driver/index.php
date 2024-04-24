@@ -1,48 +1,68 @@
-<?php require APPROOT.'/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php'; ?>
 <!--  TOP NAVIGATION  -->
-<?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
+<?php require APPROOT . '/views/inc/components/topnavbar.php'; ?>
 
 <!--  SIDE NAVIGATION  -->
 <?php
-    $section = 'dashboard';
-    require APPROOT.'/views/inc/components/sidenavbar.php';
+$section = 'dashboard';
+require APPROOT . '/views/inc/components/sidenavbar.php';
 ?>
 
+<script
+        src="https://kit.fontawesome.com/3d9946f29b.js"
+        crossorigin="anonymous"
+></script>
+
 <main class="page-container">
+
+    <!-- Map window start -->
+    <div class="overlay1 overlay" id="overlay1">
+        <div class="get-direction light-box">
+            <p class="close-btn1 close-btn do-not">
+                <i class="fas fa-xmark"></i>
+            </p>
+            <div class="direction-container">
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Map window end -->
+
     <section class="section" id="main">
         <div class="container">
             <div id="map" style="margin-top: 50px; height: 80vh; border-radius: 10px;"></div>
-<!--            <div class="search">-->
-<!--                <input type="text" class="parking-search" placeholder="Search Parking" style="border: 1px solid #ccc">-->
-<!--            </div>-->
-<!--            <div class="map">-->
-<!--                <img src="--><?php //echo URLROOT ?><!--/images/location.png" alt="">-->
-<!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4231.666368350934!2d79.86014226253688!3d6.902790088271364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259100761b8f3%3A0x78f0a33054ea929b!2sIndependence%20Square%20Parking%20Lot!5e0!3m2!1sen!2slk!4v1697709991816!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
-<!--            </div>-->
+            <!--            <div class="search">-->
+            <!--                <input type="text" class="parking-search" placeholder="Search Parking" style="border: 1px solid #ccc">-->
+            <!--            </div>-->
+            <!--            <div class="map">-->
+            <!--                <img src="--><?php //echo URLROOT ?><!--/images/location.png" alt="">-->
+            <!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4231.666368350934!2d79.86014226253688!3d6.902790088271364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259100761b8f3%3A0x78f0a33054ea929b!2sIndependence%20Square%20Parking%20Lot!5e0!3m2!1sen!2slk!4v1697709991816!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+            <!--            </div>-->
 
             <!-- Search bar -->
-<!--            <input type="search" class="data-search" placeholder="Search..">-->
+            <!--            <input type="search" class="data-search" placeholder="Search..">-->
 
             <!-- Card set -->
-<!--            <div class="user-cards"></div>-->
-<!--            <template class="data-user-template">-->
-<!--                <div class="card" style="padding: 10px;">-->
-<!--                    <a href="" class="tile">-->
-<!--                        <table>-->
-<!--                            <tr>-->
-<!--                                <td class="name" data-header></td>-->
-<!--                                <td class="city" data-des></td>-->
-<!--                                <td>-->
-<!--                                    <form action="--><?php //echo URLROOT?><!--/driver/enterExitParking" method="post" class="enter_exit_to_parking" id="enter_exit_to_parking">-->
-<!--                                        <input type="hidden" id="id" name="id" value="">-->
-<!--                                        <input type="submit" value="Enter" class="btn btn-primary" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">-->
-<!--                                    </form>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </table>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </template>-->
+            <!--            <div class="user-cards"></div>-->
+            <!--            <template class="data-user-template">-->
+            <!--                <div class="card" style="padding: 10px;">-->
+            <!--                    <a href="" class="tile">-->
+            <!--                        <table>-->
+            <!--                            <tr>-->
+            <!--                                <td class="name" data-header></td>-->
+            <!--                                <td class="city" data-des></td>-->
+            <!--                                <td>-->
+            <!--                                    <form action="-->
+            <?php //echo URLROOT?><!--/driver/enterExitParking" method="post" class="enter_exit_to_parking" id="enter_exit_to_parking">-->
+            <!--                                        <input type="hidden" id="id" name="id" value="">-->
+            <!--                                        <input type="submit" value="Enter" class="btn btn-primary" style="background-color: #fcd426; border-radius: 10px; padding: 10px 20px 10px 20px">-->
+            <!--                                    </form>-->
+            <!--                                </td>-->
+            <!--                            </tr>-->
+            <!--                        </table>-->
+            <!--                    </a>-->
+            <!--                </div>-->
+            <!--            </template>-->
         </div>
     </section>
 </main>
@@ -113,11 +133,11 @@
 <!--//    });-->
 <!--</script>-->
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GMAP?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo GMAP ?>"></script>
 <script>
     function initMap() {
         // Initialize the map centered on the user's current location
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             var userLocation = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -143,13 +163,13 @@
 
             // Define multiple locations to be displayed on the map
             var locations = [
-                <?php foreach ($data as $land){
+                <?php foreach ($data as $land) {
                 echo "{ lat: $land->latitude, lng: $land->longitude, name: '$land->name', type: '$land->availability', car: '$land->car', bike: '$land->bike', threeWheel: '$land->threeWheel', url: 'gotoLand/$land->id' },\n";
             }?>
             ];
 
             // Add markers for each location
-            locations.forEach(function(location) {
+            locations.forEach(function (location) {
                 var markerIcon;
                 if (location.type === '1') {
                     markerIcon = '<?php echo URLROOT ?>/public/images/pin-g.png';
@@ -176,17 +196,17 @@
                 });
 
                 // Show InfoWindow when marker is hovered over
-                marker.addListener('mouseover', function() {
+                marker.addListener('mouseover', function () {
                     infoWindow.open(map, marker);
                 });
 
                 // Close InfoWindow when mouse leaves marker
-                marker.addListener('mouseout', function() {
+                marker.addListener('mouseout', function () {
                     infoWindow.close();
                 });
 
                 // Set URL to the marker
-                marker.addListener('click', function() {
+                marker.addListener('click', function () {
                     var markerUrl = location.url;
                     window.location.href = markerUrl;
                 });
@@ -196,4 +216,21 @@
 
     initMap();
 </script>
-<?php require APPROOT.'/views/inc/footer.php'; ?>
+<script>
+    const body = document.querySelector("body"),
+        closeBtn1 = body.querySelector(".close-btn1"),
+        overlay1 = body.querySelector(".overlay1");
+
+    closeBtn1.addEventListener("click", () => {
+        document.querySelector(".get-direction").style.display = "none";
+        document.querySelector(".overlay1").style.display = "none";
+    });
+
+    overlay1.addEventListener("click", (e) => {
+        if (e.target.id === "overlay1") {
+            overlay1.style.display = "none";
+            document.querySelector(".get-direction").style.display = "none";
+        }
+    });
+</script>
+<?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -166,10 +166,7 @@ class Land extends Controller {
         } else {
             // Initial form data
             $data = [
-                'name' => '',
-                'car' => '',
-                'bike' => '',
-                'threeWheel' => ''
+                'name' => ''
             ];
 
             $other_data['notification_count'] = 0;

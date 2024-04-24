@@ -271,35 +271,48 @@ class Driver extends Controller {
                 $data['err'] = 'Start date and time should be greater than current date and time';
             }
 
+            $slotCount = $this->driverModel->getVehicleCapacityByType($_POST['landID'], $this->driverModel->getVehicleTypeByNumber($data['vehicleNumber']));
+
             // Check given time slot is already reserved
-            $reservations = $this->reservationModel->viewReservations($data['landID'], $data['startDate'], $this->driverModel->getVehicleTypeByNumber($data['vehicleNumber']));
-//            die(print_r($reservations));
-            foreach ($reservations as $reservation){
-//                $date = [strtotime($data['startDate'].' '.$data['startTime']), strtotime($reservation->startTime), strtotime($data['endDate'].' '.$data['endTime']), strtotime($reservation->expectedEndTime)];
-//                die(print_r($date));
-                if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
-                    $data['err'] = 'This time slot is already reserved';
-                    break;
+            $slotID = 0;
+            for($slot = 1; $slot <= $slotCount; $slot++){
+                $flag = 0;
+                $reservations = $this->reservationModel->viewReservationBySlotID($slot, $data['landID'], $data['startDate'], $this->driverModel->getVehicleTypeByNumber($data['vehicleNumber']));
+
+                foreach ($reservations as $reservation){
+                    if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+
+                    else if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+
+                    else if (strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+
+                    if (strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
                 }
 
-                else if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->expectedEndTime)){
-                    $data['err'] = 'This time slot is already reserved';
-                    break;
-                }
-
-                else if (strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
-                    $data['err'] = 'This time slot is already reserved';
-                    break;
-                }
-
-                if (strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->expectedEndTime)){
-                    $data['err'] = 'This time slot is already reserved';
+                if ($flag == 0){
+                    $slotID = $slot;
                     break;
                 }
             }
 
+            if ($flag == 1){
+                $data['err'] = 'This time slot is already reserved';
+            }
+
             if(empty($data['err'])){
-                if($this->reservationModel->makeReservation($data)){
+                if($this->reservationModel->makeReservation($data, $slotID)){
                     redirect('driver/makeReservation/'.$data['landID']);
                 }
                 else{
