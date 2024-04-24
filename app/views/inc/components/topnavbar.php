@@ -15,7 +15,11 @@
                     <a class="item" href="<?php echo URLROOT ?>/users/viewProfile"><img src="<?php echo URLROOT ?>/images/user.png" style="width: 30px; height: 30px; border-radius: 50%" alt="<?php echo $_SESSION['user_name'] ?>"></a>
                 <?php } ?>
                 <a class="item" href="<?php echo URLROOT?>/users/notifications"><img src="<?php echo URLROOT ?>/images/bell.svg" style="width: 20px; height: 30px; border-radius: 50%; margin-right: -15px;" alt="<?php echo $_SESSION['user_name'] ?>"></a>
-                <a class="item" href="<?php echo URLROOT?>/driver/scanQRCode"><img src="<?php echo URLROOT ?>/images/scanner.jpg" style="width: 40px; height: 28px; border-radius: 50%; margin-right: -20px; margin-top: 2px" alt="<?php echo $_SESSION['user_name'] ?>"></a>
+
+                <?php if($_SESSION['user_type'] == 'driver'){?>
+                    <a class="item" href="<?php echo URLROOT?>/driver/scanQRCode"><img src="<?php echo URLROOT ?>/images/scanner.jpg" style="width: 40px; height: 28px; border-radius: 50%; margin-right: -20px; margin-top: 2px" alt="<?php echo $_SESSION['user_name'] ?>"></a>
+                <?php } ?>
+
                 <?php if ($other_data['notification_count'] != 0){?>
                     <div class="notification"><?php echo $other_data['notification_count'] ?></div>
                 <?php }?>
