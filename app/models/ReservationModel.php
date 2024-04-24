@@ -17,8 +17,22 @@ class ReservationModel{
         return $reservations;
     }
 
-    public function makeReservation($data){
-        $this->db->query('INSERT INTO booking (landID, driverID, vehicleNumber, startTime, expectedEndTime) VALUES (:landID, :driverID, :vehicleNumber, :startTime, :expectedEndTime)');
+    public function viewReservationBySlotID($slotID, $landID, $date, $vehicleType){
+        $this->db->query('SELECT b.* FROM booking b JOIN vehicle v ON v.vehicleNumber = b.vehicleNumber WHERE landID = :landID AND v.vehicleType = :vehicleType AND DATE(startTime) = :reservationDate AND b.slotID = :slotID');
+        $this->db->bind(':slotID', $slotID);
+        $this->db->bind(':landID', $landID);
+        $this->db->bind(':reservationDate', $date);
+        $this->db->bind(':vehicleType', $vehicleType);
+
+        $reservations = $this->db->resultSet();
+
+        return $reservations;
+    }
+
+    public function makeReservation($data, $slotID){
+//        die(print_r($data['endDate'].' '.$data['endTime']));
+        $this->db->query('INSERT INTO booking (slotID, landID, driverID, vehicleNumber, startTime, expectedEndTime) VALUES (:slotID, :landID, :driverID, :vehicleNumber, :startTime, :expectedEndTime)');
+        $this->db->bind(':slotID', $slotID);
         $this->db->bind(':landID', $data['landID']);
         $this->db->bind(':driverID', $_SESSION['user_id']);
         $this->db->bind(':vehicleNumber', $data['vehicleNumber']);
@@ -31,4 +45,6 @@ class ReservationModel{
             return false;
         }
     }
+
+
 }

@@ -5,7 +5,7 @@ class LandCapacity extends Controller
     {
         $this->middleware = new AuthMiddleware();
         // Only parkingOwners are allowed to access parkingOwner pages
-        $this->middleware->checkAccess(['parkingOwner']);
+        $this->middleware->checkAccess(['parkingOwner', '']);
         $this->landModel = $this->model('LandModel');
     }
 

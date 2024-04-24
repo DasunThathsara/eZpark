@@ -116,6 +116,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     // Function to update reservation list based on returned data
     function updateReservationList(data) {
+        console.log(data);
         // Assuming 'reservation' property exists in the returned data
         const reservationListElement = document.getElementById('reservation-list');
         reservationListElement.innerHTML = ''; // Clear previous content

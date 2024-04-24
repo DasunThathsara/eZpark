@@ -476,4 +476,14 @@ class DriverModel{
 
         return $row->vehicleType;
     }
+
+    // Get vehicle capacity by vehicle type
+    public function getVehicleCapacityByType($landID, $vehicleType){
+        $this->db->query('SELECT '.$vehicleType.' FROM land WHERE id = :id');
+        $this->db->bind(':id', $landID);
+
+        $row = $this->db->single();
+
+        return $row->$vehicleType;
+    }
 }
