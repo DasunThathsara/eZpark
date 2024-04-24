@@ -466,4 +466,14 @@ class DriverModel{
 
         return $row;
     }
+
+    // Get vehicle type using vehicle number
+    public function getVehicleTypeByNumber($vehicleNumber){
+        $this->db->query('SELECT vehicleType FROM vehicle WHERE vehicleNumber = :vehicleNumber');
+        $this->db->bind(':vehicleNumber', $vehicleNumber);
+
+        $row = $this->db->single();
+
+        return $row->vehicleType;
+    }
 }
