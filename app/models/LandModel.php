@@ -116,7 +116,7 @@ class LandModel{
     public function updateSecurityOfficerAvail($data): bool{
         // die(print_r($data));
         // Prepare statement
-        $this->db->query('UPDATE land SET secAvail = :secAvail, car=0,bike=0,threeWheel=0   WHERE uid = :uid and name = :name ');
+        $this->db->query('UPDATE land SET secAvail = :secAvail WHERE uid = :uid and name = :name ');
 
         // Bind values
         $this->db->bind(':name', $data['name']);

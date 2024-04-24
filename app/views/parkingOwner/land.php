@@ -19,7 +19,7 @@
                     <div class="dropdown-content">
                     <?php $parking_index = 0?>
                     <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
-                        <?php for ($i = 0; $i < sizeof($other_data['lands']) - 1; $i++) {
+                        <?php for ($i = 0; $i < sizeof($other_data['lands']); $i++) {
                             if($data['id'] == $other_data['lands'][$i]->id){
                                 $parking_index = $i;
                                 continue;

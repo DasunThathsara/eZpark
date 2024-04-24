@@ -11,7 +11,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Update Price</h1>
+            <h1>Update Capacity</h1>
 
             <?php if (!empty($data['err'])){?>
                 <div class="error-msg">
@@ -67,9 +67,5 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         </div>
     </section>
 </main>
-<script>
-    function confirmSubmit() {
-        return confirm("Are you sure you want to delete this land?");
-    }
-</script>
+
 <?php require APPROOT.'/views/inc/footer.php'; ?>
