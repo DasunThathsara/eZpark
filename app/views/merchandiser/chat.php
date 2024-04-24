@@ -32,9 +32,9 @@
                             <div class="messaging-area" >
                                 <?php foreach($data['chat_history'] as $message){
                                     if($message->senderID == $_SESSION['user_id']){?>
-                                        <div class="right" ><?php echo $message->message?></div>
+                                        <div class="chat-right" ><?php echo $message->message?></div>
                                     <?php } else{?>
-                                        <div class="left" ><?php echo $message->message?></div>
+                                        <div class="chat-left" ><?php echo $message->message?></div>
                                     <?php }
                                     }?>
                             </div>
