@@ -23,7 +23,7 @@ class LandCapacity extends Controller
         if ($capacity['notification_count'] < 10)
             $capacity['notification_count'] = '0'.$capacity['notification_count'];
 
-        $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
+        $this->view($_SESSION['user_type'].'/capacity/viewCapacity', $data, $capacity);
         
     }
 
@@ -73,7 +73,7 @@ class LandCapacity extends Controller
                 ];
             }
 
-            $this->view('parkingOwner/capacity/update', $data, $other_data);
+            $this->view($_SESSION['user_type'].'/capacity/update', $data, $other_data);
         }
     }
 
@@ -117,7 +117,7 @@ class LandCapacity extends Controller
             } else {
                 // Load view with errors
 //                die(print_r($data));
-                $this->view('parkingOwner/capacity/update', $data);
+                $this->view($_SESSION['user_type'].'/capacity/update', $data);
             }
         }
     }
