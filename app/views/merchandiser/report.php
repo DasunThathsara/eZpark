@@ -298,31 +298,19 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             // }
                         ],
                         table:Array.from(Array(data_length), (item, index) => ([
-                            index + 1,
-                            genarateData[index]['driverID'],
-                            genarateData[index]['vehicleType'],
-                            genarateData[index]['startTime'],
-                            genarateData[index]['endTime'],
+                            "\n"+(index + 1)+"\n",
+                            "\n"+genarateData[index]['driverID']+"\n",
+                            "\n"+genarateData[index]['vehicleType']+"\n",
+                            "\n"+genarateData[index]['startTime']+"\n",
+                            "\n"+genarateData[index]['endTime']+"\n",
                             // (genarateData[index]['status'] === 0) ? 'IN' : 'OUT' ,
-                            ((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2),
+                            "\n"+((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2)+"\n",
                             // genarateData[index]['cost'],
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
                           
                         ])),
                           
 
-                            
-                        // style: {
-                        //     margin: { top: 30 },
-                        //     tableWidth: 'auto',
-                        //     headerRowHeight: 30,
-                        //     bodyRowHeight: 20,
-                        //     fontSize: 10,
-                        //     cellPadding: 5,
-                        //     textAlign: 'center',
-                        //     backgroundColor:'red'
-                        // },
-                        
                         
                         additionalRows: [{
                             col1: ' ',

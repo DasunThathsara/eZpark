@@ -98,6 +98,10 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
     var sDate = null;
     var eDate = null;
     var total = null;
+    var carCount = 0;
+    var bikeCount = 0;
+    var threeWheelCount = 0;
+                            
                              
 
 
@@ -145,7 +149,17 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     total += parseFloat(genarateData[i]['cost']);
                 }
                 
-                
+                for(let i = 0; i < data_length ;i++){
+                    if(genarateData[i]['vehicleType'] == 'car'){
+                        carCount++;
+                    }
+                    else if(genarateData[i]['vehicleType'] == 'bike'){
+                        bikeCount++;
+                    }
+                    else if(genarateData[i]['vehicleType'] == 'threeWheel'){
+                        threeWheelCount++;
+                    }
+                }
                 
                 const selectId = document.getElementsByClassName("dropdown-content");
                 
@@ -283,38 +297,59 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             // }
                         ],
                         table:Array.from(Array(data_length), (item, index) => ([
-                            index + 1,
-                            genarateData[index]['driverID'],
-                            genarateData[index]['vehicleType'],
-                            genarateData[index]['startTime'],
-                            genarateData[index]['endTime'],
+                            "\n"+(index + 1 )+"\n",
+                            "\n"+genarateData[index]['driverID']+"\n",
+                            "\n"+genarateData[index]['vehicleType']+"\n",
+                            "\n"+genarateData[index]['startTime']+"\n",
+                            "\n"+genarateData[index]['endTime']+"\n",
                             // (genarateData[index]['status'] === 0) ? 'IN' : 'OUT' ,
-                            ((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2),
-                            genarateData[index]['cost'],
+                            "\n"+((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2)+"\n",
+                            "\n"+genarateData[index]['cost']+"\n",
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
                            
                         ])),
                           
-
-                            
-                        // style: {
-                        //     margin: { top: 30 },
-                        //     tableWidth: 'auto',
-                        //     headerRowHeight: 30,
-                        //     bodyRowHeight: 20,
-                        //     fontSize: 10,
-                        //     cellPadding: 5,
-                        //     textAlign: 'center',
-                        //     backgroundColor:'red'
-                        // },
+                        additionalRows: [
+                        {
+                            col1: 'Car Count :',
+                            col2: carCount.toString(),
+                            col3: ' ',
+                            style: {
+                                fontSize: 13 //optional, default 12
+                            }
+                        },
+                        {
+                            col1: 'Bike Count :',
+                            col2: bikeCount.toString(),
+                            col3: ' ',
+                            style: {
+                                fontSize: 13 //optional, default 12
+                            }
+                        },
+                        {
+                            col1: 'Threewheel Count :',
+                            col2: threeWheelCount.toString(),
+                            col3: ' ',
+                            style: {
+                                fontSize: 13 //optional, default 12
+                            }
+                        },
                         
-                        
-                        additionalRows: [{
+                        {
+                            col1: ' ',
+                            col2: ' ',
+                            col3: ' ',
+                            style: {
+                                fontSize: 13, //optional, default 1
+                               
+                            }
+                        },
+                        {
                             col1: 'Net Fare :',
                             col2: total.toString()+'.00',
                             col3: ' ',
                             style: {
-                                fontSize: 14 //optional, default 12
+                                fontSize: 13 //optional, default 12
                             }
                         },
                         {
@@ -330,9 +365,13 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             col2: (total * 0.85).toString()+'.00' ,
                             col3: ' ',
                             style: {
-                                fontSize: 14 //optional, default 12
+                                fontSize: 13 //optional, default 12
                             }
-                        }],
+                        }
+                        
+
+                        
+                    ],
                         // invDescLabel: "Invoice Note",
                         // invDesc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
                     },
