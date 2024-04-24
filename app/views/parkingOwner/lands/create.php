@@ -109,6 +109,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <div class="description">*Upload deed in PDF format</div>
                     </div>
 
+                    <br><br>
+
                     <!-- Photos -->
                     <div class="form-input-title">Photos:</div>
                     <div class="file-upload-container">

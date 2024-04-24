@@ -445,7 +445,7 @@ class Land extends Controller {
             } else {
                 // Load view with errors
 //                die(print_r($data));
-                $this->view('parkingOwner/lands/create', $data, $other_data);
+                $this->view($_SESSION['user_type'].'/lands/create', $data, $other_data);
             }
 
         } else {
@@ -477,7 +477,7 @@ class Land extends Controller {
 
 
             // Load view
-            $this->view('parkingOwner/lands/create', $data, $other_data);
+            $this->view($_SESSION['user_type'].'/lands/create', $data, $other_data);
         }
     }
 

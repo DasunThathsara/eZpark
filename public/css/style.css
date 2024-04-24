@@ -6,6 +6,7 @@
 @import url("components/dashboard.css");
 @import url("components/dynamicContentTable.css");
 @import url("components/staticContentTable.css");
+@import url("components/chat.css");
 
 /* ---------------- External Styles ---------------- */
 @import url("landingpage.css");
