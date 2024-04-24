@@ -292,7 +292,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             ((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2),
                             genarateData[index]['cost'],
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
-                          
+                           
                         ])),
                           
 
