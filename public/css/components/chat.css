@@ -91,7 +91,7 @@
 
 /* Update your existing CSS with these changes */
 
-.right{
+.chat-right{
     background-color:#edc729;
     color: rgb(13, 13, 13); 
     text-align: right; 
@@ -104,7 +104,7 @@
     border-bottom-right-radius: 0px;
 }
 
-.left{
+.chat-left{
     background-color:#393636; 
     color: #fff; 
     text-align: left; 
