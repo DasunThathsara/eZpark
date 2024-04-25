@@ -38,9 +38,10 @@
 
 .chat-item{
     
-    padding: 5px;
-    height: 30px;
+    padding:3%;
+    height:auto;
     position: relative;
+    display: flex;
     
     
 }
@@ -49,6 +50,12 @@
     height: 25px;
     margin-right: 10px;
     margin-left: 15px;
+    margin: bottom 10px;
+    
+}
+
+.chat-item-text{
+    flex:1;
 }
 
 .chat-item:hover {
@@ -56,14 +63,7 @@
     cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-.chat-item::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 10%; /* Adjust as needed */
-    width: 80%; /* Set width to 70% */
-    border-bottom: 1px solid #ccc; /* Add bottom border */
-}
+
 
 .chat-area{
      
@@ -102,6 +102,7 @@
     word-wrap: break-word; /* Allow word wrapping */
     margin-left: auto;
     border-bottom-right-radius: 0px;
+    
 }
 
 .chat-left{
@@ -182,4 +183,13 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 10px;
+}
+
+.chat-selected {
+    background-color: #d5a209;
+    color: white; /* Change text color to white for better visibility */
+    border-radius: 50px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
 }
