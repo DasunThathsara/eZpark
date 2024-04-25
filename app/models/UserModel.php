@@ -532,14 +532,15 @@ class UserModel{
 
         $results = $this->db->resultSet();
 
+        // die(print_r($results));
         return $results;
     }
 
     // Add notification
-    public function addNotification($notification, $type, $sender, $receiver): bool
+    public function addNotification($notification, $type, $sender, $receiver, $data = ''): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO notification (receiverId, senderId, notificationType, notification, status) VALUES (:receiverId, :senderId, :notificationType, :notification, :status)');
+        $this->db->query('INSERT INTO notification (receiverId, senderId, notificationType, notification, status, data) VALUES (:receiverId, :senderId, :notificationType, :notification, :status, :data)');
 
         // Bind values
         $this->db->bind(':receiverId', $receiver);
@@ -547,6 +548,7 @@ class UserModel{
         $this->db->bind(':notificationType', $type);
         $this->db->bind(':notification', $notification);
         $this->db->bind(':status', 0);
+        $this->db->bind(':data', $data);
 
         // Execute
         if ($this->db->execute()){

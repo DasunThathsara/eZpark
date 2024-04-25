@@ -4,9 +4,9 @@ class LandCapacity extends Controller
     public function __construct()
     {
         $this->middleware = new AuthMiddleware();
-        // Only parkingOwners are allowed to access parkingOwner pages
-        $this->middleware->checkAccess(['parkingOwner']);
+        $this->middleware->checkAccess(['parkingOwner','security']);
         $this->landModel = $this->model('LandModel');
+        $this->userModel = $this->model('UserModel');
     }
 
     // View capacity
@@ -16,6 +16,7 @@ class LandCapacity extends Controller
             'name' => ''
         ];
 
+        // die(print_r($data));
         $capacity = $this->landModel->viewCapacity($data);
 
         $capacity['notification_count'] = 0;
@@ -34,6 +35,7 @@ class LandCapacity extends Controller
                 'vehicle_type' => trim($_GET['vehicle_type'])
             ];
 
+            // die(print_r($data));
             redirect('landCapacity/capacityUpdateForm/'.$data['id'].'/'.$data['vehicle_type']);
         }
         else{
@@ -45,35 +47,96 @@ class LandCapacity extends Controller
 
             $capacity = $this->landModel->viewCapacity($data);
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
-                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
 
             if ($data['vehicle_type'] == 'car'){
                 $data = [
                     'id' => $land_ID,
                     'vehicle_type' => $vehicle_type,
-                    'capacity' => $capacity[0]->car
+                    'capacity' => $capacity[0]->car,
+                    'requestedCapacity' => $capacity[0]->requestedCar
                 ];
             }
             else if ($data['vehicle_type'] == 'bike'){
                 $data = [
                     'id' => $land_ID,
                     'vehicle_type' => $vehicle_type,
-                    'capacity' => $capacity[0]->bike
+                    'capacity' => $capacity[0]->bike,
+                    'requestedCapacity' => $capacity[0]->requestedBike
                 ];
             }
             else if ($data['vehicle_type'] == 'threeWheel'){
                 $data = [
                     'id' => $land_ID,
                     'vehicle_type' => $vehicle_type,
-                    'capacity' => $capacity[0]->threeWheel
+                    'capacity' => $capacity[0]->threeWheel,
+                    'requestedCapacity' => $capacity[0]->requestedThreeWheel
                 ];
             }
 
-            $this->view('parkingOwner/capacity/update', $data, $other_data);
+            // die(print_r($data));
+                $this->view('parkingOwner/capacity/update', $data, $other_data);
         }
+    }
+
+    public function requestedCapacityUpdateForm($land_ID = null, $vehicle_type = null ){
+
+            $data = [
+                'id' => $land_ID,
+                'vehicle_type' => $vehicle_type,
+                'err' => ''
+            ];
+
+            
+            $capacity = $this->landModel->viewCapacity($data);
+
+            // die(print_r($capacity[0]->requestedCar));
+
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+
+            // if($capacity[0]->requestedCar == -1 || $capacity[0]->requestedBike == -1|| $capacity[0]->requestedThreeWheel == -1){
+            //     // die(print_r($capacity[0]->requestedCar));
+            //     // $data['err'] = 'You already recieve the response for that notification';
+            //     echo "gamind";
+
+            // }
+            // else{
+                if ($data['vehicle_type'] == 'car'){
+                    $data = [
+                        'id' => $land_ID,
+                        'vehicle_type' => $vehicle_type,
+                        'capacity' => $capacity[0]->car,
+                        'requestedCapacity' => $capacity[0]->requestedCar
+                    ];
+                }
+                else if ($data['vehicle_type'] == 'bike'){
+                    $data = [
+                        'id' => $land_ID,
+                        'vehicle_type' => $vehicle_type,
+                        'capacity' => $capacity[0]->bike,
+                        'requestedCapacity' => $capacity[0]->requestedBike
+                    ];
+                }
+                else if ($data['vehicle_type'] == 'threeWheel'){
+                    $data = [
+                        'id' => $land_ID,
+                        'vehicle_type' => $vehicle_type,
+                        'capacity' => $capacity[0]->threeWheel,
+                        'requestedCapacity' => $capacity[0]->requestedThreeWheel
+                    ];
+                }
+
+                // die(print_r($other_data));
+                    $this->view('parkingOwner/capacity/requestedUpdate', $data, $other_data);
+            // }
     }
 
     public function capacityUpdate(){
@@ -84,18 +147,17 @@ class LandCapacity extends Controller
 
             $data = [
                 'id' => trim($_POST['id']),
-                'name' => trim($_POST['name']),
                 'vehicle_type' => trim($_POST['vehicle_type']),
                 'capacity' => trim($_POST['capacity']),
+                'requestedCapacity' => trim($_POST['requestedCapacity']),
                 'err' => ''
             ];
 
             // Validate data
-            // Validate package type
             if (empty($data['capacity']) && $data['capacity'] != 0) {
                 $data['err'] = 'Please enter capacity';
-            } else if (!is_numeric($data['capacity'])) {
-                $data['err'] = 'Capacity should be a number';
+            } else if (!is_numeric($data['capacity']) || $data['capacity'] < 0) {
+                $data['err'] = 'Capacity should be a positive number';
             }
 
             // Validate vehicle type
@@ -107,7 +169,6 @@ class LandCapacity extends Controller
 
             // Validation is completed and no error found
             if (empty($data['err'])) {
-                // Register package
                 if ($this->landModel->updateCapacity($data)) {
                     redirect('LandCapacity/viewCapacity/'.$data['id'].'/'.$data['name']);
                 } else {
@@ -115,7 +176,109 @@ class LandCapacity extends Controller
                 }
             } else {
                 // Load view with errors
-//                die(print_r($data));
+
+                $this->view('parkingOwner/capacity/update', $data , $other_data);
+            }
+        }
+    }
+
+    public function requestCapacityUpdate(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $requestedCapacity = $_POST['requestedCapacity'];
+            $capacity = $_POST['capacity'];
+            $land_ID = $_POST['id'];
+            $owner_id = $this->landModel->getLandOwnerID($_POST['id']);
+
+            // die(print_r($requestedCapacity));
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            $data = [
+                'id' => trim($_POST['id']),
+                'capacity' => trim($_POST['capacity']),
+                'vehicle_type' => trim($_POST['vehicle_type']),
+                'requestedCapacity' => trim($_POST['requestedCapacity']),
+                'err' => ''
+            ];
+
+            if (empty($data['requestedCapacity']) && $data['requestedCapacity'] != 0) {
+                $data['err'] = 'Please enter capacity';
+            } else if (!is_numeric($data['requestedCapacity']) || $data['requestedCapacity'] < 0) {
+                $data['err'] = 'Capacity should be a positive number';
+                // die(print_r($data));
+            }
+        
+            if (empty($data['err'])) {
+                // die(print_r($data));
+                $this->landModel->updateRequestedCapacity($data);
+                $this->userModel->addNotification('Request to Change Capacity in (Land ID = '.$land_ID.') from '.$_SESSION['user_name'], 'requestChangeCapacity', $_SESSION['user_id'], $owner_id, $land_ID.'/'.$data['vehicle_type']);
+                redirect('landCapacity/capacityUpdateForm/'.$data['id'].'/'.$data['vehicle_type']);    
+
+            } else {
+                // Load view with errors
+                $this->view('parkingOwner/capacity/update', $data , $other_data);
+            }
+
+        }            
+    }
+
+    public function acceptRequestedCapacity(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => trim($_POST['id']),
+                'vehicle_type' => trim($_POST['vehicle_type']),
+                'requestedCapacity' => trim($_POST['requestedCapacity']),
+                'err' => ''
+            ];
+
+            // Validation is completed and no error found
+            if (empty($data['err'])) {
+                // die(print_r($data));
+                if ($this->landModel->acceptRequestedCapacity($data)) {
+                    redirect('LandCapacity/viewCapacity/'.$data['id'].'/'.$data['name']);
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+
+                $this->view('parkingOwner/capacity/update', $data);
+            }
+        }
+    }
+
+    public function rejectRequestedCapacity(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+            // input data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => trim($_POST['id']),
+                'vehicle_type' => trim($_POST['vehicle_type']),
+                'requestedCapacity' => trim($_POST['requestedCapacity']),
+                'err' => ''
+            ];
+
+            if (empty($data['err'])) {
+                
+                if ($this->landModel->rejectRequestedCapacity($data)) {
+                    die(print_r($data));
+                    redirect('LandCapacity/viewCapacity/'.$data['id'].'/'.$data['name']);
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+
                 $this->view('parkingOwner/capacity/update', $data);
             }
         }

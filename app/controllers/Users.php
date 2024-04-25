@@ -1012,6 +1012,8 @@ class Users extends Controller{
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
+        // die(print_r($notifications['list']));
+
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
