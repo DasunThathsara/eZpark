@@ -217,7 +217,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             {
                                 title: "#",
                                 style: {
-                                width: 10,
+                                width: 8,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -226,9 +226,9 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             },
                             
                             {
-                                title: "Driver ID",
+                                title: "Vehicle Number",
                                 style: {
-                                width: 20,
+                                width: 30,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -238,7 +238,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             { 
                                 title: "Vehicle Type",
                                 style: {
-                                width: 25,
+                                width: 27,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -268,7 +268,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             { 
                                 title: "Total time (h)",
                                 style: {
-                                width: 30,
+                                width: 25,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -278,7 +278,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             { 
                                 title: "Charge(Rs.)",
                                 style: {
-                                width: 30,
+                                width: 25,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -298,7 +298,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                         ],
                         table:Array.from(Array(data_length), (item, index) => ([
                             "\n"+(index + 1 )+"\n",
-                            "\n"+genarateData[index]['driverID']+"\n",
+                            "\n"+genarateData[index]['vehicleNumber']+"\n",
                             "\n"+genarateData[index]['vehicleType']+"\n",
                             "\n"+genarateData[index]['startTime']+"\n",
                             "\n"+genarateData[index]['endTime']+"\n",
