@@ -80,7 +80,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <?php echo $other_data[0]->bike?>
                                         </div>
                                         <div class="right">
-                                            <form action="<?php echo URLROOT ?>/landCapacity/capacityUpdateForm" method="get">
+                                        <form action="<?php echo URLROOT ?>/landCapacity/capacityUpdateForm" method="get">
                                                 <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
                                                 <input type="text" name="name" id="name" hidden value="<?php echo $data['name'] ?>" />
                                                 <input type="text" name="vehicle_type" id="vehicle_type" hidden value="bike" />

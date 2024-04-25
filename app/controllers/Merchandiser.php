@@ -21,12 +21,15 @@ class Merchandiser extends Controller {
             'total_income' => $this->landModel->getTotalIncome()
         ];
 
-        $lands['notification_count'] = 0;
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();      //changed
 
-        if ($lands['notification_count'] < 10)
-            $lands['notification_count'] = '0'.$lands['notification_count'];
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
-        $this->view('merchandiser/index', $data, $lands);
+        $notifications['lands'] = $lands;
+
+        $this->view('merchandiser/index', $data, $notifications);   //changed
     }
 
         // --------------------------------------- Lands ---------------------------------------
@@ -34,7 +37,11 @@ class Merchandiser extends Controller {
     public function lands(){
         $lands = $this->landModel->viewLands();
 
-        $other_data['notification_count'] = 0;
+        //$other_data['notification_count'] = 0;
+        //$notifications['list'] = $this->userModel->viewNotifications();
+        //$notifications['notification_count'] = $this->userModel->getNotificationCount();
+        $other_data['list'] = $this->userModel->viewNotifications();
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
