@@ -111,11 +111,40 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
         return landId;
         // console.log(landId);
     }
+    
 
     function selectDate() {
         sDate = document.getElementById('start_date').value;
         eDate = document.getElementById('end_date').value;
-        
+
+        var startDate = new Date(sDate);
+        var endDate = new Date(eDate);
+        var currentDate = new Date();
+        startDate.setHours(0, 0, 0, 0);
+        endDate.setHours(0, 0, 0, 0);
+        currentDate.setHours(0, 0, 0, 0);
+
+        // Check if start date is greater than current date
+        if (startDate > currentDate ) {
+            alert("Start date cannot be greater than current date");
+            document.getElementById("start_date").value = "";
+            return;
+        }
+
+        // Check if end date is greater than current date
+        if (endDate > currentDate) {
+            alert("End date cannot be greater than current date");
+            document.getElementById("end_date").value = "";
+            return;
+        }
+
+        // Check if end date is less than start date
+        if (endDate < startDate ) {
+            alert("End date cannot be less than start date");
+            document.getElementById("end_date").value = "";
+            return;
+        }
+            
     
     }
 
@@ -127,7 +156,14 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
     
     function generatePDF() {
         
-
+        if (!landId) {
+        alert("Please select a parking");
+        return;
+        }
+        if (!sDate || !eDate) {
+            alert("Please select both start date and end date");
+            return;
+        }
 
         $.ajax({
             url: '<?php echo URLROOT ?>/report/viewReport',
@@ -161,7 +197,23 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     }
                 }
                 
-                const selectId = document.getElementsByClassName("dropdown-content");
+                //const selectId = document.getElementsByClassName("dropdown-content");
+
+                console.log(data_length);
+                if (data_length > 0) {
+                    document.getElementById('message').textContent = 'Your report is generated!';
+                    document.getElementById('gen').style.display = 'none';
+                    document.getElementById('view').style.display = 'inline-block';
+                    document.getElementById('down').style.display = 'inline-block';
+                } 
+                else {
+                    document.getElementById('message').textContent = 'No vehicles parked during the selected date range';
+                    document.getElementById('gen').style.display = 'inline-block';
+                    document.getElementById('view').style.display = 'none';
+                    document.getElementById('down').style.display = 'none';
+                    
+                    
+                }
                 
 
                 var props = {
@@ -380,18 +432,19 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     },
                     pageEnable: true,
                     pageLabel: "Page ",
-                };                
+                };  
+                              
                 pdfObject = jsPDFInvoiceTemplate.default(props);
                 console.log("Object generated: ", pdfObject);
+                
+
+ 
             },
             error: function (xhr, status, error) {
             console.error("AJAX error:", xhr.responseText);
             }
         });
-        document.getElementById('message').textContent = 'Your report is generated!';
-        document.getElementById('gen').style.display = 'none';
-        document.getElementById('view').style.display = 'inline-block';
-        document.getElementById('down').style.display = 'inline-block';
+
     }
 
     /* view pdf */
@@ -400,6 +453,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
         console.log(pdfObject);
         if (!pdfObject) {
             return console.log('No PDF Object');
+
         }
 
         var fileURL = URL.createObjectURL(pdfObject.blob);
