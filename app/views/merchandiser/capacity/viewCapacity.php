@@ -14,7 +14,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <h1>Capacity</h1>
 
             <br><br>
-            <a class="add-btn" href="<?php echo URLROOT ?>/package/packageRegister/<?php echo $data['id'] ?>" style="font-weight: 1000; font-size: 20px">+</a>
+            <!--<a class="add-btn" href="<?php echo URLROOT ?>/package/packageRegister/<?php echo $data['id'] ?>" style="font-weight: 1000; font-size: 20px">+</a>-->
             
             <?php if (sizeof($data) == 1) {?>
                 <div class="emptyVehicle">You have no any registered vehicles</div>

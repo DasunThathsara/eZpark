@@ -16,10 +16,10 @@
             <?php if ($_SESSION['user_type'] == 'driver'){ ?>
                 <a href="<?php echo URLROOT ?>/driver/booking">
                     <?php if ($section == 'booking'){?>
-                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Bookings</div>
+                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Reservations</div>
                     <?php }
                     else{ ?>
-                        <div class="item"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Bookings</div>
+                        <div class="item"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Reservations</div>
                     <?php } ?>
                 </a>
 

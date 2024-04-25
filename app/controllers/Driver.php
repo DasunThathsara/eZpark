@@ -9,6 +9,7 @@ class Driver extends Controller {
         $this->vehicleLandModel = $this->model('VehicleLandModel');
         $this->userModel = $this->model('UserModel');
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
+        $this->reservationModel = $this->model('ReservationModel');
     }
 
     public function index(){
@@ -193,6 +194,18 @@ class Driver extends Controller {
 
 
     // ------------------------ Scan QR Code ------------------------
+    // Open QR scanner
+    public function scanQRCode(){
+        $data = [];
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('driver/scanQRCode', $data, $other_data);
+    }
+
 
     // ------------------------ Start Time ------------------------
 
@@ -212,5 +225,162 @@ class Driver extends Controller {
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
         $this->view('driver/paymentSuccessful', $vehicles, $other_data);
-    } 
+    }
+
+    // ------------------------ Reservation ------------------------
+    public function makeReservation($landID = null){
+        if($landID == null && !isset($_POST['landID'])){
+            redirect('page/404');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+
+            $data = [
+                'landID' => trim($_POST['landID']),
+                'vehicles' => $this->driverModel->viewVehicles(),
+                'startDate' => trim($_POST['reservationSDate']),
+                'startTime' => trim($_POST['reservationSTime']),
+                'endDate' => trim($_POST['reservationEDate']),
+                'endTime' => trim($_POST['reservationETime']),
+                'vehicleNumber' => trim($_POST['vehicleNumber']),
+                'err' => ''
+            ];
+
+            if (empty($data['startDate'])){
+                $data['err'] = 'Please select a start date';
+            }
+
+            if (empty($data['startTime'])){
+                $data['err'] = 'Please select a start time';
+            }
+
+            if (empty($data['endDate'])){
+                $data['err'] = 'Please select an end date';
+            }
+
+            if (empty($data['endTime'])){
+                $data['err'] = 'Please select an end time';
+            }
+
+            if (empty($data['vehicleNumber'])){
+                $data['err'] = 'Please select a vehicle';
+            }
+
+            // Check start date and time < end date and time
+            if (strtotime($data['startDate'].' '.$data['startTime']) > strtotime($data['endDate'].' '.$data['endTime'])){
+                $data['err'] = 'End date and time should be greater than start date and time';
+            }
+
+            // Check start date and time > current date and time
+            if (strtotime($data['startDate'].' '.$data['startTime']) < time()){
+                $data['err'] = 'Start date and time should be greater than current date and time';
+            }
+
+            $slotCount = $this->driverModel->getVehicleCapacityByType($_POST['landID'], $this->driverModel->getVehicleTypeByNumber($data['vehicleNumber']));
+
+            // Check given time slot is already reserved
+            $slotID = 0;
+            for($slot = 1; $slot <= $slotCount; $slot++){
+                $flag = 0;
+                $reservations = $this->reservationModel->viewReservationBySlotID($slot, $data['landID'], $data['startDate'], $this->driverModel->getVehicleTypeByNumber($data['vehicleNumber']));
+
+                foreach ($reservations as $reservation){
+                    if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+
+                    else if (strtotime($data['startDate'].' '.$data['startTime']) >= strtotime($reservation->startTime) && strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+
+                    else if (strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) <= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+
+                    if (strtotime($data['startDate'].' '.$data['startTime']) <= strtotime($reservation->startTime) && strtotime($data['endDate'].' '.$data['endTime']) >= strtotime($reservation->expectedEndTime)){
+                        $flag = 1;
+                        break;
+                    }
+                }
+
+                if ($flag == 0){
+                    $slotID = $slot;
+                    break;
+                }
+            }
+
+            if ($flag == 1){
+                $data['err'] = 'This time slot is already reserved';
+            }
+
+            if(empty($data['err'])){
+                if($this->reservationModel->makeReservation($data, $slotID)){
+                    redirect('driver/makeReservation/'.$data['landID']);
+                }
+                else{
+                    $data['err'] = 'Something went wrong';
+                    $this->view('driver/makeReservation', $data, $other_data);
+                }
+            }
+            else {
+                // Load with errors
+                $this->view('driver/makeReservation', $data, $other_data);
+            }
+        }
+
+        else{
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            $data = [
+                'landID' => $landID,
+                'vehicles' => $this->driverModel->viewVehicles(),
+                'vehicle' => '',
+                'reservation' => '',
+                'startDate' => '',
+                'startTime' => '',
+                'endDate' => '',
+                'endTime' => '',
+                'vehicleNumber' => '',
+                'err' => ''
+            ];
+
+            $this->view('driver/makeReservation', $data, $other_data);
+        }
+    }
+
+    public function findReservation($landID = null){
+        if($landID == null && !isset($_POST['landID'])){
+            redirect('page/404');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Submitted form data
+
+            $other_data['notification_count'] = 0;
+
+            if ($other_data['notification_count'] < 10)
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            $data = [
+                'landID' => trim($_POST['landID']),
+                'reservations' => $this->reservationModel->viewReservations(trim($_POST['landID']), trim($_POST['reservationDate']), trim($_POST['vehicleType'])),
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($data);
+        }
+    }
 }
