@@ -227,9 +227,9 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             },
                             
                             {
-                                title: "Driver ID",
+                                title: "Vehicle Number ",
                                 style: {
-                                width: 30,
+                                width: 35,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -299,7 +299,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                         ],
                         table:Array.from(Array(data_length), (item, index) => ([
                             "\n"+(index + 1)+"\n",
-                            "\n"+genarateData[index]['driverID']+"\n",
+                            "\n"+genarateData[index]['vehicleNumber']+"\n",
                             "\n"+genarateData[index]['vehicleType']+"\n",
                             "\n"+genarateData[index]['startTime']+"\n",
                             "\n"+genarateData[index]['endTime']+"\n",
