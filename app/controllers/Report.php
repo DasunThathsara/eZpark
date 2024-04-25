@@ -3,8 +3,9 @@ class Report extends Controller {
     public function __construct(){
         $this->middleware = new AuthMiddleware();
         // Only parkingOwner are allowed to access driver pages
-        $this->middleware->checkAccess(['parkingOwner']);
-        $this->parkingOwnerModel = $this->model('parkingOwnerModel');
+        $this->middleware->checkAccess(['parkingOwner', 'merchandiser']);
+        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
+        $this->merchandiserModel = $this->model('MerchandiserModel');
         // $this->landModel = $this->model('LandModel');
     }
 
@@ -18,12 +19,14 @@ class Report extends Controller {
         $arr['sdate'] = $sTime;
         $arr['edate'] = $eTime;
 
-        $data = $this->parkingOwnerModel->viewReport($arr);
+        if ($_SESSION['user_type'] == 'merchandiser'){
+            $data = $this->merchandiserModel->viewReport($arr);
+        }
+        else if ($_SESSION['user_type'] == 'parkingOwner'){
+            $data = $this->parkingOwnerModel->viewReport($arr);
+        }
+        
 
         echo json_encode($data);
-
-        // die(print_r($data));
-        // $this->view('parkingOwner/report', $data);
     }
-    
 }

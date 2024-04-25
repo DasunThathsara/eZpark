@@ -510,6 +510,7 @@ class UserModel{
 
     // Get notification count
     public function getNotificationCount(){
+
         if ($_SESSION['user_type'] == 'admin')
             $this->db->query('SELECT COUNT(*) AS notificationCount FROM notification WHERE (receiverId = :receiverId OR receiverId = 0) AND status = 0');
         else

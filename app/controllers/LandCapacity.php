@@ -4,7 +4,7 @@ class LandCapacity extends Controller
     public function __construct()
     {
         $this->middleware = new AuthMiddleware();
-        $this->middleware->checkAccess(['parkingOwner','security']);
+        $this->middleware->checkAccess(['parkingOwner','merchandiser','security']);
         $this->landModel = $this->model('LandModel');
         $this->userModel = $this->model('UserModel');
     }
@@ -19,12 +19,19 @@ class LandCapacity extends Controller
         // die(print_r($data));
         $capacity = $this->landModel->viewCapacity($data);
 
-        $capacity['notification_count'] = 0;
+        $capacity['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($capacity['notification_count'] < 10)
             $capacity['notification_count'] = '0'.$capacity['notification_count'];
 
-        $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
+        // $this->view($_SESSION['user_type'].'/capacity/viewCapacity', $data, $capacity);
+        
+        if ($_SESSION['user_type'] == 'security'){
+            $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
+        }else{    
+            $this->view($_SESSION['user_type'].'/capacity/viewCapacity', $data, $capacity);
+        }
+        
     }
 
     public function capacityUpdateForm($land_ID = null, $vehicle_type = null){
@@ -78,8 +85,11 @@ class LandCapacity extends Controller
                 ];
             }
 
-            // die(print_r($data));
+            if ($_SESSION['user_type'] == 'security'){
                 $this->view('parkingOwner/capacity/update', $data, $other_data);
+            }else{    
+                $this->view($_SESSION['user_type'].'/capacity/update', $data, $other_data);
+            }
         }
     }
 
@@ -102,41 +112,33 @@ class LandCapacity extends Controller
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
 
-            // if($capacity[0]->requestedCar == -1 || $capacity[0]->requestedBike == -1|| $capacity[0]->requestedThreeWheel == -1){
-            //     // die(print_r($capacity[0]->requestedCar));
-            //     // $data['err'] = 'You already recieve the response for that notification';
-            //     echo "gamind";
-
-            // }
-            // else{
-                if ($data['vehicle_type'] == 'car'){
-                    $data = [
-                        'id' => $land_ID,
-                        'vehicle_type' => $vehicle_type,
-                        'capacity' => $capacity[0]->car,
-                        'requestedCapacity' => $capacity[0]->requestedCar
-                    ];
-                }
-                else if ($data['vehicle_type'] == 'bike'){
-                    $data = [
-                        'id' => $land_ID,
-                        'vehicle_type' => $vehicle_type,
-                        'capacity' => $capacity[0]->bike,
-                        'requestedCapacity' => $capacity[0]->requestedBike
-                    ];
-                }
-                else if ($data['vehicle_type'] == 'threeWheel'){
-                    $data = [
-                        'id' => $land_ID,
-                        'vehicle_type' => $vehicle_type,
-                        'capacity' => $capacity[0]->threeWheel,
-                        'requestedCapacity' => $capacity[0]->requestedThreeWheel
-                    ];
-                }
+            if ($data['vehicle_type'] == 'car'){
+                $data = [
+                    'id' => $land_ID,
+                    'vehicle_type' => $vehicle_type,
+                    'capacity' => $capacity[0]->car,
+                    'requestedCapacity' => $capacity[0]->requestedCar
+                ];
+            }
+            else if ($data['vehicle_type'] == 'bike'){
+                $data = [
+                    'id' => $land_ID,
+                    'vehicle_type' => $vehicle_type,
+                    'capacity' => $capacity[0]->bike,
+                    'requestedCapacity' => $capacity[0]->requestedBike
+                ];
+            }
+            else if ($data['vehicle_type'] == 'threeWheel'){
+                $data = [
+                    'id' => $land_ID,
+                    'vehicle_type' => $vehicle_type,
+                    'capacity' => $capacity[0]->threeWheel,
+                    'requestedCapacity' => $capacity[0]->requestedThreeWheel
+                ];
+            }
 
                 // die(print_r($other_data));
-                    $this->view('parkingOwner/capacity/requestedUpdate', $data, $other_data);
-            // }
+                $this->view('parkingOwner/capacity/requestedUpdate', $data, $other_data);
     }
 
     public function capacityUpdate(){
@@ -144,6 +146,11 @@ class LandCapacity extends Controller
             // Submitted form data
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
             $data = [
                 'id' => trim($_POST['id']),
@@ -177,7 +184,11 @@ class LandCapacity extends Controller
             } else {
                 // Load view with errors
 
-                $this->view('parkingOwner/capacity/update', $data , $other_data);
+                if ($_SESSION['user_type'] == 'security'){
+                    $this->view('parkingOwner/capacity/update', $data, $other_data);
+                }else{    
+                    $this->view($_SESSION['user_type'].'/capacity/update', $data, $other_data);
+                }
             }
         }
     }
@@ -192,10 +203,10 @@ class LandCapacity extends Controller
             $owner_id = $this->landModel->getLandOwnerID($_POST['id']);
 
             // die(print_r($requestedCapacity));
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
-                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
             $data = [
                 'id' => trim($_POST['id']),
@@ -232,6 +243,12 @@ class LandCapacity extends Controller
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+            
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
             $data = [
                 'id' => trim($_POST['id']),
                 'vehicle_type' => trim($_POST['vehicle_type']),
@@ -250,7 +267,7 @@ class LandCapacity extends Controller
             } else {
                 // Load view with errors
 
-                $this->view('parkingOwner/capacity/update', $data);
+                $this->view('parkingOwner/capacity/update', $data ,$other_data);
             }
         }
     }
@@ -260,6 +277,11 @@ class LandCapacity extends Controller
             // Submitted form data
             // input data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
             $data = [
                 'id' => trim($_POST['id']),
@@ -271,7 +293,6 @@ class LandCapacity extends Controller
             if (empty($data['err'])) {
                 
                 if ($this->landModel->rejectRequestedCapacity($data)) {
-                    die(print_r($data));
                     redirect('LandCapacity/viewCapacity/'.$data['id'].'/'.$data['name']);
                 } else {
                     die('Something went wrong');
@@ -279,7 +300,7 @@ class LandCapacity extends Controller
             } else {
                 // Load view with errors
 
-                $this->view('parkingOwner/capacity/update', $data);
+                $this->view('parkingOwner/capacity/update', $data ,$other_data);
             }
         }
     }

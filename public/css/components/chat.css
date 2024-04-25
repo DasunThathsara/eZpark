@@ -1,0 +1,195 @@
+.chat-container{
+    display: flex;
+    justify-content: space-between; 
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row; 
+    background:none ;
+    border-radius: 0px;
+    
+            
+
+}
+
+.chat-list{
+    border-radius: 0px; 
+    width: 30%;
+    background: #fff;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.chat-list-header{
+    background:#fff;
+    justify-content: center;
+    display: flex;
+    
+    height: 40px;
+    font-weight: bold; /* Make text bold */
+    text-align: left; /* Center align text */
+    font-size: 20px; /* Set font size */
+    padding: 10px;
+
+    
+    
+    
+}
+
+.chat-item{
+    
+    padding:3%;
+    height:auto;
+    position: relative;
+    display: flex;
+    
+    
+}
+
+.chat-item img{
+    height: 25px;
+    margin-right: 10px;
+    margin-left: 15px;
+    margin: bottom 10px;
+    
+}
+
+.chat-item-text{
+    flex:1;
+}
+
+.chat-item:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+
+
+.chat-area{
+     
+    width: 70%;
+    
+}
+
+/* .messaging-area{
+    height: calc(70vh - 50px);
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+} */
+
+.messaging-area {
+    height: calc(70vh - 50px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: #f7f6f6;
+    border-radius: 10px;
+}
+
+/* Update your existing CSS with these changes */
+
+.chat-right{
+    background-color:#edc729;
+    color: rgb(13, 13, 13); 
+    text-align: right; 
+    padding: 10px; 
+    border-radius: 10px; 
+    margin: 15px; 
+    max-width: 70%; /* Set a fixed maximum width */
+    word-wrap: break-word; /* Allow word wrapping */
+    margin-left: auto;
+    border-bottom-right-radius: 0px;
+    
+}
+
+.chat-left{
+    background-color:#393636; 
+    color: #fff; 
+    text-align: left; 
+    padding: 10px; 
+    border-radius: 10px; 
+    margin: 15px; 
+    max-width: 70%; /* Set a fixed maximum width */
+    word-wrap: break-word; /* Allow word wrapping */
+    margin-right: auto;
+    border-top-left-radius: 0px;
+}
+
+
+/* .chat-send-area{
+    display: flex; 
+    justify-content: space-between;
+} */
+
+
+/* Add these styles to your existing CSS */
+
+.chat-send-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+}
+
+
+
+
+
+.chat-form{
+    display: flex; 
+    justify-content: space-around; 
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+
+.chat-img {
+    width: 50%; /* Decrease image size */
+    height: 60%; /* Decrease image size */
+    border-radius: 80%; /* Make image circular */
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: auto;
+}
+
+.chat-p {
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center align text */
+    font-size: 25px; /* Set font size */
+    margin-top: 20px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    color: #353430;
+}
+
+.chat-item.selected:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+
+.chat-list-header {
+    display: flex;
+    align-items: center;
+}
+
+#chatSearch {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-selected {
+    background-color: #d5a209;
+    color: white; /* Change text color to white for better visibility */
+    border-radius: 50px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+}

@@ -74,7 +74,7 @@ class Merchandiser extends Controller {
     }
 
         // --------------------------------- Parking Capacity ----------------------------------
-    // View all packages
+    // View capacity
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
 
@@ -87,18 +87,24 @@ class Merchandiser extends Controller {
     }
 
         // -------------------------------------- Report ---------------------------------------
-        public function viewReport(){
-            $data = [
-                'title' => 'Home page'
-            ];
-    
-            $other_data['notification_count'] = 0;
-    
-            if ($other_data['notification_count'] < 10)
-                $other_data['notification_count'] = '0'.$other_data['notification_count'];
-    
-            $this->view('merchandiser/report', $data, $other_data);
-        }
+    public function viewReport($land_ID = null){
+        $data = [
+            'title' => 'Home page',
+            'landID' => $land_ID,
+            'lands' => $this->landModel->viewLands()
+        ];
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+            // echo "<pre>";
+            // die(print_r($data));
+            // echo "</pre>";
+
+        $this->view('merchandiser/report', $data, $other_data);
+    }
 
             // ------------------------------------ Securities -------------------------------------
     // View all securities
@@ -107,8 +113,10 @@ class Merchandiser extends Controller {
             'id' => $landID
         ];
 
-        $other_data = $this->securityModel->viewSecurities($landID);
+        $securityDetails = $this->securityModel->viewSecurities($landID);
 
+        $data['securityDetails'] = $securityDetails;
+        
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
@@ -116,5 +124,37 @@ class Merchandiser extends Controller {
 
         $this->view('merchandiser/securities', $data, $other_data);
     }
+
+    // remove assinged security
+    public function securityRemove(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $land_ID = $_POST['land_id'];
+            $sec_id = $_POST['sec_id'];
+
+            $this->merchandiserModel->securityRemove($sec_id , $land_ID);
+
+            // Send notification to the landowner
+            // $this->userModel->addNotification('You unassigned from the land was declined by '.$_SESSION['user_name'], 'parkingownerUnassignFromLand', $this->landModel->getLandOwnerID($_POST['id']), $this->landModel->getLandOwnerID($_POST['id']));
+
+            redirect('merchandiser/securities/'.$land_ID);
+        }
+    }
+
+    public function landAccessControl($sec_id = null){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // die(print_r($land_ID));
+
+            if ($this->merchandiserModel->landAccessControl($sec_id)){
+                $land_ID = $_GET['land_id'];
+                redirect($_SESSION['userType'].'/securities/'.$land_ID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    } 
 
 }

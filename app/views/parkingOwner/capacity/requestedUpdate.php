@@ -20,7 +20,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
             <br><br>
             <?php if ($data['requestedCapacity'] == -1) {?>
-                <div class="emptyLand">You already recieve the response for that notification</div>
+                <div class="emptyLand">You have already received the response for that notification.</div>
             <?php }
             else {?>
             <h1>Update Capacity</h1>

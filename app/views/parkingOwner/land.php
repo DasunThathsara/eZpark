@@ -19,7 +19,7 @@
                     <div class="dropdown-content">
                     <?php $parking_index = 0?>
                     <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
-                        <?php for ($i = 0; $i < sizeof($other_data['lands']) - 1; $i++) {
+                        <?php for ($i = 0; $i < sizeof($other_data['lands']); $i++) {
                             if($data['id'] == $other_data['lands'][$i]->id){
                                 $parking_index = $i;
                                 continue;
@@ -149,6 +149,25 @@
                             </div>
                         </div>
                     </a>
+
+                    <!-- Card 7 -->
+                    <a class="card-link" id="generateBtn">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img style="transform: translateY(15px)" src="<?php echo URLROOT ?>/images/QR.png" alt="">
+                                        </div>
+                                        <div class="bottom-row"></div>
+                                    </div>
+                                </div>
+                                <div style="transform: translateY(-20px)" class="right-col" id="monthly-income">
+                                    <p style="font-size: 15px; transform: translateY(8px);">View <br />Parking QR</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="charts">
@@ -267,7 +286,7 @@
                 legend: {display: false},
                 title: {
                     display: true,
-                    text: "Vehicle Count"
+                    text: "Income Distribution"
                 }
             }
         });
@@ -292,32 +311,63 @@
                 }
             }
         });
+    </script>
 
-
-
-        // ---------------------------------------------- Toggle button ----------------------------------------------
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('toggleButton').addEventListener('change', function () {
-                var isChecked = this.checked;
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#toggleButton').change(function () {
+                var isChecked = $(this).prop('checked');
                 console.log("Checkbox is checked: " + isChecked);
-
-                fetch('<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>?isChecked=' + isChecked, {
+                $.ajax({
+                    url: '<?php echo URLROOT?>/land/changeAvailability/<?php echo $data["id"]?>',
                     method: 'GET',
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        console.log("Fetch success:", data);
-                    })
-                    .catch(error => {
-                        console.error("Fetch error:", error);
-                    });
+                    data: { isChecked: isChecked },
+                    success: function (response) {
+                        console.log("AJAX success:", response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error:", xhr.responseText);
+                    }
+                });
             });
         });
     </script>
+
+
+
+    <!-- Generate QR code-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            generateAndDownloadQRCode("<?php echo URLROOT?>/driver/gotoland/<?php echo $data['id']?>");
+        });
+
+        function generateAndDownloadQRCode(url) {
+            // Create a new QRCode instance
+            var qrcode = new QRCode(document.getElementById("qrcode"), url);
+
+            // Get the base64 encoded PNG of the QR code
+            var base64ImageData = qrcode._el.querySelector("img").getAttribute("src");
+
+            // Convert the base64 data into a Blob
+            var byteCharacters = atob(base64ImageData.replace(/^data:image\/(png|jpeg|jpg);base64,/, ''));
+            var byteNumbers = new Array(byteCharacters.length);
+            for (var i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            var byteArray = new Uint8Array(byteNumbers);
+            var blob = new Blob([byteArray], { type: 'image/png' });
+
+            // Create a temporary anchor element to trigger the download
+            var downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = 'parking_<?php echo $data['id']?>_QR_code.png';
+
+            // Trigger download
+            downloadLink.click();
+        }
+    </script>
+    <div id="qrcode" style="display: none;"></div>
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

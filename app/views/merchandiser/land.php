@@ -19,13 +19,13 @@
                     <button class="dropbtn">Select Parking</button>
                     <div class="dropdown-content">
                     <?php $parking_index = 0?>
-                    <a href="<?php echo URLROOT ?>/parkingOwner/index">Main Dashboard</a>
+                    <a href="<?php echo URLROOT ?>/merchandiser/index">Main Dashboard</a>
                         <?php for ($i = 0; $i < sizeof($other_data) - 1; $i++) {
                             if($data['id'] == $other_data[$i]->id){
                                 $parking_index = $i;
                                 continue;
                             }?>     
-                            <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
+                            <a href="<?php echo URLROOT ?>/merchandiser/gotoLand/<?php echo $other_data[$i]->id ?>"><?php echo $other_data[$i]->name ?></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -80,42 +80,8 @@
                         </div>
                     </a>
 
-                    <!-- Card 3
-                    <a class="card-link" href="<?php echo URLROOT ?>/land/prices/<?php echo $data['id'] ?>">
-                        <div class="card">
-                            <div class="row">
-                                <div class="left-col">
-                                    <div class="sub-row">
-                                        <div class="top-row">
-                                        <img style="transform: translateY(10px)" src="<?php echo URLROOT ?>/images/price.svg" alt="">
-                                        </div>
-                                        <div class="bottom-row"></div>
-                                    </div>
-                                </div>
-                                <div style="transform: translateY(7px)" class="right-col">Price Rate</div>
-                            </div>
-                        </div>
-                    </a> -->
-
-                    <!-- Card 4
-                    <a class="card-link" href="<?php echo URLROOT ?>/package/viewPackages/<?php echo $data['id'] ?>">
-                        <div class="card">
-                            <div class="row">
-                                <div class="left-col">
-                                    <div class="sub-row">
-                                        <div class="top-row">
-                                            <img src="<?php echo URLROOT ?>/images/package.svg" alt="">
-                                        </div>
-                                        <div class="bottom-row"><?php echo $data['package_count'] ?></div>
-                                    </div>
-                                </div>
-                                <div class="right-col">Packages</div>
-                            </div>
-                        </div>
-                    </a> -->
-
                     <!-- Card 5 -->
-                    <a class="card-link" href="<?php echo URLROOT ?>/parkingOwner/securities/<?php echo $data['id'] ?>">
+                    <a class="card-link" href="<?php echo URLROOT ?>/merchandiser/securities/<?php echo $data['id'] ?>">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
@@ -145,7 +111,7 @@
                                 </div>
                                 <div style="transform: translateY(-20px)" class="right-col">
                                     <p style="font-size: 15px">Monthly Income</p>
-                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. 100000</h3>
+                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px">Rs. <?php echo $data['total_income']?></h3>
                                 </div>
                             </div>
                         </div>
@@ -294,8 +260,8 @@
 
 
 
-    //<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script>
+    //<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    //changed here from script to space
     // ---------------------------------------------- Chart.js ----------------------------------------------
         const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
         const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
@@ -320,20 +286,21 @@
             },
             options: {
                 legend: {display: false},
-                scales: {
-                    yAxes: [{ticks: {min: 6, max:16}}],
-                }
+                title: {
+                    display: true,
+                    text: "Income Distribution"
+                }   //newly added
             }
         });
 
         // Create a new chart with a different id for the second canvas
         new Chart("lineChart2", {
             type: "bar",
-            data: {
-                labels: xValues,
+            data: { //added 2 after xValues and yValues
+                labels: xValues2,
                 datasets: [{
                     backgroundColor: barColors,
-                    data: yValues
+                    data: yValues2
                 }]
             },
             options: {
@@ -344,8 +311,8 @@
                 }
             }
         });
-    </script>
-
+    //removed the script closing tag
+</script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {

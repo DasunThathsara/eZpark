@@ -11,7 +11,7 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Dashboard</h1>
+            <h1>Merchandiser</h1>
 
             <!-- Dropdown Menu -->
             <div class="dropdown">
@@ -95,7 +95,7 @@
 
         <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
 
-        <div class="side-cards">
+        <div id="side-cards-container" class="side-cards">
             <div class="close-btn" onclick="closeRightCard()">X</div>
             <h2>Recent Transaction</h2>
 

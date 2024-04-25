@@ -18,36 +18,33 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
 
             <div class="report-container">
                 <div class="report-img">
+                    <div>
                     <img src="<?php echo URLROOT ?>/images/report-pic.png" alt="logo">
-                    <p class="text-heading">Select Date Range</p>
-                    <input type="date" name="start_date" id="start_date" onchange="selectDate()" />
-                    -
-                    <input type="date" name="end_date" id="end_date" onchange="selectDate()" />
-
+                    </div>
+                    
                     <div class="gen-area">
+                        <div class="form-input-title">Select Parking:</div>
+                        <select name="parking" id="district" required onchange="selectPark(this.value)">
+                            <option value="" disabled selected>Select Parking</option>
+                            <?php
+                            foreach ($data['lands'] as $parking) {
+                                ?>
+                                <option value="<?= $parking->id ?>"><?= $parking->name ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+
+                        <p class="form-input-title">Select Date Range:</p>
+                        <input type="date" name="start_date" id="start_date" onchange="selectDate()" style="color: #8a8a8a;"/>
+                        -
+                        <input type="date" name="end_date" id="end_date" onchange="selectDate()" style="color: #8a8a8a;"/>
+
                         <p class="text-warning" id="message"></p>
                         <!-- <button class="gen-btn" id="gen" onclick="generatePDF()"><a class="gen-btn" href="<?php echo URLROOT ?>/report/viewReport/2"></a>Generate Report</button> -->
                         <button class="gen-btn" id="gen" onclick="generatePDF()">Generate Report</button>
-                        <div class="dropdown">
-                            <button class="dropbtn">Select Parking</button>
-                            <div class="dropdown-content">
-                                <?php
-                                
-                                foreach ($data['lands'] as $key => $value) {
-                                    ?>
+                        
 
-
-                                    <p onclick="selectPark(<?= $value->id ?>)">
-                                        
-                                        <?= $value->name ?> 
-                                        <!-- - <?= $value->id ?> -->
-                                    </p>
-
-                                    <?php
-                                } ?>
-
-                            </div>
-                        </div>
                         
                         <button class="view-btn" id="view" onclick="viewPDF()" style="display: none;">View</button>
                         <button class="download-btn" id="down" onclick="downloadBlob()"
@@ -62,10 +59,11 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     <div class="report-ins">
                         <ul>
                             <li>Select the parking you want to get the Report</li>
-                            <li>Select the preferred Date Range for the Report</li>
+                            <li>Select the preferred date range for the Report</li>
                             <li>Click “Generate Report”</li>
-                            <li>Report will be Automatically Downloaded</li>
+                            <li>Report will be Automatically Generated</li>
                             <li>Use Adobe PDF Viewer or any other suitable software to view the report</li>
+                            <li>Click “Download” to download the report</li>
                         </ul>
                     </div>
                 </div>
@@ -100,6 +98,10 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
     var sDate = null;
     var eDate = null;
     var total = null;
+    var carCount = 0;
+    var bikeCount = 0;
+    var threeWheelCount = 0;
+                            
                              
 
 
@@ -147,7 +149,17 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     total += parseFloat(genarateData[i]['cost']);
                 }
                 
-                
+                for(let i = 0; i < data_length ;i++){
+                    if(genarateData[i]['vehicleType'] == 'car'){
+                        carCount++;
+                    }
+                    else if(genarateData[i]['vehicleType'] == 'bike'){
+                        bikeCount++;
+                    }
+                    else if(genarateData[i]['vehicleType'] == 'threeWheel'){
+                        threeWheelCount++;
+                    }
+                }
                 
                 const selectId = document.getElementsByClassName("dropdown-content");
                 
@@ -197,26 +209,26 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                     invoice: {
                         label: "",
                         // num: 19,
-                        invDate: "Payment Date: 01/01/2021 18:12",
-                        invGenDate: "Invoice Date: 02/02/2021 10:17",
+                        invDate: "From Date:" + sDate,
+                        invGenDate: "To Date:" + eDate,
                         headerBorder: false,
                         tableBodyBorder: false,
                         header: [
                             {
                                 title: "#",
                                 style: {
-                                width: 10,
+                                width: 8,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
-                                fontWeight: 'bold' // Bold font weight for header cell
+                                fontWeight: 'bold'// Bold font weight for header cell
                             }
                             },
                             
                             {
-                                title: "Driver ID",
+                                title: "Vehicle Number",
                                 style: {
-                                width: 20,
+                                width: 30,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -226,6 +238,36 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             { 
                                 title: "Vehicle Type",
                                 style: {
+                                width: 27,
+                                height: 20,
+                                backgroundColor: '#f2f2f2', // Background color for header cell
+                                textAlign: 'center', // Center align text
+                                fontWeight: 'bold' // Bold font weight for header cell
+                            }
+                            },
+                            { 
+                                title: "Arrival Time",
+                                style: {
+                                width: 40,
+                                height: 20,
+                                backgroundColor: '#f2f2f2', // Background color for header cell
+                                textAlign: 'center', // Center align text
+                                fontWeight: 'bold' // Bold font weight for header cell
+                            }
+                            },
+                            { 
+                                title: "Departure Time",
+                                style: {
+                                width: 40,
+                                height: 20,
+                                backgroundColor: '#f2f2f2', // Background color for header cell
+                                textAlign: 'center', // Center align text
+                                fontWeight: 'bold' // Bold font weight for header cell
+                            }
+                            },
+                            { 
+                                title: "Total time (h)",
+                                style: {
                                 width: 25,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
@@ -234,39 +276,9 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "Start Time",
+                                title: "Charge(Rs.)",
                                 style: {
-                                width: 40,
-                                height: 20,
-                                backgroundColor: '#f2f2f2', // Background color for header cell
-                                textAlign: 'center', // Center align text
-                                fontWeight: 'bold' // Bold font weight for header cell
-                            }
-                            },
-                            { 
-                                title: "End Time",
-                                style: {
-                                width: 40,
-                                height: 20,
-                                backgroundColor: '#f2f2f2', // Background color for header cell
-                                textAlign: 'center', // Center align text
-                                fontWeight: 'bold' // Bold font weight for header cell
-                            }
-                            },
-                            { 
-                                title: "Total time",
-                                style: {
-                                width: 30,
-                                height: 20,
-                                backgroundColor: '#f2f2f2', // Background color for header cell
-                                textAlign: 'center', // Center align text
-                                fontWeight: 'bold' // Bold font weight for header cell
-                            }
-                            },
-                            { 
-                                title: "Charge",
-                                style: {
-                                width: 30,
+                                width: 25,
                                 height: 20,
                                 backgroundColor: '#f2f2f2', // Background color for header cell
                                 textAlign: 'center', // Center align text
@@ -285,56 +297,81 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             // }
                         ],
                         table:Array.from(Array(data_length), (item, index) => ([
-                            index + 1,
-                            genarateData[index]['driverID'],
-                            genarateData[index]['vehicleType'],
-                            genarateData[index]['startTime'],
-                            genarateData[index]['endTime'],
+                            "\n"+(index + 1 )+"\n",
+                            "\n"+genarateData[index]['vehicleNumber']+"\n",
+                            "\n"+genarateData[index]['vehicleType']+"\n",
+                            "\n"+genarateData[index]['startTime']+"\n",
+                            "\n"+genarateData[index]['endTime']+"\n",
                             // (genarateData[index]['status'] === 0) ? 'IN' : 'OUT' ,
-                            genarateData[index]['endTime'] - genarateData[index]['startTime'],
-                            genarateData[index]['cost'],
+                            "\n"+((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2)+"\n",
+                            "\n"+genarateData[index]['cost']+"\n",
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
-                          
+                           
                         ])),
                           
-
-                            
-                        style: {
-                            margin: { top: 30 },
-                            tableWidth: 'auto',
-                            headerRowHeight: 30,
-                            bodyRowHeight: 20,
-                            fontSize: 10,
-                            cellPadding: 5,
-                            textAlign: 'center',
-                            backgroundColor:'red'
+                        additionalRows: [
+                        {
+                            col1: 'Car Count :',
+                            col2: carCount.toString(),
+                            col3: ' ',
+                            style: {
+                                fontSize: 13 //optional, default 12
+                            }
+                        },
+                        {
+                            col1: 'Bike Count :',
+                            col2: bikeCount.toString(),
+                            col3: ' ',
+                            style: {
+                                fontSize: 13 //optional, default 12
+                            }
+                        },
+                        {
+                            col1: 'Threewheel Count :',
+                            col2: threeWheelCount.toString(),
+                            col3: ' ',
+                            style: {
+                                fontSize: 13 //optional, default 12
+                            }
                         },
                         
-                        
-                        additionalRows: [{
-                            col1: 'Total:',
+                        {
+                            col1: ' ',
+                            col2: ' ',
+                            col3: ' ',
+                            style: {
+                                fontSize: 13, //optional, default 1
+                               
+                            }
+                        },
+                        {
+                            col1: 'Net Fare :',
                             col2: total.toString()+'.00',
-                            col3: 'ALL',
+                            col3: ' ',
                             style: {
-                                fontSize: 14 //optional, default 12
+                                fontSize: 13 //optional, default 12
                             }
                         },
                         {
-                            col1: 'VAT:',
-                            col2: '20',
-                            col3: '%',
+                            col1: ' :',
+                            col2: '15 %',
+                            col3: ' ',
                             style: {
-                                fontSize: 10 //optional, default 12
+                                fontSize: 13 //optional, default 12
                             }
                         },
                         {
-                            col1: 'SubTotal:',
-                            col2: (total * 0.8).toString()+'.00' ,
-                            col3: 'ALL',
+                            col1: 'Net Total :',
+                            col2: (total * 0.85).toString()+'.00' ,
+                            col3: ' ',
                             style: {
-                                fontSize: 10 //optional, default 12
+                                fontSize: 13 //optional, default 12
                             }
-                        }],
+                        }
+                        
+
+                        
+                    ],
                         // invDescLabel: "Invoice Note",
                         // invDesc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
                     },

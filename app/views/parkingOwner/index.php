@@ -11,13 +11,13 @@
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
-            <h1>Dashboard</h1>
+            <h1>Parking Owner</h1>
 
             <!-- Dropdown Menu -->
             <div class="dropdown">
                 <button class="dropbtn">Select Parking</button>
                 <div class="dropdown-content">
-                    <?php for ($i = 0; $i < sizeof($other_data['lands']) - 1; $i++) {?>
+                    <?php for ($i = 0; $i < sizeof($other_data['lands']); $i++) {?>
                         <a href="<?php echo URLROOT ?>/parkingOwner/gotoLand/<?php echo $other_data['lands'][$i]->id ?>"><?php echo $other_data['lands'][$i]->name ?></a>
                     <?php } ?>
                 </div>

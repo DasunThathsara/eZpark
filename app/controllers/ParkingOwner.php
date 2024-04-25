@@ -96,7 +96,7 @@ class ParkingOwner extends Controller {
     }
 
     // --------------------------------- Parking Capacity ----------------------------------
-    // View all packages
+    // View capacity
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
 

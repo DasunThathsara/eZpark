@@ -17,11 +17,68 @@ class LandModel{
     }
 
     // ------------------------- Land Functionalities -------------------------
+
+    // Register parking slot
+    public function registerParkingSlot($landID, $car, $bike, $threewheel): bool
+    {
+        $result = true;
+
+        for ($i = 1; $i <= $car; $i++){
+            $this->db->query('INSERT INTO parking_slot (slotID, landID, vehicleType, availability) VALUES (:slotID, :landID, :vehicleType, :availability)');
+
+            $this->db->bind(':slotID', $i);
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':vehicleType', 'car');
+            $this->db->bind(':availability', 0);
+
+            if ($this->db->execute()){
+                $result = $result & true;
+            }
+            else {
+                $result = $result & false;
+            }
+        }
+
+        for ($i = $car + 1; $i <= $bike + $car; $i++){
+            $this->db->query('INSERT INTO parking_slot (slotID, landID, vehicleType, availability) VALUES (:slotID, :landID, :vehicleType, :availability)');
+
+            $this->db->bind(':slotID', $i);
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':vehicleType', 'bike');
+            $this->db->bind(':availability', 0);
+
+            if ($this->db->execute()){
+                $result = $result & true;
+            }
+            else {
+                $result = $result & false;
+            }
+        }
+
+        for ($i = $car + $bike + 1; $i <= $threewheel + $car + $bike; $i++){
+            $this->db->query('INSERT INTO parking_slot (slotID, landID, vehicleType, availability) VALUES (:slotID, :landID, :vehicleType, :availability)');
+
+            $this->db->bind(':slotID', $i);
+            $this->db->bind(':landID', $landID);
+            $this->db->bind(':vehicleType', 'threewheel');
+            $this->db->bind(':availability', 0);
+
+            if ($this->db->execute()){
+                $result = $result & true;
+            }
+            else {
+                $result = $result & false;
+            }
+        }
+
+        return $result;
+    }
+
     // Register land
     public function registerLand($data): bool
     {
         // Prepare statement
-        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province, cover, latitude, longitude) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province, :cover, :latitude, :longitude)');
+        $this->db->query('INSERT INTO land (name, city, street, deed, car, bike, threeWheel, contactNo, uid, status, availability, address, district, province, cover, latitude, longitude, image1, image2, image3) VALUES (:name, :city, :street, :deed, :car, :bike, :threeWheel, :contactNo, :uid, :status, :availability, :address, :district, :province, :cover, :latitude, :longitude, :image1, :image2, :image3)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -42,10 +99,20 @@ class LandModel{
         $this->db->bind(':cover', $data['cover']);
         $this->db->bind(':latitude', $data['latitude']);
         $this->db->bind(':longitude', $data['longitude']);
+        $this->db->bind(':image1', $data['photo1']);
+        $this->db->bind(':image2', $data['photo2']);
+        $this->db->bind(':image3', $data['photo3']);
 
         // Execute
         if ($this->db->execute()){
-            return true;
+            $this->db->query('SELECT LAST_INSERT_ID() AS landID');
+            $result = $this->db->single();
+            if ($this->registerParkingSlot($result->landID, $data['car'], $data['bike'], $data['threeWheel'])){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else {
             return false;
@@ -113,7 +180,7 @@ class LandModel{
     public function updateSecurityOfficerAvail($data): bool{
         // die(print_r($data));
         // Prepare statement
-        $this->db->query('UPDATE land SET secAvail = :secAvail, car=0,bike=0,threeWheel=0   WHERE uid = :uid and name = :name ');
+        $this->db->query('UPDATE land SET secAvail = :secAvail WHERE uid = :uid and name = :name ');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
