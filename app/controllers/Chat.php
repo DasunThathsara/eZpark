@@ -25,6 +25,10 @@ class Chat extends Controller {
             $data['chat_id'] = $chat_ID;
         }
 
+        else{
+            $data['chat_id'] = null;
+        }
+
         if($_SESSION['user_type'] == "merchandiser")
             $this->view('merchandiser/chat', $data, $other_data);
         else
