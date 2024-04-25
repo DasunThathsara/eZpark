@@ -51,25 +51,28 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             <div class="left" style="width:20%">
                                                 <?php echo $other_data[$i]->packageType ?>
                                             </div>
-                                            <div class="right">
-                                                <form action="<?php echo URLROOT ?>/package/packageUpdateForm" method="get">
-                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
-                                                    <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->name ?>" />
-                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->packageType ?>" />
-                                                    <button type="submit" class="edit">
-                                                        <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
-                                                    </button>
-                                                </form>
-                                                &nbsp;
-                                                <form action="<?php echo URLROOT ?>/package/packageRemove" method="post">
-                                                    <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->name ?>" />
-                                                    <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
-                                                    <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->packageType ?>" />
-                                                    <button type="submit" class="delete" onclick="return confirmSubmit();">
-                                                        <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
-                                                    </button>
-                                                </form>
-                                            </div>
+
+                                            <?php if ($_SESSION['user_type'] == 'parkingOwner'){ ?>
+                                                <div class="right">
+                                                    <form action="<?php echo URLROOT ?>/package/packageUpdateForm" method="get">
+                                                        <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                        <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->name ?>" />
+                                                        <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->packageType ?>" />
+                                                        <button type="submit" class="edit">
+                                                            <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
+                                                        </button>
+                                                    </form>
+                                                    &nbsp;
+                                                    <form action="<?php echo URLROOT ?>/package/packageRemove" method="post">
+                                                        <input type="text" name="package_type" id="package_type" hidden value="<?php echo $other_data[$i]->name ?>" />
+                                                        <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
+                                                        <input type="text" name="vehicle_type" id="vehicle_type" hidden value="<?php echo $other_data[$i]->packageType ?>" />
+                                                        <button type="submit" class="delete" onclick="return confirmSubmit();">
+                                                            <img src="<?php echo URLROOT ?>/images/trash-solid.svg" alt="">
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                     </a>
                                 </td>

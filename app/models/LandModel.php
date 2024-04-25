@@ -594,7 +594,7 @@ class LandModel{
     }
 
     public function viewCapacity($data){
-        $this->db->query('SELECT car, bike, threeWheel FROM land WHERE id = :id');
+        $this->db->query('SELECT car, requestedCar, bike, requestedBike, threeWheel, requestedThreeWheel FROM land WHERE id = :id');
         $this->db->bind(':id', $data['id']);
 
         $row = $this->db->resultSet();
@@ -619,15 +619,64 @@ class LandModel{
     public function updateCapacity($data): bool
     {
         // Prepare statement
-        if($data['vehicle_type'] == 'car')
+        if($data['vehicle_type'] == 'car'){
             $this->db->query('UPDATE land SET car = :capacity WHERE id = :id');
-        else if($data['vehicle_type'] == 'bike')
+        }else if($data['vehicle_type'] == 'bike')
             $this->db->query('UPDATE land SET bike = :capacity WHERE id = :id');
         else if($data['vehicle_type'] == 'threeWheel')
             $this->db->query('UPDATE land SET threeWheel = :capacity WHERE id = :id');
 
         // Bind values
         $this->db->bind(':capacity', $data['capacity']);
+        $this->db->bind(':id', $data['id']);
+
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function acceptRequestedCapacity($data): bool
+    {
+        // Prepare statement
+        if($data['vehicle_type'] == 'car')
+            $this->db->query('UPDATE land SET car = :requestedCapacity, requestedCar = -1 WHERE id = :id');
+        else if($data['vehicle_type'] == 'bike')
+            $this->db->query('UPDATE land SET bike = :requestedCapacity, requestedBike = -1 WHERE id = :id');
+        else if($data['vehicle_type'] == 'threeWheel')
+            $this->db->query('UPDATE land SET threeWheel = :requestedCapacity, requestedThreeWheel = -1 WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':requestedCapacity', $data['requestedCapacity']);
+        $this->db->bind(':id', $data['id']);
+
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function rejectRequestedCapacity($data): bool
+    {
+        // Prepare statement
+        if($data['vehicle_type'] == 'car'){
+        // die(print_r($data));
+            $this->db->query('UPDATE land SET requestedCar = -1 WHERE id = :id');
+    }else if($data['vehicle_type'] == 'bike')
+            $this->db->query('UPDATE land SET requestedBike = -1 WHERE id = :id');
+        else if($data['vehicle_type'] == 'threeWheel')
+            $this->db->query('UPDATE land SET requestedThreeWheel = -1 WHERE id = :id');
+
+        // Bind values
+        // $this->db->bind(':requestedCapacity', $data['requestedCapacity']);
         $this->db->bind(':id', $data['id']);
 
 
@@ -785,5 +834,40 @@ class LandModel{
         $row = $this->db->single();
 
         return $row;
+    }
+
+    public function updateRequestedCapacity($data){
+
+        if($data['vehicle_type'] == 'car'){
+            $this->db->query('UPDATE land SET requestedCar = :requestedCar WHERE id = :id');
+
+             // Bind values
+            $this->db->bind(':requestedCar', $data['requestedCapacity']);
+            $this->db->bind(':id', $data['id']);
+
+            // die(print_r($data));
+        }else if($data['vehicle_type'] == 'bike'){
+            $this->db->query('UPDATE land SET requestedBike = :requestedBike WHERE id = :id');
+        
+             // Bind values
+            $this->db->bind(':requestedBike', $data['requestedCapacity']);
+            $this->db->bind(':id', $data['id']);
+
+        }else if($data['vehicle_type'] == 'threeWheel'){
+            $this->db->query('UPDATE land SET requestedThreeWheel = :requestedThreeWheel WHERE id = :id');
+        
+             // Bind values
+            $this->db->bind(':requestedThreeWheel', $data['requestedCapacity']);
+            $this->db->bind(':id', $data['id']);
+
+        }
+
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }
