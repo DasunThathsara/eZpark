@@ -31,6 +31,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <div class="left" style="width:20%; padding-left:12px;">
                                         Capacity
                                     </div>
+                                    <?php if($_SESSION['user_type'] == 'security') {?>
+                                    <div class="left" style="width:30%; padding-left:100px; text-align:center;">
+                                        Request to Change Capacity
+                                    </div>
+                                    <?php }?>
                                 </div>
                             </th>
                         </tr>

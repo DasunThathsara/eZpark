@@ -171,10 +171,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 tileLink.href = `<?php print_r(URLROOT)?>/admin/viewRegistrationRequestedLand/${notification.senderID}/${notification.id}`;
             }
             else if (notification.notificationType == 'securityRequestResult') {
+                
                 tileLink.href = `<?php print_r(URLROOT)?>/land/viewSecurity/${notification.senderID}`;
             }
             else if (notification.notificationType == 'requestChangeCapacity') {
-                tileLink.href = `<?php print_r(URLROOT)?>/landCapacity/requestedCapacityUpdateForm/${notification.data}`;
+                tileLink.href = `<?php print_r(URLROOT)?>/landCapacity/requestedCapacityUpdateForm/${notification.data}/${notification.id}`;
             }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);

@@ -1,5 +1,6 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
+
 <style>
     .page-container .section .content-body .emptySec {
         margin-top: 100px;
@@ -37,7 +38,7 @@
                     else {?>
                         <h1 class="title">Dashboard</h1>
 
-                        <div class="container2">
+                        <div class="container">
                             <h1><?php echo $data['name'] ?> Dashboard</h1>
 
                             <!-- Toggle Button -->
@@ -85,7 +86,7 @@
                                                     <div class="bottom-row"></div>
                                                 </div>
                                             </div>
-                                            <div style="transform: translateY(7px)" class="right-col">Price Rate</div>
+                                            <div style="transform: translateY(7px)" class="right-col">View Price <br />Rate</div>
                                         </div>
                                     </div>
                                 </a>

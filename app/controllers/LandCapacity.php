@@ -91,8 +91,11 @@ class LandCapacity extends Controller
         }
     }
 
-    public function requestedCapacityUpdateForm($land_ID = null, $vehicle_type = null ){
+    public function requestedCapacityUpdateForm($land_ID = null, $vehicle_type = null, $notification_id=null ){
 
+        if ($notification_id != null)
+            $this->userModel->markAsRead($notification_id);
+        
             $data = [
                 'id' => $land_ID,
                 'vehicle_type' => $vehicle_type,
