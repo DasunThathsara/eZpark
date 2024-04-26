@@ -131,13 +131,13 @@ class Driver extends Controller {
         $land = $this->landModel->viewLand($land_ID);
         $land->packages = $this->driverModel->viewPackages($data);
 
+        $land->freeSLots = $this->landModel->getFreeSlots($land_ID);
+
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
-//        die(print_r($land->packages));
 
         $this->view('driver/viewParking', $land, $notifications);
     }
