@@ -22,9 +22,11 @@
             else {?>
                 <div class="table-container">
                     <table class="table">
-                        <tr>
-                            <th>Vehicle Name</th>
-                            <th width="60px"></th>
+                        <tr style="display:flex ;justify-content:space-between;width:78%;">
+                            <th >Vehicle Name</th>
+                            <th style="transform: translate(0px)">Vehicle Number</th>
+                            <th style="transform: translate(0px)">Vehicle Type</th>
+                            
                         </tr>
                         <?php for ($i = 0; $i < sizeof($data); $i++) {?>
                             <tr>
@@ -33,6 +35,9 @@
                                         <div class="content">
                                             <div class="left" style="width:50%">
                                                 <?php echo $data[$i]->name ?>
+                                            </div>
+                                            <div class="left" style="width:50%">
+                                                <?php echo $data[$i]->vehicleNumber ?>
                                             </div>
                                             <div class="left" style="width:20%">
                                                 <?php echo $data[$i]->vehicleType ?>
