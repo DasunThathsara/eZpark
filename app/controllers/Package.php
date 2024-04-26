@@ -4,8 +4,7 @@ class Package extends Controller
     public function __construct()
     {
         $this->middleware = new AuthMiddleware();
-        // Only parkingOwners are allowed to access parkingOwner pages
-        $this->middleware->checkAccess(['parkingOwner']);
+        $this->middleware->checkAccess(['parkingOwner', 'security']);
         $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
     }
 
