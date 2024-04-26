@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'securities';
+$section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
