@@ -53,7 +53,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                 <p class="id-p"><span class="id"></span></p>
                                             </td>
                                             <td class="options">
-                                                <form action="<?php echo URLROOT ?>/users/markAsReadNotification" method="post" class="markAsRead-form" id="delete-form">
+                                                <form action="<?php echo URLROOT ?>/users/markAsReadNotification" method="post" class="markAsRead-form" id="markAsRead-form">
                                                     <input type="text" name="id" id="id" hidden value="" />
                                                     <button type="submit" class="delete" onclick="confirmSubmit()">
                                                         <img src="<?php echo URLROOT ?>/images/check.svg" alt="">

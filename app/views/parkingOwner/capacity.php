@@ -20,9 +20,19 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <div class="emptyLand">You have no any registered lands</div>
             <?php }
             else {?>
-                <!-- Search bar -->
-                <input type="search" class="data-search" placeholder="Search..">
+                <!-- Search area -->
+                <div class="search-area">
+                    <!-- Search bar -->
+                    <input type="search" class="data-search" placeholder="Search land...">
+                    <div class="filter-area">
+                        <img class="filter-btn" src="<?php echo URLROOT?>/images/filter-ico.png" alt="">
+                    </div>
+                </div>
 
+                <div class="user-card-title-1">
+                    <div class="name">Land Name</div>
+                    <div class="capacity">Capacity</div>
+                </div>
                 <!-- Card set -->
                 <div class="user-cards"></div>
                 <template class="data-user-template">
@@ -30,8 +40,12 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <a href="#" class="tile">
                             <table>
                                 <tr>
-                                    <td class="header" style="width: 50%" data-header></td>
+                                    <td class="name-td" data-header>
+                                        <p class="header"></p>
+                                        <p class="id-p">Land ID: <span class="id"></span></p>
+                                    </td>
                                     <td class="capacity" data-header></td>
+
                                     <td class="options">
                                         <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
                                             <input type="text" name="id" id="id" hidden value="" />
@@ -78,6 +92,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         console.log(card);
         card.querySelector(".header").textContent = land.name;
         card.querySelector(".capacity").textContent = land.car + land.bike + land.threeWheel;
+        card.querySelector(".id").textContent = land.id;
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
 

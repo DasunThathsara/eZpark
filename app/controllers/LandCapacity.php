@@ -23,8 +23,6 @@ class LandCapacity extends Controller
 
         if ($capacity['notification_count'] < 10)
             $capacity['notification_count'] = '0'.$capacity['notification_count'];
-
-        // $this->view($_SESSION['user_type'].'/capacity/viewCapacity', $data, $capacity);
         
         if ($_SESSION['user_type'] == 'security'){
             $this->view('parkingOwner/capacity/viewCapacity', $data, $capacity);
