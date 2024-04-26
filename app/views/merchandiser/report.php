@@ -111,9 +111,38 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
         // console.log(landId);
     }
 
+
     function selectDate() {
         sDate = document.getElementById('start_date').value;
         eDate = document.getElementById('end_date').value;
+
+        var startDate = new Date(sDate);
+        var endDate = new Date(eDate);
+        var currentDate = new Date();
+        startDate.setHours(0, 0, 0, 0);
+        endDate.setHours(0, 0, 0, 0);
+        currentDate.setHours(0, 0, 0, 0);
+
+        // Check if start date is greater than current date
+        if (startDate > currentDate ) {
+            alert("Start date cannot be greater than current date");
+            document.getElementById("start_date").value = "";
+            return;
+        }
+
+        // Check if end date is greater than current date
+        if (endDate > currentDate) {
+            alert("End date cannot be greater than current date");
+            document.getElementById("end_date").value = "";
+            return;
+        }
+
+        // Check if end date is less than start date
+        if (endDate < startDate ) {
+            alert("End date cannot be less than start date");
+            document.getElementById("end_date").value = "";
+            return;
+        }
         
     
     }
@@ -126,7 +155,14 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
     
     function generatePDF() {
         
-
+        if (!landId) {
+        alert("Please select a parking");
+        return;
+        }
+        if (!sDate || !eDate) {
+            alert("Please select both start date and end date");
+            return;
+        }
 
         $.ajax({
             url: '<?php echo URLROOT ?>/report/viewReport',
@@ -162,8 +198,25 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                 }
                 
                 
-                const selectId = document.getElementsByClassName("dropdown-content");
+                //const selectId = document.getElementsByClassName("dropdown-content");
                 
+                
+                console.log(data_length);
+                if (data_length > 0) {
+                    document.getElementById('message').textContent = 'Your report is generated!';
+                    document.getElementById('gen').style.display = 'none';
+                    document.getElementById('view').style.display = 'inline-block';
+                    document.getElementById('down').style.display = 'inline-block';
+                } 
+                else {
+                    document.getElementById('message').textContent = 'No vehicles parked during the selected date range';
+                    document.getElementById('gen').style.display = 'inline-block';
+                    document.getElementById('view').style.display = 'none';
+                    document.getElementById('down').style.display = 'none';
+                    
+                    
+                }
+  
 
                 var props = {
                     outputType: jsPDFInvoiceTemplate.OutputType.Blob,
@@ -267,7 +320,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "Total time (h)",
+                                title: "Total time ",
                                 style: {
                                 width: 30,
                                 height: 20,
@@ -304,7 +357,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             "\n"+genarateData[index]['startTime']+"\n",
                             "\n"+genarateData[index]['endTime']+"\n",
                             // (genarateData[index]['status'] === 0) ? 'IN' : 'OUT' ,
-                            "\n"+((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2)+"\n",
+                            "\n"+Math.floor((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime())/ (1000 * 60 * 60))+"h "+Math.floor((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime())% (1000 * 60 * 60) / (1000 * 60)) + "m"+"\n",
                             // genarateData[index]['cost'],
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
                           
@@ -352,10 +405,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
             console.error("AJAX error:", xhr.responseText);
             }
         });
-        document.getElementById('message').textContent = 'Your report is generated!';
-        document.getElementById('gen').style.display = 'none';
-        document.getElementById('view').style.display = 'inline-block';
-        document.getElementById('down').style.display = 'inline-block';
+        
     }
 
     /* view pdf */
