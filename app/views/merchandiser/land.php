@@ -97,7 +97,7 @@
                         </div>
                     </a>
 
-                    <!-- Card 6 -->
+                    <!-- Card 6 
                     <a class="card-link" href="">
                         <div class="card">
                             <div class="row">
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </a>    -->
                 </div>
 
                 <div class="charts">
