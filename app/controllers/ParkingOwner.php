@@ -17,7 +17,9 @@ class ParkingOwner extends Controller {
             'land_count' => $this->landModel->getLandCount(),
             'total_capacity' => $this->landModel->getTotalCapacity(),
             'today_total_transactions' => $this->landModel->getTodayTotalTransactions(),
-            'total_income' => $this->landModel->getTotalIncome()
+            'total_income' => $this->landModel->getTotalIncome(),
+            'total_income_distribution' => $this->landModel->getTotalIncomeDistribution(),
+            'total_vehicle_distribution' => $this->landModel->getTotalVehicleDistribution()
         ];
 
         $notifications['list'] = $this->userModel->viewNotifications();
