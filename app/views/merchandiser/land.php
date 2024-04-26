@@ -139,7 +139,7 @@
                 </div>
 
                 <div class="charts">
-                    <h2>Analysis</h2>
+                    <h2><?php echo $data['name'] ?> Vehicle Distribution</h2>
                     <div class="chart-container">
                         <!--<div class="chart">
                             <canvas id="lineChart1" style="width:100%;max-width:600px"></canvas>
