@@ -5,7 +5,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'lands';
+$section = 'dashboard';
 require APPROOT . '/views/inc/components/sidenavbar.php';
 ?>
 
