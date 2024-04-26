@@ -37,7 +37,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     </div>
 
                     <div class="user-card-title">
-                        <div class="name">Name</div>
+                        <div class="name">Notifications</div>
                     </div>
 
                     <div class="card-set-container">
@@ -70,6 +70,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                         </tr>
                                     </table>
                                 </a>
+                            
                             </div>
                         </template>
                     </div>
@@ -172,10 +173,13 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             else if (notification.notificationType == 'securityRequestResult') {
                 tileLink.href = `<?php print_r(URLROOT)?>/land/viewSecurity/${notification.senderID}`;
             }
+            else if (notification.notificationType == 'requestChangeCapacity') {
+                tileLink.href = `<?php print_r(URLROOT)?>/landCapacity/requestedCapacityUpdateForm/${notification.data}`;
+            }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }
-
+        
         // Set values to delete notification
         const deleteForm = card.querySelector('.delete-form');
         if (deleteForm) {

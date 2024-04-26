@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-    $section = 'profile';
+    $section = 'lands';
     require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 

@@ -61,13 +61,13 @@
                                             <td class="status-td" data-header><span class="status"></span></td>
 
                                             <td class="options">
-                                                <form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
+                                                <!--<form action="<?php echo URLROOT ?>/land/prices" method="get" class="price-form">
                                                     <input type="text" name="id" id="id" hidden value="" />
                                                     <input type="text" name="name" id="name" hidden value="" />
                                                     <button type="submit" class="price">
                                                         <img src="<?php echo URLROOT ?>/images/price.svg" alt="">
                                                     </button>
-                                                </form>
+                                                </form>-->
                                                 &nbsp;
                                                 <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
                                                     <input type="text" name="name" id="name" hidden value="" />

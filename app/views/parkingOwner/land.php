@@ -152,7 +152,7 @@
 
                     <!-- Card 7 -->
                     <a class="card-link" id="generateBtn">
-                        <div class="card">
+                        <div class="card" style="cursor:pointer;">
                             <div class="row">
                                 <div class="left-col">
                                     <div class="sub-row">

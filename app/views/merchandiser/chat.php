@@ -23,7 +23,10 @@
 
                         <?php foreach($data['chat_list'] as $chat) {?>
                             <a href="<?php echo URLROOT?>/chat/viewChat/<?php echo $chat->chatID?>" >
-                                <div class="chat-item" ><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/userimg.png" alt=""><?php echo $chat->senderName;?></div>
+                                <div class="chat-item <?php echo ($data['chat_id'] == $chat->chatID) ? 'chat-selected' : ''; ?>" >
+                                <img  src="<?php echo URLROOT ?>/images/userimg.png" alt="">
+                                <div class="chat-item-text"><?php echo $chat->senderName;?></div>
+                            </div>
                             </a>
                         <?php } ?> 
                     </div>
@@ -89,6 +92,7 @@
             } else {
                 chatItem.style.display = "none";
             }
+
         });
     });
 });
