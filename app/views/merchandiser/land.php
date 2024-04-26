@@ -121,12 +121,12 @@
                 <div class="charts">
                     <h2>Analysis</h2>
                     <div class="chart-container">
-                        <div class="chart">
+                        <!--<div class="chart">
                             <canvas id="lineChart1" style="width:100%;max-width:600px"></canvas>
-                        </div>
-                        <div class="chart">
-                            <canvas id="lineChart2" style="width:100%;max-width:600px"></canvas>
-                        </div>
+                        </div>-->
+                        <!--<div class="chart">-->
+                            <canvas id="lineChart2" style="width:100%;max-width:600px;margin:auto"></canvas>
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -263,8 +263,8 @@
     //<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     //changed here from script to space
     // ---------------------------------------------- Chart.js ----------------------------------------------
-        const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-        const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
+       // const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+        //const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
 
         var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
         var yValues2 = [<?php echo $data['vehicle_distribution']->January?>, <?php echo $data['vehicle_distribution']->February?>, <?php echo $data['vehicle_distribution']->March?>, <?php echo $data['vehicle_distribution']->April?>, <?php echo $data['vehicle_distribution']->May?>, <?php echo $data['vehicle_distribution']->June?>, <?php echo $data['vehicle_distribution']->July?>, <?php echo $data['vehicle_distribution']->August?>, <?php echo $data['vehicle_distribution']->September?>, <?php echo $data['vehicle_distribution']->October?>, <?php echo $data['vehicle_distribution']->November?>, <?php echo $data['vehicle_distribution']->December?>];
@@ -272,34 +272,37 @@
         var barColors = ["red", "green", "blue", "orange", "brown", "purple", "yellow", "pink", "cyan", "olive", "magenta", "lime"];
 
 
-        new Chart("lineChart1", {
+        // new Chart("lineChart1", {
+        //     type: "line",
+        //     data: {
+        //         labels: xValues,
+        //         datasets: [{
+        //             fill: false,
+        //             lineTension: 0,
+        //             backgroundColor: "rgb(0,0,0)",
+        //             borderColor: "rgb(252,212,38)",
+        //             data: yValues
+        //         }]
+        //     },
+        //     options: {
+        //         legend: {display: false},
+        //         title: {
+        //             display: true,
+        //             text: "Income Distribution"
+        //         }   //newly added
+        //     }
+        // });
+
+        // Create a new chart with a different id for the second canvas
+        new Chart("lineChart2", {
             type: "line",
-            data: {
-                labels: xValues,
+            data: { //added 2 after xValues and yValues
+                labels: xValues2,
                 datasets: [{
                     fill: false,
                     lineTension: 0,
                     backgroundColor: "rgb(0,0,0)",
                     borderColor: "rgb(252,212,38)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {display: false},
-                title: {
-                    display: true,
-                    text: "Income Distribution"
-                }   //newly added
-            }
-        });
-
-        // Create a new chart with a different id for the second canvas
-        new Chart("lineChart2", {
-            type: "bar",
-            data: { //added 2 after xValues and yValues
-                labels: xValues2,
-                datasets: [{
-                    backgroundColor: barColors,
                     data: yValues2
                 }]
             },
