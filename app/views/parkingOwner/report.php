@@ -111,7 +111,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
         return landId;
         // console.log(landId);
     }
-    
+
 
     function selectDate() {
         sDate = document.getElementById('start_date').value;
@@ -318,7 +318,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             }
                             },
                             { 
-                                title: "Total time (h)",
+                                title: "Total time ",
                                 style: {
                                 width: 25,
                                 height: 20,
@@ -355,7 +355,7 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             "\n"+genarateData[index]['startTime']+"\n",
                             "\n"+genarateData[index]['endTime']+"\n",
                             // (genarateData[index]['status'] === 0) ? 'IN' : 'OUT' ,
-                            "\n"+((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime()) / (1000 * 60 * 60)).toFixed(2)+"\n",
+                            "\n"+Math.floor((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime())/ (1000 * 60 * 60))+"h "+Math.floor((new Date(genarateData[index]['endTime']).getTime() - new Date(genarateData[index]['startTime']).getTime())% (1000 * 60 * 60) / (1000 * 60)) + "m"+"\n",
                             "\n"+genarateData[index]['cost']+"\n",
                             // (genarateData[index]['paymentStatus'] === 0) ? 'payed' : 'unpaid' 
                            
