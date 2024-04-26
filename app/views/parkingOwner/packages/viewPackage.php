@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'packages';
+$section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -83,7 +83,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 <script>
     function confirmSubmit() {
-        return confirm("Are you sure you want to delete this vehicle?");
+        return confirm("Are you sure you want to delete this package?");
     }
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>
