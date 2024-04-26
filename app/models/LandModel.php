@@ -856,12 +856,8 @@ class LandModel{
         $row = $this->db->single();
         
         return $row;
-<<<<<<< HEAD
     }
     
-=======
-      
->>>>>>> 90a2e4b5873dfc21b7c9035826d7c5e631f160ee
     public function updateRequestedCapacity($data){
 
         if($data['vehicle_type'] == 'car'){
