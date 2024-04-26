@@ -7,12 +7,17 @@
 $section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
+
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
             <h1 class="title">View Parking</h1>
             <p class="subtitle">View real-time information about the parking before entering</p>
-
+                <?php if(isset($_GET['error'])){?>
+                    <div style="color: red; background-color: rgba(255,0,0,0.05); border-radius: 10px; padding: 5px; width: calc(100% - 30px); text-align: center; border: 1px solid rgba(255,0,0,0.1); margin-top: 30px; font-size: 13px;">
+                        You have no any free vehicle to enter the parking
+                    </div>
+                <?php }?>
             <div class="view-parking-container " style="">
                 <div class="parking-cover-container">
                     <img class="parking-cover" src="<?php echo URLROOT ?>/images/parking_bg1.jpg" alt="Phone">

@@ -36,6 +36,10 @@ select {
   background-color: white;
 }
 
+a:hover{
+  cursor: pointer;
+}
+
 textarea {
   background-color: white;
   border: 1px solid rgba(138, 138, 138, 0.37);

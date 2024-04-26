@@ -486,4 +486,15 @@ class DriverModel{
 
         return $row->$vehicleType;
     }
+
+    // Get driver's vehicle availability
+    public function getVehicleAvailability($vehicleType){
+        $this->db->query('SELECT COUNT(*) AS count FROM vehicle WHERE id = :id and vehicleType = :vehicleType');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':vehicleType', $vehicleType);
+
+        $row = $this->db->single();
+
+        return $row->$vehicleType;
+    }
 }

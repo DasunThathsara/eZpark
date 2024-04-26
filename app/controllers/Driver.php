@@ -187,8 +187,14 @@ class Driver extends Controller {
             $land_ID = $_POST['id'];
             $vehicle_type = $_POST['vehicle_type'];
 
-            $this->driverModel->enterParking($land_ID, $vehicle_type);
-            redirect('driver/index');
+            if ($this->driverModel->getVehicleAvailability($vehicle_type) > 0){
+                $this->driverModel->enterParking($land_ID, $vehicle_type);
+                redirect('driver/index');
+            }
+            else{
+                // If the vehicle is not available
+                redirect('driver/gotoLand/'.$land_ID.'?error=1');
+            }
         }
     }
 
