@@ -318,6 +318,17 @@ class LandModel{
         return $row;
     }
 
+    //retrieve images from images of land
+    public function getLandImages($land_ID){
+
+        $this->db->query('SELECT image1, image2, image3, cover FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+        
+        return $row;
+    }
+
     // View all lands
     public function viewAllLands(){
         $this->db->query('SELECT * FROM land WHERE status = :status');
@@ -857,7 +868,7 @@ class LandModel{
         
         return $row;
     }
-    
+
     public function updateRequestedCapacity($data){
 
         if($data['vehicle_type'] == 'car'){

@@ -70,7 +70,7 @@
                                                 </form>-->
                                                 &nbsp;
                                                 <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
-                                                    <input type="text" name="name" id="name" hidden value="" />
+                                                    <!-- <input type="text" name="name" id="name" hidden value="" /> -->
                                                     <input type="text" name="id" id="id" hidden value="" />
                                                     <button type="submit" class="edit">
                                                         <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
@@ -176,10 +176,8 @@
         const updateForm = card.querySelector('.update-form');
         if (updateForm) {
             const idInput = updateForm.querySelector('#id');
-            const nameInput = updateForm.querySelector('#name');
             
-            if (nameInput && idInput) {
-                nameInput.value = land.name;
+            if (idInput) {
                 idInput.value = land.id;
             } else {
                 console.error("One or more form inputs not found in the cloned card:", card);
