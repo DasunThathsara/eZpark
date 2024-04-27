@@ -47,7 +47,7 @@ html {
     position: relative;
     display: flex;
     transition: background-color 0.5s; /* Add transition effect */
-    background-color:  #ffc837;
+    background-color:  #ffffff;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     /* outline: 0.2px solid rgb(0, 0, 0); */
@@ -67,7 +67,7 @@ html {
 
 .chat-item-text{
     flex:1;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .chat-item-text:hover{
@@ -76,10 +76,10 @@ html {
 }
 
 .chat-item:hover {
-    background-color: #ffffff; /* Change background color on hover */
+    background-color: #ffc400; /* Change background color on hover */
     cursor: pointer; /* Change cursor to pointer on hover */
     color: black; /* Change text color to black on hover */
-    outli
+    
 }
 
 
@@ -209,7 +209,7 @@ html {
 }
 
 .chat-selected {
-    background-color:  #000000;
+    background-color:  #ffc400;
     color: white; /* Change text color to white for better visibility */
     border-radius: 50px;
     border-top-right-radius: 5px;
