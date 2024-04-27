@@ -140,7 +140,7 @@
     width: 360px;
     padding: 20px 0 20px 0;
     height: 75vh;
-    overflow-scrolling: auto;
+    overflow: scroll;
     transition: 1s, transform 1s;
     opacity: 0;
 }
