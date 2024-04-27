@@ -49,15 +49,6 @@
                         <div class="item"><img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">Vehicles</div>
                     <?php } ?>
                 </a>
-
-                <a href="<?php echo URLROOT ?>/driver/rating">
-                    <?php if ($section == 'rating'){?>
-                        <div class="item selected"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
-                    <?php }
-                    else{ ?>
-                        <div class="item"><img src="<?php echo URLROOT ?>/images/rating.svg" alt="">Rating</div>
-                    <?php } ?>
-                </a>
             <?php } ?>
 
             <!------------------------------------------ Merchandiser ------------------------------------------>

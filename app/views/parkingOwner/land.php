@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div style="transform: translateY(-20px)" class="right-col" id="monthly-income">
-                                    <p style="font-size: 15px; transform: translateY(8px);">View <br />Parking QR</p>
+                                    <p style="font-size: 15px; transform: translateY(8px);">Download <br />Parking QR</p>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +358,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         document.getElementById('generateBtn').addEventListener('click', function() {
-            generateAndDownloadQRCode("<?php echo URLROOT?>/driver/gotoland/<?php echo $data['id']?>");
+            generateAndDownloadQRCode("<?php echo URLROOT?>/driver/enterExitParking/<?php echo $data['id']?>");
         });
 
         function generateAndDownloadQRCode(url) {
