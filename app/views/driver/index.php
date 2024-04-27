@@ -22,9 +22,10 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                 <p class="close-btn1 close-btn do-not">
                     <i class="fas fa-xmark"></i>
                 </p>
-                <form action="" method="post">
+                <form id="ratingForm" action="<?php echo URLROOT?>/driver/addRatingReviewComplaint" method="post">
                     <div class="direction-container">
                         <div class="completion-container">
+                            <input type="text" name="landID" hidden value="<?php echo $_GET['completion_status']?>">
                             <h2 class="rating-title">Transaction completed!<br /><span style="font-size: 20px; margin-top: 10px; color: #6b6b6b">Rate to the parking location</span></h2>
                             <div class="rate">
                                 <input type="radio" id="star5" name="rate" value="5" />
@@ -42,9 +43,12 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             <textarea class="review-box" name="review-message" id="review-message" placeholder="Add Review..." cols="30" rows="10"></textarea>
 
                             <label class="check-box-area">
+                                <br>
                                 <input class="check-box" type="checkbox" name="complaint">
                                 Make Complaint for the parking
                             </label>
+
+                            <input type="submit" id="submitButton" value="Send" style="margin-left: 50px; margin-right: 50px; width: calc(100% - 100px); background-color: #ffc536; margin-top: 30px" disabled>
                         </div>
                     </div>
                 </form>
@@ -146,19 +150,29 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
 </script>
 <script>
     const body = document.querySelector("body"),
-        closeBtn1 = body.querySelector(".close-btn1"),
-        overlay1 = body.querySelector(".overlay1");
+        closeBtn1 = body.querySelector(".close-btn1");
 
     closeBtn1.addEventListener("click", () => {
         document.querySelector(".get-direction").style.display = "none";
-        document.querySelector(".overlay1").style.display = "none";
     });
 
-    overlay1.addEventListener("click", (e) => {
-        if (e.target.id === "overlay1") {
-            overlay1.style.display = "none";
-            document.querySelector(".get-direction").style.display = "none";
-        }
+    history.pushState(null, null, 'http://localhost/eZpark/driver/index');
+
+
+
+
+
+    // Get all radio buttons
+    var radioButtons = document.querySelectorAll('input[type="radio"][name="rate"]');
+    // Get submit button
+    var submitButton = document.getElementById('submitButton');
+
+    // Add event listener to radio buttons
+    radioButtons.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            // Enable submit button if any radio button is checked
+            submitButton.disabled = false;
+        });
     });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
