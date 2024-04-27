@@ -82,7 +82,8 @@ class Merchandiser extends Controller {
             'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
             'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
             'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
-            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
+            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID),
+            'land_images' =>$this->landModel->getLandImages($land_ID)
         ];
 
         $this->view('merchandiser/land', $data, $lands);

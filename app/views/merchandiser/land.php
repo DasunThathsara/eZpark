@@ -149,6 +149,24 @@
                         <!--</div>-->
                     </div>
                 </div>
+                
+                <div class="image-container">
+                    <h2>Images</h2>
+                    <div class="land-images">
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image1?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image2?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image3?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->cover?>" alt="">
+                            </div>
+                    </div>
+                </div>
             </div>
 
             <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>

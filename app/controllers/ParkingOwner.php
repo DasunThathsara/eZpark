@@ -56,6 +56,7 @@ class ParkingOwner extends Controller {
 
         $notifications['lands'] = $this->landModel->viewLands();
 
+        // die(print_r($notifications['lands']));
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
@@ -73,9 +74,9 @@ class ParkingOwner extends Controller {
             'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
             'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
             'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
-            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
+            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID),
+            'land_images' =>$this->landModel->getLandImages($land_ID)
         ];
-
         $this->view('parkingOwner/land', $data, $notifications);
     }
 
