@@ -541,6 +541,15 @@ class LandModel{
 
         // Execute
         if ($this->db->execute()){
+
+            // Delete slots
+            $this->db->query('DELETE FROM parking_slot WHERE landID = :id');
+
+            // Bind values
+            $this->db->bind(':id', $id);
+            $this->db->execute();
+
+
             // Get email and name
             $this->db->query('SELECT name, email FROM user WHERE id = :id');
 
@@ -548,7 +557,7 @@ class LandModel{
             $this->db->bind(':id', $uid);
             $data = $this->db->single();
 
-//            die(print_r($data));
+
 
             $name = $data->name;
             $email = $data->email;
@@ -848,16 +857,17 @@ class LandModel{
     }
 
     //newly added to get the total vehicle distribution of a land owner
-    public function getTotalVehicleDistribution(){
+    public function getTotalVehicleDistribution()
+    {
         $this->db->query('SELECT SUM(January) AS January,SUM(February) AS February,SUM(March) AS March,SUM(April) AS April,SUM(May) AS May,SUM(June) AS June,SUM(July) AS July,SUM(August) AS August,SUM(September) AS September,SUM(October) AS October,SUM(November) AS November,SUM(December) AS December FROM vehicle_flow WHERE ownerID = :ownerID AND year = :year');
         $this->db->bind(':ownerID', $_SESSION['user_id']);
         $this->db->bind(':year', date('Y'));
 
         $row = $this->db->single();
-        
+
         return $row;
     }
-    
+
     public function updateRequestedCapacity($data){
 
         if($data['vehicle_type'] == 'car'){
@@ -890,5 +900,31 @@ class LandModel{
         else {
             return false;
         }
+    }
+
+    // Get free slots in the parking
+    public function getFreeSlots($landID){
+        $this->db->query('SELECT COUNT(*) AS freeSlots FROM parking_slot WHERE landID = :landID AND availability = 0 AND vehicleType = "car"');
+        $this->db->bind(':landID', $landID);
+
+        $row = $this->db->single();
+
+        $data['car'] = $row->freeSlots;
+
+        $this->db->query('SELECT COUNT(*) AS freeSlots FROM parking_slot WHERE landID = :landID AND availability = 0 AND vehicleType = "bike"');
+        $this->db->bind(':landID', $landID);
+
+        $row = $this->db->single();
+
+        $data['bike'] = $row->freeSlots;
+
+        $this->db->query('SELECT COUNT(*) AS freeSlots FROM parking_slot WHERE landID = :landID AND availability = 0 AND vehicleType = "threeWheel"');
+        $this->db->bind(':landID', $landID);
+
+        $row = $this->db->single();
+
+        $data['threeWheel'] = $row->freeSlots;
+
+        return $data;
     }
 }

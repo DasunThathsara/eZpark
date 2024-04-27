@@ -7,12 +7,17 @@
 $section = 'lands';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
+
 <main class="page-container">
     <section class="section" id="main">
         <div class="container">
             <h1 class="title">View Parking</h1>
             <p class="subtitle">View real-time information about the parking before entering</p>
-
+                <?php if(isset($_GET['error'])){?>
+                    <div style="color: red; background-color: rgba(255,0,0,0.05); border-radius: 10px; padding: 5px; width: calc(100% - 30px); text-align: center; border: 1px solid rgba(255,0,0,0.1); margin-top: 30px; font-size: 13px;">
+                        You have no any free vehicle to enter the parking
+                    </div>
+                <?php }?>
             <div class="view-parking-container " style="">
                 <div class="parking-cover-container">
                     <img class="parking-cover" src="<?php echo URLROOT ?>/images/parking_bg1.jpg" alt="Phone">
@@ -29,46 +34,46 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             <a class="parking-option" href="<?php echo URLROOT?>/driver/enterExitParking/<?php echo $data->id?>">
                                 <div class="parking-option-text">Enter Parking</div>
                                 <div class="parking-option-icon">
-                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/Enter.png" alt="Parking">
+                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/Enter.png" alt="Parking" style="padding: 4px 0;">
                                 </div>
                             </a>
 
                             <a class="parking-option second-option" href="<?php echo URLROOT?>/driver/directionToParking/<?php echo $data->id?>">
                                 <div class="parking-option-text">Get Direction</div>
                                 <div class="parking-option-icon">
-                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/Navigation.png" alt="Parking">
+                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/Navigation.png" alt="Parking" style="padding: 4px 0;">
                                 </div>
                             </a>
 
                             <a class="parking-option second-option" href="<?php echo URLROOT?>/driver/makeReservation/<?php echo $data->id?>">
                                 <div class="parking-option-text">Make Reservation</div>
                                 <div class="parking-option-icon">
-                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/booking.png" alt="Parking">
+                                    <img class="parking-option-icon" src="<?php echo URLROOT ?>/images/booking.png" alt="Parking" style="padding: 4px 0;">
                                 </div>
                             </a>
                         </div>
                     </div>
 
                     <div class="slot-area">
-                        <p style="color: gray; font-size: 12px;">Real-Time Availability</p>
+                        <p style="color: gray; font-size: 14px;">Real-Time Availability</p>
                         <div class="slot-cards">
                             <div class="slot-card">
                                 <div class="slot-card-title">
                                     <img style="width: 30px;" src="<?php echo URLROOT ?>/images/motor-sports.png" alt="" class="vehicle-image">
                                 </div>
-                                <div class="slot-card-value"><?php echo $data->car?> / <?php echo $data->car?></div>
+                                <div class="slot-card-value"><span style="color: #ffb700"><?php echo $data->freeSLots['car']?></span> / <?php echo $data->car?></div>
                             </div>
                             <div class="slot-card">
                                 <div class="slot-card-title">
                                     <img style="width: 30px;" src="<?php echo URLROOT ?>/images/car-c.png" alt="" class="vehicle-image">
                                 </div>
-                                <div class="slot-card-value"><?php echo $data->bike?> / <?php echo $data->bike?></div>
+                                <div class="slot-card-value"><span style="color: #ffb700"><?php echo $data->freeSLots['bike']?></span> / <?php echo $data->bike?></div>
                             </div>
                             <div class="slot-card">
                                 <div class="slot-card-title">
                                     <img style="width: 30px;" src="<?php echo URLROOT ?>/images/tuk-tuk.png" alt="" class="vehicle-image">
                                 </div>
-                                <div class="slot-card-value"><?php echo $data->threeWheel?> / <?php echo $data->threeWheel?></div>
+                                <div class="slot-card-value"><span style="color: #ffb700"><?php echo $data->freeSLots['threeWheel']?></span> / <?php echo $data->threeWheel?></div>
                             </div>
                         </div>
                     </div>
@@ -96,43 +101,48 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <div class="package-area">
                         <div style="color: #fccc04; margin-top: 60px; font-size: 25px;">Available Packages</div>
                         <div class="package-cards">
-                            <?php foreach ($data->packages as $package){?>
-                                <div class="package-card">
-                                    <div class="package-vehicle-type">
-                                        <?php echo $package->packageType?> Parking Package
-                                    </div>
-
-                                    <div class="package-type">
-                                        <?php echo $package->name?> • 1 Vehicle
-                                    </div>
-
-                                    <?php if ($package->name == 'monthly'){?>
-                                        <div class="package-expire">Available till <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month'))?></div>
-                                    <?php }?>
-
-                                    <?php if ($package->name == 'weekly'){?>
-                                        <div class="package-expire">Available till <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 week'))?></div>
-                                    <?php }?>
-
-                                    <div class="package-option">
-                                        <div class="package-price">
-                                            LKR <?php echo $package->price?>
+                            <?php if (empty($data->packages)){?>
+                                <div style="border: 2px dotted rgb(252,204,4); background-color: rgba(252,204,4,0.04); color: #a98000; border-radius: 20px; padding: 10px; width: calc(100%); height: 100px; display: flex; align-items: center; justify-content: center">No Packages Available</div>
+                            <?php }
+                            else{?>
+                                <?php foreach ($data->packages as $package){?>
+                                    <div class="package-card">
+                                        <div class="package-vehicle-type">
+                                            <?php echo $package->packageType?> Parking Package
                                         </div>
 
-                                        <div class="subscribe-btn">
-                                            <?php if (empty($package->status)){?>
-                                                <form action="<?php echo URLROOT?>/driver/subscribePackage" method="post">
-                                                    <input type="text" name="landID" id="landID" value="<?php echo $data->id?>" hidden required>
-                                                    <input type="text" name="vehicleType" id="vehicleType" value="<?php echo $package->packageType?>" hidden required>
-                                                    <input type="text" name="packageType" id="packageType" value="<?php echo $package->name?>" hidden required>
-                                                    <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; transform: translateY(-5px)" value="Subscribe">
-                                                </form>
-                                            <?php } else {?>
-                                                <button style="color: black; background-color: white; border-radius: 10px; padding: 10px; width: 100px; outline: none; border: 1px solid #fccc04;">Subscribed</button>
-                                            <?php }?>
+                                        <div class="package-type">
+                                            <?php echo $package->name?> • 1 Vehicle
+                                        </div>
+
+                                        <?php if ($package->name == 'monthly'){?>
+                                            <div class="package-expire">Available till <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month'))?></div>
+                                        <?php }?>
+
+                                        <?php if ($package->name == 'weekly'){?>
+                                            <div class="package-expire">Available till <?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 week'))?></div>
+                                        <?php }?>
+
+                                        <div class="package-option">
+                                            <div class="package-price">
+                                                LKR <?php echo $package->price?>
+                                            </div>
+
+                                            <div class="subscribe-btn">
+                                                <?php if (empty($package->status)){?>
+                                                    <form action="<?php echo URLROOT?>/driver/subscribePackage" method="post">
+                                                        <input type="text" name="landID" id="landID" value="<?php echo $data->id?>" hidden required>
+                                                        <input type="text" name="vehicleType" id="vehicleType" value="<?php echo $package->packageType?>" hidden required>
+                                                        <input type="text" name="packageType" id="packageType" value="<?php echo $package->name?>" hidden required>
+                                                        <input type="submit" style="background-color: #fccc04; border-radius: 10px; padding: 10px; width: 100px; transform: translateY(-5px)" value="Subscribe">
+                                                    </form>
+                                                <?php } else {?>
+                                                    <button style="color: black; background-color: white; border-radius: 10px; padding: 10px; width: 100px; outline: none; border: 1px solid #fccc04;">Subscribed</button>
+                                                <?php }?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php }?>
                             <?php }?>
                         </div>
                     </div>
