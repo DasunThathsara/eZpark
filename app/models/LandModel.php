@@ -927,4 +927,57 @@ class LandModel{
 
         return $data;
     }
+
+    // Ban parking
+    public function banParking($land_id, $user_id)
+    {
+        // Get name and user email
+        $this->db->query('SELECT name, email FROM user WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $user_id);
+        $data = $this->db->single();
+        $name = $data->name;
+        $email = $data->email;
+
+
+        // get land name using land ID
+        $this->db->query('SELECT name FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_id);
+        $land = $this->db->single();
+        $landName = $land->name;
+
+
+        //Content
+        $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear ' . $name . ',<br><br>
+        
+                We regret to inform you that your land '.$landName.' with eZpark has been banned. This action has been taken due to a violation of our terms of service or community guidelines.
+                <br><br>
+                Reasons for account bans include, but are not limited to, engaging in prohibited activities, violation of user policies, or repeated breaches of our terms.
+                <br><br>
+                If you believe this action has been taken in error or if you have any questions, please contact our support team at support@ezpark.com.
+                <br><br>
+                We take the security and well-being of our community seriously, and we appreciate your understanding.
+                <br>
+            </p>
+            <p>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+
+        $this->sendEmail($email, $name, 'Your account has been banned', $this->mail->Body);
+
+        $this->db->query('UPDATE land SET status = 2 WHERE id = :id');
+        $this->db->bind(':id', $land_id);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

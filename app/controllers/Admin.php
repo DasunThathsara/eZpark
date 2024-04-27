@@ -15,28 +15,35 @@ class Admin extends Controller {
             'title' => 'Admin Dashboard'
         ];
 
-        $other_data['notification_count'] = $data['request_count'];
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        // die(print_r($notifications['list']));
 
-        $this->view('admin/index', $data, $other_data);
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $this->view('admin/index', $data, $notifications);
     }
 
     public function viewRegistrationRequests(){
         $data = $this->landModel->viewUnVerifyLands();
 
-        $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        // die(print_r($notifications['list']));
 
-        $this->view('admin/requests', $data, $other_data);
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $this->view('admin/requests', $data, $notifications);
     }
 
     public function viewRegistrationRequestedLand($land_id = null, $notification_id = null){
         if ($notification_id != null)
             $this->userModel->markAsRead($notification_id);
+
         $data = $this->landModel->viewLand($land_id);
 
         $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
@@ -98,5 +105,78 @@ class Admin extends Controller {
 
             redirect('admin/viewRegistrationRequests');
         }
+    }
+
+    // View Complaints
+    public function complaints(){
+        $data = $this->adminModel->viewComplaints();
+
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+
+        $this->view('admin/complaints', $data, $notifications);
+    }
+
+    // Assign my self complaint
+    public function assignMySelfComplaint(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->userModel->assignMySelfComplaint($_POST['id'], $_SESSION['user_id']);
+
+            redirect('admin/complaints');
+        }
+    }
+
+    // Unassign my self complaint
+    public function unassignedMySelfComplaint(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $this->userModel->unassignMySelfComplaint($_POST['id'], $_SESSION['user_id']);
+
+            redirect('admin/complaints');
+        }
+    }
+
+    // View Complaint
+    public function viewComplaint($complaint_id){
+        $data = $this->userModel->viewComplaint($complaint_id);
+        $land = $this->landModel->viewLand($data->complaineeID);
+
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $notifications['complaint_details'] = $data;
+
+        $this->view('admin/viewComplaint', $land, $notifications);
+    }
+
+    // Ban user
+    public function banUser(){
+        $complaintID = $_POST['id'];
+        $ownerID = $_POST['ownerID'];
+
+        $this->userModel->banUser($ownerID);
+
+        redirect('admin/viewComplaint/'.$complaintID);
+    }
+
+    // Ban parking
+    public function banParking(){
+        $landID = $_POST['landID'];
+        $complaintID = $_POST['id'];
+        $ownerID = $_POST['ownerID'];
+
+        $this->landModel->banParking($landID, $ownerID);
+
+        redirect('admin/viewComplaint/'.$complaintID);
     }
 }
