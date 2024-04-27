@@ -821,6 +821,16 @@ class LandModel{
         return $row;
     }
 
+    // Get All recent transactions from all owners
+    public function getAllTodayTotalTransactions(){
+        $this->db->query('SELECT lt.*, l.name FROM land_transaction lt JOIN land l ON lt.ownerID = l.uid AND lt.landID = l.id WHERE lt.transactionTime >= :transactionTime ORDER BY lt.transactionTime DESC LIMIT 8');
+        $this->db->bind(':transactionTime', date('Y-m-d'));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
     // Get total income of owner's all parking
     public function getTotalIncome(){
         $this->db->query('SELECT SUM(dl.cost) AS totalIncome FROM driver_land dl JOIN land l ON dl.landID = l.id WHERE l.uid = :uid AND dl.endTime >= :endTime');

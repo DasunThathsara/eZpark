@@ -12,6 +12,7 @@ class Admin extends Controller {
     public function index(){
         $data = [
             'request_count' => $this->landModel->getUnVerifyLandCount(),
+            'all_today_total_transactions' => $this->landModel->getAllTodayTotalTransactions(),
             'title' => 'Admin Dashboard'
         ];
 
