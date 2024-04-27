@@ -309,12 +309,22 @@ class LandModel{
 
     // View all lands of current user
     public function viewLands(){
-        $this->db->query('SELECT * FROM land WHERE uid = :uid and status = :status');
+        $this->db->query('SELECT * FROM land WHERE uid = :uid');
         $this->db->bind(':uid', $_SESSION['user_id']);
-        $this->db->bind(':status', 1);
 
         $row = $this->db->resultSet();
 
+        return $row;
+    }
+
+    //retrieve images from images of land
+    public function getLandImages($land_ID){
+
+        $this->db->query('SELECT image1, image2, image3, cover FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+        
         return $row;
     }
 
@@ -810,6 +820,16 @@ class LandModel{
         return $row;
     }
 
+    // Get All recent transactions from all owners
+    public function getAllTodayTotalTransactions(){
+        $this->db->query('SELECT lt.*, l.name FROM land_transaction lt JOIN land l ON lt.ownerID = l.uid AND lt.landID = l.id WHERE lt.transactionTime >= :transactionTime ORDER BY lt.transactionTime DESC LIMIT 8');
+        $this->db->bind(':transactionTime', date('Y-m-d'));
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
     // Get total income of owner's all parking
     public function getTotalIncome(){
         $this->db->query('SELECT SUM(dl.cost) AS totalIncome FROM driver_land dl JOIN land l ON dl.landID = l.id WHERE l.uid = :uid AND dl.endTime >= :endTime');
@@ -844,6 +864,16 @@ class LandModel{
         return $row;
     }
 
+    // Get total income distribution of all lands registered in the system
+    public function getAllTotalIncomeDistribution(){
+        $this->db->query('SELECT SUM(January) AS January,SUM(February) AS February,SUM(March) AS March,SUM(April) AS April,SUM(May) AS May,SUM(June) AS June,SUM(July) AS July,SUM(August) AS August,SUM(September) AS September,SUM(October) AS October,SUM(November) AS November,SUM(December) AS December FROM income WHERE year = :year');
+        $this->db->bind(':year', date('Y'));
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
     // Get vehicle distribution of the land
     public function getVehicleDistribution($landID){
         $this->db->query('SELECT * FROM vehicle_flow WHERE landID = :landID AND year = :year AND ownerID = :ownerID');
@@ -861,6 +891,16 @@ class LandModel{
     {
         $this->db->query('SELECT SUM(January) AS January,SUM(February) AS February,SUM(March) AS March,SUM(April) AS April,SUM(May) AS May,SUM(June) AS June,SUM(July) AS July,SUM(August) AS August,SUM(September) AS September,SUM(October) AS October,SUM(November) AS November,SUM(December) AS December FROM vehicle_flow WHERE ownerID = :ownerID AND year = :year');
         $this->db->bind(':ownerID', $_SESSION['user_id']);
+        $this->db->bind(':year', date('Y'));
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    // Get total vehicle distribution of all lands registered in the system
+    public function getAllTotalVehicleDistribution(){
+        $this->db->query('SELECT SUM(January) AS January,SUM(February) AS February,SUM(March) AS March,SUM(April) AS April,SUM(May) AS May,SUM(June) AS June,SUM(July) AS July,SUM(August) AS August,SUM(September) AS September,SUM(October) AS October,SUM(November) AS November,SUM(December) AS December FROM vehicle_flow WHERE year = :year');
         $this->db->bind(':year', date('Y'));
 
         $row = $this->db->single();

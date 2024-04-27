@@ -22,6 +22,40 @@
     transition: 0.3s;
     height: 100px;
 }
+.page-container .section .container .image-container{
+    margin: 35px 400px 40px 10px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
+    padding: 20px 5px 20px 6px;
+    transition: 1s, transform 1s; 
+}
+
+.page-container .section .container .image-container.reveal {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.page-container .section .container .image-container h2{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.page-container .section .container .image-container .land-images {
+    justify-content: space-between;
+    text-align: center;  
+}
+
+.page-container .section .container .image-container .land-images .land-image{
+    transition: 1s, transform 1s;
+}
+
+.page-container .section .container .image-container .land-images .land-image img{
+    border-radius: 10px;
+    width: 90%;
+    height: 300px;
+    
+}
 
 .page-container .section .container .cards .card:hover{
     scale: 1.05;
@@ -106,7 +140,7 @@
     width: 360px;
     padding: 20px 0 20px 0;
     height: 75vh;
-    overflow-scrolling: auto;
+    overflow: scroll;
     transition: 1s, transform 1s;
     opacity: 0;
 }

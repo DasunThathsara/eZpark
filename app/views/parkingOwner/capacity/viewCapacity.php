@@ -17,7 +17,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             <!-- <a class="add-btn" href="<?php echo URLROOT ?>/package/packageRegister/<?php echo $data['id'] ?>" style="font-weight: 1000; font-size: 20px">+</a> -->
             
             <?php if (sizeof($data) == 1) {?>
-                <div class="emptyVehicle">You have no any registered vehicles</div>
+                <div class="emptyVehicle">You have no any registered lands</div>
             <?php }
             else {?>
                 <div class="table-container">
@@ -31,6 +31,11 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <div class="left" style="width:20%; padding-left:12px;">
                                         Capacity
                                     </div>
+                                    <?php if($_SESSION['user_type'] == 'security') {?>
+                                    <div class="left" style="width:30%; padding-left:100px; text-align:center;">
+                                        Request to Change Capacity
+                                    </div>
+                                    <?php }?>
                                 </div>
                             </th>
                         </tr>

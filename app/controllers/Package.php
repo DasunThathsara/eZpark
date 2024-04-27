@@ -196,20 +196,20 @@ class Package extends Controller
     }
 
     public function packageUpdateForm($land_ID = null, $package_type = null, $vehicle_type = null){
-        if (sizeof($_GET) > 1){
-            $data = [
-                'id' => trim($_GET['id']),
-                'package_type' => trim($_GET['package_type']),
-                'vehicle_type' => trim($_GET['vehicle_type'])
-            ];
+        // if (sizeof($_GET) > 1){
+        //     $data = [
+        //         'id' => trim($_GET['id']),
+        //         'package_type' => trim($_GET['package_type']),
+        //         'vehicle_type' => trim($_GET['vehicle_type'])
+        //     ];
 
-            redirect('package/packageUpdateForm/'.$data['id'].'/'.$data['package_type'].'/'.$data['vehicle_type']);
-        }
-        else{
+        //     redirect('package/packageUpdateForm/'.$data['id'].'/'.$data['package_type'].'/'.$data['vehicle_type']);
+        // }
+        // else{
             $data = [
-                'id' => $land_ID,
-                'package_type' => $package_type,
-                'vehicle_type' => $vehicle_type
+                'id' => $_GET['id'],
+                'package_type' => $_GET['package_type'],
+                'vehicle_type' => $_GET['vehicle_type']
             ];
 
             $package = $this->parkingOwnerModel->viewToBeUpdatedPackage($data);
@@ -226,14 +226,14 @@ class Package extends Controller
                 'package_price' => $package[0]->price,
                 'err' => ''
             ];
-
+                        // die(print_r($data));
             $this->view('parkingOwner/packages/update', $data, $other_data);
-            // die(print_r($data));
-        }
+
+        // }
     }
 
-    public function packageUpdate()
-    {
+    public function packageUpdate(){
+
         $other_data['notification_count'] = 0;
             
         if ($other_data['notification_count'] < 10) {
@@ -246,13 +246,14 @@ class Package extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'id' => isset($_POST['id']) ? trim($_POST['id']) : '',
-                'vehicle_type' => isset($_POST['vehicle_type']) ? trim($_POST['vehicle_type']) : '',
-                'old_vehicle_type' => isset($_POST['old_vehicle_type']) ? trim($_POST['old_vehicle_type']) : '',
-                'package_price' => isset($_POST['package_price']) ? trim($_POST['package_price']) : '',
-                'package_type' => isset($_POST['package_type']) ? trim($_POST['package_type']) : '',
-                'old_package_type' => isset($_POST['old_package_type']) ? trim($_POST['old_package_type']) : '',
-                'err' => isset($data['err']) ? $data['err'] : ''
+                'id' => ($_POST['id']),
+                'vehicle_type' => ($_POST['vehicle_type']),
+                'old_vehicle_type' =>($_POST['old_vehicle_type']),
+                'package_price' => ($_POST['package_price']),
+                'old_package_price' => ($_POST['old_package_price']),
+                'package_type' => ($_POST['package_type']),
+                'old_package_type' =>($_POST['old_package_type']),
+                'err' =>''
             ];
             // die(print_r($data));
             
@@ -276,12 +277,13 @@ class Package extends Controller
             }
 
             // Check if the package already exists
-            if (empty($data['err']) && !$this->parkingOwnerModel->checkPackage($data)) {
+            if (!$this->parkingOwnerModel->checkPackage($data) && $data['old_package_price'] == $data['package_price']) {
                 $data['err'] = 'Package already exists';
             }
+            
             // Validation is completed and no error found
             if (empty($data['err'])) {
-                // Register package
+                // Update package
                 if ($this->parkingOwnerModel->updatePackage($data)) {
                     redirect('package/viewPackages/'.$data['id'].'/'.$data['package_type']);
                 } else {

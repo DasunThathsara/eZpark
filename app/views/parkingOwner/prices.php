@@ -50,6 +50,7 @@
                                                 <?php echo $other_data[$i]->additionalHourPrice ?>
                                             </div>
                                             <div class="right">
+                                                <?php if ($_SESSION['user_type'] == 'parkingOwner'){?>
                                                 <form action="<?php echo URLROOT ?>/landprice/priceUpdateForm" method="get">
                                                     <input type="text" name="id" id="id" hidden value="<?php echo $data['id'] ?>" />
                                                     <input type="text" name="pid" id="pid" hidden value="<?php echo $other_data[$i]->pid ?>" />
@@ -60,6 +61,7 @@
                                                         <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="Edit">
                                                     </button>
                                                 </form>
+                                                <?php }?>
                                             </div>
                                         </div>
                                     </a>
