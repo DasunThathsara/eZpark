@@ -79,8 +79,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     <div class="left" style="width:28%;">
                                         Capacity
                                     </div>
-                                    <div class="left" style="width:28%; text-align: center;">
-                                        Request to Change Capacity
+                                    <div class="left" style="width:18%; text-align: center;">
+                                        Request Capacity
                                     </div>
                                 </div>
                             </th>

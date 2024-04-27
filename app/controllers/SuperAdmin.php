@@ -13,6 +13,9 @@ class SuperAdmin extends Controller {
     public function index(){
         $data = [
             'request_count' => $this->landModel->getUnVerifyLandCount(),
+            'all_today_total_transactions' => $this->landModel->getAllTodayTotalTransactions(),
+            'all_total_income_distribution' => $this->landModel->getAllTotalIncomeDistribution(),
+            'all_total_vehicle_distribution' => $this->landModel->getAllTotalVehicleDistribution(),
             'title' => 'Admin Dashboard'
         ];
 

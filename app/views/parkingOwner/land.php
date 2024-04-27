@@ -131,7 +131,7 @@
                     </a>
 
                     <!-- Card 6 -->
-                    <a class="card-link" href="">
+                    <a class="card-link">
                         <div class="card">
                             <div class="row">
                                 <div class="left-col">
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div style="transform: translateY(-20px)" class="right-col" id="monthly-income">
-                                    <p style="font-size: 15px; transform: translateY(8px);">View <br />Parking QR</p>
+                                    <p style="font-size: 15px; transform: translateY(8px);">Download <br />Parking QR</p>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,25 @@
                             <canvas id="lineChart2" style="width:100%;max-width:600px"></canvas>
                         </div>
                     </div>
-                </div>
+                </div> 
+
+                <div class="image-container">
+                    <h2>Images</h2>
+                    <div class="land-images">
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image1?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image2?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image3?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->cover?>" alt="">
+                            </div>
+                    </div>
+                </div> 
             </div>
 
             <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
@@ -340,7 +358,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         document.getElementById('generateBtn').addEventListener('click', function() {
-            generateAndDownloadQRCode("<?php echo URLROOT?>/driver/gotoland/<?php echo $data['id']?>");
+            generateAndDownloadQRCode("<?php echo URLROOT?>/driver/enterExitParking/<?php echo $data['id']?>");
         });
 
         function generateAndDownloadQRCode(url) {
@@ -369,5 +387,7 @@
         }
     </script>
     <div id="qrcode" style="display: none;"></div>
+
+
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>

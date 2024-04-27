@@ -20,6 +20,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
         <input type="text" name="id" id="id" required hidden value="<?php echo $data['id'] ?>" />
         <input type="text" name="old_vehicle_type" id="old_vehicle_type" required hidden value="<?php echo $data['vehicle_type'] ?>" />
         <input type="text" name="old_package_type" id="old_package_type" required hidden value="<?php echo $data['package_type'] ?>" />
+        <input type="text" name="old_package_price" id="old_package_price" required hidden value="<?php echo $data['package_price'] ?>" />
 
         <!-- package name -->
         <select name="package_type">

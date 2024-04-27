@@ -44,21 +44,27 @@ class Land extends Controller {
                 $data['err'] = 'Please enter car';
             } else if (!preg_match('/^[1-9]\d*(\.\d+)?$/', $data['car'])){
                 $data['err'] = 'Invalid data type for cars';
+            }else if( ($data['car']) < 0){
+                $data['err'] = 'Price must be positive';
             }
 
             if (empty($data['bike'])){
                 $data['err'] = 'Please enter bike';
             } else if (!preg_match('/^[1-9]\d*(\.\d+)?$/', $data['bike'])){
                 $data['err'] = 'Invalid data type for bikes';
+            }else if( ($data['bike']) < 0){
+                $data['err'] = 'Price must be positive';
             }
 
             if (empty($data['threeWheel'])){
                 $data['err'] = 'Please enter threeWheel';
             } else if (!preg_match('/^[1-9]\d*(\.\d+)?$/', $data['threeWheel'])){
                 $data['err'] = 'Invalid data type for three wheels';
+            }else if( ($data['threeWheel']) < 0){
+                $data['err'] = 'Price must be positive';
             }
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -67,7 +73,8 @@ class Land extends Controller {
             if (empty($data['err'])){
                 // Register land
                 if ($this->landModel->setPrice($data)){
-                    $this->successPropertyRegister($data);
+                    $id = $this->landModel->findLandID($data['name']);
+                    redirect('land/successPropertyRegister/'.$id);
                 } else {
                     die('Something went wrong');
                 }
@@ -130,7 +137,7 @@ class Land extends Controller {
                 $data['err'] = 'Please enter secAvail';
             }
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -179,7 +186,7 @@ class Land extends Controller {
     }
     
     public function aboutSecurityOfficer($data){
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -383,7 +390,7 @@ class Land extends Controller {
 
             // Parking photo 3 upload validation
             if (empty($data['err']) and !empty($_FILES['photo3']['name'])){
-                $cover = $this->imageUpload('photo1');
+                $cover = $this->imageUpload('photo3');
                 $data['photo3'] = $cover['image'];
                 if(empty($cover['err']))
                     $data['err'] = '';
@@ -395,7 +402,7 @@ class Land extends Controller {
                 $data['err'] = 'Please upload parking photo 3';
             }
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -427,14 +434,6 @@ class Land extends Controller {
 
             // Validation is completed and no error found*/
             if (empty($data['err'])){
-                // Generate QR code
-//                $path = PUBLICROOT.'/QRs/';
-//                $img_name = 'QR-'.time().'.'.uniqid();
-//                $qrcode = $path.$img_name.'.png';
-//                QRcode :: png("dasun thaths", $qrcode, 'H', 4, 4);
-//
-//                $data['qrcode'] = $img_name.'.png';
-
                 // Register land
                 if ($this->landModel->registerLand($data) && $this->userModel->addNotification('Land registration request from '.$_SESSION['user_name'], 'landRegistration', $this->landModel->getLandID($data['name']), 0)){
                     $this->aboutSecurityOfficer($data);
@@ -443,7 +442,6 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
-//                die(print_r($data));
                 $this->view($_SESSION['user_type'].'/lands/create', $data, $other_data);
             }
 
@@ -469,7 +467,7 @@ class Land extends Controller {
                 'err' => ''
             ];
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -612,13 +610,17 @@ class Land extends Controller {
     }
 
     // Success property register page
-    public function successPropertyRegister($data){
-        $other_data['notification_count'] = 0;
+    public function successPropertyRegister($land_ID = null){
+        $data['id'] = $land_ID;
+        $land = $this->landModel->viewLand($land_ID);
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        $this->view('parkingOwner/lands/successPropertyRegister', $data, $other_data);
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $this->view('parkingOwner/lands/successPropertyRegister', $land, $notifications);
     }
 
     // ------------------------------ Price ------------------------------
@@ -638,7 +640,7 @@ class Land extends Controller {
 
             $prices = $this->landModel->viewPrice($data);
 
-            $prices['notification_count'] = 0;
+            $prices['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($prices['notification_count'] < 10)
                 $prices['notification_count'] = '0'.$prices['notification_count'];
@@ -663,7 +665,7 @@ class Land extends Controller {
             $other_data['pending_securities'][] = $sec->sid;
         }
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -710,7 +712,12 @@ class Land extends Controller {
     }
 
     // View security
-    public function viewSecurity($land_ID = null, $security_ID = null){
+    public function viewSecurity($land_ID = null, $security_ID = null, $notification_id = null){
+
+        // die(print_r($land_ID));
+        if ($notification_id != null)
+            $this->userModel->markAsRead($notification_id);
+
         if (sizeof($_GET) > 1){
             $data = [
                 'id' => trim($_GET['id'])
@@ -727,9 +734,7 @@ class Land extends Controller {
 
                 $security = $this->securityModel->viewSecurityProfile($data);
 
-                // die(print_r($data));
-
-                $security['notification_count'] = 0;
+                $security['notification_count'] = $this->userModel->getNotificationCount();
 
                 if ($security['notification_count'] < 10)
                     $security['notification_count'] = '0'.$security['notification_count'];
@@ -741,7 +746,7 @@ class Land extends Controller {
                     'id' => $security_ID,
                     'lid' => $land_ID
                 ];
-
+                die(print_r($data));
                 $security = $this->securityModel->viewSecurityProfile($data);
 
                 $pendingSec = $this->securityModel->getSecurityPendingList($land_ID);
@@ -751,7 +756,7 @@ class Land extends Controller {
                     $security['pending_securities'][] = $sec->sid;
                 }
 
-                $security['notification_count'] = 0;
+                $security['notification_count'] = $this->userModel->getNotificationCount();
 
                 if ($security['notification_count'] < 10)
                     $security['notification_count'] = '0'.$security['notification_count'];

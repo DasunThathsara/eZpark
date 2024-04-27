@@ -17,7 +17,9 @@ class ParkingOwner extends Controller {
             'land_count' => $this->landModel->getLandCount(),
             'total_capacity' => $this->landModel->getTotalCapacity(),
             'today_total_transactions' => $this->landModel->getTodayTotalTransactions(),
-            'total_income' => $this->landModel->getTotalIncome()
+            'total_income' => $this->landModel->getTotalIncome(),
+            'total_income_distribution' => $this->landModel->getTotalIncomeDistribution(),
+            'total_vehicle_distribution' => $this->landModel->getTotalVehicleDistribution()
         ];
 
         $notifications['list'] = $this->userModel->viewNotifications();
@@ -35,15 +37,16 @@ class ParkingOwner extends Controller {
     // View all lands
     public function lands(){
         $lands = $this->landModel->viewLands();
-
+// die(print_r($lands));
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
+        
+                // die(print_r($land->status));
         $this->view('parkingOwner/lands', $lands, $notifications);
-    }
+    }    
 
     // Go to specific land
     public function gotoLand($land_ID = null){
@@ -54,6 +57,7 @@ class ParkingOwner extends Controller {
 
         $notifications['lands'] = $this->landModel->viewLands();
 
+        // die(print_r($notifications['lands']));
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
@@ -71,9 +75,9 @@ class ParkingOwner extends Controller {
             'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
             'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
             'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
-            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
+            'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID),
+            'land_images' =>$this->landModel->getLandImages($land_ID)
         ];
-
         $this->view('parkingOwner/land', $data, $notifications);
     }
 

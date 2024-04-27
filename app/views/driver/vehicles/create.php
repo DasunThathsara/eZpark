@@ -27,7 +27,7 @@
 
         <br><br>
         <!-- Vehicle Type -->
-        <div class="form-input-title">User Type:</div>
+        <div class="form-input-title">Vehicle Type:</div>
         <div class="user-selection-container">
             <ul class="user-selection-list">
                 <li data-user-type="car">Car</li>

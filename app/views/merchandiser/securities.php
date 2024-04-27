@@ -34,7 +34,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                     </div>
 
                                     <div class="left" style="width:31%">
-                                        Access For Security
+                                        Access
                                     </div>
                                 </div>
                             </th>

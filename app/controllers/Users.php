@@ -227,7 +227,6 @@ class Users extends Controller{
         }
     }
 
-
     // PMerchandiser registration form
     public function merchandiserRegister(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -339,7 +338,6 @@ class Users extends Controller{
             $this->view('users/merchandiserRegister', $data);
         }
     }
-
 
     // Security registration form
     public function securityRegister(){
@@ -493,7 +491,6 @@ class Users extends Controller{
             $this->view('users/securityRegister', $data);
         }
     }
-
 
     // Admin registration form
     public function adminRegister(){

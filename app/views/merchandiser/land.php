@@ -97,7 +97,7 @@
                         </div>
                     </a>
 
-                    <!-- Card 6 -->
+                    <!-- Card 6 
                     <a class="card-link" href="">
                         <div class="card">
                             <div class="row">
@@ -115,18 +115,56 @@
                                 </div>
                             </div>
                         </div>
+                    </a>    -->
+
+                    <!-- Card 7 -->
+                    <a class="card-link" id="generateBtn">
+                        <div class="card" style="cursor:pointer;">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img style="transform: translateY(15px)" src="<?php echo URLROOT ?>/images/QR.png" alt="">
+                                        </div>
+                                        <div class="bottom-row"></div>
+                                    </div>
+                                </div>
+                                <div style="transform: translateY(-20px)" class="right-col" id="monthly-income">
+                                    <p style="font-size: 15px; transform: translateY(8px);">View <br />Parking QR</p>
+                                </div>
+                            </div>
+                        </div>
                     </a>
+
                 </div>
 
                 <div class="charts">
-                    <h2>Analysis</h2>
+                    <h2><?php echo $data['name'] ?> Vehicle Distribution</h2>
                     <div class="chart-container">
-                        <div class="chart">
+                        <!--<div class="chart">
                             <canvas id="lineChart1" style="width:100%;max-width:600px"></canvas>
-                        </div>
-                        <div class="chart">
-                            <canvas id="lineChart2" style="width:100%;max-width:600px"></canvas>
-                        </div>
+                        </div>-->
+                        <!--<div class="chart">-->
+                            <canvas id="lineChart2" style="width:100%;max-width:600px;margin:auto"></canvas>
+                        <!--</div>-->
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <h2>Images</h2>
+                    <div class="land-images">
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image1?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image2?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image3?>" alt="">
+                            </div>
+                            <div class="land-image">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->cover?>" alt="">
+                            </div>
                     </div>
                 </div>
             </div>
@@ -263,8 +301,8 @@
     //<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     //changed here from script to space
     // ---------------------------------------------- Chart.js ----------------------------------------------
-        const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-        const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
+       // const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+        //const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
 
         var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
         var yValues2 = [<?php echo $data['vehicle_distribution']->January?>, <?php echo $data['vehicle_distribution']->February?>, <?php echo $data['vehicle_distribution']->March?>, <?php echo $data['vehicle_distribution']->April?>, <?php echo $data['vehicle_distribution']->May?>, <?php echo $data['vehicle_distribution']->June?>, <?php echo $data['vehicle_distribution']->July?>, <?php echo $data['vehicle_distribution']->August?>, <?php echo $data['vehicle_distribution']->September?>, <?php echo $data['vehicle_distribution']->October?>, <?php echo $data['vehicle_distribution']->November?>, <?php echo $data['vehicle_distribution']->December?>];
@@ -272,34 +310,37 @@
         var barColors = ["red", "green", "blue", "orange", "brown", "purple", "yellow", "pink", "cyan", "olive", "magenta", "lime"];
 
 
-        new Chart("lineChart1", {
+        // new Chart("lineChart1", {
+        //     type: "line",
+        //     data: {
+        //         labels: xValues,
+        //         datasets: [{
+        //             fill: false,
+        //             lineTension: 0,
+        //             backgroundColor: "rgb(0,0,0)",
+        //             borderColor: "rgb(252,212,38)",
+        //             data: yValues
+        //         }]
+        //     },
+        //     options: {
+        //         legend: {display: false},
+        //         title: {
+        //             display: true,
+        //             text: "Income Distribution"
+        //         }   //newly added
+        //     }
+        // });
+
+        // Create a new chart with a different id for the second canvas
+        new Chart("lineChart2", {
             type: "line",
-            data: {
-                labels: xValues,
+            data: { //added 2 after xValues and yValues
+                labels: xValues2,
                 datasets: [{
                     fill: false,
                     lineTension: 0,
                     backgroundColor: "rgb(0,0,0)",
                     borderColor: "rgb(252,212,38)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {display: false},
-                title: {
-                    display: true,
-                    text: "Income Distribution"
-                }   //newly added
-            }
-        });
-
-        // Create a new chart with a different id for the second canvas
-        new Chart("lineChart2", {
-            type: "bar",
-            data: { //added 2 after xValues and yValues
-                labels: xValues2,
-                datasets: [{
-                    backgroundColor: barColors,
                     data: yValues2
                 }]
             },
@@ -334,6 +375,43 @@
             });
         });
     </script>
+
+
+
+        <!-- Generate QR code-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            generateAndDownloadQRCode("<?php echo URLROOT?>/driver/gotoland/<?php echo $data['id']?>");
+        });
+
+        function generateAndDownloadQRCode(url) {
+            // Create a new QRCode instance
+            var qrcode = new QRCode(document.getElementById("qrcode"), url);
+
+            // Get the base64 encoded PNG of the QR code
+            var base64ImageData = qrcode._el.querySelector("img").getAttribute("src");
+
+            // Convert the base64 data into a Blob
+            var byteCharacters = atob(base64ImageData.replace(/^data:image\/(png|jpeg|jpg);base64,/, ''));
+            var byteNumbers = new Array(byteCharacters.length);
+            for (var i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            var byteArray = new Uint8Array(byteNumbers);
+            var blob = new Blob([byteArray], { type: 'image/png' });
+
+            // Create a temporary anchor element to trigger the download
+            var downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = 'parking_<?php echo $data['id']?>_QR_code.png';
+
+            // Trigger download
+            downloadLink.click();
+        }
+    </script>
+    <div id="qrcode" style="display: none;"></div>
+
 
 
 <?php require APPROOT.'/views/inc/footer.php'; ?>
