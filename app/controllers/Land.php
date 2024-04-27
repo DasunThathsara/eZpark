@@ -73,7 +73,8 @@ class Land extends Controller {
             if (empty($data['err'])){
                 // Register land
                 if ($this->landModel->setPrice($data)){
-                    $this->successPropertyRegister($data);
+                    $id = $this->landModel->findLandID($data['name']);
+                    redirect('land/successPropertyRegister/'.$id);
                 } else {
                     die('Something went wrong');
                 }
@@ -389,7 +390,7 @@ class Land extends Controller {
 
             // Parking photo 3 upload validation
             if (empty($data['err']) and !empty($_FILES['photo3']['name'])){
-                $cover = $this->imageUpload('photo1');
+                $cover = $this->imageUpload('photo3');
                 $data['photo3'] = $cover['image'];
                 if(empty($cover['err']))
                     $data['err'] = '';
@@ -433,14 +434,6 @@ class Land extends Controller {
 
             // Validation is completed and no error found*/
             if (empty($data['err'])){
-                // Generate QR code
-//                $path = PUBLICROOT.'/QRs/';
-//                $img_name = 'QR-'.time().'.'.uniqid();
-//                $qrcode = $path.$img_name.'.png';
-//                QRcode :: png("dasun thaths", $qrcode, 'H', 4, 4);
-//
-//                $data['qrcode'] = $img_name.'.png';
-
                 // Register land
                 if ($this->landModel->registerLand($data) && $this->userModel->addNotification('Land registration request from '.$_SESSION['user_name'], 'landRegistration', $this->landModel->getLandID($data['name']), 0)){
                     $this->aboutSecurityOfficer($data);
@@ -449,7 +442,6 @@ class Land extends Controller {
                 }
             } else {
                 // Load view with errors
-//                die(print_r($data));
                 $this->view($_SESSION['user_type'].'/lands/create', $data, $other_data);
             }
 
@@ -618,13 +610,17 @@ class Land extends Controller {
     }
 
     // Success property register page
-    public function successPropertyRegister($data){
-        $other_data['notification_count'] = $this->userModel->getNotificationCount();
+    public function successPropertyRegister($land_ID = null){
+        $data['id'] = $land_ID;
+        $land = $this->landModel->viewLand($land_ID);
 
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
-        $this->view('parkingOwner/lands/successPropertyRegister', $data, $other_data);
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $this->view('parkingOwner/lands/successPropertyRegister', $land, $notifications);
     }
 
     // ------------------------------ Price ------------------------------

@@ -15,31 +15,48 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
 
 <main class="page-container">
 
-    <!-- Map window start -->
-    <div class="overlay1 overlay" id="overlay1">
-        <div class="get-direction light-box">
-            <p class="close-btn1 close-btn do-not">
-                <i class="fas fa-xmark"></i>
-            </p>
-            <div class="direction-container">
-                rating-title
-                <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
-                </div>
+    <!-- Rating window start -->
+    <?php if(isset($_GET['completion_status'])){?>
+        <div class="overlay1 overlay" id="overlay1">
+            <div class="get-direction light-box">
+                <p class="close-btn1 close-btn do-not">
+                    <i class="fas fa-xmark"></i>
+                </p>
+                <form id="ratingForm" action="<?php echo URLROOT?>/driver/addRatingReviewComplaint" method="post">
+                    <div class="direction-container">
+                        <div class="completion-container">
+                            <input type="text" name="landID" hidden value="<?php echo $_GET['completion_status']?>">
+                            <h2 class="rating-title">Transaction completed!<br /><span style="font-size: 20px; margin-top: 10px; color: #6b6b6b">Rate to the parking location</span></h2>
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+
+                            <textarea class="review-box" name="review-message" id="review-message" placeholder="Add Review..." cols="30" rows="10"></textarea>
+
+                            <label class="check-box-area">
+                                <br>
+                                <input class="check-box" type="checkbox" name="complaint">
+                                Make Complaint for the parking
+                            </label>
+
+                            <input type="submit" id="submitButton" value="Send" style="margin-left: 50px; margin-right: 50px; width: calc(100% - 100px); background-color: #ffc536; margin-top: 30px" disabled>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+    <?php }?>
     </div>
-    </div>
-    <!-- Map window end -->
+    <!-- Rating window end -->
 
     <section class="section" id="main">
         <div class="container">
@@ -133,19 +150,29 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
 </script>
 <script>
     const body = document.querySelector("body"),
-        closeBtn1 = body.querySelector(".close-btn1"),
-        overlay1 = body.querySelector(".overlay1");
+        closeBtn1 = body.querySelector(".close-btn1");
 
     closeBtn1.addEventListener("click", () => {
         document.querySelector(".get-direction").style.display = "none";
-        document.querySelector(".overlay1").style.display = "none";
     });
 
-    overlay1.addEventListener("click", (e) => {
-        if (e.target.id === "overlay1") {
-            overlay1.style.display = "none";
-            document.querySelector(".get-direction").style.display = "none";
-        }
+    history.pushState(null, null, 'http://localhost/eZpark/driver/index');
+
+
+
+
+
+    // Get all radio buttons
+    var radioButtons = document.querySelectorAll('input[type="radio"][name="rate"]');
+    // Get submit button
+    var submitButton = document.getElementById('submitButton');
+
+    // Add event listener to radio buttons
+    radioButtons.forEach(function(radioButton) {
+        radioButton.addEventListener('change', function() {
+            // Enable submit button if any radio button is checked
+            submitButton.disabled = false;
+        });
     });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

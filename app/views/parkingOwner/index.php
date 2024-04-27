@@ -168,16 +168,16 @@
 
         // Refresh every 1 second
         setInterval(refreshMonthlyIncome, 1000);
-    </script>
+    
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<script>
+//<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+
     const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-    const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+    const yValues = [<?php echo $data['total_income_distribution']->January?>, <?php echo $data['total_income_distribution']->February?>, <?php echo $data['total_income_distribution']->March?>, <?php echo $data['total_income_distribution']->April?>, <?php echo $data['total_income_distribution']->May?>, <?php echo $data['total_income_distribution']->June?>, <?php echo $data['total_income_distribution']->July?>, <?php echo $data['total_income_distribution']->August?>, <?php echo $data['total_income_distribution']->September?>, <?php echo $data['total_income_distribution']->October?>, <?php echo $data['total_income_distribution']->November?>, <?php echo $data['total_income_distribution']->December?>];
 
-    var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues2 = [55, 49, 44, 24, 15];
+    var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+    var yValues2 = [<?php echo $data['total_vehicle_distribution']->January?>, <?php echo $data['total_vehicle_distribution']->February?>, <?php echo $data['total_vehicle_distribution']->March?>, <?php echo $data['total_vehicle_distribution']->April?>, <?php echo $data['total_vehicle_distribution']->May?>, <?php echo $data['total_vehicle_distribution']->June?>, <?php echo $data['total_vehicle_distribution']->July?>, <?php echo $data['total_vehicle_distribution']->August?>, <?php echo $data['total_vehicle_distribution']->September?>, <?php echo $data['total_vehicle_distribution']->October?>, <?php echo $data['total_vehicle_distribution']->November?>, <?php echo $data['total_vehicle_distribution']->December?>];
     var barColors = ["red", "green","blue","orange","brown"];
 
     new Chart("lineChart1", {
@@ -194,8 +194,11 @@
         },
         options: {
             legend: {display: false},
-            scales: {
-                yAxes: [{ticks: {min: 6, max:16}}],
+            //scales: {
+                //yAxes: [{ticks: {min: 6, max:16}}],
+                title: {
+                    display: true,
+                    text: "Income Distribution"
             }
         }
     });
@@ -204,10 +207,10 @@
     new Chart("lineChart2", {
         type: "bar",
         data: {
-            labels: xValues,
+            labels: xValues2,
             datasets: [{
                 backgroundColor: barColors,
-                data: yValues
+                data: yValues2
             }]
         },
         options: {

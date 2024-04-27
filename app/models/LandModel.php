@@ -317,6 +317,17 @@ class LandModel{
         return $row;
     }
 
+    //retrieve images from images of land
+    public function getLandImages($land_ID){
+
+        $this->db->query('SELECT image1, image2, image3, cover FROM land WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $row = $this->db->single();
+        
+        return $row;
+    }
+
     // View all lands
     public function viewAllLands(){
         $this->db->query('SELECT * FROM land WHERE status = :status');
@@ -540,6 +551,15 @@ class LandModel{
 
         // Execute
         if ($this->db->execute()){
+
+            // Delete slots
+            $this->db->query('DELETE FROM parking_slot WHERE landID = :id');
+
+            // Bind values
+            $this->db->bind(':id', $id);
+            $this->db->execute();
+
+
             // Get email and name
             $this->db->query('SELECT name, email FROM user WHERE id = :id');
 
@@ -547,7 +567,7 @@ class LandModel{
             $this->db->bind(':id', $uid);
             $data = $this->db->single();
 
-//            die(print_r($data));
+
 
             $name = $data->name;
             $email = $data->email;
@@ -823,12 +843,35 @@ class LandModel{
         return $row;
     }
 
+    //newly added to get the total income distribution of a land owner
+    public function getTotalIncomeDistribution(){
+        $this->db->query('SELECT SUM(January) AS January,SUM(February) AS February,SUM(March) AS March,SUM(April) AS April,SUM(May) AS May,SUM(June) AS June,SUM(July) AS July,SUM(August) AS August,SUM(September) AS September,SUM(October) AS October,SUM(November) AS November,SUM(December) AS December FROM income WHERE ownerID = :ownerID AND year = :year');
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+        $this->db->bind(':year', date('Y'));
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
     // Get vehicle distribution of the land
     public function getVehicleDistribution($landID){
         $this->db->query('SELECT * FROM vehicle_flow WHERE landID = :landID AND year = :year AND ownerID = :ownerID');
         $this->db->bind(':landID', $landID);
         $this->db->bind(':year', date('Y'));
         $this->db->bind(':ownerID', $_SESSION['user_id']);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    //newly added to get the total vehicle distribution of a land owner
+    public function getTotalVehicleDistribution()
+    {
+        $this->db->query('SELECT SUM(January) AS January,SUM(February) AS February,SUM(March) AS March,SUM(April) AS April,SUM(May) AS May,SUM(June) AS June,SUM(July) AS July,SUM(August) AS August,SUM(September) AS September,SUM(October) AS October,SUM(November) AS November,SUM(December) AS December FROM vehicle_flow WHERE ownerID = :ownerID AND year = :year');
+        $this->db->bind(':ownerID', $_SESSION['user_id']);
+        $this->db->bind(':year', date('Y'));
 
         $row = $this->db->single();
 
@@ -867,6 +910,31 @@ class LandModel{
         else {
             return false;
         }
+    }
 
+    // Get free slots in the parking
+    public function getFreeSlots($landID){
+        $this->db->query('SELECT COUNT(*) AS freeSlots FROM parking_slot WHERE landID = :landID AND availability = 0 AND vehicleType = "car"');
+        $this->db->bind(':landID', $landID);
+
+        $row = $this->db->single();
+
+        $data['car'] = $row->freeSlots;
+
+        $this->db->query('SELECT COUNT(*) AS freeSlots FROM parking_slot WHERE landID = :landID AND availability = 0 AND vehicleType = "bike"');
+        $this->db->bind(':landID', $landID);
+
+        $row = $this->db->single();
+
+        $data['bike'] = $row->freeSlots;
+
+        $this->db->query('SELECT COUNT(*) AS freeSlots FROM parking_slot WHERE landID = :landID AND availability = 0 AND vehicleType = "threeWheel"');
+        $this->db->bind(':landID', $landID);
+
+        $row = $this->db->single();
+
+        $data['threeWheel'] = $row->freeSlots;
+
+        return $data;
     }
 }

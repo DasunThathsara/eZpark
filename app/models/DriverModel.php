@@ -486,4 +486,71 @@ class DriverModel{
 
         return $row->$vehicleType;
     }
+
+    // Get driver's vehicle availability
+    public function getVehicleAvailability($vehicleType){
+        $this->db->query('SELECT COUNT(*) AS count FROM vehicle WHERE id = :id and vehicleType = :vehicleType');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':vehicleType', $vehicleType);
+
+        $row = $this->db->single();
+
+        return $row->count;
+    }
+
+    // Get driver's reservations list
+    public function getReservations(){
+        $this->db->query('SELECT b.*, l.name, l.city, v.vehicleType FROM booking b JOIN land l ON b.landID = l.id JOIN vehicle v ON v.vehicleNumber = b.vehicleNumber WHERE driverID = :driverID ORDER BY startTime DESC');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Make rate or review or complaint to the parking
+    public function addRatingReviewComplaint($data){
+        $result = true;
+        // Check the review type
+        if ($data['complaint'] == 1){
+            $this->db->query('INSERT INTO complaint (complainerID, complaineeID, message, date) VALUES (:complainerID, :complaineeID, :message, :date)');
+            $this->db->bind(':complainerID', $_SESSION['user_id']);
+            $this->db->bind(':complaineeID', $data['landID']);
+            $this->db->bind(':message', $data['review']);
+            $this->db->bind(':date', date("Y-m-d"));
+
+            if (!$this->db->execute()){
+                $result = false;
+            }
+        }
+        else{
+            $this->db->query('INSERT INTO review (reviewerID, revieweeID, message, date) VALUES (:reviewerID, :revieweeID, :message, :date)');
+            $this->db->bind(':reviewerID', $_SESSION['user_id']);
+            $this->db->bind(':revieweeID', $data['landID']);
+            $this->db->bind(':message', $data['review']);
+            $this->db->bind(':date', date("Y-m-d"));
+
+            if (!$this->db->execute()){
+                $result = false;
+            }
+        }
+
+        // Insert rate to the land
+        $this->db->query('INSERT INTO parking_rating (raterID, landID, rate) VALUES (:raterID, :landID, :rate)');
+        $this->db->bind(':raterID', $_SESSION['user_id']);
+        $this->db->bind(':landID', $data['landID']);
+        $this->db->bind(':rate', $data['rating']);
+
+        if (!$this->db->execute()){
+            $result = false;
+        }
+
+
+        if ($result){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
