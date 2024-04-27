@@ -382,10 +382,27 @@
 }
 
 /* ----------------- Driver Profile Styles ---------------- */
+.completion-container{
+    text-align: center;
+    width: calc(100%);
+    margin-top: 50px;
+}
+
+.completion-container .rating-title{
+    color: #ffc536;
+    font-size: 30px;
+}
+
 .rate {
-    float: left;
+    text-align: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
     height: 46px;
     padding: 0 10px;
+    margin-top: 50px;
+    margin-left: 15px;
+    scale: 2;
 }
 
 .rate:not(:checked) > input {
@@ -424,3 +441,23 @@
     color: #ffc700;
 }
 
+
+.completion-container .review-box{
+    margin: 50px 40px 0 40px;
+    width: calc(100% - 100px);
+    background-color: rgba(253, 198, 62, 0.07);
+    border: 2px dotted rgba(253, 198, 62, 0.24);
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: rgba(140, 140, 140, 0.87);
+    font-size: 15px;
+}
+
+.completion-container .review-box::placeholder{
+    text-align: center;
+}
+
+.completion-container .check-box-area{
+    margin-top: 100px;
+}

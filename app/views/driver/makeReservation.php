@@ -133,13 +133,35 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             data.reservations.forEach(reservation => {
                 const reservationElement = document.createElement('div');
                 reservationElement.classList.add('reservation');
+
+                var startTime = new Date(reservation.startTime);
+                var hours = startTime.getHours();
+                var minutes = startTime.getMinutes();
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+
+                var formattedStartTime = hours + ":" + minutes;
+
+
+                var endTime = new Date(reservation.startTime);
+                var hours = endTime.getHours();
+                var endTime = new Date(reservation.expectedEndTime);
+                var minutes = endTime.getMinutes();
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+
+                var formattedEndTime = hours + ":" + minutes;
+
                 reservationElement.innerHTML = `
-                    <div class="reservation" style="width: calc(100% - 60px); background-color: rgba(128,128,128,0.16); display: flex; justify-content: space-between; padding: 10px; border-radius: 10px; margin-top: 5px;">
-                        <div>Reservation: ${count}</div>
-                        <div>Start Time: ${reservation.startTime}</div>
-                        <div>End Time: ${reservation.expectedEndTime}</div>
+                    <div class="reservation" style="width: calc(100% - 80px); background-color: rgba(128,128,128,0.16); display: flex; justify-content: space-between; padding: 10px 20px; border-radius: 10px; margin-top: 5px;">
+                        <div style="text-align: center">${count}</div>
+                        <div style="text-align: center">${formattedStartTime}</div>
+                        <div style="text-align: center">${formattedEndTime}</div>
                     </div>
                 `;
+
                 reservationListElement.appendChild(reservationElement);
 
                 count += 1;

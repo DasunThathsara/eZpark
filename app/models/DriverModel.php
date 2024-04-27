@@ -486,4 +486,25 @@ class DriverModel{
 
         return $row->$vehicleType;
     }
+
+    // Get driver's vehicle availability
+    public function getVehicleAvailability($vehicleType){
+        $this->db->query('SELECT COUNT(*) AS count FROM vehicle WHERE id = :id and vehicleType = :vehicleType');
+        $this->db->bind(':id', $_SESSION['user_id']);
+        $this->db->bind(':vehicleType', $vehicleType);
+
+        $row = $this->db->single();
+
+        return $row->count;
+    }
+
+    // Get driver's reservations list
+    public function getReservations(){
+        $this->db->query('SELECT b.*, l.name, l.city, v.vehicleType FROM booking b JOIN land l ON b.landID = l.id JOIN vehicle v ON v.vehicleNumber = b.vehicleNumber WHERE driverID = :driverID ORDER BY startTime DESC');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
 }

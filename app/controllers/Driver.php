@@ -36,14 +36,14 @@ class Driver extends Controller {
 
     // ------------------------ Bookings ------------------------
     public function booking(){
-        $vehicles = $this->driverModel->viewVehicles();
+        $reservations = $this->driverModel->getReservations();
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/booking', $vehicles, $other_data);
+        $this->view('driver/booking', $reservations, $other_data);
     }
 
     // ------------------------ History ------------------------
@@ -56,18 +56,6 @@ class Driver extends Controller {
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
         $this->view('driver/history', $history, $other_data);
-    }
-
-    // ------------------------ Rating ------------------------
-    public function rating(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/rating', $vehicles, $other_data);
     }
 
     // ------------------------ Packages ------------------------
@@ -131,13 +119,13 @@ class Driver extends Controller {
         $land = $this->landModel->viewLand($land_ID);
         $land->packages = $this->driverModel->viewPackages($data);
 
+        $land->freeSLots = $this->landModel->getFreeSlots($land_ID);
+
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
-//        die(print_r($land->packages));
 
         $this->view('driver/viewParking', $land, $notifications);
     }
@@ -171,7 +159,7 @@ class Driver extends Controller {
         if($parking_status){
             // If the driver is already parked, then exit the parking
             $this->driverModel->exitParking($data);
-            redirect('driver/index');
+            redirect('driver/index?completion_status='.$land_ID);
         }
         else{
             // If the driver is not parked, then select the vehicle type
@@ -187,8 +175,14 @@ class Driver extends Controller {
             $land_ID = $_POST['id'];
             $vehicle_type = $_POST['vehicle_type'];
 
-            $this->driverModel->enterParking($land_ID, $vehicle_type);
-            redirect('driver/index');
+            if ($this->driverModel->getVehicleAvailability($vehicle_type) > 0){
+                $this->driverModel->enterParking($land_ID, $vehicle_type);
+                redirect('driver/index');
+            }
+            else{
+                // If the vehicle is not available
+                redirect('driver/gotoLand/'.$land_ID.'?error=1');
+            }
         }
     }
 
