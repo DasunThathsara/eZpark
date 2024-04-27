@@ -60,7 +60,7 @@
                 </a>
 
                 <!-- Card 3 -->
-                <a class="card-link" href="">
+                <a class="card-link">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">

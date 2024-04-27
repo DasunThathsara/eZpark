@@ -35,15 +35,16 @@ class ParkingOwner extends Controller {
     // View all lands
     public function lands(){
         $lands = $this->landModel->viewLands();
-
+// die(print_r($lands));
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
-
+        
+                // die(print_r($land->status));
         $this->view('parkingOwner/lands', $lands, $notifications);
-    }
+    }    
 
     // Go to specific land
     public function gotoLand($land_ID = null){

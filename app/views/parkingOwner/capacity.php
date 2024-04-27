@@ -40,7 +40,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                         <a href="#" class="tile">
                             <table>
                                 <tr>
-                                    <td class="name-td" data-header>
+                                    <td style=width:550px; class="name-td" data-header>
                                         <p class="header"></p>
                                         <p class="id-p">Land ID: <span class="id"></span></p>
                                     </td>
