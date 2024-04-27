@@ -192,7 +192,7 @@
                                 <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image2?>" alt="">
                             </div>
                             <div class="land-image">
-                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image2?>" alt="">
+                                <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->image3?>" alt="">
                             </div>
                             <div class="land-image">
                                 <img src="<?php echo URLROOT?>/ParkingPhotos/<?php echo $data['land_images']->cover?>" alt="">

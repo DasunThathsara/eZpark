@@ -383,7 +383,7 @@ class Land extends Controller {
 
             // Parking photo 3 upload validation
             if (empty($data['err']) and !empty($_FILES['photo3']['name'])){
-                $cover = $this->imageUpload('photo1');
+                $cover = $this->imageUpload('photo3');
                 $data['photo3'] = $cover['image'];
                 if(empty($cover['err']))
                     $data['err'] = '';
