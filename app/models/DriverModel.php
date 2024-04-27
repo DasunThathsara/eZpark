@@ -508,45 +508,51 @@ class DriverModel{
         return $row;
     }
 
-    // Make rate or review or complaint to the parking
-    public function addRatingReviewComplaint($data){
-        $result = true;
-        // Check the review type
-        if ($data['complaint'] == 1){
-            $this->db->query('INSERT INTO complaint (complainerID, complaineeID, message, date) VALUES (:complainerID, :complaineeID, :message, :date)');
-            $this->db->bind(':complainerID', $_SESSION['user_id']);
-            $this->db->bind(':complaineeID', $data['landID']);
-            $this->db->bind(':message', $data['review']);
-            $this->db->bind(':date', date("Y-m-d"));
+    // Add Complaint
+    public function addComplaint($data){
+        $this->db->query('INSERT INTO complaint (complainerID, complaineeID, message, date) VALUES (:complainerID, :complaineeID, :message, :date)');
+        $this->db->bind(':complainerID', $_SESSION['user_id']);
+        $this->db->bind(':complaineeID', $data['landID']);
+        $this->db->bind(':message', $data['review']);
+        $this->db->bind(':date', date("Y-m-d"));
 
-            if (!$this->db->execute()){
-                $result = false;
-            }
+        if ($this->db->execute()){
+            $this->db->query('SELECT LAST_INSERT_ID() AS complaintID');
+            $row = $this->db->single();
+            return $row->complaintID;
         }
-        else{
-            $this->db->query('INSERT INTO review (reviewerID, revieweeID, message, date) VALUES (:reviewerID, :revieweeID, :message, :date)');
-            $this->db->bind(':reviewerID', $_SESSION['user_id']);
-            $this->db->bind(':revieweeID', $data['landID']);
-            $this->db->bind(':message', $data['review']);
-            $this->db->bind(':date', date("Y-m-d"));
-
-            if (!$this->db->execute()){
-                $result = false;
-            }
+        else {
+            return false;
         }
+    }
 
+    // Add Review
+    public function addReview($data){
+        $this->db->query('INSERT INTO review (reviewerID, revieweeID, message, date) VALUES (:reviewerID, :revieweeID, :message, :date)');
+        $this->db->bind(':reviewerID', $_SESSION['user_id']);
+        $this->db->bind(':revieweeID', $data['landID']);
+        $this->db->bind(':message', $data['review']);
+        $this->db->bind(':date', date("Y-m-d"));
+
+        if ($this->db->execute()){
+            $this->db->query('SELECT LAST_INSERT_ID() AS complaintID');
+            $row = $this->db->single();
+            return $row->complaintID;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Add Rating
+    public function addRating($data){
         // Insert rate to the land
         $this->db->query('INSERT INTO parking_rating (raterID, landID, rate) VALUES (:raterID, :landID, :rate)');
         $this->db->bind(':raterID', $_SESSION['user_id']);
         $this->db->bind(':landID', $data['landID']);
         $this->db->bind(':rate', $data['rating']);
 
-        if (!$this->db->execute()){
-            $result = false;
-        }
-
-
-        if ($result){
+        if ($this->db->execute()){
             return true;
         }
         else {
