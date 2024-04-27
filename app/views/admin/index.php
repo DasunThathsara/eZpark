@@ -221,12 +221,34 @@
         setInterval(refreshSideCard, 1000);
 
 
+        // --------------------------------------- Real time update income card ---------------------------------------
+        function refreshMonthlyIncome() {
+            // Fetch updated content via AJAX
+            fetch('<?php echo URLROOT?>/Admin/index') // Update URL to your controller method
+                .then(response => response.text())
+                .then(data => {
+                    // Extract the monthly income value from the returned data
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const updatedIncome = doc.getElementById('monthly-income').querySelector('h3').textContent;
+
+                    // Update the value inside the h3 tag
+                    document.getElementById('monthly-income').querySelector('h3').textContent = updatedIncome;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Refresh every 1 second
+        setInterval(refreshMonthlyIncome, 1000);
+ 
+
+
 
     const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-    const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+    const yValues = [<?php echo $data['all_total_income_distribution']->January?>, <?php echo $data['all_total_income_distribution']->February?>, <?php echo $data['all_total_income_distribution']->March?>, <?php echo $data['all_total_income_distribution']->April?>, <?php echo $data['all_total_income_distribution']->May?>, <?php echo $data['all_total_income_distribution']->June?>, <?php echo $data['all_total_income_distribution']->July?>, <?php echo $data['all_total_income_distribution']->August?>, <?php echo $data['all_total_income_distribution']->September?>, <?php echo $data['all_total_income_distribution']->October?>, <?php echo $data['all_total_income_distribution']->November?>, <?php echo $data['all_total_income_distribution']->December?>];
 
-    var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues2 = [55, 49, 44, 24, 15];
+    var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+    var yValues2 = [<?php echo $data['all_total_vehicle_distribution']->January?>, <?php echo $data['all_total_vehicle_distribution']->February?>, <?php echo $data['all_total_vehicle_distribution']->March?>, <?php echo $data['all_total_vehicle_distribution']->April?>, <?php echo $data['all_total_vehicle_distribution']->May?>, <?php echo $data['all_total_vehicle_distribution']->June?>, <?php echo $data['all_total_vehicle_distribution']->July?>, <?php echo $data['all_total_vehicle_distribution']->August?>, <?php echo $data['all_total_vehicle_distribution']->September?>, <?php echo $data['all_total_vehicle_distribution']->October?>, <?php echo $data['all_total_vehicle_distribution']->November?>, <?php echo $data['all_total_vehicle_distribution']->December?>];
     var barColors = ["red", "green","blue","orange","brown"];
 
     new Chart("lineChart1", {
@@ -243,8 +265,11 @@
         },
         options: {
             legend: {display: false},
-            scales: {
-                yAxes: [{ticks: {min: 6, max:16}}],
+            //scales: {
+                //yAxes: [{ticks: {min: 6, max:16}}],
+                title: {
+                    display: true,
+                    text: "Income Distribution"
             }
         }
     });
@@ -253,17 +278,17 @@
     new Chart("lineChart2", {
         type: "bar",
         data: {
-            labels: xValues,
+            labels: xValues2,
             datasets: [{
                 backgroundColor: barColors,
-                data: yValues
+                data: yValues2
             }]
         },
         options: {
             legend: {display: false},
             title: {
                 display: true,
-                text: "Vehicle Count"
+                text: "Vehicle Distribution"
             }
         }
     });
