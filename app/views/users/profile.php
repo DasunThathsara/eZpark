@@ -48,7 +48,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                     <!-- Email -->
                     <div class="form-input-title">Email:</div>
-                    <input type="email" name="email" id="email" required value="<?php echo $data['email'] ?>" />
+                    <input type="email" disabled name="email" id="email" required value="<?php echo $data['email'] ?>" />
 
                     <!-- Contact number -->
                     <div class="form-input-title">Contact number:</div>

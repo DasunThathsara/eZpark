@@ -34,15 +34,15 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
                             <form action="<?php echo URLROOT ?>/admin/verifyLand" method="post" class="request-form" id="request-form">
                                 <input type="text" name="id" id="id" hidden value="<?php echo $data->id?>" />
-                                <button type="submit" style="border: none; background-color: rgb(250,202,5); color: white; border-radius: 10px; padding: 10px 5px; display: flex; justify-content: space-between; align-items: center;" onclick="confirmSubmit()">
-                                Accept Request <img src="<?php echo URLROOT ?>/images/tick.svg" style="width: 18px" alt="">
+                                <button type="submit" style="border: none; background-color: rgb(250,202,5); color: white; border-radius: 10px; padding: 10px 10px; display: flex; justify-content: space-between; align-items: center; width: 150px;" onclick="confirmSubmit()">
+                                Accept Request <img src="<?php echo URLROOT ?>/images/check-solid-w.svg" style="width: 18px;" alt="">
                                 </button>
                             </form>
 
                             <form action="<?php echo URLROOT ?>/admin/unverifyLand" method="post" class="request-form-2" id="request-form-2">
                                 <input type="text" name="id" id="id" hidden value="<?php echo $data->id?>" />
-                                <button type="submit" style="border: none; background-color: rgb(250,202,5); color: white; border-radius: 10px; padding: 10px 5px; display: flex; justify-content: space-between; align-items: center; margin-top: 5px;" onclick="confirmSubmit()">
-                                Reject Request<img src="<?php echo URLROOT ?>/images/circle-xmark-regular.svg" style="width: 18px;" alt="">
+                                <button type="submit" style="border: none; background-color: rgb(250,202,5); color: white; border-radius: 10px; padding: 10px 10px; display: flex; justify-content: space-between; align-items: center; margin-top: 5px; width: 150px;" onclick="confirmSubmit()">
+                                Reject Request<img src="<?php echo URLROOT ?>/images/xmark-solid-w.svg" style="width: 18px;" alt="">
                                 </button>
                             </form>
 
@@ -98,6 +98,8 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             </div>
                         </div>
                     </div>
+
+                    <br><br>
                 </div>
             </div>
         </div>

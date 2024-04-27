@@ -36,14 +36,14 @@ class Driver extends Controller {
 
     // ------------------------ Bookings ------------------------
     public function booking(){
-        $vehicles = $this->driverModel->viewVehicles();
+        $reservations = $this->driverModel->getReservations();
 
         $other_data['notification_count'] = 0;
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
-        $this->view('driver/booking', $vehicles, $other_data);
+        $this->view('driver/booking', $reservations, $other_data);
     }
 
     // ------------------------ History ------------------------
@@ -56,18 +56,6 @@ class Driver extends Controller {
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
 
         $this->view('driver/history', $history, $other_data);
-    }
-
-    // ------------------------ Rating ------------------------
-    public function rating(){
-        $vehicles = $this->driverModel->viewVehicles();
-
-        $other_data['notification_count'] = 0;
-
-        if ($other_data['notification_count'] < 10)
-            $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
-        $this->view('driver/rating', $vehicles, $other_data);
     }
 
     // ------------------------ Packages ------------------------
@@ -171,7 +159,7 @@ class Driver extends Controller {
         if($parking_status){
             // If the driver is already parked, then exit the parking
             $this->driverModel->exitParking($data);
-            redirect('driver/index');
+            redirect('driver/index?completion_status='.$land_ID);
         }
         else{
             // If the driver is not parked, then select the vehicle type

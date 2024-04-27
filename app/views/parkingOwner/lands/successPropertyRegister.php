@@ -12,7 +12,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <section class="section" id="main">
         <div class="container">
             <h1 class="title">Congratulations!! <br /> Your land was created</h1>
-            <p class="subtitle" style="font-size: 15px;">Please wait for admin approval</p>
+            <p class="subtitle" style="font-size: 15px">Please wait for admin approval</p>
             <?php if(isset($_GET['error'])){?>
                 <div style="color: red; background-color: rgba(255,0,0,0.05); border-radius: 10px; padding: 5px; width: calc(100% - 30px); text-align: center; border: 1px solid rgba(255,0,0,0.1); margin-top: 30px; font-size: 13px;">
                     You have no any free vehicle to enter the parking
