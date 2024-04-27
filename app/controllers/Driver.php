@@ -186,6 +186,32 @@ class Driver extends Controller {
         }
     }
 
+    // Add rating, and review or complaint to the parking
+    public function addRatingReviewComplaint(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'landID' => $_POST['landID'],
+                'rating' => $_POST['rate'],
+                'review' => $_POST['review-message'],
+                'complaint' => isset($_POST['complaint']) ? 1 : 0
+            ];
+
+
+            $this->driverModel->addRatingReviewComplaint($data);
+
+            if ($data['complaint'] == 1){
+                $this->userModel->addNotification($data['review'], 'complaint', $_SESSION['username'], 0);
+                $this->userModel->addNotification($data['review'], 'complaint', $_SESSION['username'], $this->landModel->getLandownerID($data['landID']));
+            }
+            else{
+                $this->userModel->addNotification($data['review'], 'complaint', $_SESSION['username'], $this->landModel->getLandownerID($data['landID']));
+            }
+            redirect('driver/index');
+        }
+    }
+
 
     // ------------------------ Scan QR Code ------------------------
     // Open QR scanner
