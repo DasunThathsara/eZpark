@@ -11,18 +11,24 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
     <main class="page-container">
         <section class="section" id="main">
             <div class="container">
-                <div class="vehicle-type-selection">
+                <h1 class="title">Select Vehicle Type</h1>
+                <p class="subtitle">Select vehicle type to enter to the parking</p>
+                <div class="vehicle-type-selection" style="box-shadow: 0 0 8px 0.1px rgba(0,0,0,0.2); padding: 20px; border-radius: 20px; margin-top: 15vh">
                     <form action="<?php echo URLROOT?>/driver/enterParking" method="post">
                         <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden>
                         <input type="text" name="vehicle_type" value="car" hidden>
                         <input type="submit" value="Car">
                     </form>
 
+                    <br>
+
                     <form action="<?php echo URLROOT?>/driver/enterParking" method="post">
                         <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden>
                         <input type="text" name="vehicle_type" value="bike" hidden>
                         <input type="submit" value="Bike">
                     </form>
+
+                    <br>
 
                     <form action="<?php echo URLROOT?>/driver/enterParking" method="post">
                         <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden>
