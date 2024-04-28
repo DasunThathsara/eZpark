@@ -29,6 +29,7 @@
                         <div class="unavailable-lands option-item">Unavailable</div>
                     </div>
                     <hr class="option-break" />
+                    
                     <!-- Search area -->
                     <div class="search-area">
                         <!-- Search bar -->
@@ -71,12 +72,13 @@
                                                 </form>-->
                                                 &nbsp;
                                                 <form action="<?php echo URLROOT ?>/land/landUpdateForm" method="get" class="update-form">
-                                                    <!-- <input type="text" name="name" id="name" hidden value="" /> -->
+                                                    <input type="text" name="name" id="name" hidden value="" />
                                                     <input type="text" name="id" id="id" hidden value="" />
                                                     <button type="submit" class="edit">
                                                         <img src="<?php echo URLROOT ?>/images/edit-solid.svg" alt="">
                                                     </button>
                                                 </form>
+
                                                 &nbsp;
                                                 <form action="<?php echo URLROOT ?>/land/landRemove" method="post" class="delete-form">
                                                     <input type="text" name="name" id="name" hidden value="" />
