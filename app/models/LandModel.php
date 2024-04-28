@@ -413,6 +413,40 @@ class LandModel{
         return $row->{'COUNT(*)'};
     }
 
+    public function getReviewsAndComplaintsCount($land_ID){
+        $this->db->query('SELECT COUNT(*) FROM review  WHERE revieweeID = :revieweeID');
+        $this->db->bind(':revieweeID', $land_ID);
+
+        $review_count = $this->db->single();
+
+        $this->db->query('SELECT COUNT(*) FROM complaint  WHERE complaineeID = :complaineeID');
+        $this->db->bind(':complaineeID', $land_ID);
+
+        $complaint_count = $this->db->single();
+
+        $total = $complaint_count->{'COUNT(*)'} + $review_count->{'COUNT(*)'};
+        return $total;
+    }
+
+    public function getAvgRatingCount($land_ID){
+        $this->db->query('SELECT SUM(amount) AS tot_rate FROM rate  WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $rate_amount = $this->db->single();
+        $total_rate = $rate_amount->tot_rate;
+
+        $this->db->query('SELECT COUNT(*) FROM rate  WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $land_rate_count = $this->db->single()->{'COUNT(*)'};
+        $avg_rate = $total_rate/$land_rate_count;
+
+        // Format average rate to two decimal places
+        $formatted_avg_rate = number_format($avg_rate, 2);
+        // die(print_r($formatted_avg_rate));
+        return $formatted_avg_rate;
+    }
+
     // Get land ID by UID and name
     public function getLandID($name){
         $this->db->query('SELECT id FROM land WHERE name = :name and uid = :uid');
