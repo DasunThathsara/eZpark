@@ -117,11 +117,15 @@ class LandPrice extends Controller
             // Validate hour price
             if (empty($data['hour_price'])) {
                 $data['err'] = 'Please enter hour price';
-            } 
+            }else if($data['hour_price']<0 or !ctype_digit(strval($data['hour_price']))){
+                $data['err'] = 'Plese enter a positive number';
+            }
 
             // Validate additional hour price
             if (empty($data['additional_hour_price'])) {
                 $data['err'] = 'Please enter additional hour price';
+            }else if($data['additional_hour_price']<0 or !ctype_digit(strval($data['additional_hour_price']))){
+                $data['err'] = 'Plese enter a positive number';
             }
 
             // Validation is completed and no error found
@@ -135,6 +139,14 @@ class LandPrice extends Controller
             } else {
                 // Load view with errors
                 $prices = $this->landModel->viewPrice($data);
+                
+            
+
+                $prices['notification_count'] = 0;
+
+                if ($prices['notification_count'] < 10)
+                    $prices['notification_count'] = '0'.$prices['notification_count'];
+
                 $this->view('parkingOwner/prices/update', $data, $prices);
             }
         }
