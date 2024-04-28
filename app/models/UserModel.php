@@ -626,4 +626,108 @@ class UserModel{
         return $result->status;
 
     }
+
+    // Assign my self complaint
+    public function assignMySelfComplaint($complaintID, $adminID): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE complaint SET adminID = :adminID WHERE complaintID = :complaintID');
+
+        // Bind values
+        $this->db->bind(':complaintID', $complaintID);
+        $this->db->bind(':adminID', $adminID);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // Unassign my self complaint
+    public function unassignMySelfComplaint($complaintID, $adminID): bool
+    {
+        // Prepare statement
+        $this->db->query('UPDATE complaint SET adminID = 0 WHERE complaintID = :complaintID');
+
+        // Bind values
+        $this->db->bind(':complaintID', $complaintID);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // View complaint
+    public function viewComplaint($complaintID){
+        $this->db->query('SELECT * FROM complaint WHERE complaintID = :complaintID');
+        $this->db->bind(':complaintID', $complaintID);
+
+        $row = $this->db->single();
+
+        $this->db->query('SELECT * FROM user WHERE id = :id');
+        $this->db->bind(':id', $row->complainerID);
+        $complainer = $this->db->single();
+        $row->complainerName = $complainer->name;
+
+        $this->db->query('SELECT * FROM land WHERE id = :id');
+        $this->db->bind(':id', $row->complaineeID);
+        $complainee = $this->db->single();
+        $row->complaineeName = $complainee->name;
+        $row->ownerID = $complainee->uid;
+
+        return $row;
+    }
+
+    // Ban user
+    public function banUser($user_id)
+    {
+        $this->db->query('SELECT name, email FROM user WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $user_id);
+        $data = $this->db->single();
+
+        $name = $data->name;
+        $email = $data->email;
+
+        //Content
+        $this->mail->Body = '<div id="overview" style="margin: auto; width: 80%; font-size: 13px">
+            <p style="color: black">
+                Dear ' . $name . ',<br><br>
+        
+                We regret to inform you that your account with eZpark has been banned. This action has been taken due to a violation of our terms of service or community guidelines.
+                <br><br>
+                Reasons for account bans include, but are not limited to, engaging in prohibited activities, violation of user policies, or repeated breaches of our terms.
+                <br><br>
+                If you believe this action has been taken in error or if you have any questions, please contact our support team at support@ezpark.com.
+                <br><br>
+                We take the security and well-being of our community seriously, and we appreciate your understanding.
+                <br>
+            </p>
+            <p>
+                Best regards,<br>
+                eZpark Team
+            </p>
+        </div>';
+
+        $this->sendEmail($email, $name, 'Your account has been banned', $this->mail->Body);
+
+        $this->db->query('UPDATE user SET status = 2, banCount = banCount + 1, banTime = :banTime WHERE id = :id');
+        $this->db->bind(':id', $user_id);
+        $this->db->bind(':banTime', date("Y-m-d H:i:s"));
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

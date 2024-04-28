@@ -1,5 +1,22 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
 
+
+<style>
+    .page-container .section .content-body .emptySec {
+        margin-top: 100px;
+        margin-left: 50px;
+        margin-right: 50px;
+        background-color: rgba(253, 198, 62, 0.07);
+        border: 2px dotted rgba(253, 198, 62, 0.24);
+        text-align: center;
+        border-radius: 20px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        color: rgba(140, 140, 140, 0.87);
+        font-size: 20px;
+    }
+</style>
+
 <!--  TOP NAVIGATION  -->
 <?php require APPROOT.'/views/inc/components/topnavbar.php'; ?>
 
@@ -12,11 +29,11 @@
         <section class="section" id="main">
         <div class="content-body">
                 <?php if ($data['id'] == 0) {?>
-                    <div class="emptysecurity">You have no any assigned land</div>
+                    <div class="emptySec" >You have no any assigned land</div>
                 <?php }   
                 else { ?>
                     <?php if($data['landAccess'] != 1) {?>
-                        <div class="emptysecurity">You have no access to assigned land</div>
+                        <div class="emptySec">You have no access to assigned land</div>
                     <?php }
                     else {?>
                         <h1 class="title">Dashboard</h1>
@@ -69,7 +86,7 @@
                                                     <div class="bottom-row"></div>
                                                 </div>
                                             </div>
-                                            <div style="transform: translateY(7px)" class="right-col">Price Rate</div>
+                                            <div style="transform: translateY(7px)" class="right-col">View Price <br />Rate</div>
                                         </div>
                                     </div>
                                 </a>
@@ -92,7 +109,7 @@
                                 </a>
 
                                 <!-- Card 5 -->
-                                <a class="card-link" href="">
+                                <a class="card-link">
                                     <div class="card">
                                         <div class="row">
                                             <div class="left-col">

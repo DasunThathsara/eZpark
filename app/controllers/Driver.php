@@ -199,15 +199,26 @@ class Driver extends Controller {
             ];
 
 
-            $this->driverModel->addRatingReviewComplaint($data);
-
             if ($data['complaint'] == 1){
-                $this->userModel->addNotification($data['review'], 'complaint', $_SESSION['username'], 0);
-                $this->userModel->addNotification($data['review'], 'complaint', $_SESSION['username'], $this->landModel->getLandownerID($data['landID']));
+                // Add complaint
+                $complaintID = $this->driverModel->addComplaint($data);
+                if($complaintID != 0){
+                    $this->userModel->addNotification('Complaint for '.$this->landModel->getLandName($data['landID']).'. Complaint: '.$data['review'], 'complaint', $_SESSION['username'], 0, $complaintID);
+                    $this->userModel->addNotification('Complaint for '.$this->landModel->getLandName($data['landID']).'. Complaint: '.$data['review'], 'complaint', $_SESSION['username'], $this->landModel->getLandownerID($data['landID']), $complaintID);
+                }
+
             }
             else{
-                $this->userModel->addNotification($data['review'], 'complaint', $_SESSION['username'], $this->landModel->getLandownerID($data['landID']));
+                // Add review
+                $reviewID = $this->driverModel->addReview($data);
+                if ($reviewID != 0){
+                    $this->userModel->addNotification($data['review'].' from '.$_SESSION['username'], 'complaint', $_SESSION['username'], $this->landModel->getLandownerID($data['landID']), $reviewID);
+                }
             }
+
+            // Add rating
+            $this->driverModel->addRating($data);
+
             redirect('driver/index');
         }
     }
