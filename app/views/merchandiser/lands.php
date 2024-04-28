@@ -24,6 +24,7 @@
                 else {?>
                     <div class="title-options">
                         <div class="all-lands option-item option-item-active">All Lands</div>
+                        <div class="pending-lands option-item">Pending</div>
                         <div class="available-lands option-item">Available</div>
                         <div class="unavailable-lands option-item">Unavailable</div>
                     </div>
@@ -122,26 +123,37 @@
         const card = userCardTemplate.content.cloneNode(true).children[0];
         console.log(card);
         card.querySelector(".name").textContent = land.name;
+        card.querySelector(".id").textContent = land.id;
         card.querySelector(".location").textContent = land.city;
         card.querySelector(".capacity").textContent = land.car + land.bike + land.threeWheel;
-        card.querySelector(".id").textContent = land.id;
-        if (land.availability === 0){
-            card.querySelector(".status").textContent = 'Unavailable';
-            card.querySelector(".status").classList.add("status-unavailable");
-        }else{
 
-            card.querySelector(".status").textContent = 'Available';
-            card.querySelector(".status").classList.add("status-available");
-        }
+        const update_form = document.querySelector(".update-form");
+        
+        if(land.status === 1){
+            if (land.availability === 0){
+                card.querySelector(".status").textContent = 'Unavailable';
+                card.querySelector(".status").classList.add("status-unavailable");
+                
+            }else if(land.availability === 1){
+
+                card.querySelector(".status").textContent = 'Available';
+                card.querySelector(".status").classList.add("status-available");
+            }
+        }else{
+            card.querySelector(".status").textContent = 'Pending';
+            card.querySelector(".status").classList.add("status-pending");
+        }    
 
         document.querySelector(".user-cards").appendChild(card);
         const tileLink = card.querySelector('.tile');
     
         // Set the parking view link
-        if (tileLink) {
-            tileLink.href = `gotoLand/${land.id}`;
-        } else {
-            console.error("Anchor element with class 'tile' not found in the cloned card:", card);
+        if(land.status === 1){
+            if (tileLink) {
+                tileLink.href = `gotoLand/${land.id}`;
+            } else {
+                console.error("Anchor element with class 'tile' not found in the cloned card:", card);
+            }
         }
         
         // Set id and name to go to the price page
@@ -149,6 +161,10 @@
         if (priceForm) {
             const idInput = priceForm.querySelector('#id');
             const nameInput = priceForm.querySelector('#name');
+
+            if (land.status === 0){
+                priceForm.style.display = 'none';
+            }
         
             if (idInput && nameInput) {
                 idInput.value = land.id;
@@ -157,7 +173,6 @@
                 console.error("Form inputs with id 'id' or 'name' not found in the cloned card:", card);
             }
         }
-
 
         // Set id and name to delete the land
         const deleteForm = card.querySelector('.delete-form');
@@ -176,19 +191,26 @@
         const updateForm = card.querySelector('.update-form');
         if (updateForm) {
             const idInput = updateForm.querySelector('#id');
+            const nameInput = updateForm.querySelector('#name');
+
+            if (land.status === 0){
+                updateForm.style.display = 'none';
+            }
             
-            if (idInput) {
+            if (nameInput && idInput) {
+                nameInput.value = land.name;
                 idInput.value = land.id;
             } else {
                 console.error("One or more form inputs not found in the cloned card:", card);
             }
         }
 
-        return { id: land.id, name: land.name, city: land.city, street: land.street, availability: land.availability, element: card };
+        return { id: land.id, name: land.name, city: land.city, street: land.street, availability: land.availability, status: land.status, element: card };
     });
     
     // ------------------------------- Filter -------------------------------
     const allLands = document.querySelector(".all-lands");
+    const pendingLands = document.querySelector(".pending-lands");
     const availableLands = document.querySelector(".available-lands");
     const unavailableLands = document.querySelector(".unavailable-lands");
     
@@ -196,6 +218,7 @@
         allLands.classList.add("option-item-active");
         availableLands.classList.remove("option-item-active");
         unavailableLands.classList.remove("option-item-active");
+        pendingLands.classList.remove("option-item-active");
         lands.forEach(land => {
             land.element.classList.remove("hide");
         });
@@ -205,8 +228,9 @@
         allLands.classList.remove("option-item-active");
         availableLands.classList.add("option-item-active");
         unavailableLands.classList.remove("option-item-active");
+        pendingLands.classList.remove("option-item-active");
         lands.forEach(land => {
-            if (land.availability === 1) {
+            if (land.availability === 1 && land.status === 1) {
                 land.element.classList.remove("hide");
             } else {
                 land.element.classList.add("hide");
@@ -218,8 +242,23 @@
         allLands.classList.remove("option-item-active");
         availableLands.classList.remove("option-item-active");
         unavailableLands.classList.add("option-item-active");
+        pendingLands.classList.remove("option-item-active");
         lands.forEach(land => {
-            if (land.availability === 0) {
+            if (land.availability === 0 && land.status === 1) {
+                land.element.classList.remove("hide");
+            } else {
+                land.element.classList.add("hide");
+            }
+        });
+    });
+
+    pendingLands.addEventListener("click", () => {
+        allLands.classList.remove("option-item-active");
+        availableLands.classList.remove("option-item-active");
+        unavailableLands.classList.remove("option-item-active");
+        pendingLands.classList.add("option-item-active");
+        lands.forEach(land => {
+            if (land.status === 0) {
                 land.element.classList.remove("hide");
             } else {
                 land.element.classList.add("hide");
