@@ -127,7 +127,49 @@
                 </a>
             <?php }?>
 
+            
+            <!-------------------------------------------- Admin-------------------------------------------->
+            <?php if ($_SESSION['user_type'] == 'admin'){ ?>
+                <a href="<?php echo URLROOT ?>/admin/complaints">
+                    <?php if ($section == 'complaints'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Complaints</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Complaints</div>
+                    <?php } ?>
+                </a>
 
+                <a href="<?php echo URLROOT ?>/admin/viewRegistrationRequests">
+                    <?php if ($section == 'registrationRequests'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/request.png" alt="">Registration Requests</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/request.png" alt="">Registration Requests</div>
+                    <?php } ?>
+                </a>
+            <?php }?>
+
+
+            <!-------------------------------------------- Admin-------------------------------------------->
+            <?php if ($_SESSION['user_type'] == 'superAdmin'){ ?>
+                <a href="<?php echo URLROOT ?>/superAdmin/complaints">
+                    <?php if ($section == 'complaints'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Complaints</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Complaints</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/superAdmin/viewRegistrationRequests">
+                    <?php if ($section == 'registrationRequests'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/request.png" alt="">Registration Requests</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/request.png" alt="">Registration Requests</div>
+                    <?php } ?>
+                </a>
+            <?php }?>
             <a href="<?php echo URLROOT ?>/users/viewProfile">
                 <?php if ($section == 'profile'){?>
                     <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/profile.svg" alt="">Profile</div>

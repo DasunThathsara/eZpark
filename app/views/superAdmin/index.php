@@ -65,7 +65,7 @@
                 </a>
 
                 <!-- Card 2 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/parkingCapacity">
+                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/complaints">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
@@ -73,7 +73,6 @@
                                     <div class="top-row">
                                         <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                     </div>
-                                    <div class="bottom-row">20</div>
                                 </div>
                             </div>
                             <div class="right-col">Complaints</div>

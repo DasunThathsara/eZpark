@@ -31,7 +31,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             <div class="parking-open-time">Open Hours: 8.30 AM - 9.30 PM</div>
                         </div>
                         <div class="parking-directions">
-                            <form action="<?php echo URLROOT ?>/admin/banParking" method="post" class="request-form" id="request-form">
+                            <form action="<?php echo URLROOT ?>/superAdmin/banParking" method="post" class="request-form" id="request-form">
                                 <input type="text" name="landID" id="landID" hidden value="<?php echo $other_data['complaint_details']->complaineeID?>" />
                                 <input type="text" name="id" id="id" hidden value="<?php echo $other_data['complaint_details']->complaintID?>" />
                                 <input type="text" name="ownerID" id="ownerID" hidden value="<?php echo $other_data['complaint_details']->ownerID?>" />
@@ -40,7 +40,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                 </button>
                             </form>
 
-                            <form action="<?php echo URLROOT ?>/admin/banUser" method="post" class="request-form-2" id="request-form-2">
+                            <form action="<?php echo URLROOT ?>/superAdmin/banUser" method="post" class="request-form-2" id="request-form-2">
                                 <input type="text" name="id" id="id" hidden value="<?php echo $other_data['complaint_details']->complaintID?>" />
                                 <input type="text" name="ownerID" id="ownerID" hidden value="<?php echo $other_data['complaint_details']->ownerID?>" />
                                 <button type="submit" style="border: none; background-color: rgb(250,202,5); color: white; border-radius: 10px; padding: 10px 10px; display: flex; justify-content: space-between; align-items: center; margin-top: 5px; width: 150px;" onclick="confirmSubmit()">
