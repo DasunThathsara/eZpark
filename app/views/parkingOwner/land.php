@@ -178,7 +178,7 @@
                                         <div class="top-row">
                                             <img src="<?php echo URLROOT ?>/images/review&complaints.jpg" alt="">
                                         </div>
-                                        <div class="bottom-row"><?php echo $data['security_count'] ?></div>
+                                        <div class="bottom-row"><?php echo $data['reviewsAndComplaints_count'] ?></div>
                                     </div>
                                 </div>
                                 <div class="right-col">Reviews &<br />Complaints</div>

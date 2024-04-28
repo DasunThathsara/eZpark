@@ -413,6 +413,21 @@ class LandModel{
         return $row->{'COUNT(*)'};
     }
 
+    public function getReviewsAndComplaintsCount($land_ID){
+        $this->db->query('SELECT COUNT(*) FROM review  WHERE revieweeID = :revieweeID');
+        $this->db->bind(':revieweeID', $land_ID);
+
+        $review_count = $this->db->single();
+
+        $this->db->query('SELECT COUNT(*) FROM complaint  WHERE complaineeID = :complaineeID');
+        $this->db->bind(':complaineeID', $land_ID);
+
+        $complaint_count = $this->db->single();
+
+        $total = $complaint_count->{'COUNT(*)'} + $review_count->{'COUNT(*)'};
+        return $total;
+    }
+
     // Get land ID by UID and name
     public function getLandID($name){
         $this->db->query('SELECT id FROM land WHERE name = :name and uid = :uid');
