@@ -53,7 +53,10 @@ class Security extends Controller {
                 'availability' => $this->landModel->getAvailability($land_ID),
                 'capacity' => $this->landModel->getCapacity($land_ID),
                 'today_transactions' => $this->landModel->getTodayTransactions($land_ID),
-                'total_income' => $this->landModel->getTotalParkingIncome($land_ID)
+                'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
+                'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
+                'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID)
+            
             ];
         }
         
