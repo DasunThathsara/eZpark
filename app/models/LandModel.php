@@ -428,6 +428,22 @@ class LandModel{
         return $total;
     }
 
+    public function getRatingCount($land_ID){
+        $this->db->query('SELECT SUM(amount) AS tot_rate FROM rate  WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $rate_amount = $this->db->single();
+        $total_rate = $rate_amount->tot_rate;
+
+        $this->db->query('SELECT COUNT(*) FROM rate  WHERE id = :id');
+        $this->db->bind(':id', $land_ID);
+
+        $land_rate_count = $this->db->single()->{'COUNT(*)'};
+        $avg_rate = $total_rate/$land_rate_count;
+                // die(print_r($avg_rate));
+        return $avg_rate;
+    }
+
     // Get land ID by UID and name
     public function getLandID($name){
         $this->db->query('SELECT id FROM land WHERE name = :name and uid = :uid');

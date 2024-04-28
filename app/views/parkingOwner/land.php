@@ -169,7 +169,7 @@
                         </div>
                     </a>
 
-                     <!-- Card 5 -->
+                     <!-- Card 8 -->
                      <a class="card-link" href="<?php echo URLROOT ?>/land/viewReviewsAndComplaints/<?php echo $data['id'] ?>">
                         <div class="card">
                             <div class="row">
@@ -182,6 +182,27 @@
                                     </div>
                                 </div>
                                 <div class="right-col">Reviews &<br />Complaints</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    
+                    <!-- Card 9 -->
+                    <a class="card-link">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/rating.svg" alt="">
+                                        </div>
+                                        <div class="bottom-row"></div>
+                                    </div>
+                                </div>
+                                <div style="transform: translateY(-30px)" class="right-col" id="monthly-income">
+                                    <p style="font-size: 20px">Rating</p>
+                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px; transform: translateX(8px)"><?php echo $data['rating_count']?>/5</h3>
+                                </div>
                             </div>
                         </div>
                     </a>
