@@ -968,6 +968,33 @@ class LandModel{
         return $data;
     }
 
+    public function viewComplaints($landID){
+        $this->db->query('SELECT complaint.*, user.name AS complainerName 
+                          FROM complaint JOIN
+                          user ON complaint.complainerID = user.id
+                          WHERE complaint.complaineeID = :land_id');
+
+        $this->db->bind(':land_id', $landID);
+
+        $result = $this->db->resultSet();
+
+        // die(print_r($result));
+        return $result;
+    }
+
+    public function viewReviews($landID){
+        $this->db->query('SELECT review.*, user.name AS reviewerName 
+                          FROM review JOIN
+                          user ON review.reviewerID = user.id
+                          WHERE review.revieweeID = :land_id');
+
+        $this->db->bind(':land_id', $landID);
+
+        $result = $this->db->resultSet();
+
+        // die(print_r($result));
+        return $result;
+    }    
     // Ban parking
     public function banParking($land_id, $user_id)
     {

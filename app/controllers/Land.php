@@ -765,4 +765,11 @@ class Land extends Controller {
             }
         }
     }
+
+    public function viewReviewsAndComplaints($land_ID){
+        $other_data = $this->landModel->viewReviews($land_ID);
+        $data = $this->landModel->viewComplaints($land_ID);
+
+        $this->view('parkingOwner/reviewAndComplaints', $data, $other_data);
+    }
 }

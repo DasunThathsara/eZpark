@@ -168,6 +168,24 @@
                             </div>
                         </div>
                     </a>
+
+                     <!-- Card 5 -->
+                     <a class="card-link" href="<?php echo URLROOT ?>/land/viewReviewsAndComplaints/<?php echo $data['id'] ?>">
+                        <div class="card">
+                            <div class="row">
+                                <div class="left-col">
+                                    <div class="sub-row">
+                                        <div class="top-row">
+                                            <img src="<?php echo URLROOT ?>/images/review&complaints.jpg" alt="">
+                                        </div>
+                                        <div class="bottom-row"><?php echo $data['security_count'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="right-col">Reviews &<br />Complaints</div>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
 
                 <div class="charts">
