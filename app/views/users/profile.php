@@ -20,6 +20,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <?php } ?>
 
                 <form action="<?php echo URLROOT ?>/users/updateProfile" method="post" enctype="multipart/form-data">
+                    <input type="text" name="email" id="email" hidden required value="<?php echo $data['email'] ?>" />
                     <div class="profile-container">
                         <?php if($_SESSION['profile_photo']){ ?>
                             <img class="profile-pic" id="preview" src="<?php echo URLROOT ?>/profile_pics/<?php echo $data['profile_photo']?>" alt="<?php echo $_SESSION['user_name'] ?>">

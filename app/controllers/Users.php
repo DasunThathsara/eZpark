@@ -868,6 +868,8 @@ class Users extends Controller{
             'profile_photo' => $_SESSION['profile_photo']
         ];
 
+        // die(print_r($data));
+
         $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
 
         if ($other_data['notification_count'] < 10)
@@ -937,6 +939,7 @@ class Users extends Controller{
                 'profile_photo' => '',
                 'err' => ''
             ];
+            // die(print_r($data));
 
             if(isset($_FILES['profile_photo'])){
                 $img_details = $this->imgUpload('profile_photo');
@@ -951,14 +954,14 @@ class Users extends Controller{
             }
 
             // Validate email
-            if (empty($data['email'])){
-                $data['err'] = 'Please enter email';
-            } else {
-                // Check email
-                if ($data['email'] != $_SESSION['user_email'] and $this->userModel->findUserByEmail($data['email'])){
-                    $data['err'] = 'Email is already taken';
-                }
-            }
+            // if (empty($data['email'])){
+            //     $data['err'] = 'Please enter email';
+            // } else {
+            //     // Check email
+            //     if ($data['email'] != $_SESSION['user_email'] and $this->userModel->findUserByEmail($data['email'])){
+            //         $data['err'] = 'Email is already taken';
+            //     }
+            // }
 
             // Validate username
             if (empty($data['username'])){
