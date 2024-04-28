@@ -122,7 +122,10 @@ class Package extends Controller
             // Validate package price
             if (empty($data['package_price'])) {
                 $data['err'] = 'Please enter price';
+            }else if($data['package_price']<0 or !ctype_digit(strval($data['package_price']))){
+                $data['err'] = 'Please enter positive price';
             }
+
     
             // Validate vehicle type
             if (empty($data['vehicle_type'])) {
@@ -148,7 +151,13 @@ class Package extends Controller
             }
     
             // Load view with errors
-            $this->view('parkingOwner/packages/create', $data);
+            $other_data['notification_count'] = 0;
+            
+            if ($other_data['notification_count'] < 10) {
+                $other_data['notification_count'] = '0'.$other_data['notification_count'];
+            }
+            
+            $this->view('parkingOwner/packages/create', $data,$other_data);
         } else {
             // Initial form data (GET request)
             $data = [
@@ -268,7 +277,9 @@ class Package extends Controller
             // Validate package price
             if (empty($data['package_price'])) {
                 $data['err'] = 'Please enter price';
-            } 
+            } else if($data['package_price']<0 or !ctype_digit(strval($data['package_price']))){
+                $data['err'] = 'Please enter positive price';
+            }
            
             if (empty($data['vehicle_type'])) {
                 $data['err'] = 'Please select package type';

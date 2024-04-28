@@ -88,7 +88,7 @@
         chatItems.forEach(function (chatItem) {
             const senderName = chatItem.textContent.toLowerCase();
             if (senderName.includes(searchText)) {
-                chatItem.style.display = "block";
+                chatItem.style.display = "flex";
             } else {
                 chatItem.style.display = "none";
             }
