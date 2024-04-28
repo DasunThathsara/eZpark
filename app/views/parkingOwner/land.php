@@ -201,7 +201,7 @@
                                 </div>
                                 <div style="transform: translateY(-30px)" class="right-col" id="monthly-income">
                                     <p style="font-size: 20px">Rating</p>
-                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px; transform: translateX(8px)"><?php echo $data['rating_count']?>/5</h3>
+                                    <h3 style="color: rgba(0,0,0,0.62); font-size: 20px; transform: translateX(8px)"><?php echo $data['rating_count']?>/5.00</h3>
                                 </div>
                             </div>
                         </div>

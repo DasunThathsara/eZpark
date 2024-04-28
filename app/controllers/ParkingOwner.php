@@ -78,7 +78,7 @@ class ParkingOwner extends Controller {
             'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID),
             'land_images' =>$this->landModel->getLandImages($land_ID),
             'reviewsAndComplaints_count' => $this->landModel->getReviewsAndComplaintsCount($land_ID),
-            'rating_count' => $this->landModel->getRatingCount($land_ID)
+            'rating_count' => $this->landModel->getAvgRatingCount($land_ID)
         ];
         $this->view('parkingOwner/land', $data, $notifications);
     }

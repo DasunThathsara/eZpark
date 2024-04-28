@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'dashboard';
+$section = 'registrationRequests';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
