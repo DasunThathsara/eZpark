@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'history';
+$section = 'booking';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
