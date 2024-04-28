@@ -35,7 +35,7 @@ class SuperAdmin extends Controller {
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
+  
         $this->view('superAdmin/requests', $data, $other_data );
     }
 
