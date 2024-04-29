@@ -178,7 +178,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 tileLink.href = `<?php print_r(URLROOT)?>/landCapacity/requestedCapacityUpdateForm/${notification.data}/${notification.id}`;
             }
             else if (notification.notificationType == 'complaint') {
-                tileLink.href = `<?php print_r(URLROOT)?>/admin/viewComplaint/${notification.data}`;
+                tileLink.href = `<?php print_r(URLROOT)?>/land/viewReviewsAndComplaints/${notification.data}`;
             }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);

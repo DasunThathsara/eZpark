@@ -439,12 +439,16 @@ class LandModel{
         $this->db->bind(':id', $land_ID);
 
         $land_rate_count = $this->db->single()->{'COUNT(*)'};
-        $avg_rate = $total_rate/$land_rate_count;
 
-        // Format average rate to two decimal places
-        $formatted_avg_rate = number_format($avg_rate, 2);
-        // die(print_r($formatted_avg_rate));
-        return $formatted_avg_rate;
+        if ($land_rate_count == 0){
+            return $land_rate_count;
+                    // die(print_r($land_rate_count));
+        }else{
+            $avg_rate = $total_rate/$land_rate_count;
+            // Format average rate to two decimal places
+            $formatted_avg_rate = number_format($avg_rate, 2);
+            return $formatted_avg_rate;
+        }
     }
 
     // Get land ID by UID and name

@@ -80,6 +80,7 @@ class ParkingOwner extends Controller {
             'reviewsAndComplaints_count' => $this->landModel->getReviewsAndComplaintsCount($land_ID),
             'rating_count' => $this->landModel->getAvgRatingCount($land_ID)
         ];
+        // die(print_r($data));
         $this->view('parkingOwner/land', $data, $notifications);
     }
 
