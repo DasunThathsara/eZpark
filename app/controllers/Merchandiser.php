@@ -25,9 +25,9 @@ class Merchandiser extends Controller {
 
         // die(print_r($data));
 
-        $lands['notification_count'] = 0;
-        //$lands['list'] = $this->userModel->viewNotifications();
-        //$lands['notification_count'] = $this->userModel->getNotificationCount();      //changed
+         $lands['notification_count'] = 0;
+        // $lands['list'] = $this->userModel->viewNotifications();
+        // $lands['notification_count'] = $this->userModel->getNotificationCount();      //changed
 
         if ($lands['notification_count'] < 10)
             $lands['notification_count'] = '0'.$lands['notification_count'];
