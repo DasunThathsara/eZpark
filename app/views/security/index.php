@@ -129,7 +129,7 @@
                                 </a>
                             </div>
 
-                            <div class="charts">
+                            <!-- <div class="charts">
                                 <h2>Analysis</h2>
                                 <div class="chart-container">
                                     <div class="chart">
@@ -139,7 +139,7 @@
                                         <canvas id="lineChart2" style="width:100%;max-width:600px"></canvas>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
@@ -201,80 +201,80 @@
 
 
         // --------------------------------------- Real time update income card ---------------------------------------
-        function refreshMonthlyIncome() {
-            // Fetch updated content via AJAX
-            fetch('<?php echo URLROOT?>/Security') // Update URL to your controller method
-                .then(response => response.text())
-                .then(data => {
-                    // Extract the monthly income value from the returned data
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
-                    const updatedIncome = doc.getElementById('monthly-income').querySelector('h3').textContent;
+        // function refreshMonthlyIncome() {
+        //     // Fetch updated content via AJAX
+        //     fetch('<?php echo URLROOT?>/Security') // Update URL to your controller method
+        //         .then(response => response.text())
+        //         .then(data => {
+        //             // Extract the monthly income value from the returned data
+        //             const parser = new DOMParser();
+        //             const doc = parser.parseFromString(data, 'text/html');
+        //             const updatedIncome = doc.getElementById('monthly-income').querySelector('h3').textContent;
 
-                    // Update the value inside the h3 tag
-                    document.getElementById('monthly-income').querySelector('h3').textContent = updatedIncome;
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
+        //             // Update the value inside the h3 tag
+        //             document.getElementById('monthly-income').querySelector('h3').textContent = updatedIncome;
+        //         })
+        //         .catch(error => console.error('Error fetching data:', error));
+        // }
 
-        // Refresh every 1 second
-        setInterval(refreshMonthlyIncome, 1000);
+        // // Refresh every 1 second
+        // setInterval(refreshMonthlyIncome, 1000);
 
 
 
         // ---------------------------------------------- Chart.js ----------------------------------------------
-        const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-        const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
+//         const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+//         const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
 
-        var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-        var yValues2 = [<?php echo $data['vehicle_distribution']->January?>, <?php echo $data['vehicle_distribution']->February?>, <?php echo $data['vehicle_distribution']->March?>, <?php echo $data['vehicle_distribution']->April?>, <?php echo $data['vehicle_distribution']->May?>, <?php echo $data['vehicle_distribution']->June?>, <?php echo $data['vehicle_distribution']->July?>, <?php echo $data['vehicle_distribution']->August?>, <?php echo $data['vehicle_distribution']->September?>, <?php echo $data['vehicle_distribution']->October?>, <?php echo $data['vehicle_distribution']->November?>, <?php echo $data['vehicle_distribution']->December?>];
-        // var barColors = ["red", "green", "blue", "orange", "brown", "purple", "teal", "pink", "yellow", "cyan", "magenta", "lime"];
-        var barColors = ["red", "green", "blue", "orange", "brown", "purple", "yellow", "pink", "cyan", "olive", "magenta", "lime"];
+//         var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+//         var yValues2 = [<?php echo $data['vehicle_distribution']->January?>, <?php echo $data['vehicle_distribution']->February?>, <?php echo $data['vehicle_distribution']->March?>, <?php echo $data['vehicle_distribution']->April?>, <?php echo $data['vehicle_distribution']->May?>, <?php echo $data['vehicle_distribution']->June?>, <?php echo $data['vehicle_distribution']->July?>, <?php echo $data['vehicle_distribution']->August?>, <?php echo $data['vehicle_distribution']->September?>, <?php echo $data['vehicle_distribution']->October?>, <?php echo $data['vehicle_distribution']->November?>, <?php echo $data['vehicle_distribution']->December?>];
+//         // var barColors = ["red", "green", "blue", "orange", "brown", "purple", "teal", "pink", "yellow", "cyan", "magenta", "lime"];
+//         var barColors = ["red", "green", "blue", "orange", "brown", "purple", "yellow", "pink", "cyan", "olive", "magenta", "lime"];
 
-        new Chart("lineChart1", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgb(0,0,0)",
-                    borderColor: "rgb(252,212,38)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: {display: false},
-                //scales: {
-                    //yAxes: [{ticks: {min: 6, max:16}}],
-                    title: {
-                    display: true,
-                    text: "Income Distribution"
-                }
-            }
-        });
+//         new Chart("lineChart1", {
+//             type: "line",
+//             data: {
+//                 labels: xValues,
+//                 datasets: [{
+//                     fill: false,
+//                     lineTension: 0,
+//                     backgroundColor: "rgb(0,0,0)",
+//                     borderColor: "rgb(252,212,38)",
+//                     data: yValues
+//                 }]
+//             },
+//             options: {
+//                 legend: {display: false},
+//                 //scales: {
+//                     //yAxes: [{ticks: {min: 6, max:16}}],
+//                     title: {
+//                     display: true,
+//                     text: "Income Distribution"
+//                 }
+//             }
+//         });
 
 
 
-        // Create a new chart with a different id for the second canvas
-        new Chart("lineChart2", {
-            type: "bar",
-            data: {
-                labels: xValues2,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues2
-                }]
-            },
-            options: {
-                legend: {display: false},
-                title: {
-                    display: true,
-                    text: "Vehicle Dsitribution"
-                }
-            }
-        });
-</script>
+//         // Create a new chart with a different id for the second canvas
+//         new Chart("lineChart2", {
+//             type: "bar",
+//             data: {
+//                 labels: xValues2,
+//                 datasets: [{
+//                     backgroundColor: barColors,
+//                     data: yValues2
+//                 }]
+//             },
+//             options: {
+//                 legend: {display: false},
+//                 title: {
+//                     display: true,
+//                     text: "Vehicle Dsitribution"
+//                 }
+//             }
+//         });
+ </script>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
