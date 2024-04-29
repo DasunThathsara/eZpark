@@ -8,6 +8,9 @@ class Merchandiser extends Controller {
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
         $this->userModel = $this->model('UserModel');
+        $this->driverModel = $this->model('DriverModel');
+        $this->chatModel = $this->model('ChatModel');
+        $this->parkingOwnerModel = $this->model('ParkingOwnerModel');
 
     }
 
@@ -173,6 +176,108 @@ class Merchandiser extends Controller {
                 die('Something went wrong');
             }
         }
-    } 
+    }
 
+    // Search parking
+    public function findParking(){
+        $lands = $this->landModel->viewAllLands();
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('merchandiser/searchParking', $lands, $other_data);
+    }
+
+    // View parking
+    public function viewParking($land_ID = null, $mergedLandID = null){
+        if($mergedLandID == null){
+            $data['id'] = $land_ID;
+            $land = $this->landModel->viewLand($land_ID);
+            $land->packages = $this->driverModel->viewPackages($data);
+
+            $land->freeSLots = $this->landModel->getFreeSlots($land_ID);
+
+            $land->baseLands = $this->landModel->viewAllLandsByUserID();
+
+            $land->landID = $land_ID;
+
+            $notifications['list'] = $this->userModel->viewNotifications();
+            $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($notifications['notification_count'] < 10)
+                $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+            $this->view('merchandiser/viewParking', $land, $notifications);
+        }
+        else{
+            $data['id'] = $land_ID;
+            $land_ID = $mergedLandID;
+            $mergedLandID = $data['id'];
+            $data['id'] = $mergedLandID;
+            $land = $this->landModel->viewLand($land_ID);
+            $land->packages = $this->driverModel->viewPackages($data);
+
+            $land->freeSLots = $this->landModel->getFreeSlots($land_ID);
+
+            $land->baseLands = $this->landModel->viewAllLandsByUserID();
+
+            $land->mergedLandID = $mergedLandID;
+
+            $notifications['list'] = $this->userModel->viewNotifications();
+            $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($notifications['notification_count'] < 10)
+                $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+            $this->view('merchandiser/viewParkingRequest', $land, $notifications);
+        }
+    }
+
+    // Send request to merge parking
+    public function requestParking(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $land_ID = $_POST['landID'];
+            $baseLandID = $_POST['baseLandID'];
+            $duration = $_POST['duration'];
+
+            $mergeID = $this->merchandiserModel->mergeParking($land_ID, $baseLandID, $duration);
+
+            // Send notification to the landowner
+            $this->userModel->addNotification('You have a request to merge your parking with another parking', 'parkingMergeRequest', $this->landModel->getLandOwnerID($baseLandID), $this->landModel->getLandOwnerID($land_ID), $mergeID);
+
+            redirect('merchandiser/viewParking/'.$land_ID);
+        }
+    }
+
+    public function viewAllLandsByusdrID(){
+        $lands = $this->landModel->viewAllLandsByusdrID();
+
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('merchandiser/lands', $lands, $other_data);
+    }
+
+    public function confirmRequestParking(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $BaseLandID = $_POST['otherBaseLandID'];
+            $mergeID = $_POST['mergeID'];
+
+            $mergeDetails = $this->parkingOwnerModel->getMergeDetails($mergeID);
+
+            $this->chatModel->createChat((int)$_SESSION['user_id'], (int)$this->landModel->getLandOwnerID($mergeDetails->landID));
+
+            $this->merchandiserModel->confirmMergeParking($mergeID);
+
+            redirect('chat/viewChat/');
+        }
+    }
 }

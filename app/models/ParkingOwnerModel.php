@@ -294,4 +294,32 @@ class ParkingOwnerModel{
 
         $this->mail->send();
     }
+
+    // Accept merge request
+    public function acceptMergeRequest($amount, $mergeID): bool{
+        // Prepare statement
+        $this->db->query('UPDATE parking_merge SET status = 1, payment = :payment WHERE mergeID = :mergeID;');
+
+        // Bind values
+        $this->db->bind(':mergeID', $mergeID);
+        $this->db->bind(':payment', $amount);
+
+        // Execute
+        if ($this->db->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // get merge details using merge id
+    public function getMergeDetails($mergeID){
+        $this->db->query('SELECT * FROM parking_merge WHERE mergeID = :mergeID');
+        $this->db->bind(':mergeID', $mergeID);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
 }

@@ -159,7 +159,7 @@ class Land extends Controller {
                             'err' => ''
                         ];
 
-                        $this->successPropertyRegister($data); 
+                        redirect('land/successPropertyRegister/'.$id);
                     }
                 } else {
                     die('Something went wrong');
@@ -746,7 +746,7 @@ class Land extends Controller {
                     'id' => $security_ID,
                     'lid' => $land_ID
                 ];
-                die(print_r($data));
+                // die(print_r($data));
                 $security = $this->securityModel->viewSecurityProfile($data);
 
                 $pendingSec = $this->securityModel->getSecurityPendingList($land_ID);
