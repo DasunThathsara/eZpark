@@ -15,7 +15,7 @@ class Driver extends Controller {
     public function index(){
         $data = $this->landModel->viewAllLands();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -26,7 +26,7 @@ class Driver extends Controller {
     public function vehicles(){
         $vehicles = $this->driverModel->viewVehicles();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -38,7 +38,7 @@ class Driver extends Controller {
     public function booking(){
         $reservations = $this->driverModel->getReservations();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -50,7 +50,7 @@ class Driver extends Controller {
     public function history(){
         $history = $this->driverModel->viewHistory();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -62,7 +62,7 @@ class Driver extends Controller {
     public function packages(){
         $packages = $this->driverModel->viewSubscribedPackages();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -146,7 +146,7 @@ class Driver extends Controller {
             ];
         }
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0' . $other_data['notification_count'];
@@ -229,7 +229,7 @@ class Driver extends Controller {
     public function scanQRCode(){
         $data = [];
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -250,7 +250,7 @@ class Driver extends Controller {
     public function paymentSuccessful(){
         $vehicles = $this->driverModel->viewVehicles();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -267,7 +267,7 @@ class Driver extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Submitted form data
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->viewNotifications();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];

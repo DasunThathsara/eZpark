@@ -18,7 +18,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
             <div class="content-body">
                 <?php if (sizeof($data) == 0) {?>
-                    <div class="emptysecurity">You have no any request lands</div>
+                    <div class="emptysecurity" style="justify-self: center">You don't have any land requests.</div>
                 <?php }  
                 else {?>
                     <div class="title-options" style="width: 250px;">

@@ -83,7 +83,7 @@ class Security extends Controller {
 
         // die(print_r($other_data));
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];

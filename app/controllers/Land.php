@@ -94,7 +94,7 @@ class Land extends Controller {
 
             ];
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->viewNotifications();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -105,7 +105,7 @@ class Land extends Controller {
     }
 
     public function setPrice($data){
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->viewNotifications();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -175,7 +175,7 @@ class Land extends Controller {
                 'name' => ''
             ];
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->viewNotifications();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];

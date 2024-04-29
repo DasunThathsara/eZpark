@@ -16,7 +16,7 @@ class Package extends Controller
 
         $packages = $this->parkingOwnerModel->viewPackages($data);
 
-        $packages['notification_count'] = 0;
+        $packages['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($packages['notification_count'] < 10)
             $packages['notification_count'] = '0'.$packages['notification_count'];
@@ -151,7 +151,7 @@ class Package extends Controller
             }
     
             // Load view with errors
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
             
             if ($other_data['notification_count'] < 10) {
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -168,7 +168,7 @@ class Package extends Controller
                 'err' => ''
             ];
     
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
             
             if ($other_data['notification_count'] < 10) {
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -223,7 +223,7 @@ class Package extends Controller
 
             $package = $this->parkingOwnerModel->viewToBeUpdatedPackage($data);
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -243,7 +243,7 @@ class Package extends Controller
 
     public function packageUpdate(){
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
             
         if ($other_data['notification_count'] < 10) {
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
