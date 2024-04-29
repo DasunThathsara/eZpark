@@ -207,7 +207,7 @@
 .user-cards .card .email{
     width: 10px;
     transition: 1s, transform 1s;
-    background-color: yellow;
+    /* background-color: yellow; */
 }
 
 .user-cards .card .location{

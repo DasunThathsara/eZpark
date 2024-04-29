@@ -53,8 +53,8 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
                             <div class="identifier">
                                 <a href="" class="tile">
                                     <table>
-                                        <tr style="background-color: green">
-                                            <td class="name-td" style="width: 200px; background-color: red" data-header>
+                                        <!-- <tr style="background-color: green"> -->
+                                            <td class="name-td" style="width: 200px;" data-header>
                                                 <p class="name"></p>
                                                 <p class="id-p">Admin ID: <span class="id"></span></p>
                                             </td>

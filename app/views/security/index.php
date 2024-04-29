@@ -36,7 +36,7 @@
                         <div class="emptySec">You have no access to assigned land</div>
                     <?php }
                     else {?>
-                        <h1 class="title">Dashboard</h1>
+                        <h1 class="title">Security</h1>
 
                         <div class="container">
                             <h1><?php echo $data['name'] ?> Dashboard</h1>
@@ -224,11 +224,12 @@
 
         // ---------------------------------------------- Chart.js ----------------------------------------------
         const xValues = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
-        const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+        const yValues = [<?php echo $data['income_distribution']->January?>, <?php echo $data['income_distribution']->February?>, <?php echo $data['income_distribution']->March?>, <?php echo $data['income_distribution']->April?>, <?php echo $data['income_distribution']->May?>, <?php echo $data['income_distribution']->June?>, <?php echo $data['income_distribution']->July?>, <?php echo $data['income_distribution']->August?>, <?php echo $data['income_distribution']->September?>, <?php echo $data['income_distribution']->October?>, <?php echo $data['income_distribution']->November?>, <?php echo $data['income_distribution']->December?>];
 
-        var xValues2 = ["Italy", "France", "Spain", "USA", "Argentina"];
-        var yValues2 = [55, 49, 44, 24, 15];
-        var barColors = ["red", "green","blue","orange","brown"];
+        var xValues2 = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov', 'dec'];
+        var yValues2 = [<?php echo $data['vehicle_distribution']->January?>, <?php echo $data['vehicle_distribution']->February?>, <?php echo $data['vehicle_distribution']->March?>, <?php echo $data['vehicle_distribution']->April?>, <?php echo $data['vehicle_distribution']->May?>, <?php echo $data['vehicle_distribution']->June?>, <?php echo $data['vehicle_distribution']->July?>, <?php echo $data['vehicle_distribution']->August?>, <?php echo $data['vehicle_distribution']->September?>, <?php echo $data['vehicle_distribution']->October?>, <?php echo $data['vehicle_distribution']->November?>, <?php echo $data['vehicle_distribution']->December?>];
+        // var barColors = ["red", "green", "blue", "orange", "brown", "purple", "teal", "pink", "yellow", "cyan", "magenta", "lime"];
+        var barColors = ["red", "green", "blue", "orange", "brown", "purple", "yellow", "pink", "cyan", "olive", "magenta", "lime"];
 
         new Chart("lineChart1", {
             type: "line",
@@ -244,8 +245,11 @@
             },
             options: {
                 legend: {display: false},
-                scales: {
-                    yAxes: [{ticks: {min: 6, max:16}}],
+                //scales: {
+                    //yAxes: [{ticks: {min: 6, max:16}}],
+                    title: {
+                    display: true,
+                    text: "Income Distribution"
                 }
             }
         });
@@ -256,22 +260,24 @@
         new Chart("lineChart2", {
             type: "bar",
             data: {
-                labels: xValues,
+                labels: xValues2,
                 datasets: [{
                     backgroundColor: barColors,
-                    data: yValues
+                    data: yValues2
                 }]
             },
             options: {
                 legend: {display: false},
                 title: {
                     display: true,
-                    text: "Vehicle Count"
+                    text: "Vehicle Dsitribution"
                 }
             }
         });
+</script>
 
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
 
         // ---------------------------------------------- Toggle button ----------------------------------------------
         document.addEventListener('DOMContentLoaded', function () {
