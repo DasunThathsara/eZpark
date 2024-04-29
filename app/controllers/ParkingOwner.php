@@ -97,7 +97,7 @@ class ParkingOwner extends Controller {
 
         $packages = $this->parkingOwnerModel->viewPackages($data);
 
-        $packages['notification_count'] = 0;
+        $packages['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($packages['notification_count'] < 10)
             $packages['notification_count'] = '0'.$packages['notification_count'];
@@ -110,7 +110,7 @@ class ParkingOwner extends Controller {
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -126,7 +126,7 @@ class ParkingOwner extends Controller {
             'lands' => $this->landModel->viewLands()
         ];
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];

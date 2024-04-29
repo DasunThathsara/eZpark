@@ -17,9 +17,9 @@
     <?php } ?>
 
     <form action="<?php echo URLROOT ?>/land/secAvailSet" method="post">
+        <p>Security Availability</p>
         <!-- Name -->
         <select name="secAvail">
-            <option value="" hidden disabled selected>Security availability</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
         </select>

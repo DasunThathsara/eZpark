@@ -53,7 +53,7 @@ class LandPrice extends Controller
 
             $package = $this->parkingOwnerModel->viewToBeUpdatedPackage($data);
 
-            $other_data['notification_count'] = 0;
+            $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($other_data['notification_count'] < 10)
                 $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -82,7 +82,7 @@ class LandPrice extends Controller
 
             $prices = $this->landModel->viewPrice($data);
 
-            $prices['notification_count'] = 0;
+            $prices['notification_count'] = $this->userModel->getNotificationCount();
 
             if ($prices['notification_count'] < 10)
                 $prices['notification_count'] = '0'.$prices['notification_count'];
@@ -142,7 +142,7 @@ class LandPrice extends Controller
                 
             
 
-                $prices['notification_count'] = 0;
+                $prices['notification_count'] = $this->userModel->getNotificationCount();
 
                 if ($prices['notification_count'] < 10)
                     $prices['notification_count'] = '0'.$prices['notification_count'];

@@ -28,8 +28,8 @@ class Merchandiser extends Controller {
 
         // die(print_r($data));
 
-         $lands['notification_count'] = 0;
-        // $lands['list'] = $this->userModel->viewNotifications();
+         $lands['notification_count'] = $this->userModel->getNotificationCount();
+        // $lands['list'] = $this->userModel->getNotificationCount();
         // $lands['notification_count'] = $this->userModel->getNotificationCount();      //changed
 
         if ($lands['notification_count'] < 10)
@@ -45,10 +45,10 @@ class Merchandiser extends Controller {
     public function lands(){
         $lands = $this->landModel->viewLands();
 
-        $other_data['notification_count'] = 0;
-        //$notifications['list'] = $this->userModel->viewNotifications();
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
+        //$notifications['list'] = $this->userModel->getNotificationCount();
         //$notifications['notification_count'] = $this->userModel->getNotificationCount();
-        //$other_data['list'] = $this->userModel->viewNotifications();
+        //$other_data['list'] = $this->userModel->getNotificationCount();
         //$other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
@@ -66,7 +66,7 @@ class Merchandiser extends Controller {
 
         $lands = $this->landModel->viewLands();
 
-        $lands['notification_count'] = 0;
+        $lands['notification_count'] = $this->userModel->getNotificationCount();
         
 
         
@@ -86,7 +86,9 @@ class Merchandiser extends Controller {
             'total_income' => $this->landModel->getTotalParkingIncome($land_ID),
             'income_distribution' => $this->landModel->getIncomeDistribution($land_ID),
             'vehicle_distribution' => $this->landModel->getVehicleDistribution($land_ID),
-            'land_images' =>$this->landModel->getLandImages($land_ID)
+            'land_images' =>$this->landModel->getLandImages($land_ID),
+            'reviewsAndComplaints_count' => $this->landModel->getReviewsAndComplaintsCount($land_ID),
+            'rating_count' => $this->landModel->getAvgRatingCount($land_ID)
         ];
 
         $this->view('merchandiser/land', $data, $lands);
@@ -97,7 +99,7 @@ class Merchandiser extends Controller {
     public function parkingCapacity($parking_ID = null, $parking_name = null){
         $lands = $this->landModel->viewLands();
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -113,7 +115,7 @@ class Merchandiser extends Controller {
             'lands' => $this->landModel->viewLands()
         ];
 
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
@@ -136,7 +138,7 @@ class Merchandiser extends Controller {
 
         $data['securityDetails'] = $securityDetails;
         
-        $other_data['notification_count'] = 0;
+        $other_data['notification_count'] = $this->userModel->getNotificationCount();
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
