@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'history';
+$section = 'transactions';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -20,10 +20,12 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                     <tr>
                         <td>
                             <div class="content-title">
-                                <div class="left" style="width:30%;">Parking</div>
-                                <div class="left" style="width:15%;">Vehicle</div>
+                                <div class="left" style="width:20%;">Parking</div>
+                                <div class="left" style="width:25%;">Vehicle</div>
                                 <div class="left" style="width:20%;">Status</div>
-                                <div class="left" style="width:25%; text-align: center;">Date</div>
+                                <div class="left" style="width:20%;">Cost( LKR  )</div>
+                                <div class="left" style="width:25%; text-align: center;">Start Time</div>
+                                <div class="left" style="width:25%; text-align: center;">End Time</div>
                             </div>
                         </td>
                         <td width="40px"></td>
@@ -33,7 +35,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             <td>
                                 <a class="tile">
                                     <div class="content" style="padding-bottom: 30px;">
-                                        <div class="left" style="width:30%;">
+                                        <div class="left" style="width:15%;">
                                             <div class="parking-name">
                                                 <a href="<?php echo URLROOT?>/driver/gotoland/<?php echo $data[$i]->landID?>"><?php echo $data[$i]->name ?></a>
                                             </div>
@@ -62,13 +64,24 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                                     echo "<div style='color: #ff9900'>On going</div>";
                                                 }?>
                                             </div>
-                                            <div class="cost" style="transform: translateY(15px);">
-                                                LKR <?php echo $data[$i]->cost ?>
-                                            </div>
                                         </div>
-                                        <div class="left" style="width:25%; text-align: center; transform: translateY(15px);">
-                                            <?php echo $date = date('Y-m-d', strtotime($data[$i]->startTime)); ?>
+                                        <div class="cost" style="width:12%; transform: translateY(15px);">
+                                            <?php echo $data[$i]->cost ?>
                                         </div>
+                                        <div class="left" style="width:15%; text-align: center; transform: translateY(15px);">
+                                            <?php echo $data[$i]->startTime ; ?>
+                                        </div>
+                                        <div class="left" style="width:15%; text-align: center; transform: translateY(15px);">
+                                            <?php echo $data[$i]->endTime ; ?>
+                                        </div>
+                                        <form style="padding-top:35px "action="<?php echo URLROOT ?>/driver/updateRecentTransaction" method="post">
+                                            <input type="text" name="driverID" id="driverID" hidden value="<?php echo $data[$i]->driverID ?>" />
+                                            <input type="text" name="landID" id="landID" hidden value="<?php echo $data[$i]->landID ?>" />
+                                            <input type="text" name="startTime" id="startTime" hidden value="<?php echo $data[$i]->startTime ?>" />
+                                            <button style="background-color:white; border:none; outline:none"type="submit" class="delete" onclick="return confirmSubmit();">
+                                                <img style="width:20px; height:20px "src="<?php echo URLROOT ?>/images/transaction.png" alt="">
+                                            </button>
+                                        </form>
                                     </div>
                                 </a>
                             </td>
@@ -83,7 +96,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 </main>
 <script>
     function confirmSubmit() {
-        return confirm("Are you sure you want to delete this booking?");
+        return confirm("Are you sure pay now");
     }
 </script>
 <?php require APPROOT.'/views/inc/footer.php'; ?>

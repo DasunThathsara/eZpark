@@ -1,7 +1,7 @@
 <div class="sidenav">
     <div class="container">
         <div class="logo"><img src="<?php echo URLROOT ?>/images/logo.png" alt="">
-        <h7 style="font-size: 14px; position: absolute; left: 30px; top: 140px; font-weight: bold"><?php echo $_SESSION['user_type'] ?></h7>
+        <!-- <h7 style="font-size: 14px; position: absolute; left: 30px; top: 140px; font-weight: bold"><?php echo $_SESSION['user_type'] ?></h7> -->
         </div>
         <a class="sidenav-close-btn" onclick="navToggleClose()">X</a>
         <div class="items">
@@ -22,6 +22,15 @@
                     <?php }
                     else{ ?>
                         <div class="item"><img src="<?php echo URLROOT ?>/images/booking.svg" alt="">Reservations</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/driver/recentTransaction">
+                <?php if ($section == 'transactions'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/recentTransaction.jpg" alt="">Recent Transactions</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/recentTransaction.jpg" alt="">Recent Transactions</div>
                     <?php } ?>
                 </a>
 
