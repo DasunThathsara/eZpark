@@ -24,7 +24,6 @@ class Chat extends Controller {
             $data['chat_history'] = $this->chatModel->getChatHistory($chat_ID);
             $data['chat_id'] = $chat_ID;
         }
-
         else{
             $data['chat_id'] = null;
         }

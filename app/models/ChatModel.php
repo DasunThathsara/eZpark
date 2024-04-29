@@ -6,6 +6,18 @@ class ChatModel{
         $this->db = new Database();
     }
 
+    // create chat
+    public function createChat($person1, $person2){
+        $this->db->query('INSERT INTO chats (person1, person2) VALUE(:person1, :person2)');
+        $this->db->bind(':person1', $person1);
+        $this->db->bind(':person2', $person2);
+
+        if($this->db->execute())
+            return true;
+        else
+            return false;
+    }
+
     public function getName($userID){
         $this->db->query('SELECT name FROM user WHERE id = :id');
         $this->db->bind(':id', $userID);

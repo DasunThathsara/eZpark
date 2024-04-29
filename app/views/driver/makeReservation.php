@@ -144,7 +144,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 var formattedStartTime = hours + ":" + minutes;
 
 
-                var endTime = new Date(reservation.startTime);
+                var endTime = new Date(reservation.expectedEndTime);
                 var hours = endTime.getHours();
                 var endTime = new Date(reservation.expectedEndTime);
                 var minutes = endTime.getMinutes();

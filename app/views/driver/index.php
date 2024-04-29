@@ -159,9 +159,6 @@ require APPROOT . '/views/inc/components/sidenavbar.php';
     history.pushState(null, null, 'http://localhost/eZpark/driver/index');
 
 
-
-
-
     // Get all radio buttons
     var radioButtons = document.querySelectorAll('input[type="radio"][name="rate"]');
     // Get submit button

@@ -1085,4 +1085,33 @@ class LandModel{
             return false;
         }
     }
+
+    public function viewAllLandsByUserID(){
+        $this->db->query('SELECT id, name FROM land WHERE uid = :uid');
+        $this->db->bind(':uid', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+
+        return $row;
+    }
+
+    // Get land id using request id
+    public function getLandIDByRequestID($mergeID){
+        $this->db->query('SELECT baseLandID FROM parking_merge WHERE mergeID = :mergeID');
+        $this->db->bind(':mergeID', $mergeID);
+
+        $row = $this->db->single();
+
+        return $row->baseLandID;
+    }
+
+    // get ownerId using landID
+    public function getOwnerID($landID){
+        $this->db->query('SELECT uid FROM land WHERE id = :id');
+        $this->db->bind(':id', $landID);
+
+        $row = $this->db->single();
+
+        return $row->uid;
+    }
 }
