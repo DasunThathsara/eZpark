@@ -26,7 +26,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                 <p>Bike: <?php echo $data->bike?></p>
                 <p>Three wheel: <?php echo $data->threeWheel?></p>
 
-                <?php if ($data->assignedLand != $data->id) {?>
+                <?php if ($data->assignedLand == 0) {?>
                     <div class="options" style="display: flex; margin-top: 20px">
                         <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="post" class="update-form">
                             <input type="text" name="id" id="id" hidden value="<?php echo $data->id?>" />
@@ -42,7 +42,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                             </button>
                         </form>
                     </div>
-                <?php } else{?>
+                <?php } else if($data->assignedLand == $data->id || $data->assignedLand != $data->id){?>
                     <a href="<?php echo URLROOT?>/security/index" style="background-color:orange; border-radius: 10px; padding: 10px">Go to dashboard</a>
                 <?php }?>
             </div>

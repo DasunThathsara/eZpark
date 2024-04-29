@@ -1028,6 +1028,7 @@ class Users extends Controller{
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
+        // die(print_r($notifications));    
         $this->view('users/notifications', $data, $notifications);
     }
 

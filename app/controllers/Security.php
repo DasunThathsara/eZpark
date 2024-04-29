@@ -94,8 +94,9 @@ class Security extends Controller {
     // View land request
     public function viewRequests(){
         $data = $this->securityModel->viewLandRequest();
+        // $data['assignedLand'] = $this->securityModel->getAssignedLandID();
 
-        // die(print_r($data));
+        // die(print_r( $data));
 
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
@@ -115,7 +116,7 @@ class Security extends Controller {
         // Get land details
         $data = $this->landModel->viewLand($landID);
         $data->assignedLand = $this->securityModel->getAssignedLandID();
-
+// die(print_r($data));
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();
 
