@@ -15,7 +15,7 @@
                     <a class="item" href="<?php echo URLROOT ?>/users/viewProfile"><img src="<?php echo URLROOT ?>/images/user.png" style="width: 30px; height: 30px; border-radius: 50%" alt="<?php echo $_SESSION['user_name'] ?>"></a>
                 <?php } ?>
                 <a class="item" href="<?php echo URLROOT?>/users/notifications"><img src="<?php echo URLROOT ?>/images/bell.svg" style="width: 20px; height: 30px; border-radius: 50%; margin-right: -15px;" alt="<?php echo $_SESSION['user_name'] ?>"></a>
-                <p style="font-size: 12px; position: absolute; right: 20px; top: 34px; font-weight:bold">You logged as, <?php echo $_SESSION['user_type'] ?> </p>
+                <p style="font-size: 14px; position: absolute; right: 20px; top: 32px; font-weight:bold">You logged as, <?php echo $_SESSION['user_type'] ?> </p>
                 <?php if($_SESSION['user_type'] == 'driver'){?>
                     <a class="item" href="<?php echo URLROOT?>/driver/scanQRCode"><img src="<?php echo URLROOT ?>/images/scanner.jpg" style="width: 40px; height: 28px; border-radius: 50%; margin-right: -20px; margin-top: 2px" alt="<?php echo $_SESSION['user_name'] ?>"></a>
                 <?php } ?>
