@@ -58,6 +58,33 @@ class Driver extends Controller {
         $this->view('driver/history', $history, $other_data);
     }
 
+    // ------------------------ recentTransaction ------------------------
+    public function recentTransaction(){
+        $recentTransaction = $this->driverModel->viewRecentTransaction();
+// die(print_r($recentTransaction));
+        $other_data['notification_count'] = 0;
+
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+
+        $this->view('driver/recentTransaction', $recentTransaction, $other_data);
+    }
+
+
+    // ------------------------ recentTransaction ------------------------
+    public function updateRecentTransaction(){
+        $successTransaction = $this->driverModel->updateRecentTransaction();
+        // die(print_r($successTransaction));
+        $other_data['notification_count'] = 0;
+    
+        if ($other_data['notification_count'] < 10)
+            $other_data['notification_count'] = '0'.$other_data['notification_count'];
+    
+        redirect('driver/recentTransaction', $other_data);
+    }
+    
+
+
     // ------------------------ Packages ------------------------
     public function packages(){
         $packages = $this->driverModel->viewSubscribedPackages();

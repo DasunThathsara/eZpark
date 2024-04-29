@@ -25,6 +25,15 @@
                     <?php } ?>
                 </a>
 
+                <a href="<?php echo URLROOT ?>/driver/recentTransaction">
+                <?php if ($section == 'transactions'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/recentTransaction.jpg" alt="">Recent Transactions</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/recentTransaction.jpg" alt="">Recent Transactions</div>
+                    <?php } ?>
+                </a>
+
                 <a href="<?php echo URLROOT ?>/driver/history">
                     <?php if ($section == 'history'){?>
                         <div class="item selected"><img src="<?php echo URLROOT ?>/images/history.svg" alt="">Parking History</div>

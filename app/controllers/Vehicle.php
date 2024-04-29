@@ -12,6 +12,7 @@ class Vehicle extends Controller
     // Register Vehicle
     public function vehicleRegister()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Submitted form data
             // input data
@@ -104,7 +105,9 @@ class Vehicle extends Controller
     // Update Vehicle
     public function vehicleUpdateForm()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $data = [
                 'name' => trim($_POST['name']),
                 'vehicle_type' => trim($_POST['vehicle_type']),

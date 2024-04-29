@@ -453,8 +453,31 @@ class DriverModel{
         $this->db->bind(':driverID', $_SESSION['user_id']);
 
         $row = $this->db->resultSet();
-
         return $row;
+    }
+
+    public function viewRecentTransaction(){
+        $this->db->query('SELECT dl.*, l.name, l.city FROM driver_land dl JOIN land l ON l.id = dl.landID WHERE dl.driverID = :driverID AND dl.paymentStatus = 0');
+        $this->db->bind(':driverID', $_SESSION['user_id']);
+
+        $row = $this->db->resultSet();
+        // die(print_r($row));
+        return $row;
+    }
+
+    
+    public function updateRecentTransaction(){
+        $this->db->query('UPDATE driver_land SET paymentStatus = 1 WHERE driverID = :driverID AND landID = :landID AND startTime = :startTime');
+        $this->db->bind(':driverID', $_POST['driverID']);
+        $this->db->bind(':landID', $_POST['landID']);
+        $this->db->bind(':startTime', $_POST['startTime']);
+        
+        if($this->db->execute()){
+            return true;
+        }else {
+            return false;
+        }
+        
     }
 
     // Get land coordinates
