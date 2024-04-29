@@ -73,14 +73,21 @@
                     <?php } ?>
                 </a>
 
-                
-
                 <a href="<?php echo URLROOT ?>/chat/viewChat">
                     <?php if ($section == 'chat'){?>
                         <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Chat</div>
                     <?php }
                     else{ ?>
                         <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Chat</div>
+                    <?php } ?>
+                </a>
+
+                <a href="<?php echo URLROOT ?>/merchandiser/findParking">
+                    <?php if ($section == 'findParking'){?>
+                        <div class="item selected"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Find Parking</div>
+                    <?php }
+                    else{ ?>
+                        <div class="item"><img style="transform: translateY(5px)" src="<?php echo URLROOT ?>/images/chat.svg" alt="">Find Parking</div>
                     <?php } ?>
                 </a>
 

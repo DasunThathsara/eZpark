@@ -8,6 +8,7 @@ class ParkingOwner extends Controller {
         $this->landModel = $this->model('LandModel');
         $this->securityModel = $this->model('SecurityModel');
         $this->userModel = $this->model('UserModel');
+        $this->driverModel = $this->model('DriverModel');
     }
 
     public function index(){
@@ -197,5 +198,49 @@ class ParkingOwner extends Controller {
                 die('Something went wrong');
             }
         }
-    } 
+    }
+
+    // View merge request
+    public function viewMergeRequest($requestID = null){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $mergeID = $_POST['mergeID'];
+            $amount = $_POST['amount'];
+
+            $this->parkingOwnerModel->acceptMergeRequest($amount, $mergeID);
+
+
+            $mergeDetails = $this->parkingOwnerModel->getMergeDetails($mergeID);
+
+            $this->userModel->addNotification('Your merge request has been accepted by '.$_SESSION['user_name'], 'mergeRequestAccepted', $_SESSION['user_id'], $this->landModel->getOwnerID($mergeDetails->baseLandID), $mergeID.'/'.$mergeDetails->baseLandID);
+            redirect('parkingOwner/viewMergeRequest/'.$mergeID);
+        }
+        else{
+            if (!is_numeric($requestID)) {
+                redirect('error');
+                return;
+            }
+            $landID = $this->landModel->getLandIDByRequestID($requestID);
+
+            $data['id'] = $landID;
+
+            $land = $this->landModel->viewLand($landID);
+            $land->packages = $this->driverModel->viewPackages($data);
+
+            $land->freeSLots = $this->landModel->getFreeSlots($landID);
+
+            $land->baseLands = $this->landModel->viewAllLandsByUserID();
+
+            $land->mergeID = $requestID;
+
+            $notifications['list'] = $this->userModel->viewNotifications();
+            $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+            if ($notifications['notification_count'] < 10)
+                $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+            $this->view('parkingOwner/viewMergeRequest', $land, $notifications);
+        }
+    }
 }

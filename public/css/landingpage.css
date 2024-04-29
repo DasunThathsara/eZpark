@@ -114,7 +114,7 @@
 
 .landing-container .yellow-circle-5{
     background: linear-gradient(to right, rgb(248,215,90), rgb(255,167,41));
-    z-index: -1;
+    z-index: 10;
     position: absolute;
     right: 50vw;
     top: 0;
@@ -559,4 +559,30 @@
         height: 4rem;
         border-radius: 0 0 10rem 10rem;
     }
+}
+
+
+/* ------------------------------ Parking owner ----------------------------- */
+.landing-container .parkingOwner-area{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 150px;
+    transition: 0.5s, transform 0.5s;
+    background-color: #ffffff;
+    padding: 10px;
+    height: 100vh;
+}
+
+.landing-container .parkingOwner-area .parking-img{
+    width: 50%;
+    height: 50%;
+}
+
+.landing-container .parkingOwner-area .parking-img .parking-landing-img{
+    width: 50%;
+}
+
+.landing-container .parkingOwner-area .parking-details{
+    width: 50%;
 }
