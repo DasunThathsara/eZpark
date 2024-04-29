@@ -38,6 +38,8 @@ class ParkingOwner extends Controller {
     // View all lands
     public function lands(){
         $lands = $this->landModel->viewLands();
+        // $lands->slot
+        
 // die(print_r($lands));
         $notifications['list'] = $this->userModel->viewNotifications();
         $notifications['notification_count'] = $this->userModel->getNotificationCount();

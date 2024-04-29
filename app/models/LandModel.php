@@ -429,20 +429,18 @@ class LandModel{
     }
 
     public function getAvgRatingCount($land_ID){
-        $this->db->query('SELECT SUM(amount) AS tot_rate FROM rate  WHERE id = :id');
-        $this->db->bind(':id', $land_ID);
+        $this->db->query('SELECT SUM(rate) AS tot_rate FROM parking_rating  WHERE landID = :landID');
+        $this->db->bind(':landID', $land_ID);
 
         $rate_amount = $this->db->single();
         $total_rate = $rate_amount->tot_rate;
 
-        $this->db->query('SELECT COUNT(*) FROM rate  WHERE id = :id');
-        $this->db->bind(':id', $land_ID);
+        $this->db->query('SELECT COUNT(*) FROM parking_rating  WHERE landID = :landID');
+        $this->db->bind(':landID', $land_ID);
 
         $land_rate_count = $this->db->single()->{'COUNT(*)'};
-
         if ($land_rate_count == 0){
             return $land_rate_count;
-                    // die(print_r($land_rate_count));
         }else{
             $avg_rate = $total_rate/$land_rate_count;
             // Format average rate to two decimal places
