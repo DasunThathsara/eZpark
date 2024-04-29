@@ -71,7 +71,7 @@
                             <div class="left-col">
                                 <div class="sub-row">
                                     <div class="top-row">
-                                        <img src="<?php echo URLROOT ?>/images/review&complaints.jpg" alt="">
+                                        <img src="<?php echo URLROOT ?>/images/complain.png" alt="">
                                     </div>
                                     
                                 </div>
