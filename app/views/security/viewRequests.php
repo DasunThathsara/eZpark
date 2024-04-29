@@ -56,7 +56,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
                                             </td>
                                             <td class="district" data-header></td>
                                             <td class="province" data-header></td>
-
+                                        
                                             <td class="options">
                                                 <form action="<?php echo URLROOT ?>/security/acceptLandRequest" method="POST" class="accept-form" id="accept-form">
                                                     <input type="text" name="id" class="id" id="landID" hidden value="" />
@@ -162,7 +162,6 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
     let securities = [];
     var backendData = <?php echo json_encode($data); ?>;
-    // console.log(backendData)
     securities = backendData.map(security => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         card.querySelector(".name").textContent = security.name;

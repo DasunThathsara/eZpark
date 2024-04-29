@@ -4,7 +4,7 @@
 
 <!--  SIDE NAVIGATION  -->
 <?php
-$section = 'dashboard';
+$section = 'complaints';
 require APPROOT.'/views/inc/components/sidenavbar.php';
 ?>
 
@@ -18,7 +18,7 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
 
             <br><br>
             <?php if (sizeof($data) == 0) {?>
-                <div class="emptyVehicle">You have no any registration requests</div>
+                <div class="emptyVehicle">You have no any complaints</div>
             <?php }
             else {?>
 

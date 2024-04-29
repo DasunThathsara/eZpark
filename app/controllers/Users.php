@@ -83,6 +83,8 @@ class Users extends Controller{
             // Validate contact number
             if (empty($data['contact_no'])){
                 $data['err'] = 'Please enter contact number';
+            }else if(strlen($data['contact_no']) != 10 || !ctype_digit($data['contact_no'])){
+                $data['err'] = 'Please enter valid contact number';
             }
 
             // Validation is completed and no error found
@@ -187,6 +189,8 @@ class Users extends Controller{
             // Validate contact number
             if (empty($data['contact_no'])){
                 $data['err'] = 'Please enter contact number';
+            }else if(strlen($data['contact_no']) != 10 || !ctype_digit($data['contact_no'])){
+                $data['err'] = 'Please enter valid contact number';
             }
 
             // Validation is completed and no error found
@@ -294,6 +298,8 @@ class Users extends Controller{
             // Validate contact number
             if (empty($data['contact_no'])){
                 $data['err'] = 'Please enter contact number';
+            }else if(strlen($data['contact_no']) != 10 || !ctype_digit($data['contact_no'])){
+                $data['err'] = 'Please enter valid contact number';
             }
 
             // Validation is completed and no error found
@@ -402,22 +408,25 @@ class Users extends Controller{
                 $data['err'] = 'Please select user type';
             }
 
+
             // Validate contact number
-            if (empty($data['contact_no']) and $data['err'] == '' and $data['err'] == ''){
+            if (empty($data['contact_no']) and $data['err'] == ''){
                 $data['err'] = 'Please enter contact number';
+            }else if(strlen($data['contact_no']) != 10 || !ctype_digit($data['contact_no'])){
+                $data['err'] = 'Please enter valid contact number';
             }
 
             // Validate NIC
             if (empty($data['NIC']) and $data['err'] == ''){
                 $data['err'] = 'Please enter NIC';
             }
-            else if (strlen($data['NIC']) == 10 and ($data['NIC'][9] == 'V' or $data['NIC'][9] == 'v')){
+            else if (strlen($data['NIC']) == 10 and ($data['NIC'][9] == 'V' or $data['NIC'][9] == 'v') and $data['err'] == ''){
                 $data['err'] = '';
             }
-            else if (strlen($data['NIC']) == 12 and ctype_digit($data['NIC'])){
+            else if (strlen($data['NIC']) == 12 and ctype_digit($data['NIC']) and $data['err'] == ''){
                 $data['err'] = '';
             }
-            else{
+            else if($data['err'] == ''){
                 $data['err'] = 'Invalid NIC';
             }
 
@@ -546,6 +555,8 @@ class Users extends Controller{
             // Validate contact number
             if (empty($data['contact_no'])){
                 $data['err'] = 'Please enter contact number';
+            }else if(strlen($data['contact_no']) != 10 || !ctype_digit($data['contact_no'])){
+                $data['err'] = 'Please enter valid contact number';
             }
 
             // Validation is completed and no error found
@@ -857,6 +868,8 @@ class Users extends Controller{
             'profile_photo' => $_SESSION['profile_photo']
         ];
 
+        // die(print_r($data));
+
         $other_data['notification_count'] = $this->landModel->getUnVerifyLandCount();
 
         if ($other_data['notification_count'] < 10)
@@ -926,6 +939,7 @@ class Users extends Controller{
                 'profile_photo' => '',
                 'err' => ''
             ];
+            // die(print_r($data));
 
             if(isset($_FILES['profile_photo'])){
                 $img_details = $this->imgUpload('profile_photo');
@@ -940,14 +954,14 @@ class Users extends Controller{
             }
 
             // Validate email
-            if (empty($data['email'])){
-                $data['err'] = 'Please enter email';
-            } else {
-                // Check email
-                if ($data['email'] != $_SESSION['user_email'] and $this->userModel->findUserByEmail($data['email'])){
-                    $data['err'] = 'Email is already taken';
-                }
-            }
+            // if (empty($data['email'])){
+            //     $data['err'] = 'Please enter email';
+            // } else {
+            //     // Check email
+            //     if ($data['email'] != $_SESSION['user_email'] and $this->userModel->findUserByEmail($data['email'])){
+            //         $data['err'] = 'Email is already taken';
+            //     }
+            // }
 
             // Validate username
             if (empty($data['username'])){
@@ -1014,6 +1028,7 @@ class Users extends Controller{
         if ($notifications['notification_count'] < 10)
             $notifications['notification_count'] = '0'.$notifications['notification_count'];
 
+        // die(print_r($notifications));    
         $this->view('users/notifications', $data, $notifications);
     }
 

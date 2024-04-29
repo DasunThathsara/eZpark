@@ -34,7 +34,7 @@
 .form-container .type-select a{
     text-decoration: none;
     /*color: #000000;*/
-    color: #E29C00;
+    color: #fdc63e;
 }
 
 .form-container .type-select .type-select-btn{
@@ -49,13 +49,13 @@
     box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
     background-color: white;
-    border: 1px solid #E29C00; /*newly added border*/
+    border: 1px solid #fdc63e; /*newly added border*/
 }
 
 .form-container .type-select .type-select-btn:hover{
     scale: 1.05;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 188, 19));*/
-    background: #E29C00;    /*newly added*/
+    background: #fdc63e;    /*newly added*/
     color: #ffffff;        /*newly added*/
     border: 1px solid #ffffff;      /*newly added*/
 }
@@ -320,7 +320,7 @@
 .form-container h1{
     text-align: center;
     /*background: linear-gradient(to right, rgb(248,215,90), rgb(255, 180, 19));*/
-    background: #E29C00;
+    background: #fdc63e;
     border-radius: 10px 10px 0 0;   /*change of border radius*/
     padding-top: 20px;
     padding-bottom: 20px;
@@ -337,7 +337,7 @@ input[type=text], input[type=password], input[type=email], input[type=number]{
     padding: 12px 35px;  /*newly added*/
     margin: 8px 0 10px 0;   /*newly added*/
     /*border: 1px solid #ffffff;*/
-    border: 1px solid #E29C00;  /*newly added*/
+    border: 1px solid #fdc63e;  /*newly added*/
     /*border-bottom: 1px solid #ccc;*/
     box-sizing: border-box;
     outline: none;
@@ -362,12 +362,12 @@ input[type=date], input[type=time]{
 
 input[placeholder]{
     /*color: rgba(0, 0, 0, 0.47);*/
-    color: #E29C00;   /*newly added*/
+    color: #fdc63e;   /*newly added*/
     opacity: 0.5;   /*newly added*/
 }
 
 .form-container .district{
-    border: 1px solid #E29C00;
+    border: 1px solid #fdc63e;
     display: flex;
     margin-right: 10px;
 }
@@ -417,7 +417,7 @@ input[placeholder]{
 
 input[type=text]:hover, input[type=password]:hover, input[type=email], input[type=number]:hover {
     /*border-bottom: 1px solid #9a9a9a;*/
-    border-bottom: 1px solid #E29C00;   /*newly added*/
+    border-bottom: 1px solid #fdc63e;   /*newly added*/
 }
 
 .input-box-err{
@@ -426,7 +426,7 @@ input[type=text]:hover, input[type=password]:hover, input[type=email], input[typ
 
 input[type=submit] {
     width: 100%;
-    background-color: #E29C00;
+    background-color: #fdc63e;
     /*background-color: #fdc63e;*/
     /*color: #000000;*/
     color: #ffffff;   /*newly added*/
@@ -523,7 +523,7 @@ input[type=submit]:hover {
 }
 
 .land-register-form .map-btn{
-    background-color: #e09b01;
+    background-color: #fdc63e;
     color: white;
     display: none;
     text-align: center;
@@ -546,7 +546,7 @@ input[type=submit]:hover {
 
 .land-register-form .map-trigger-btn{
     cursor: pointer;
-    background-color: #e29c00;
+    background-color: #fdc63e;
     padding: 12px;
     border-radius: 5px;
     color: white;

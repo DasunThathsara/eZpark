@@ -93,11 +93,11 @@
             </div>
         </div>
 
-        <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
+        <div class="open-side-cards-btn" onclick="closeRightCard()">View Transactions</div>
 
         <div id="side-cards-container" class="side-cards">
             <div class="close-btn" onclick="closeRightCard()">X</div>
-            <h2>Recent Transaction</h2>
+            <h2>Recent Transactions</h2>
 
             <p><span>&#9632;</span>Today</p>
 

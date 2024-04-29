@@ -65,7 +65,7 @@
                 </a>
 
                 <!-- Card 2 -->
-                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/parkingCapacity">
+                <a class="card-link" href="<?php echo URLROOT ?>/superAdmin/complaints">
                     <div class="card">
                         <div class="row">
                             <div class="left-col">
@@ -73,7 +73,6 @@
                                     <div class="top-row">
                                         <img src="<?php echo URLROOT ?>/images/vehicle.svg" alt="">
                                     </div>
-                                    <div class="bottom-row">20</div>
                                 </div>
                             </div>
                             <div class="right-col">Complaints</div>
@@ -129,11 +128,11 @@
             </div>
         </div>
 
-        <div class="open-side-cards-btn" onclick="closeRightCard()">View Transaction</div>
+        <div class="open-side-cards-btn" onclick="closeRightCard()">View Transactions</div>
 
         <div class="side-cards">
             <div class="close-btn" onclick="closeRightCard()">X</div>
-            <h2>Recent Transaction</h2>
+            <h2>Recent Transactions</h2>
 
             <p><span>&#9632;</span>Today</p>
         <!--

@@ -38,7 +38,7 @@ class SuperAdmin extends Controller {
 
         if ($other_data['notification_count'] < 10)
             $other_data['notification_count'] = '0'.$other_data['notification_count'];
-
+  
         $this->view('superAdmin/requests', $data, $other_data );
     }
 
@@ -345,4 +345,54 @@ class SuperAdmin extends Controller {
             }
         }
     } 
+
+    // View Complaints
+    public function complaints(){
+        $data = $this->adminModel->viewComplaints();
+
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+// die(print_r($data));
+
+        $this->view('superAdmin/complaints', $data, $notifications);
+    }
+
+    public function viewComplaint($complaint_id){
+        $data = $this->userModel->viewComplaint($complaint_id);
+        $land = $this->landModel->viewLand($data->complaineeID);
+
+        $notifications['list'] = $this->userModel->viewNotifications();
+        $notifications['notification_count'] = $this->userModel->getNotificationCount();
+
+        if ($notifications['notification_count'] < 10)
+            $notifications['notification_count'] = '0'.$notifications['notification_count'];
+
+        $notifications['complaint_details'] = $data;
+
+        $this->view('superAdmin/viewComplaint', $land, $notifications);
+    }
+
+     // Ban user
+     public function banUser(){
+        $complaintID = $_POST['id'];
+        $ownerID = $_POST['ownerID'];
+
+        $this->userModel->banUser($ownerID);
+
+        redirect('superAdmin/viewComplaint/'.$complaintID);
+    }
+
+    // Ban parking
+    public function banParking(){
+        $landID = $_POST['landID'];
+        $complaintID = $_POST['id'];
+        $ownerID = $_POST['ownerID'];
+
+        $this->landModel->banParking($landID, $ownerID);
+
+        redirect('superAdmin/viewComplaint/'.$complaintID);
+    }
 }
