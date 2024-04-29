@@ -180,6 +180,12 @@ require APPROOT.'/views/inc/components/sidenavbar.php';
             else if (notification.notificationType == 'complaint') {
                 tileLink.href = `<?php print_r(URLROOT)?>/admin/viewComplaint/${notification.data}`;
             }
+            else if (notification.notificationType == 'parkingMergeRequest') {
+                tileLink.href = `<?php print_r(URLROOT)?>/parkingOwner/viewMergeRequest/${notification.data}`;
+            }
+            else if (notification.notificationType == 'mergeRequestAccepted') {
+                tileLink.href = `<?php print_r(URLROOT)?>/merchandiser/viewParking/${notification.data}`;
+            }
         } else {
             console.error("Anchor element with class 'tile' not found in the cloned card:", card);
         }

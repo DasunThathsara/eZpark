@@ -31,7 +31,7 @@
                         <?php } ?> 
                     </div>
                     <div class="chat-area" >
-                        <?php if (!empty($data['chat_history'])){?>
+                        <?php if (!empty($data['chat_id'])){?>
                             <div class="messaging-area" >
                                 <?php foreach($data['chat_history'] as $message){
                                     if($message->senderID == $_SESSION['user_id']){?>

@@ -159,7 +159,7 @@ class Land extends Controller {
                             'err' => ''
                         ];
 
-                        $this->successPropertyRegister($data); 
+                        redirect('land/successPropertyRegister/'.$id);
                     }
                 } else {
                     die('Something went wrong');
