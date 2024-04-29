@@ -146,10 +146,10 @@ class SecurityModel{
     // View land requests
     public function viewLandRequest(){
         $this->db->query('SELECT slr.lid, slr.sid, l.name, l.district, l.province
-        FROM security_land_request AS slr
-        JOIN land AS l ON slr.lid = l.id
-        WHERE slr.sid = :sid;
-        ');
+                        FROM security_land_request AS slr
+                        JOIN land AS l ON slr.lid = l.id
+                        WHERE slr.sid = :sid;
+                        ');
 
         // Bind values
         $this->db->bind(':sid', $_SESSION['user_id']);
@@ -312,6 +312,7 @@ class SecurityModel{
         $this->db->bind(':id', $_SESSION['user_id']);
 
         $row = $this->db->single();
+        // die(print_r($row));
         return $row->landID;
     }
 
